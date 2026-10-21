@@ -18,3 +18,12 @@ export const getSafeNext = (next: string | null) => (next && next.startsWith("/"
  */
 export const getPostLoginHref = (user: PublicUser, next: string | null) =>
   getSafeNext(next) ?? (user.role === ROLES.admin ? ADMIN_HOME : ACCOUNT_HOME);
+
+/**
+ * Reads the message of a failure.
+ *
+ * @param error Value that was thrown.
+ * @param fallback Message to use when the failure has none.
+ * @returns The message of the error, or the fallback.
+ */
+export const getErrorMessage = (error: unknown, fallback: string) => (error instanceof Error ? error.message : fallback);

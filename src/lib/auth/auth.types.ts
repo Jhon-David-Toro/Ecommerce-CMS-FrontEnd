@@ -29,3 +29,10 @@ export interface AuthState {
   signUp: (input: RegisterInput) => Promise<PublicUser>;
   signOut: () => Promise<void>;
 }
+
+export interface AuthFormOptions<V> {
+  initial: V;
+  validate: (values: V) => Record<string, string>;
+  authenticate: (values: V) => Promise<PublicUser>;
+  fallbackError: string;
+}

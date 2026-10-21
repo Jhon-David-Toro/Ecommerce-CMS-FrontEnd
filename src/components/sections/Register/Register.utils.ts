@@ -16,3 +16,11 @@ export const validateRegister = (values: RegisterValues) =>
     password: required(values.password) ?? minLength(values.password, MIN_PASSWORD_LENGTH),
     confirm: values.confirm === values.password ? undefined : "The passwords do not match.",
   });
+
+/**
+ * Picks the fields that the account creation needs.
+ *
+ * @param values Values typed by the user.
+ * @returns The name, email and password, without the confirmation.
+ */
+export const toRegisterInput = ({ name, email: address, password }: RegisterValues) => ({ name, email: address, password });

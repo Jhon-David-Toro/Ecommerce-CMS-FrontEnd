@@ -2,11 +2,11 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 
-import type { Product } from "@/lib/catalog/product.types";
+import type { ProductSummary } from "@/lib/catalog/product.types";
 
 import { FeaturedProducts } from "./FeaturedProducts";
 
-const buildProducts = (count: number): Product[] =>
+const buildProducts = (count: number): ProductSummary[] =>
   Array.from({ length: count }, (_, index) => ({
     id: index + 1,
     name: `Product ${index + 1}`,

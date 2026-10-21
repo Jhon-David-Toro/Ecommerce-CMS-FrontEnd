@@ -16,7 +16,7 @@ describe("Navbar", () => {
 
   it("offers a product search box", () => {
     render(<Navbar />);
-    expect(screen.getByRole("textbox", { name: "Search products" })).toBeInTheDocument();
+    expect(screen.getByRole("searchbox", { name: "Search products" })).toBeInTheDocument();
   });
 
   it("opens and closes the sidebar menu", async () => {

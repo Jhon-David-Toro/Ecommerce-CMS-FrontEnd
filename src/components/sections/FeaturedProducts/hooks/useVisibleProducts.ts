@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import type { Product } from "@/lib/catalog/product.types";
+import type { ProductSummary } from "@/lib/catalog/product.types";
 
 import { INITIAL_VISIBLE_PRODUCTS } from "../FeaturedProducts.constants";
 
@@ -10,7 +10,7 @@ import { INITIAL_VISIBLE_PRODUCTS } from "../FeaturedProducts.constants";
  * @param products Full product list.
  * @returns The visible products, whether there is more to show and the action that shows all.
  */
-export const useVisibleProducts = (products: Product[]) => {
+export const useVisibleProducts = (products: ProductSummary[]) => {
   const [showAll, setShowAll] = useState(false);
 
   return {

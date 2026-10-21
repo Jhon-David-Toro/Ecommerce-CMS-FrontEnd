@@ -12,14 +12,14 @@ import styles from "./QuantityControl.module.scss";
  *
  * @param props Component props.
  * @param props.quantity Current quantity.
- * @param props.setQuantity Receives the new quantity.
+ * @param props.onQuantityChange Receives the new quantity.
  * @returns The quantity control.
  */
-export const QuantityControl: FC<QuantityControlProps> = ({ quantity, setQuantity }) => (
+export const QuantityControl: FC<QuantityControlProps> = ({ quantity, onQuantityChange }) => (
   <div className={styles.quantity} role="group" aria-label="Quantity control">
     <Button
       text={DECREMENT_LABEL}
-      onClick={() => setQuantity(decrement(quantity))}
+      onClick={() => onQuantityChange(decrement(quantity))}
       className={styles.quantity__button}
       type="text"
       size="small"
@@ -28,7 +28,7 @@ export const QuantityControl: FC<QuantityControlProps> = ({ quantity, setQuantit
     <span className={styles.quantity__value}>{quantity}</span>
     <Button
       text={INCREMENT_LABEL}
-      onClick={() => setQuantity(increment(quantity))}
+      onClick={() => onQuantityChange(increment(quantity))}
       className={styles.quantity__button}
       type="text"
       size="small"

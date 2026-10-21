@@ -15,7 +15,7 @@ import { usePagination } from "./usePagination";
  */
 export const useProductsPage = () => {
   const { isFiltersOpen, setIsFiltersOpen } = useFilterStore();
-  const products = useFilteredProducts();
+  const { products, isLoading } = useFilteredProducts();
   const { currentPage, totalPages, pageItems, setCurrentPage } = usePagination(products, PRODUCTS_PER_PAGE);
   const filtersRef = useRef<HTMLElement>(null);
   const pageRef = useRef<HTMLElement>(null);
@@ -33,5 +33,5 @@ export const useProductsPage = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  return { isFiltersOpen, filtersRef, pageRef, total: products.length, currentPage, totalPages, pageItems, changePage };
+  return { isLoading, isFiltersOpen, filtersRef, pageRef, total: products.length, currentPage, totalPages, pageItems, changePage };
 };

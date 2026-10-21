@@ -1,43 +1,46 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { useParams } from "next/navigation";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import mockProduct from "@/assets/mockProduct.json";
+import { getProduct, productRepository } from "@/lib/catalog/catalog.api";
 
 import { ProductDetails } from "./ProductDetails";
 
-const responses: Record<string, unknown> = {
-  "/data/products.json": { newArrivals: [], topSelling: [] },
-  "/data/reviews.json": [],
-  "/data/faqs.json": [{ id: "1", question: "How do I wash it?", answer: "Machine wash cold." }],
-};
-
 describe("ProductDetails", () => {
   beforeEach(() => {
-    vi.stubGlobal(
-      "fetch",
-      vi.fn((url: string) => Promise.resolve({ json: () => Promise.resolve(responses[url]) })),
-    );
+    window.localStorage.clear();
+    vi.mocked(useParams).mockReturnValue({ id: "1" });
   });
 
-  afterEach(() => {
-    vi.unstubAllGlobals();
-  });
-
-  it("shows the product name and the recommendations section", async () => {
+  it("shows the product name, its gallery and the recommendations section", async () => {
     render(<ProductDetails />);
-    expect(screen.getByRole("heading", { level: 2, name: mockProduct.name })).toBeInTheDocument();
-    expect(await screen.findByRole("heading", { name: "YOU MIGHT ALSO LIKE" })).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { level: 2, name: "One Life Graphic T-Shirt" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "YOU MIGHT ALSO LIKE" })).toBeInTheDocument();
+    expect(screen.getByRole("navigation", { name: "Breadcrumb" })).toBeInTheDocument();
   });
 
-  it("starts on the reviews tab", async () => {
+  it("starts on the reviews tab with the approved reviews", async () => {
     render(<ProductDetails />);
     expect(await screen.findByRole("heading", { name: /all reviews/i })).toBeInTheDocument();
   });
 
-  it("switches to the FAQs tab", async () => {
+  it("shows the questions of the product on the FAQs tab", async () => {
     render(<ProductDetails />);
-    await userEvent.click(screen.getByRole("button", { name: "FAQs" }));
-    expect(await screen.findByText("How do I wash it?")).toBeInTheDocument();
+    await userEvent.click(await screen.findByRole("button", { name: "FAQs" }));
+    const product = (await getProduct(1))!;
+    expect(await screen.findByText(product.faqs[0].question)).toBeInTheDocument();
+  });
+
+  it("says when the product does not exist", async () => {
+    vi.mocked(useParams).mockReturnValue({ id: "9999" });
+    render(<ProductDetails />);
+    expect(await screen.findByRole("heading", { name: "Product not found" })).toBeInTheDocument();
+  });
+
+  it("hides unpublished products", async () => {
+    await productRepository.update(1, { status: "draft" });
+    render(<ProductDetails />);
+    expect(await screen.findByRole("heading", { name: "Product not found" })).toBeInTheDocument();
   });
 });

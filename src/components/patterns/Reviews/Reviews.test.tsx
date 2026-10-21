@@ -2,19 +2,13 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 
-import type { Review } from "@/lib/catalog/review.types";
+import { buildReview } from "@/test/factories";
 
 import { Reviews } from "./Reviews";
 
-const reviews: Review[] = [
-  { id: "1", author: "Alice", rating: 5, text: "Great!", date: "2024-05-01", verified: true },
-  { id: "2", author: "Bob", rating: 4, text: "Good!", date: "2024-04-01", verified: false },
-  { id: "3", author: "Charlie", rating: 3, text: "Average!", date: "2024-03-01", verified: true },
-  { id: "4", author: "Diana", rating: 5, text: "Excellent!", date: "2024-02-01", verified: true },
-  { id: "5", author: "Eve", rating: 2, text: "Not great.", date: "2024-01-01", verified: false },
-  { id: "6", author: "Frank", rating: 1, text: "Bad.", date: "2023-12-01", verified: true },
-  { id: "7", author: "George", rating: 3, text: "Okay.", date: "2023-11-01", verified: false },
-];
+const dates = ["2024-05-01", "2024-04-01", "2024-03-01", "2024-02-01", "2024-01-01", "2023-12-01", "2023-11-01"];
+const texts = ["Great!", "Good!", "Average!", "Excellent!", "Not great.", "Bad.", "Okay."];
+const reviews = texts.map((text, index) => buildReview({ id: index + 1, text, date: `${dates[index]}T00:00:00.000Z` }));
 
 const getReviewTexts = () => screen.getAllByText(/^"/).map((quote) => quote.textContent);
 

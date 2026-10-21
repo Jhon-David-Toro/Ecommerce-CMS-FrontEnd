@@ -6,5 +6,5 @@ export interface ProductTabContentProps {
   activeTab: string;
   description: ProductDescription;
   reviews: Review[] | null;
-  faqs: FAQ[] | null;
+  faqs: FAQ[];
 }

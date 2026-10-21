@@ -1,3 +1,3 @@
-import type { Product } from "@/lib/catalog/product.types";
+import type { ProductSummary } from "@/lib/catalog/product.types";
 
-export type ProductCardProps = Pick<Product, "id" | "name" | "price" | "discountPrice" | "rating" | "image" | "discount">;
+export type ProductCardProps = ProductSummary;

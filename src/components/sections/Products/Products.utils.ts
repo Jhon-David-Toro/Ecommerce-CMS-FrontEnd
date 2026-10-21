@@ -14,6 +14,16 @@ import { SORT_COMPARATORS } from "./Products.constants";
 export const matchesSelection = (selected: string[], value?: string) =>
   selected.length === 0 || (value !== undefined && selected.includes(value));
 
+/**
+ * Tells whether any value of the product is selected: an empty selection lets everything through.
+ *
+ * @param selected Values the user picked.
+ * @param values Values of the product.
+ * @returns True when the product matches.
+ */
+export const matchesAny = (selected: string[], values: string[]) =>
+  selected.length === 0 || values.some((value) => selected.includes(value));
+
 export const filterCreators: Record<keyof Omit<FilterCriteria, "sortBy">, FilterCreator> = {
   category:
     ({ category }) =>
@@ -26,11 +36,14 @@ export const filterCreators: Record<keyof Omit<FilterCriteria, "sortBy">, Filter
   colors:
     ({ colors }) =>
     (product) =>
-      matchesSelection(colors, product.color),
+      matchesAny(
+        colors,
+        product.colors.map((color) => color.hex),
+      ),
   sizes:
     ({ sizes }) =>
     (product) =>
-      matchesSelection(sizes, product.size),
+      matchesAny(sizes, product.sizes),
   dressStyles:
     ({ dressStyles }) =>
     (product) =>

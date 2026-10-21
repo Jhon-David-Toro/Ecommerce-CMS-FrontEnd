@@ -109,6 +109,26 @@
     gap: utils.pxToRem(8px);
   }
 
+  &__iconLink {
+    position: relative;
+    display: inline-flex;
+    color: black;
+  }
+
+  &__badge {
+    position: absolute;
+    top: utils.pxToRem(-6px);
+    right: utils.pxToRem(-8px);
+    min-width: utils.pxToRem(18px);
+    padding: 0 utils.pxToRem(5px);
+    font-size: utils.pxToRem(11px);
+    line-height: utils.pxToRem(18px);
+    text-align: center;
+    color: white;
+    background-color: black;
+    border-radius: 999px;
+  }
+
   &__icon {
     width: utils.pxToRem(24px);
     height: utils.pxToRem(24px);

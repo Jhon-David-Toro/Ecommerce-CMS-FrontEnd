@@ -11,7 +11,7 @@ describe(Banner.name, () => {
 
     const link = screen.getByRole("link", { name: /Sign Up Now/i });
     expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute("href", "/");
+    expect(link).toHaveAttribute("href", "/register");
 
     const icon = screen.getByRole("img", { name: /close icon/i });
     expect(icon).toBeInTheDocument();

@@ -1,0 +1,5 @@
+export interface QueryState<T> {
+  data: T | null;
+  error: Error | null;
+  isLoading: boolean;
+}

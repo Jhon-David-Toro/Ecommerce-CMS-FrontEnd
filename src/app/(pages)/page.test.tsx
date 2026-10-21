@@ -1,31 +1,20 @@
-import { render, screen, waitFor } from "@testing-library/react";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { render, screen } from "@testing-library/react";
+import { beforeEach, describe, expect, it } from "vitest";
 
-import Home from "@/app/(pages)/page";
-
-const catalog = {
-  newArrivals: [{ id: 1, name: "New jacket", price: 100, rating: 4, image: "/new.png" }],
-  topSelling: [{ id: 2, name: "Top shirt", price: 50, rating: 5, image: "/top.png" }],
-};
+import Home from "./page";
 
 describe("Home page", () => {
-  beforeEach(() => {
-    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ json: () => Promise.resolve(catalog) }));
-  });
+  beforeEach(() => window.localStorage.clear());
 
-  afterEach(() => {
-    vi.unstubAllGlobals();
-  });
-
-  it("requests the catalog on mount", async () => {
-    render(<Home />);
-    await waitFor(() => expect(fetch).toHaveBeenCalledWith("/data/products.json", expect.anything()));
-  });
-
-  it("renders the hero and both product sections", async () => {
+  it("renders the hero headline", () => {
     render(<Home />);
     expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
-    expect(await screen.findByText("New jacket")).toBeInTheDocument();
-    expect(await screen.findByText("Top shirt")).toBeInTheDocument();
+  });
+
+  it("shows the new arrivals and top selling sections with products from the catalog", async () => {
+    render(<Home />);
+    expect(screen.getByRole("heading", { level: 2, name: "New Arrivals" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2, name: "Top Selling" })).toBeInTheDocument();
+    expect((await screen.findAllByRole("heading", { level: 3 })).length).toBeGreaterThan(0);
   });
 });

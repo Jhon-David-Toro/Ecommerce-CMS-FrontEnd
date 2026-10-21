@@ -2,15 +2,19 @@ import { describe, expect, it } from "vitest";
 
 import type { FilterCriteria } from "@/lib/catalog/filters/filters.types";
 import type { Product } from "@/lib/catalog/product.types";
+import { buildProduct } from "@/test/factories";
 
-import { filterProducts, matchesSelection } from "./Products.utils";
+import { filterProducts, matchesAny, matchesSelection } from "./Products.utils";
 
 const criteria: FilterCriteria = { category: [], priceRange: [0, 250], colors: [], sizes: [], dressStyles: [] };
 
+const black = [{ name: "Black", hex: "black" }];
+const white = [{ name: "White", hex: "white" }];
+
 const products: Product[] = [
-  { id: 1, name: "Cheap", price: 20, rating: 3, image: "/1.png", category: "Jeans", color: "black", date: 1 },
-  { id: 2, name: "Pricey", price: 200, rating: 5, image: "/2.png", category: "Hoodie", color: "white", date: 3 },
-  { id: 3, name: "Middle", price: 100, rating: 4, image: "/3.png", category: "Jeans", color: "white", date: 2 },
+  buildProduct({ id: 1, name: "Cheap", price: 20, rating: 3, category: "Jeans", colors: black, createdAt: 1 }),
+  buildProduct({ id: 2, name: "Pricey", price: 200, rating: 5, category: "Hoodie", colors: white, createdAt: 3 }),
+  buildProduct({ id: 3, name: "Middle", price: 100, rating: 4, category: "Jeans", colors: white, createdAt: 2 }),
 ];
 
 const names = (list: Product[]) => list.map((product) => product.name);
@@ -24,6 +28,17 @@ describe("matchesSelection", () => {
     expect(matchesSelection(["black"], "black")).toBe(true);
     expect(matchesSelection(["black"], "white")).toBe(false);
     expect(matchesSelection(["black"], undefined)).toBe(false);
+  });
+});
+
+describe("matchesAny", () => {
+  it("lets everything through without a selection", () => {
+    expect(matchesAny([], [])).toBe(true);
+  });
+
+  it("needs at least one selected value", () => {
+    expect(matchesAny(["a"], ["a", "b"])).toBe(true);
+    expect(matchesAny(["c"], ["a", "b"])).toBe(false);
   });
 });
 

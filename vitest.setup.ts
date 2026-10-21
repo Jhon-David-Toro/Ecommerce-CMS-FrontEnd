@@ -9,3 +9,12 @@ import { afterEach, vi } from "vitest";
 afterEach(cleanup);
 
 vi.mock("next/font/google", () => ({ Poppins: () => ({ className: "poppins" }) }));
+
+vi.mock("next/navigation", () => ({
+  useParams: vi.fn(() => ({})),
+  useRouter: vi.fn(() => ({ push: vi.fn(), replace: vi.fn(), back: vi.fn(), refresh: vi.fn() })),
+  usePathname: vi.fn(() => "/"),
+  useSearchParams: vi.fn(() => new URLSearchParams()),
+  notFound: vi.fn(),
+  redirect: vi.fn(),
+}));

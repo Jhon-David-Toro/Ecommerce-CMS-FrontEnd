@@ -1,16 +1,18 @@
 import { StatsCounter } from "@/components/patterns/StatsCounter";
 
-import { HERO_STATS } from "../Hero.constants";
+import type { HeroStatsProps } from "../Hero.types";
 import styles from "../Hero.module.scss";
 
 /**
  * Hero/Stats: counters with the store numbers.
  *
+ * @param props Component props.
+ * @param props.stats Numbers to count up to, with their labels.
  * @returns The stats row.
  */
-export const HeroStats = () => (
+export const HeroStats = ({ stats }: HeroStatsProps) => (
   <section className={styles.hero__article_stats}>
-    {HERO_STATS.map((stat) => (
+    {stats.map((stat) => (
       <StatsCounter key={stat.label} {...stat} />
     ))}
   </section>

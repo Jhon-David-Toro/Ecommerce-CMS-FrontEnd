@@ -1,0 +1,41 @@
+@use "src/styles/utils" as utils;
+
+.wrapper {
+  overflow-x: auto;
+  border: utils.pxToRem(1px) solid var(--color-border);
+  border-radius: var(--radius-card);
+}
+
+.table {
+  width: 100%;
+  font-size: utils.pxToRem(14px);
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: utils.pxToRem(12px) utils.pxToRem(16px);
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: utils.pxToRem(1px) solid var(--color-border);
+  }
+
+  th {
+    font-size: utils.pxToRem(12px);
+    color: var(--color-muted);
+    text-transform: uppercase;
+    background-color: #fafafa;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  a {
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+}
+
+.right {
+  text-align: right !important;
+}

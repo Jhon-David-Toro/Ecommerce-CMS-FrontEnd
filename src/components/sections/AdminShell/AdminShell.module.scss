@@ -1,0 +1,92 @@
+@use "src/styles/utils" as utils;
+
+.shell {
+  display: grid;
+  grid-template-columns: utils.pxToRem(240px) 1fr;
+  min-height: 100vh;
+  background-color: #fafafa;
+
+  @include utils.media-ltlg() {
+    grid-template-columns: 1fr;
+  }
+
+  &__sidebar {
+    padding: utils.pxToRem(20px) utils.pxToRem(16px);
+    color: white;
+    background-color: black;
+  }
+
+  &__brand {
+    display: block;
+    margin-bottom: utils.pxToRem(24px);
+    font-size: utils.pxToRem(22px);
+    font-weight: 900;
+    color: white;
+    text-decoration: none;
+
+    span {
+      font-size: utils.pxToRem(12px);
+      font-weight: 500;
+      opacity: 0.7;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    gap: utils.pxToRem(4px);
+    padding: 0;
+    list-style: none;
+
+    @include utils.media-ltlg() {
+      flex-flow: row wrap;
+    }
+  }
+
+  &__link {
+    display: block;
+    padding: utils.pxToRem(10px) utils.pxToRem(12px);
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    border-radius: utils.pxToRem(8px);
+
+    &:hover {
+      color: white;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  &__top {
+    display: flex;
+    gap: utils.pxToRem(16px);
+    align-items: center;
+    justify-content: flex-end;
+    padding: utils.pxToRem(12px) utils.pxToRem(24px);
+    background-color: white;
+    border-bottom: utils.pxToRem(1px) solid var(--color-border);
+  }
+
+  &__store {
+    color: var(--color-muted);
+  }
+
+  &__user {
+    font-weight: 600;
+  }
+
+  &__main {
+    flex: 1;
+    padding: utils.pxToRem(24px);
+  }
+}
+
+.active {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.18);
+}

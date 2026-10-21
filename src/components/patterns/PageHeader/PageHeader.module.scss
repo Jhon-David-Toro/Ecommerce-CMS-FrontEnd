@@ -1,0 +1,25 @@
+@use "src/styles/utils" as utils;
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: utils.pxToRem(16px);
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: utils.pxToRem(20px);
+
+  &__title {
+    font-size: utils.pxToRem(28px);
+    font-weight: 800;
+  }
+
+  &__text {
+    margin-top: utils.pxToRem(4px);
+    color: var(--color-muted);
+  }
+
+  &__actions {
+    display: flex;
+    gap: utils.pxToRem(12px);
+  }
+}

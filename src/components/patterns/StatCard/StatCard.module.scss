@@ -1,0 +1,23 @@
+@use "src/styles/utils" as utils;
+
+.card {
+  padding: utils.pxToRem(20px);
+  border: utils.pxToRem(1px) solid var(--color-border);
+  border-radius: var(--radius-card);
+
+  &__label {
+    font-size: utils.pxToRem(14px);
+    color: var(--color-muted);
+  }
+
+  &__value {
+    margin: utils.pxToRem(6px) 0;
+    font-size: utils.pxToRem(30px);
+    font-weight: 800;
+  }
+
+  &__hint {
+    font-size: utils.pxToRem(13px);
+    color: var(--color-muted);
+  }
+}

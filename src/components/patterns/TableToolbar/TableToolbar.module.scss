@@ -1,0 +1,20 @@
+@use "src/styles/utils" as utils;
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: utils.pxToRem(12px);
+  align-items: center;
+  margin-bottom: utils.pxToRem(16px);
+
+  &__search {
+    flex: 1;
+    min-width: utils.pxToRem(200px);
+    padding: utils.pxToRem(10px) utils.pxToRem(16px);
+    font: inherit;
+    background-color: var(--color-surface);
+    border: none;
+    border-radius: 999px;
+    outline: none;
+  }
+}

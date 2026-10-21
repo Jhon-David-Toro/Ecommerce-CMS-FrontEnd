@@ -4,9 +4,14 @@
   display: flex;
   flex-direction: column;
   gap: utils.pxToRem(16px);
-  padding: utils.pxToRem(20px) utils.pxToRem(24px);
+  padding: utils.pxToRem(24px);
   border: utils.pxToRem(1px) solid var(--color-border);
   border-radius: var(--radius-card);
+
+  > a,
+  > button {
+    width: 100%;
+  }
 
   &__title {
     font-size: utils.pxToRem(24px);
@@ -15,12 +20,13 @@
   &__list {
     display: flex;
     flex-direction: column;
-    gap: utils.pxToRem(14px);
+    gap: utils.pxToRem(20px);
   }
 
   &__row {
     display: flex;
     justify-content: space-between;
+    font-size: utils.pxToRem(20px);
 
     dd {
       font-weight: 700;
@@ -44,7 +50,8 @@
 
     &_total {
       padding-top: utils.pxToRem(16px);
-      font-size: utils.pxToRem(20px);
+      font-size: utils.pxToRem(24px);
+      color: var(--color-ink);
       border-top: utils.pxToRem(1px) solid var(--color-border);
     }
   }

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 
 import type { PromoCodeFormProps } from "./PromoCodeForm.types";
 import { PromoFeedback } from "./parts/PromoFeedback";
+import { PromoInput } from "./parts/PromoInput";
 import styles from "./PromoCodeForm.module.scss";
 
 /**
@@ -34,14 +35,7 @@ export const PromoCodeForm: FC<PromoCodeFormProps> = ({ appliedCode, discountPer
   return (
     <form className={styles.promo} onSubmit={handleSubmit}>
       <div className={styles.promo__row}>
-        <input
-          className={styles.promo__input}
-          type="text"
-          value={code}
-          onChange={(event) => setCode(event.target.value)}
-          placeholder="Add promo code"
-          aria-label="Promo code"
-        />
+        <PromoInput value={code} onChange={setCode} />
         <Button type="primary" size="small" text="Apply" typeAttribute="submit" />
       </div>
       <PromoFeedback appliedCode={appliedCode} discountPercent={discountPercent} />

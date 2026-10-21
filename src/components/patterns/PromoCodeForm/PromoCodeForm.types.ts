@@ -10,3 +10,8 @@ export interface PromoFeedbackProps {
   appliedCode: string;
   discountPercent: number;
 }
+
+export interface PromoInputProps {
+  value: string;
+  onChange: (value: string) => void;
+}

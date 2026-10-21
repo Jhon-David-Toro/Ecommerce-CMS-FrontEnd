@@ -14,7 +14,7 @@
 
   &__layout {
     display: grid;
-    grid-template-columns: 1fr utils.pxToRem(400px);
+    grid-template-columns: 1.4fr 1fr;
     gap: utils.pxToRem(20px);
     align-items: start;
 
@@ -29,7 +29,7 @@
   }
 
   &__items {
-    padding: utils.pxToRem(4px) utils.pxToRem(24px);
+    padding: utils.pxToRem(4px) utils.pxToRem(20px);
     list-style: none;
     border: utils.pxToRem(1px) solid var(--color-border);
     border-radius: var(--radius-card);

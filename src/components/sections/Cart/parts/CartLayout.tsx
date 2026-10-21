@@ -23,7 +23,15 @@ export const CartLayout = ({ cart }: CartLayoutProps) => (
     </ul>
     <OrderSummary totals={cart.totals} discountPercent={cart.discountPercent}>
       <PromoCodeForm appliedCode={cart.promoCode} discountPercent={cart.discountPercent} onApply={cart.applyPromo} />
-      <Button type="primary" size="large" text="Go to Checkout" href="/checkout" typeAttribute="button" />
+      <Button
+        type="primary"
+        size="large"
+        text="Go to Checkout"
+        href="/checkout"
+        icon="chevron-right"
+        iconPosition="right"
+        typeAttribute="button"
+      />
     </OrderSummary>
   </div>
 );

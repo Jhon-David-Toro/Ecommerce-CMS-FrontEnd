@@ -10,10 +10,25 @@
     gap: utils.pxToRem(12px);
   }
 
-  &__input {
+  &__field {
+    position: relative;
     flex: 1;
     min-width: 0;
-    padding: utils.pxToRem(12px) utils.pxToRem(16px);
+  }
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    left: utils.pxToRem(16px);
+    width: utils.pxToRem(22px);
+    height: utils.pxToRem(22px);
+    color: var(--color-muted);
+    transform: translateY(-50%);
+  }
+
+  &__input {
+    width: 100%;
+    padding: utils.pxToRem(14px) utils.pxToRem(16px) utils.pxToRem(14px) utils.pxToRem(48px);
     font: inherit;
     background-color: var(--color-surface);
     border: none;

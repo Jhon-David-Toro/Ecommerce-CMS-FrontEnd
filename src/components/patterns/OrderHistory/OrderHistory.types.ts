@@ -25,3 +25,10 @@ export interface OrderThumbsProps {
 export interface OrderCardActionsProps extends OrderCardProps {
   action: OrderAction | null;
 }
+
+export interface ExtraButton {
+  text: string;
+  href?: string;
+  onClick?: () => void;
+  danger?: boolean;
+}

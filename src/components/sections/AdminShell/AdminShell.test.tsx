@@ -43,7 +43,7 @@ describe("AdminShell", () => {
 
   it("links back to the store", () => {
     render(<AdminShell>content</AdminShell>);
-    expect(screen.getByRole("link", { name: "View store" })).toHaveAttribute("href", "/");
+    expect(screen.getByRole("link", { name: "Visit store" })).toHaveAttribute("href", "/");
   });
 
   it("signs out and goes to the sign in page", async () => {

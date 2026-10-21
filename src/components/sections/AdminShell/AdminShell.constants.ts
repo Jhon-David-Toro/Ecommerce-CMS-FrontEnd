@@ -9,6 +9,7 @@ import {
   TruckIcon,
   UsersIcon,
   RectangleStackIcon,
+  UserCircleIcon,
 } from "@heroicons/react/24/outline";
 
 import type { AdminNavItem } from "./AdminShell.types";
@@ -24,4 +25,5 @@ export const ADMIN_NAV: AdminNavItem[] = [
   { label: "Site content", href: "/admin/content", icon: PaintBrushIcon },
   { label: "Pages", href: "/admin/pages", icon: DocumentTextIcon },
   { label: "Settings", href: "/admin/settings", icon: Cog6ToothIcon },
+  { label: "Account", href: "/admin/account", icon: UserCircleIcon },
 ];

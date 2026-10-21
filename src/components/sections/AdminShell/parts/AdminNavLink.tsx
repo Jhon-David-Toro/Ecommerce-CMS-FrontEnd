@@ -7,7 +7,7 @@ import { isActiveLink } from "../AdminShell.utils";
 import styles from "../AdminShell.module.scss";
 
 /**
- * AdminShell/NavLink: one link of the sidebar; the link of the current section is highlighted.
+ * AdminShell/NavLink: icon-only link of the sidebar with a tooltip; the link of the current section is dark.
  *
  * @param props Component props.
  * @param props.item Navigation item.
@@ -19,9 +19,14 @@ export const AdminNavLink = ({ item, pathname }: AdminNavLinkProps) => {
 
   return (
     <li>
-      <Link href={item.href} className={cx(styles.shell__link, active && styles.active)} aria-current={active ? "page" : undefined}>
+      <Link
+        href={item.href}
+        className={cx(styles.shell__link, active && styles.active)}
+        aria-label={item.label}
+        data-label={item.label}
+        aria-current={active ? "page" : undefined}
+      >
         <item.icon className={styles.shell__icon} />
-        {item.label}
       </Link>
     </li>
   );

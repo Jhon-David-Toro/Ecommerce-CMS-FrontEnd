@@ -1,12 +1,12 @@
+import { ArrowLeftStartOnRectangleIcon, BuildingStorefrontIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
-import { Button } from "@/components/ui/Button";
-
 import type { AdminTopBarProps } from "../AdminShell.types";
+import { getInitial } from "../AdminShell.utils";
 import styles from "../AdminShell.module.scss";
 
 /**
- * AdminShell/TopBar: link to the store, the name of the signed-in user and the sign out button.
+ * AdminShell/TopBar: "Visit store" pill, the signed-in user (links to the account page) and the sign out button.
  *
  * @param props Component props.
  * @param props.userName Name of the signed-in user.
@@ -16,9 +16,17 @@ import styles from "../AdminShell.module.scss";
 export const AdminTopBar = ({ userName, onSignOut }: AdminTopBarProps) => (
   <header className={styles.shell__top}>
     <Link href="/" className={styles.shell__store}>
-      View store
+      <BuildingStorefrontIcon /> Visit store
     </Link>
-    <span className={styles.shell__user}>{userName}</span>
-    <Button type="secondary" size="small" text="Sign out" typeAttribute="button" onClick={onSignOut} />
+    <Link href="/admin/account" className={styles.shell__profile}>
+      <span className={styles.shell__avatar} aria-hidden="true">
+        {getInitial(userName)}
+      </span>
+      <span className={styles.shell__user}>{userName}</span>
+      <ChevronDownIcon className={styles.shell__chevron} />
+    </Link>
+    <button type="button" className={styles.shell__signout} aria-label="Sign out" onClick={onSignOut}>
+      <ArrowLeftStartOnRectangleIcon />
+    </button>
   </header>
 );

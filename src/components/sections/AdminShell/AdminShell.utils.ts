@@ -9,3 +9,11 @@ import type { AdminNavItem } from "./AdminShell.types";
  */
 export const isActiveLink = (pathname: string, { href, exact }: Pick<AdminNavItem, "href" | "exact">) =>
   exact ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
+
+/**
+ * Gives the letter shown inside the avatar of the signed-in user.
+ *
+ * @param name Name of the user.
+ * @returns The first letter in upper case, or an empty string without a name.
+ */
+export const getInitial = (name?: string) => name?.trim().charAt(0).toUpperCase() ?? "";

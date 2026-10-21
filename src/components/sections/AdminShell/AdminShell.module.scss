@@ -29,7 +29,8 @@
       flex-direction: row;
       width: 100%;
       height: auto;
-      padding: utils.pxToRem(12px) utils.pxToRem(16px);
+      justify-content: safe center;
+      padding: utils.pxToRem(8px) utils.pxToRem(16px);
       overflow-x: auto;
       scrollbar-width: none;
       border-right: 0;
@@ -133,7 +134,7 @@
     padding: utils.pxToRem(20px) utils.pxToRem(32px) 0;
 
     @include utils.media-ltlg() {
-      padding: utils.pxToRem(16px) utils.pxToRem(16px) 0;
+      padding: utils.pxToRem(12px) utils.pxToRem(16px) 0;
     }
   }
 
@@ -144,14 +145,10 @@
     margin-right: auto;
 
     @include utils.media-ltlg() {
-      flex-basis: 100%;
-      max-width: none;
-      margin-right: 0;
-    }
-
-    @include utils.media-xs() {
       flex: 1 1 0;
       min-width: 0;
+      max-width: none;
+      margin-right: 0;
     }
 
     input {

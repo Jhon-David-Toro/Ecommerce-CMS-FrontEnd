@@ -1,15 +1,9 @@
-import { readJson, writeJson } from "@/lib/shared/storage/storage";
+import { writeJson } from "@/lib/shared/storage/storage";
 
-import { NOT_FOUND_MESSAGE } from "./repository.constants";
-import type { Entity, NewEntity, Repository } from "./repository.types";
+import type { Entity, Repository } from "./repository.types";
+import { deleteRecord, findRecord, insertRecord, patchRecord, readCollection } from "./repository.utils";
 
-/**
- * Computes the id for a new record: one more than the highest existing id.
- *
- * @param items Existing records.
- * @returns The next free id.
- */
-export const nextId = (items: Entity[]) => items.reduce((highest, item) => Math.max(highest, item.id), 0) + 1;
+export { nextId } from "./repository.utils";
 
 /**
  * Creates a CRUD repository that keeps its records in browser storage, as a stand-in for a REST API.
@@ -20,44 +14,14 @@ export const nextId = (items: Entity[]) => items.reduce((highest, item) => Math.
  * @returns The repository.
  */
 export const createRepository = <T extends Entity>(key: string, seed: () => T[]): Repository<T> => {
-  /**
-   * Reads the whole collection, seeding it on first use.
-   *
-   * @returns The stored records.
-   */
-  const read = () => {
-    const stored = readJson<T[] | null>(key, null);
-    if (stored) return stored;
-    const initial = seed();
-    writeJson(key, initial);
-    return initial;
-  };
+  const read = () => readCollection(key, seed);
 
   return {
     list: async () => read(),
-    getById: async (id) => read().find((item) => item.id === id) ?? null,
-    create: async (data: NewEntity<T>) => {
-      const items = read();
-      const created = { ...data, id: nextId(items) } as T;
-      writeJson(key, [...items, created]);
-      return created;
-    },
-    update: async (id, patch) => {
-      const items = read();
-      const current = items.find((item) => item.id === id);
-      if (!current) throw new Error(NOT_FOUND_MESSAGE);
-      const updated = { ...current, ...patch };
-      writeJson(
-        key,
-        items.map((item) => (item.id === id ? updated : item)),
-      );
-      return updated;
-    },
-    remove: async (id) =>
-      writeJson(
-        key,
-        read().filter((item) => item.id !== id),
-      ),
+    getById: async (id) => findRecord(read(), id),
+    create: async (data) => insertRecord(key, read(), data),
+    update: async (id, patch) => patchRecord(key, read(), id, patch),
+    remove: async (id) => deleteRecord(key, read(), id),
     save: async (items) => writeJson(key, items),
   };
 };

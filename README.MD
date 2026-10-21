@@ -1,110 +1,74 @@
-# E-commerce Platform (Next.js + TypeScript + SASS + Strapi)
+# E-commerce CMS - Frontend
 
-Welcome to the **E-commerce Platform**! This project is a modern, scalable e-commerce application built with a powerful tech stack. The frontend is developed using **Next.js** with **TypeScript** and **modular SASS** for styling, while the backend is powered by **Strapi**, a headless CMS, to manage products, users, and orders.
+Storefront and admin frontend of the e-commerce platform. It talks to the Spring Boot API in
+[API-REST-JAVA-ECOMMERCE](https://github.com/Jhon-David-Toro/API-REST-JAVA-ECOMMERCE).
 
-## Routes for test
-https://shop.labs-develop.cloud/
-https://shop.labs-develop.cloud/products
-https://shop.labs-develop.cloud/product-details/1
+## Stack
 
-## Testing
+- Next.js 16 (App Router, Turbopack) and React 19
+- TypeScript (strict) and SCSS Modules
+- Zustand for client state
+- Vitest and Testing Library for tests
 
-start coverage/lcov-report/index.html
-npx jest --coverage
+## Getting started
 
-## Table of Contents
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-  - [Backend (Strapi) Setup](#backend-strapi-setup)
-  - [Frontend (Next.js) Setup](#frontend-nextjs-setup)
-- [Running the Project](#running-the-project)
-- [Environment Variables](#environment-variables)
-- [Contributing](#contributing)
-- [License](#license)
+```bash
+npm install
+npm run dev
+```
 
-## Features
-- **Product Management**: Add, update, and delete products via Strapi's admin panel.
-- **User Authentication**: Secure user login and registration (via Strapi).
-- **Responsive Design**: Modular SASS ensures a clean, maintainable, and responsive UI.
-- **Type-Safe Code**: TypeScript ensures robust and error-free development.
-- **SEO Optimized**: Next.js provides server-side rendering for better SEO.
-- **API Integration**: Seamless communication between the Next.js frontend and Strapi backend.
+The app runs at `http://localhost:3000`.
 
-## Tech Stack
-- **Frontend**:
-  - Next.js (React Framework)
-  - TypeScript
-  - SASS (Modular CSS)
-- **Backend**:
-  - Strapi (Headless CMS)
-- **Other Tools**:
-  - Node.js
-  - npm or Yarn
+## Scripts
 
-## Project Structure
+| Script | What it does |
+| --- | --- |
+| `npm run dev` | Development server |
+| `npm run build` | Production build (also type-checks) |
+| `npm run typecheck` | `tsc --noEmit` |
+| `npm run lint` | ESLint, including the complexity limit and deprecated APIs |
+| `npm run test` | Vitest, one `*.test.tsx` per component |
+| `npm run test:coverage` | Vitest with a V8 coverage report |
 
-ecommerce-nextjs-strapi/
+Before opening a pull request run `typecheck`, `lint`, `test` and `build`.
 
-├── backend/        # Strapi backend (Headless CMS)
+## Project structure
 
-└── frontend/       # Next.js frontend (TypeScript + SASS)
+```
+src/
+  app/                     Next.js routes; pages only compose sections
+  components/
+    ui/                    generic building blocks (Button, Select, Rating, ...)
+    patterns/              domain components (ProductCard, Pagination, Filters, ...)
+    sections/              page-level sections (Hero, Navbar, Products, ...)
+  lib/                     code shared by several components, grouped by domain
+    catalog/               product types, filters store, data urls
+    shared/                classnames, dom hooks, http, collections
+    site/                  menu and footer data
+  styles/                  design tokens, mixins and global styles
+  test/                    test setup and mocks
+```
 
+Every component lives in its own folder:
 
-## Prerequisites
-Before you begin, ensure you have the following installed:
-- Node.js (v18 or higher)
-- npm or Yarn
-- Git
+```
+Select/
+  Select.tsx               component (named export)
+  Select.types.ts          types and interfaces
+  Select.constants.ts      constants and lookup tables
+  Select.utils.ts          pure logic
+  Select.module.scss       styles
+  Select.test.tsx          tests
+  index.ts                 public exports
+  hooks/                   hooks of the component
+  parts/                   sub-components
+```
 
-## Installation
+## Conventions
 
-### Backend (Strapi) Setup
-1. Navigate to the backend folder: `cd backend`
-2. Install dependencies: `npm install`
-3. Start the Strapi server in development mode: `npm run develop`
-4. Access the Strapi admin panel at `http://localhost:1337/admin` and set up your admin user.
-5. Configure your content types (e.g., Products, Users, Orders) in the Strapi admin panel.
-
-### Frontend (Next.js) Setup
-1. Navigate to the frontend folder:
-2. Install dependencies:
-3. Create a `.env.local` file in the `frontend` directory and add the necessary environment variables (see [Environment Variables](#environment-variables) below).
-4. Start the Next.js development server:
-5. Open `http://localhost:3000` in your browser to see the frontend.
-
-## Running the Project
-1. Start the backend (Strapi):
-- From the `backend` folder, run: `npm run develop`
-2. Start the frontend (Next.js):
-- From the `frontend` folder, run: `npm run dev`
-3. Ensure both servers are running:
-- Strapi backend: `http://localhost:1337`
-- Next.js frontend: `http://localhost:3000`
-
-## Environment Variables
-Create a `.env.local` file in the `frontend` folder with the following variables:
-
-`NEXT_PUBLIC_STRAPI_API_URL=http://localhost:1337`
-
-`NEXT_PUBLIC_STRAPI_API_TOKEN=your-strapi-api-token`
-
-- `NEXT_PUBLIC_STRAPI_API_URL`: The URL of your Strapi backend.
-- `NEXT_PUBLIC_STRAPI_API_TOKEN`: (Optional) If your Strapi API requires authentication, generate a token in the Strapi admin panel.
-
-For the backend, you may need to configure environment variables in a `.env` file in the `backend` folder, such as database settings (if not using SQLite).
-
-## Contributing
-Contributions are welcome! To contribute:
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/your-feature`).
-3. Make your changes and commit them (`git commit -m "Add your feature"`).
-4. Push to the branch (`git push origin feature/your-feature`).
-5. Open a pull request.
-
-Please ensure your code follows the project's coding standards and includes appropriate tests.
-
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+- Named exports only, except for Next.js pages and layouts.
+- Types never live in `.tsx`, hooks or utils; constants never live in `.tsx`.
+- `useEffect` bodies only call a named function or return a cleanup.
+- Every function stays at a complexity of 10 or less and is documented with JSDoc in English.
+- Class names are built with `cx()` from `@/lib/shared/classnames/cx`.
+- Commits follow Conventional Commits and have a subject line only.

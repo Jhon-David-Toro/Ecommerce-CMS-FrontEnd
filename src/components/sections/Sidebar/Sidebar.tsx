@@ -21,7 +21,14 @@ import styles from "./Sidebar.module.scss";
 export const Sidebar: FC<SidebarProps> = ({ isOpen, toggleSidebar, menu }) => (
   <dialog role="dialog" open={isOpen} className={cx(styles.sidebar, { [styles.open]: isOpen })}>
     <strong className={styles.navbar__brand}>SHOP.COM</strong>
-    <XMarkIcon className={styles.sidebar__close} onClick={toggleSidebar} data-testid="sidebar-close" />
+    <XMarkIcon
+      className={styles.sidebar__close}
+      onClick={toggleSidebar}
+      data-testid="sidebar-close"
+      role="button"
+      aria-hidden={false}
+      aria-label="Close menu"
+    />
     <ul className={styles.sidebar__list}>
       {menu.map((item) => (
         <li key={item.label} className={styles.sidebar__item}>

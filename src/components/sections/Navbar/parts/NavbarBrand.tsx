@@ -13,7 +13,7 @@ import styles from "../Navbar.module.scss";
  */
 export const NavbarBrand = ({ onMenuClick }: NavbarBrandProps) => (
   <section className={styles.navbar__logo}>
-    <Bars3Icon onClick={onMenuClick} className={styles.navbar__hamburger} />
+    <Bars3Icon onClick={onMenuClick} className={styles.navbar__hamburger} role="button" aria-hidden={false} aria-label="Open menu" />
     <Link className={styles.navbar__brand} href="/">
       <strong>SHOP.COM</strong>
     </Link>

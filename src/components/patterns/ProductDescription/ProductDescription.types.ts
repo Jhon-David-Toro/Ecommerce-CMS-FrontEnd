@@ -16,3 +16,7 @@ export interface DescriptionSectionData {
 export interface DescriptionSectionProps {
   section: DescriptionSectionData;
 }
+
+export interface DescriptionListProps {
+  items: string[];
+}

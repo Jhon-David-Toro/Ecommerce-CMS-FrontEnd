@@ -1,9 +1,9 @@
 import { BrandsBanner } from "@/components/patterns/BrandsBanner";
-import { StatsCounter } from "@/components/patterns/StatsCounter";
 import { Button } from "@/components/ui/Button";
 
-import { HERO_IMAGES, HERO_STATS } from "./Hero.constants";
+import { HERO_IMAGES } from "./Hero.constants";
 import { HeroImage } from "./parts/HeroImage";
+import { HeroStats } from "./parts/HeroStats";
 import styles from "./Hero.module.scss";
 
 /**
@@ -22,11 +22,7 @@ export const Hero = () => (
         of style.
       </p>
       <Button type="primary" text="Shop Now" href="/products" size="medium" typeAttribute="button" />
-      <section className={styles.hero__article_stats}>
-        {HERO_STATS.map((stat) => (
-          <StatsCounter key={stat.label} {...stat} />
-        ))}
-      </section>
+      <HeroStats />
     </article>
     <BrandsBanner />
   </section>

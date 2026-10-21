@@ -1,10 +1,9 @@
 import type { FC } from "react";
 
-import { DEFAULT_TYPE_ATTRIBUTE, ICON_POSITIONS } from "./Button.constants";
+import { DEFAULT_TYPE_ATTRIBUTE } from "./Button.constants";
 import type { ButtonProps } from "./Button.types";
 import { buildButtonClassName } from "./Button.utils";
-import { ButtonIcon } from "./parts/ButtonIcon";
-import styles from "./Button.module.scss";
+import { ButtonContent } from "./parts/ButtonContent";
 
 /**
  * Button: action button that renders as a link when it receives an `href`.
@@ -41,32 +40,14 @@ export const Button: FC<ButtonProps> = ({
   ariaPressed,
 }) => {
   const classes = buildButtonClassName({ type, size, margin, iconPosition, className });
-  const iconNode = icon && <ButtonIcon icon={icon} />;
-  const content = (
-    <>
-      {iconPosition === ICON_POSITIONS.left && iconNode}
-      <span className={styles.text}>{text}</span>
-      {iconPosition === ICON_POSITIONS.right && iconNode}
-    </>
-  );
+  const content = <ButtonContent text={text} icon={icon} iconPosition={iconPosition} />;
 
-  if (href) {
-    return (
-      <a href={href} className={classes} onClick={onClick} id={id}>
-        {content}
-      </a>
-    );
-  }
-
-  return (
-    <button
-      type={typeAttribute}
-      className={classes}
-      onClick={onClick}
-      id={id}
-      disabled={disabled}
-      aria-pressed={ariaPressed}
-    >
+  return href ? (
+    <a href={href} className={classes} onClick={onClick} id={id}>
+      {content}
+    </a>
+  ) : (
+    <button type={typeAttribute} className={classes} onClick={onClick} id={id} disabled={disabled} aria-pressed={ariaPressed}>
       {content}
     </button>
   );

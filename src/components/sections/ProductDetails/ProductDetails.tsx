@@ -1,24 +1,21 @@
 "use client";
 
-import clsx from "clsx";
-
-import { CATALOG_URLS } from "@/lib/catalog/catalog.constants";
-import type { Catalog } from "@/lib/catalog/catalog.types";
-import { useFetchJson } from "@/lib/shared/http/useFetchJson";
-
 import mockProduct from "@/assets/mockProduct.json";
-import { FeaturedProducts } from "@/components/sections/FeaturedProducts";
-import { Faqs } from "@/components/patterns/Faqs";
-import type { FAQ } from "@/lib/catalog/faq.types";
-import { ProductDescription } from "@/components/patterns/ProductDescription";
 import { ProductImages } from "@/components/patterns/ProductImages";
 import { ProductInfo } from "@/components/patterns/ProductInfo";
-import { Reviews } from "@/components/patterns/Reviews";
+import { FeaturedProducts } from "@/components/sections/FeaturedProducts";
 import { Tabs } from "@/components/ui/Tabs";
-import { useAnimatedTab } from "./hooks/useAnimatedTab";
+import { CATALOG_URLS } from "@/lib/catalog/catalog.constants";
+import type { Catalog } from "@/lib/catalog/catalog.types";
+import type { FAQ } from "@/lib/catalog/faq.types";
 import type { ProductDetail } from "@/lib/catalog/productDetails.types";
 import type { Review } from "@/lib/catalog/review.types";
-import { DEFAULT_TAB, PRODUCT_TABS, TAB_LABELS } from "./ProductDetails.constants";
+import { cx } from "@/lib/shared/classnames/cx";
+import { useFetchJson } from "@/lib/shared/http/useFetchJson";
+
+import { useAnimatedTab } from "./hooks/useAnimatedTab";
+import { ProductTabContent } from "./parts/ProductTabContent";
+import { DEFAULT_TAB, TAB_LABELS } from "./ProductDetails.constants";
 import styles from "./ProductDetails.module.scss";
 
 /**
@@ -33,12 +30,6 @@ export const ProductDetails = () => {
   const catalog = useFetchJson<Catalog>(CATALOG_URLS.products);
   const { activeTab, animate, changeTab } = useAnimatedTab();
 
-  const tabContent = {
-    [PRODUCT_TABS.details]: <ProductDescription description={product.description} />,
-    [PRODUCT_TABS.reviews]: <Reviews review={reviews ?? []} />,
-    [PRODUCT_TABS.faqs]: <Faqs faqs={faqs ?? []} />,
-  };
-
   return (
     <section className={styles.container}>
       <main className={styles.container__main}>
@@ -46,8 +37,8 @@ export const ProductDetails = () => {
         <ProductInfo product={product} />
       </main>
       <Tabs tabs={TAB_LABELS} initialTab={DEFAULT_TAB} onTabChange={changeTab} />
-      <div className={clsx(styles.tabContent, { [styles.animate]: animate })}>
-        {tabContent[activeTab as keyof typeof tabContent]}
+      <div className={cx(styles.tabContent, { [styles.animate]: animate })}>
+        <ProductTabContent activeTab={activeTab} description={product.description} reviews={reviews} faqs={faqs} />
       </div>
       <FeaturedProducts products={catalog?.topSelling ?? []} category="YOU MIGHT ALSO LIKE" />
     </section>

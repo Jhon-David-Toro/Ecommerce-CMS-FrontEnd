@@ -1,13 +1,9 @@
 "use client";
 
-import { useState } from "react";
-
 import { FilterSection } from "@/components/patterns/FilterSection";
-import { useFilterStore } from "@/lib/catalog/filters/filtersStore";
 
+import { usePriceFilter } from "./hooks/usePriceFilter";
 import { PRICE_BOUNDS } from "./PriceFilter.constants";
-import type { PriceBound } from "./PriceFilter.types";
-import { movePriceBound } from "./PriceFilter.utils";
 import { PriceSlider } from "./parts/PriceSlider";
 import styles from "./PriceFilter.module.scss";
 
@@ -17,19 +13,7 @@ import styles from "./PriceFilter.module.scss";
  * @returns The price filter.
  */
 export const PriceFilter = () => {
-  const { priceRange, setPriceRange } = useFilterStore();
-  const [activeSlider, setActiveSlider] = useState<PriceBound | null>(null);
-
-  /**
-   * Applies a slider move, ignoring the slider that is not being dragged.
-   *
-   * @param bound Slider that fired the change.
-   * @param value New value of that slider.
-   */
-  const handleChange = (bound: PriceBound, value: number) => {
-    const next = activeSlider === bound ? movePriceBound(priceRange, bound, value) : null;
-    if (next) setPriceRange(next);
-  };
+  const { priceRange, activate, deactivate, handleChange } = usePriceFilter();
 
   return (
     <FilterSection title="Price">
@@ -40,8 +24,8 @@ export const PriceFilter = () => {
               key={bound}
               bound={bound}
               priceRange={priceRange}
-              onActivate={setActiveSlider}
-              onDeactivate={() => setActiveSlider(null)}
+              onActivate={activate}
+              onDeactivate={deactivate}
               onChange={handleChange}
             />
           ))}

@@ -25,6 +25,8 @@ export interface ButtonProps {
 
 export type ButtonClassParams = Pick<ButtonProps, "type" | "size" | "margin" | "iconPosition" | "className">;
 
+export type ButtonContentProps = Pick<ButtonProps, "text" | "icon" | "iconPosition">;
+
 export interface ButtonIconProps {
   icon: NonNullable<ButtonProps["icon"]>;
 }

@@ -1,15 +1,15 @@
 "use client";
 
-import Link from "next/link";
 import type { FC } from "react";
 
 import menuData from "@/assets/menu.json";
 import { Sidebar } from "@/components/sections/Sidebar";
-import type { MenuData } from "@/lib/site/menu.types";
 import { useToggle } from "@/lib/shared/state/useToggle";
+import type { MenuData } from "@/lib/site/menu.types";
 
 import { NavbarActions } from "./parts/NavbarActions";
 import { NavbarBrand } from "./parts/NavbarBrand";
+import { NavbarLinks } from "./parts/NavbarLinks";
 import { NavbarSearch } from "./parts/NavbarSearch";
 import styles from "./Navbar.module.scss";
 
@@ -27,13 +27,7 @@ export const Navbar: FC = () => {
       <nav className={styles.navbar__container}>
         <ul className={styles.navbar__list}>
           <NavbarBrand onMenuClick={toggleSidebar} />
-          {data.navbar.map((item) => (
-            <li key={item.label} className={styles.navbar__item}>
-              <Link href={item.href} className={styles.navbar__link}>
-                {item.label}
-              </Link>
-            </li>
-          ))}
+          <NavbarLinks items={data.navbar} />
           <NavbarSearch />
           <NavbarActions />
         </ul>

@@ -1,16 +1,12 @@
 "use client";
 
-import type { FC, SubmitEvent } from "react";
-
-import { Button } from "@/components/ui/Button";
-import { Checkbox } from "@/components/ui/Checkbox";
-import { Input } from "@/components/ui/Input";
-import { TextArea } from "@/components/ui/TextArea";
+import { FormActions } from "@/components/patterns/FormActions";
+import { createSubmitHandler } from "@/lib/shared/forms/submit";
 import { useFormValues } from "@/lib/shared/forms/useFormValues";
-import { compact, required } from "@/lib/shared/forms/validators";
-import { slugify } from "@/lib/shared/text/text";
 
 import type { TaxonomyFormProps } from "./TaxonomyForm.types";
+import { toSubmittedValues, validateTaxonomy } from "./TaxonomyForm.utils";
+import { TaxonomyFields } from "./parts/TaxonomyFields";
 import styles from "./TaxonomyForm.module.scss";
 
 /**
@@ -25,33 +21,27 @@ import styles from "./TaxonomyForm.module.scss";
  * @param props.onCancel Called when the admin cancels.
  * @returns The form.
  */
-export const TaxonomyForm: FC<TaxonomyFormProps> = ({ initial, imageLabel, withDescription = false, title, onSubmit, onCancel }) => {
+export const TaxonomyForm = ({ initial, imageLabel, withDescription = false, title, onSubmit, onCancel }: TaxonomyFormProps) => {
   const { values, errors, setErrors, setField, field } = useFormValues(initial);
-
-  /**
-   * Validates the form and sends the values.
-   *
-   * @param event Submit event of the form.
-   */
-  const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const found = compact({ name: required(values.name) });
-    setErrors(found);
-    if (!Object.keys(found).length) onSubmit({ ...values, slug: slugify(values.slug || values.name) });
-  };
+  const handleSubmit = createSubmitHandler({
+    values,
+    validate: validateTaxonomy,
+    setErrors,
+    onValid: (valid) => onSubmit(toSubmittedValues(valid)),
+  });
 
   return (
     <form className={styles.form} onSubmit={handleSubmit} noValidate aria-label={title}>
       <h2 className={styles.form__title}>{title}</h2>
-      <Input label="Name" error={errors.name} {...field("name")} />
-      <Input label="Slug" hint="Leave empty to build it from the name." {...field("slug")} />
-      <Input label={imageLabel} type="url" {...field("picture")} />
-      {withDescription && <TextArea label="Description" {...field("description")} />}
-      <Checkbox label="Visible in the store" checked={values.visible} onChange={(event) => setField("visible", event.target.checked)} />
-      <div className={styles.form__actions}>
-        <Button type="secondary" size="small" text="Cancel" typeAttribute="button" onClick={onCancel} />
-        <Button type="primary" size="small" text="Save" typeAttribute="submit" />
-      </div>
+      <TaxonomyFields
+        field={field}
+        errors={errors}
+        visible={values.visible}
+        onVisibleChange={(visible) => setField("visible", visible)}
+        imageLabel={imageLabel}
+        withDescription={withDescription}
+      />
+      <FormActions submitLabel="Save" onCancel={onCancel} />
     </form>
   );
 };

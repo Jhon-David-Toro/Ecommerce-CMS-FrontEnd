@@ -1,0 +1,7 @@
+@use "src/styles/utils" as utils;
+
+.actions {
+  display: flex;
+  gap: utils.pxToRem(12px);
+  justify-content: flex-end;
+}

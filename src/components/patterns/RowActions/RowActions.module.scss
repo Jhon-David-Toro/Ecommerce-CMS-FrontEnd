@@ -1,0 +1,21 @@
+@use "src/styles/utils" as utils;
+
+.actions {
+  display: flex;
+  gap: utils.pxToRem(12px);
+  justify-content: flex-end;
+
+  &__button,
+  &__danger {
+    padding: 0;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  &__danger {
+    color: var(--color-danger);
+  }
+}

@@ -30,12 +30,12 @@
     border-bottom: none;
   }
 
+  [data-align="right"] {
+    text-align: right;
+  }
+
   a {
     font-weight: 600;
     color: var(--color-ink);
   }
-}
-
-.right {
-  text-align: right !important;
 }

@@ -1,3 +1,5 @@
+import type { Errors, FieldProps } from "@/lib/shared/forms/forms.types";
+
 export interface TaxonomyValues {
   name: string;
   slug: string;
@@ -13,4 +15,13 @@ export interface TaxonomyFormProps {
   title: string;
   onSubmit: (values: TaxonomyValues) => void;
   onCancel: () => void;
+}
+
+export interface TaxonomyFieldsProps {
+  field: (name: keyof TaxonomyValues & string) => FieldProps;
+  errors: Errors;
+  visible: boolean;
+  onVisibleChange: (visible: boolean) => void;
+  imageLabel: string;
+  withDescription: boolean;
 }

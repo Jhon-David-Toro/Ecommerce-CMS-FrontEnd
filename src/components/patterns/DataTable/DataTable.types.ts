@@ -14,3 +14,13 @@ export interface DataTableProps<T> {
   getRowKey: (row: T) => string | number;
   emptyTitle?: string;
 }
+
+export interface DataTableHeadProps<T> {
+  columns: Column<T>[];
+}
+
+export interface DataTableBodyProps<T> {
+  columns: Column<T>[];
+  rows: T[];
+  getRowKey: (row: T) => string | number;
+}

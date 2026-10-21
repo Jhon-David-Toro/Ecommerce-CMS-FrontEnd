@@ -1,6 +1,8 @@
 import { EmptyState } from "@/components/ui/EmptyState";
 
 import type { DataTableProps } from "./DataTable.types";
+import { DataTableBody } from "./parts/DataTableBody";
+import { DataTableHead } from "./parts/DataTableHead";
 import styles from "./DataTable.module.scss";
 
 /**
@@ -20,26 +22,8 @@ export const DataTable = <T,>({ caption, columns, rows, getRowKey, emptyTitle = 
   return (
     <div className={styles.wrapper}>
       <table className={styles.table} aria-label={caption}>
-        <thead>
-          <tr>
-            {columns.map((column) => (
-              <th key={column.key} scope="col" className={column.align === "right" ? styles.right : undefined}>
-                {column.header}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row) => (
-            <tr key={getRowKey(row)}>
-              {columns.map((column) => (
-                <td key={column.key} className={column.align === "right" ? styles.right : undefined}>
-                  {column.render(row)}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
+        <DataTableHead columns={columns} />
+        <DataTableBody columns={columns} rows={rows} getRowKey={getRowKey} />
       </table>
     </div>
   );

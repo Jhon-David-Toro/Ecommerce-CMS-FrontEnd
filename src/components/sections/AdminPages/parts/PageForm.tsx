@@ -1,15 +1,12 @@
 "use client";
 
-import type { SubmitEvent } from "react";
-
-import { Button } from "@/components/ui/Button";
-import { Checkbox } from "@/components/ui/Checkbox";
-import { Input } from "@/components/ui/Input";
-import { TextArea } from "@/components/ui/TextArea";
+import { FormActions } from "@/components/patterns/FormActions";
+import { createSubmitHandler } from "@/lib/shared/forms/submit";
 import { useFormValues } from "@/lib/shared/forms/useFormValues";
-import { compact, required } from "@/lib/shared/forms/validators";
 
 import type { PageFormProps } from "../AdminPages.types";
+import { validatePage } from "../AdminPages.utils";
+import { PageFields } from "./PageFields";
 import styles from "../AdminPages.module.scss";
 
 /**
@@ -24,30 +21,18 @@ import styles from "../AdminPages.module.scss";
  */
 export const PageForm = ({ initial, heading, onSubmit, onCancel }: PageFormProps) => {
   const { values, errors, setErrors, setField, field } = useFormValues(initial);
-
-  /**
-   * Validates the form and sends the values.
-   *
-   * @param event Submit event of the form.
-   */
-  const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const found = compact({ title: required(values.title), body: required(values.body) });
-    setErrors(found);
-    if (!Object.keys(found).length) onSubmit(values);
-  };
+  const handleSubmit = createSubmitHandler({ values, validate: validatePage, setErrors, onValid: onSubmit });
 
   return (
     <form className={styles.form} onSubmit={handleSubmit} noValidate aria-label={heading}>
       <h2 className={styles.form__title}>{heading}</h2>
-      <Input label="Title" error={errors.title} {...field("title")} />
-      <Input label="Slug" hint="Leave empty to build it from the title. The page lives at /p/slug." {...field("slug")} />
-      <TextArea label="Text" hint="Leave a blank line between paragraphs." error={errors.body} {...field("body")} />
-      <Checkbox label="Published" checked={values.published} onChange={(event) => setField("published", event.target.checked)} />
-      <div className={styles.form__actions}>
-        <Button type="secondary" size="small" text="Cancel" typeAttribute="button" onClick={onCancel} />
-        <Button type="primary" size="small" text="Save page" typeAttribute="submit" />
-      </div>
+      <PageFields
+        field={field}
+        errors={errors}
+        published={values.published}
+        onPublishedChange={(published) => setField("published", published)}
+      />
+      <FormActions submitLabel="Save page" onCancel={onCancel} />
     </form>
   );
 };

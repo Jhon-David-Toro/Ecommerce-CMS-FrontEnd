@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 
 import type { Product } from "@/lib/catalog/product.types";
 
-import FeaturedProducts from "./FeaturedProducts";
+import { FeaturedProducts } from "./FeaturedProducts";
 
 const buildProducts = (count: number): Product[] =>
   Array.from({ length: count }, (_, index) => ({

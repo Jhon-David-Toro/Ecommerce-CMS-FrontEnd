@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
-import SelectColor from "./SelectColor";
+import { SelectColor } from "./SelectColor";
 
 const colors = [
   { name: "Red", hex: "#ff0000" },

@@ -2,16 +2,16 @@
 
 import { FC, useState } from 'react';
 import { ProductInfoProps } from './ProductInfo.types';
-import Rating from '@/components/ui/Rating/Rating';
-import Button from '@/components/ui/Button/Button';
-import QuantityControl from '@/components/ui/QuantityControl/QuantityControl';
-import ProductPrice from '@/components/patterns/ProductPrice/ProductPrice';
-import ColorSelector from '@/components/ui/SelectColor/SelectColor';
-import SizeSelector from '@/components/patterns/SizeSelector/SizeSelector';
-import Divider from '@/components/ui/Divider/Divider';
+import { Rating } from "@/components/ui/Rating";
+import { Button } from "@/components/ui/Button";
+import { QuantityControl } from "@/components/ui/QuantityControl";
+import { ProductPrice } from "@/components/patterns/ProductPrice";
+import { SelectColor } from "@/components/ui/SelectColor";
+import { SizeSelector } from "@/components/patterns/SizeSelector";
+import { Divider } from "@/components/ui/Divider";
 import styles from './ProductInfo.module.scss';
 
-const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
+export const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
   const [selectedColor, setSelectedColor] = useState(product.colors[0].name);
   const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
   const [quantity, setQuantity] = useState(1);
@@ -24,7 +24,7 @@ const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
       <p className={styles.product__description}>{product.description.overview}</p>
 
       <Divider/>
-      <ColorSelector
+      <SelectColor
         colors={product.colors}
         selectedColor={selectedColor}
         onColorChange={setSelectedColor}
@@ -48,5 +48,3 @@ const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
     </article>
   );
 };
-
-export default ProductInfo;

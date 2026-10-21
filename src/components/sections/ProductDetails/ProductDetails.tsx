@@ -7,17 +7,17 @@ import type { Catalog } from "@/lib/catalog/catalog.types";
 import { useFetchJson } from "@/lib/shared/http/useFetchJson";
 
 import mockProduct from "@/assets/mockProduct.json";
-import FeaturedProducts from "@/components/sections/FeaturedProducts/FeaturedProducts";
-import Faqs from "@/components/patterns/Faqs/Faqs";
+import { FeaturedProducts } from "@/components/sections/FeaturedProducts";
+import { Faqs } from "@/components/patterns/Faqs";
 import type { FAQ } from "@/lib/catalog/faq.types";
-import ProductDescription from "@/components/patterns/ProductDescription/ProductDescription";
-import ProductImages from "@/components/patterns/ProductImages/ProductImages";
-import ProductInfo from "@/components/patterns/ProductInfo/ProductInfo";
-import Reviews from "@/components/patterns/Reviews/Reviews";
-import Tabs from "@/components/ui/Tabs/Tabs";
+import { ProductDescription } from "@/components/patterns/ProductDescription";
+import { ProductImages } from "@/components/patterns/ProductImages";
+import { ProductInfo } from "@/components/patterns/ProductInfo";
+import { Reviews } from "@/components/patterns/Reviews";
+import { Tabs } from "@/components/ui/Tabs";
 import { useAnimatedTab } from "./hooks/useAnimatedTab";
 import type { Product } from "@/lib/catalog/productDetails.types";
-import type { Review } from "@/components/patterns/Reviews/Reviews.types";
+import type { Review } from "@/lib/catalog/review.types";
 import { PRODUCT_TABS } from "./ProductDetails.constants";
 import styles from "./ProductDetails.module.scss";
 
@@ -26,7 +26,7 @@ import styles from "./ProductDetails.module.scss";
  *
  * @returns The product page content.
  */
-const ProductDetails = () => {
+export const ProductDetails = () => {
   const product: Product = mockProduct;
   const reviews = useFetchJson<Review[]>(CATALOG_URLS.reviews);
   const faqs = useFetchJson<FAQ[]>(CATALOG_URLS.faqs);
@@ -53,5 +53,3 @@ const ProductDetails = () => {
     </section>
   );
 };
-
-export default ProductDetails;

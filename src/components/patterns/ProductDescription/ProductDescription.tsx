@@ -5,7 +5,7 @@ import { ProductDescriptionProps } from './ProductDescription.types';
 import clsx from 'clsx';
 import styles from './ProductDescription.module.scss';
 
-const ProductDescription: FC<ProductDescriptionProps> = ({ description }) => {
+export const ProductDescription: FC<ProductDescriptionProps> = ({ description }) => {
   return (
     <div className={styles.details}>
       <h2 className={styles.details__title}>Product Description</h2>
@@ -58,5 +58,3 @@ const ProductDescription: FC<ProductDescriptionProps> = ({ description }) => {
     </div>
   );
 };
-
-export default ProductDescription;

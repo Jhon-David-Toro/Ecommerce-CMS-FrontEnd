@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import Button from '@/components/ui/Button/Button';
+import { Button } from "@/components/ui/Button";
 import styles from './Hero.module.scss';
 import Image from 'next/image';
-import StatsCounter from '@/components/patterns/StatsCounter/StatsCounter';
-import BrandsBanner from '@/components/patterns/BrandsBanner/BrandsBanner';
-import Skeleton from '@/components/ui/Skeleton/Skeleton';
+import { StatsCounter } from "@/components/patterns/StatsCounter";
+import { BrandsBanner } from "@/components/patterns/BrandsBanner";
+import { Skeleton } from "@/components/ui/Skeleton";
 
-const Hero = () => {
+export const Hero = () => {
   const [desktopLoaded, setDesktopLoaded] = useState(false);
   const [mobileLoaded, setMobileLoaded] = useState(false);
 
@@ -52,5 +52,3 @@ const Hero = () => {
     </section>
   )
 }
-
-export default Hero

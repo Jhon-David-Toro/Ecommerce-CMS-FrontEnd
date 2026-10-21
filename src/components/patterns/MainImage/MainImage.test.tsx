@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
-import MainImage from "./MainImage";
+import { MainImage } from "./MainImage";
 
 const ZOOMED_IMAGE = "Enlarged image of the product";
 

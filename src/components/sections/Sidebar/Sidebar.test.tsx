@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { render, screen, fireEvent } from '@testing-library/react';
-import Sidebar from './Sidebar';
+import { Sidebar } from "./Sidebar";
 
 describe(Sidebar.name, () => {
   const mockToggle = vi.fn();

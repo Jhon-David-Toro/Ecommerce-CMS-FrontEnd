@@ -3,7 +3,7 @@ import { paymentMethods } from '@/components/sections/Footer/Footer.constants';
 import Image from 'next/image';
 import styles from './FooterPaymentMethods.module.scss';
 
-const PaymentMethods: FC = () => (
+export const PaymentMethods: FC = () => (
   <div className={styles.payment} role="list" aria-label="Accepted Payment Methods">
     {paymentMethods.map((method) => (
       <div key={method.name} role="listitem">
@@ -18,5 +18,3 @@ const PaymentMethods: FC = () => (
     ))}
   </div>
 );
-
-export default PaymentMethods;

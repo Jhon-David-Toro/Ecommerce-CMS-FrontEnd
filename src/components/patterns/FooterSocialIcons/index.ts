@@ -1,0 +1,1 @@
+export { FooterSocialIcons } from "./FooterSocialIcons";

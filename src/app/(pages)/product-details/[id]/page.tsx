@@ -1,9 +1,9 @@
-import ProductDetailts from "@/components/sections/ProductDetails/ProductDetails";
+import { ProductDetails } from "@/components/sections/ProductDetails";
 
 const ProductPage = () => {
 
   return (
-    <ProductDetailts/>
+    <ProductDetails/>
   );
 };
 

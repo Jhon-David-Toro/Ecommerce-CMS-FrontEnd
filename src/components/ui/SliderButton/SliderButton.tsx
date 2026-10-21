@@ -3,7 +3,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/16/solid';
 import { SliderButtonProps } from './SliderButton.types';
 import styles from './SliderButton.module.scss';
 
-const SliderButton: FC<SliderButtonProps> = ({ direction, onClick, disabled }) => {
+export const SliderButton: FC<SliderButtonProps> = ({ direction, onClick, disabled }) => {
   return (
     <button
       className={`${styles.arrow}`}
@@ -14,5 +14,3 @@ const SliderButton: FC<SliderButtonProps> = ({ direction, onClick, disabled }) =
     </button>
   );
 };
-
-export default SliderButton;

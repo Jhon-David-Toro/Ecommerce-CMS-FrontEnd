@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { FaqListProps } from './FaqList.types';
-import FaqItem from '@/components/patterns/FaqItem/FaqItem';
+import { FaqItem } from "@/components/patterns/FaqItem";
 import styles from './FaqList.module.scss';
 
-const FaqList: FC<FaqListProps> = ({ faqs }) => {
+export const FaqList: FC<FaqListProps> = ({ faqs }) => {
   return (
     <ul className={styles.faq__list}>
       {faqs.map((faq) => (
@@ -12,5 +12,3 @@ const FaqList: FC<FaqListProps> = ({ faqs }) => {
     </ul>
   );
 };
-
-export default FaqList;

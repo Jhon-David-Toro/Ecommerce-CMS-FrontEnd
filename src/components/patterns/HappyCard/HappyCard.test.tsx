@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
-import HappyCard from "./HappyCard";
+import { HappyCard } from "./HappyCard";
 
 const props = { name: "Sarah M.", rating: 4, text: "Great quality" };
 

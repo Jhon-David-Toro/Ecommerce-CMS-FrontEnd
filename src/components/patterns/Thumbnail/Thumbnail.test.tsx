@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
-import Thumbnail from "./Thumbnail";
+import { Thumbnail } from "./Thumbnail";
 
 const props = { image: "/thumb.png", alt: "Product thumbnail", ariaLabel: "Thumbnail image" };
 

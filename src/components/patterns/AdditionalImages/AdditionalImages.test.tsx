@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
-import AdditionalImages from "./AdditionalImages";
+import { AdditionalImages } from "./AdditionalImages";
 
 const mainImage = "/main.jpg";
 const additionalImages = ["/image1.jpg", "/image2.jpg"];

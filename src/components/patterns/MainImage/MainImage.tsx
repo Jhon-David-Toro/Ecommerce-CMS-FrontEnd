@@ -6,12 +6,12 @@ import { IMAGE_CONFIG } from '@/lib/catalog/imageConfig.constants';
 import { MainImageProps } from './MainImage.types';
 import { calculateZoomedImageTranslate } from './MainImage.utils';
 import { useImageZoom } from './hooks/useImageZoom';
-import ZoomLens from '@/components/patterns/ZoomLens/ZoomLens';
-import ZoomedImage from '@/components/patterns/ZoomedImage/ZoomedImage';
+import { ZoomLens } from "@/components/patterns/ZoomLens";
+import { ZoomedImage } from "@/components/patterns/ZoomedImage";
 import styles from './MainImage.module.scss';
-import Skeleton from '@/components/ui/Skeleton/Skeleton';
+import { Skeleton } from "@/components/ui/Skeleton";
 
-const MainImage: FC<MainImageProps> = ({ currentMainImage, isMobile }) => {
+export const MainImage: FC<MainImageProps> = ({ currentMainImage, isMobile }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const { imageRef, isZooming, lensPosition, ...handlers } = useImageZoom(isMobile);
   const imageWidth = isMobile ? IMAGE_CONFIG.ZOOMED_IMAGE_WIDTH_MOBILE : IMAGE_CONFIG.ZOOMED_IMAGE_WIDTH;
@@ -50,5 +50,3 @@ const MainImage: FC<MainImageProps> = ({ currentMainImage, isMobile }) => {
     </article>
   );
 };
-
-export default MainImage;

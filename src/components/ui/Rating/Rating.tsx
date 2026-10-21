@@ -3,7 +3,7 @@ import { StarIcon } from '@heroicons/react/24/solid';
 import { RatingProps } from './Rating.types';
 import styles from './Rating.module.scss';
 
-const Rating: FC<RatingProps> = ({ rating, size, numbers = true }) => {
+export const Rating: FC<RatingProps> = ({ rating, size, numbers = true }) => {
   const fullStars = Math.floor(rating);
   const halfStar = rating % 1 >= 0.5;
   const emptyStars = 5 - Math.ceil(rating);
@@ -28,5 +28,3 @@ const Rating: FC<RatingProps> = ({ rating, size, numbers = true }) => {
     </section>
   );
 };
-
-export default Rating;

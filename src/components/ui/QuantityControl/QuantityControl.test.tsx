@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { render, screen, fireEvent } from '@testing-library/react';
-import QuantityControl from './QuantityControl';
+import { QuantityControl } from "./QuantityControl";
 
 describe(QuantityControl.name, () => {
   it('renders with the initial quantity', () => {

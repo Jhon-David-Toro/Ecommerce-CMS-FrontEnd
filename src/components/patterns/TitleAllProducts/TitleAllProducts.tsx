@@ -5,9 +5,9 @@ import { SORT_OPTIONS } from './TitleAllProducts.constants';
 import { TitleAllProductsProps } from './TitleAllProducts.types';
 import { getShowingText } from './TitleAllProducts.utils';
 import styles from './TitleAllProducts.module.scss';
-import Select from '@/components/ui/Select/Select';
+import { Select } from "@/components/ui/Select";
 
-const TitleAllProducts = ({currentPage, productsPerPage, totalProducts}: TitleAllProductsProps) => {
+export const TitleAllProducts = ({currentPage, productsPerPage, totalProducts}: TitleAllProductsProps) => {
   const { selectedCategoryName, sortBy, setSortBy } = useFilterStore();
 
   const title = selectedCategoryName?.trim() ? selectedCategoryName : 'All Products';
@@ -31,5 +31,3 @@ const TitleAllProducts = ({currentPage, productsPerPage, totalProducts}: TitleAl
     </section>
   );
 };
-
-export default TitleAllProducts;

@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { DEFAULT_TAB, TAB_LABELS } from '@/components/sections/ProductDetails/ProductDetails.constants';
 import styles from './Tabs.module.scss';
 
-const Tabs: FC<TabsProps> = ({ onTabChange }) => {
+export const Tabs: FC<TabsProps> = ({ onTabChange }) => {
   const [activeTab, setActiveTab] = useState<string>(DEFAULT_TAB);
   const tabs = TAB_LABELS;
 
@@ -30,5 +30,3 @@ const Tabs: FC<TabsProps> = ({ onTabChange }) => {
     </nav>
   );
 };
-
-export default Tabs;

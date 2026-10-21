@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { ProductPriceProps } from './ProductPrice.types';
 import styles from './ProductPrice.module.scss';
 
-const ProductPrice: FC<ProductPriceProps> = ({ price, discountPrice, discount, currency = 'USD' }) => {
+export const ProductPrice: FC<ProductPriceProps> = ({ price, discountPrice, discount, currency = 'USD' }) => {
     const formatPrice = (value: number) =>
         new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(value);
 
@@ -20,5 +20,3 @@ const ProductPrice: FC<ProductPriceProps> = ({ price, discountPrice, discount, c
         </p>
     );
 };
-
-export default ProductPrice;

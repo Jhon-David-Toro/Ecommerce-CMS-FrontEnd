@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { CheckCircleIcon } from '@heroicons/react/16/solid';
 import { ReviewCardProps } from './ReviewCard.types';
-import Rating from '@/components/ui/Rating/Rating';
+import { Rating } from "@/components/ui/Rating";
 import styles from './ReviewCard.module.scss';
 
-const ReviewCard: FC<ReviewCardProps> = ({ review }) => {
+export const ReviewCard: FC<ReviewCardProps> = ({ review }) => {
   return (
     <article className={styles.review}>
       <Rating rating={review.rating} size='extra-medium' numbers={false} />
@@ -16,5 +16,3 @@ const ReviewCard: FC<ReviewCardProps> = ({ review }) => {
     </article>
   );
 };
-
-export default ReviewCard;

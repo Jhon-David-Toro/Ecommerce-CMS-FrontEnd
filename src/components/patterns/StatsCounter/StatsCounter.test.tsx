@@ -1,7 +1,7 @@
 import { act, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import StatsCounter from "./StatsCounter";
+import { StatsCounter } from "./StatsCounter";
 
 describe("StatsCounter", () => {
   beforeEach(() => {

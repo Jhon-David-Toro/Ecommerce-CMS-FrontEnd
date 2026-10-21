@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { render, screen } from '@testing-library/react';
-import BrandsBanner from './BrandsBanner';
+import { BrandsBanner } from "./BrandsBanner";
 
 describe(BrandsBanner.name, () => {
   it('renders without crashing', () => {

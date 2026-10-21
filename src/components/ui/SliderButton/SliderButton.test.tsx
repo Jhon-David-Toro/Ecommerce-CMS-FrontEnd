@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { render, screen, fireEvent } from '@testing-library/react';
-import SliderButton from './SliderButton';
+import { SliderButton } from "./SliderButton";
 import { SVGProps } from 'react';
 
 vi.mock('@heroicons/react/16/solid', () => ({

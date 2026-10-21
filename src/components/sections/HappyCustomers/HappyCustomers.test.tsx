@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 
-import HappyCustomers from "./HappyCustomers";
+import { HappyCustomers } from "./HappyCustomers";
 
 describe("HappyCustomers", () => {
   it("shows the title and every review", () => {

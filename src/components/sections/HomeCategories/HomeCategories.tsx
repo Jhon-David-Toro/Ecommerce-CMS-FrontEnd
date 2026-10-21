@@ -1,7 +1,7 @@
-import HomeCategory from '@/components/patterns/HomeCategory/HomeCategory';
+import { HomeCategory } from "@/components/patterns/HomeCategory";
 import styles from './HomeCategories.module.scss';
 
-const HomeCategories = () => {
+export const HomeCategories = () => {
   return (
     <section className={styles.categories}>
       <h2 className={styles.categories__title}>BROWSE BY DESS STYLE</h2>
@@ -9,5 +9,3 @@ const HomeCategories = () => {
     </section>
   )
 }
-
-export default HomeCategories

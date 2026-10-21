@@ -1,37 +1,23 @@
-import { describe, expect, it, vi } from "vitest";
-import { render, screen } from '@testing-library/react';
-import FaqList from './FaqList';
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 
-vi.mock('@/components/patterns/FaqItem/FaqItem', () => {
-    const MockFaqItem = ({ faq }: { faq: { id: string; question: string; answer: string } }) => (
-      <li data-testid="faq-item">{faq.question}</li>
-    );
-    MockFaqItem.displayName = 'MockFaqItem';
-    return { default: MockFaqItem };
-});
-  
-describe(FaqList.name, () => {
-  const mockFaqs = [
-    {
-      id: '1',
-      question: 'What is your return policy?',
-      answer: 'You can return items within 30 days.',
-    },
-    {
-      id: '2',
-      question: 'Do you offer international shipping?',
-      answer: 'Yes, we ship worldwide.',
-    },
-  ];
+import { FaqList } from "./FaqList";
 
-  it('renders a list of FAQ items', () => {
-    render(<FaqList faqs={mockFaqs} />);
+const faqs = [
+  { id: "1", question: "What is your return policy?", answer: "You can return items within 30 days." },
+  { id: "2", question: "Do you offer international shipping?", answer: "Yes, we ship worldwide." },
+];
 
-    const items = screen.getAllByTestId('faq-item');
-    expect(items).toHaveLength(mockFaqs.length);
+describe("FaqList", () => {
+  it("renders one item per question", () => {
+    render(<FaqList faqs={faqs} />);
+    expect(screen.getAllByRole("listitem")).toHaveLength(2);
+    expect(screen.getByRole("button", { name: /What is your return policy\?/ })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Do you offer international shipping\?/ })).toBeInTheDocument();
+  });
 
-    mockFaqs.forEach((faq) => {
-      expect(screen.getByText(faq.question)).toBeInTheDocument();
-    });
+  it("renders an empty list without questions", () => {
+    render(<FaqList faqs={[]} />);
+    expect(screen.queryAllByRole("listitem")).toHaveLength(0);
   });
 });

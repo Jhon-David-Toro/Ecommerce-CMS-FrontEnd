@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 import categories from "@/assets/home-category.json";
-import HomeCategory from "./HomeCategory";
+import { HomeCategory } from "./HomeCategory";
 
 describe("HomeCategory", () => {
   it("renders one link per category", () => {

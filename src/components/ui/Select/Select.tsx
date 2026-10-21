@@ -16,7 +16,7 @@ import styles from "./Select.module.scss";
  * @param props.onChange Called with the option the user picks.
  * @returns The select.
  */
-const Select = ({ value, options, onChange }: SelectProps) => {
+export const Select = ({ value, options, onChange }: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -63,5 +63,3 @@ const Select = ({ value, options, onChange }: SelectProps) => {
     </div>
   );
 };
-
-export default Select;

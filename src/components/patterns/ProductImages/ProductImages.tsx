@@ -6,8 +6,8 @@ import { useWindowWidth } from "@/lib/shared/dom/useWindowWidth";
 
 import { IMAGE_CONFIG } from "@/lib/catalog/imageConfig.constants";
 import { ProductImagesProps } from "./ProductImages.types";
-import AdditionalImages from "@/components/patterns/AdditionalImages/AdditionalImages";
-import MainImage from "@/components/patterns/MainImage/MainImage";
+import { AdditionalImages } from "@/components/patterns/AdditionalImages";
+import { MainImage } from "@/components/patterns/MainImage";
 import styles from "./ProductImages.module.scss";
 
 /**
@@ -18,7 +18,7 @@ import styles from "./ProductImages.module.scss";
  * @param props.additionalImages Extra images of the product.
  * @returns The gallery.
  */
-const ProductImages: FC<ProductImagesProps> = ({ mainImage, additionalImages }) => {
+export const ProductImages: FC<ProductImagesProps> = ({ mainImage, additionalImages }) => {
   const [currentMainImage, setCurrentMainImage] = useState(mainImage);
   const isMobile = useWindowWidth() <= IMAGE_CONFIG.IS_MOBILE;
 
@@ -34,5 +34,3 @@ const ProductImages: FC<ProductImagesProps> = ({ mainImage, additionalImages }) 
     </section>
   );
 };
-
-export default ProductImages;

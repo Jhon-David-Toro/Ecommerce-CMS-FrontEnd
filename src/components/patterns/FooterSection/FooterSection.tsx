@@ -3,7 +3,7 @@ import { FooterSection } from '@/components/sections/Footer/Footer.constants';
 import Link from 'next/link';
 import styles from './FooterSection.module.scss';
 
-const FooterSectionComponent: FC<{ section: FooterSection }> = ({ section }) => (
+export const FooterSectionComponent: FC<{ section: FooterSection }> = ({ section }) => (
   <section className={styles.footerSection} aria-labelledby={`footer-${section.title.toLowerCase()}`}>
     <h3 className={styles.footerSection__title} id={`footer-${section.title.toLowerCase()}`}>
       {section.title}
@@ -19,5 +19,3 @@ const FooterSectionComponent: FC<{ section: FooterSection }> = ({ section }) => 
     </ul>
   </section>
 );
-
-export default FooterSectionComponent;

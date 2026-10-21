@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback, FC } from 'react';
 import type { StatsCounterProps } from './StatsCounter.types';
 import styles from './StatsCounter.module.scss';
 
-const StatsCounter: FC<StatsCounterProps> = ({ endValue, label, duration = 2000 }) => {
+export const StatsCounter: FC<StatsCounterProps> = ({ endValue, label, duration = 2000 }) => {
   const [count, setCount] = useState(0);
 
   const incrementValue = useCallback(() => {
@@ -33,5 +33,3 @@ const StatsCounter: FC<StatsCounterProps> = ({ endValue, label, duration = 2000 
     </section>
   );
 };
-
-export default StatsCounter;

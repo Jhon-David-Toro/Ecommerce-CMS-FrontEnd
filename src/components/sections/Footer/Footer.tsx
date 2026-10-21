@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { footerSections, socialLinks } from './Footer.constants';
-import FooterSocialIcons from '@/components/patterns/FooterSocialIcons/FooterSocialIcons';
-import FooterSectionComponent from '@/components/patterns/FooterSection/FooterSection';
-import PaymentMethods from '@/components/patterns/FooterPaymentMethods/FooterPaymentMethods';
+import { FooterSocialIcons } from "@/components/patterns/FooterSocialIcons";
+import { FooterSectionComponent } from "@/components/patterns/FooterSection";
+import { PaymentMethods } from "@/components/patterns/FooterPaymentMethods";
 import styles from './Footer.module.scss';
 
-const Footer: FC = () => {
+export const Footer: FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -35,5 +35,3 @@ const Footer: FC = () => {
     </footer>
   );
 };
-
-export default Footer;

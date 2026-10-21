@@ -7,7 +7,7 @@ type FilterSectionProps = {
   children: ReactNode;
 };
 
-const FilterSection = ({ title, children }: FilterSectionProps) => {
+export const FilterSection = ({ title, children }: FilterSectionProps) => {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
@@ -23,5 +23,3 @@ const FilterSection = ({ title, children }: FilterSectionProps) => {
     </div>
   );
 };
-
-export default FilterSection;

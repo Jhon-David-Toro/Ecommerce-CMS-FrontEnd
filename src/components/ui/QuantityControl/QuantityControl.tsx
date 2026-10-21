@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { QuantityControlProps } from './QuantityControl.types';
-import Button from '@/components/ui/Button/Button';
+import { Button } from "@/components/ui/Button";
 import styles from './QuantityControl.module.scss';
 
-const QuantityControl: FC<QuantityControlProps> = ({ quantity, setQuantity }) => {
+export const QuantityControl: FC<QuantityControlProps> = ({ quantity, setQuantity }) => {
   const handleDecrement = () => {
     setQuantity(quantity > 1 ? quantity - 1 : 1);
   };
@@ -34,5 +34,3 @@ const QuantityControl: FC<QuantityControlProps> = ({ quantity, setQuantity }) =>
     </div>
   );
 };
-
-export default QuantityControl;

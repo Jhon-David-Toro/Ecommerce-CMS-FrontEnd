@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
-import Rating from "./Rating";
+import { Rating } from "./Rating";
 
 const countStars = (container: HTMLElement) => container.querySelectorAll("svg").length;
 

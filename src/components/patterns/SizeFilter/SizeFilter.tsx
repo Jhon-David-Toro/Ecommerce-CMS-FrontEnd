@@ -1,13 +1,13 @@
 
 import { useFilterStore } from '@/lib/catalog/filters/filtersStore';
-import Button from '@/components/ui/Button/Button';
-import FilterSection from '@/components/patterns/FilterSection/FilterSection';
+import { Button } from "@/components/ui/Button";
+import { FilterSection } from "@/components/patterns/FilterSection";
 import clsx from 'clsx';
 import styles from './SizeFilter.module.scss';
 
 const sizes = ['XX-Small', 'X-Small', 'Small', 'Medium', 'Large', 'X-Large', 'XX-Large', '3X-Large'];
 
-const SizeFilter = () => {
+export const SizeFilter = () => {
   const { sizes: selectedSizes, setSizes } = useFilterStore();
 
   const toggleSelection = (item: string) => {
@@ -36,5 +36,3 @@ const SizeFilter = () => {
     </FilterSection>
   );
 };
-
-export default SizeFilter;

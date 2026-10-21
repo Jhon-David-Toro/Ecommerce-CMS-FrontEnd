@@ -2,8 +2,8 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 
-import type { Review } from "@/components/patterns/ReviewCard/ReviewCard.types";
-import Reviews from "./Reviews";
+import type { Review } from "@/lib/catalog/review.types";
+import { Reviews } from "./Reviews";
 
 const reviews: Review[] = [
   { id: "1", author: "Alice", rating: 5, text: "Great!", date: "2024-05-01", verified: true },

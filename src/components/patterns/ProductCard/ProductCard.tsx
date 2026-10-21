@@ -3,13 +3,13 @@
 import { FC, useState } from 'react';
 import type { Product } from '@/lib/catalog/product.types';
 import Image from 'next/image';
-import Rating from '@/components/ui/Rating/Rating';
-import ProductPrice from '@/components/patterns/ProductPrice/ProductPrice';
+import { Rating } from "@/components/ui/Rating";
+import { ProductPrice } from "@/components/patterns/ProductPrice";
 import styles from './ProductCard.module.scss';
 import Link from 'next/link';
-import Skeleton from '@/components/ui/Skeleton/Skeleton';
+import { Skeleton } from "@/components/ui/Skeleton";
 
-const ProductCard: FC<Product> = ({
+export const ProductCard: FC<Product> = ({
   id,
   name,
   price,
@@ -52,5 +52,3 @@ const ProductCard: FC<Product> = ({
     </article>
   );
 };
-
-export default ProductCard;

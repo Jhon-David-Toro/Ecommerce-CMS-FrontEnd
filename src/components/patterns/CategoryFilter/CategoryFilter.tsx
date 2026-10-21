@@ -1,11 +1,11 @@
 import { useFilterStore } from '@/lib/catalog/filters/filtersStore';
 import clsx from 'clsx';
-import FilterSection from '@/components/patterns/FilterSection/FilterSection';
+import { FilterSection } from "@/components/patterns/FilterSection";
 import styles from './CategoryFilter.module.scss';
 
 const categories = ['T-Shirts', 'Shorts', 'Hoodie', 'Jeans'];
 
-const CategoryFilter = () => {
+export const CategoryFilter = () => {
   const { category, setCategory } = useFilterStore();
 
   const toggleSelection = (item: string) => {
@@ -41,5 +41,3 @@ const CategoryFilter = () => {
     </FilterSection>
   );
 };
-
-export default CategoryFilter;

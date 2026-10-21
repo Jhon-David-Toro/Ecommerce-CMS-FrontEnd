@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 import { HappyCardProps } from './HappyCard.types';
-import Rating from '@/components/ui/Rating/Rating';
+import { Rating } from "@/components/ui/Rating";
 import styles from './HappyCard.module.scss';
 
-const HappyCard: FC<HappyCardProps> = ({ name, rating, text }) => {
+export const HappyCard: FC<HappyCardProps> = ({ name, rating, text }) => {
   return (
     <div className={styles.card}>
       <div className={styles.header}>
@@ -15,5 +15,3 @@ const HappyCard: FC<HappyCardProps> = ({ name, rating, text }) => {
     </div>
   );
 };
-
-export default HappyCard;

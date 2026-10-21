@@ -3,7 +3,7 @@ import { FaqItemProps } from './FaqItem.types';
 import styles from './FaqItem.module.scss';
 import clsx from 'clsx';
 
-const FaqItem: FC<FaqItemProps> = ({ faq }) => {
+export const FaqItem: FC<FaqItemProps> = ({ faq }) => {
   const [isActive, setIsActive] = useState(false);
   const toggleFaq = () => setIsActive(!isActive);
 
@@ -34,5 +34,3 @@ const FaqItem: FC<FaqItemProps> = ({ faq }) => {
     </li>
   );
 };
-
-export default FaqItem;

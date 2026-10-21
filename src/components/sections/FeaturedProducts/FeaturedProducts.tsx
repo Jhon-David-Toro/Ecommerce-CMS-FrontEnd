@@ -2,13 +2,13 @@
 
 import { FC, useState } from 'react';
 import type { FeaturedProductsProps } from './FeaturedProducts.types';
-import ProductCard from '@/components/patterns/ProductCard/ProductCard';
-import Button from '@/components/ui/Button/Button';
+import { ProductCard } from "@/components/patterns/ProductCard";
+import { Button } from "@/components/ui/Button";
 import styles from './FeaturedProducts.module.scss';
 
 const INITIAL_VISIBLE_PRODUCTS = 4;
 
-const FeaturedProducts: FC<FeaturedProductsProps> = ({ products, category }) => {
+export const FeaturedProducts: FC<FeaturedProductsProps> = ({ products, category }) => {
   const [showAll, setShowAll] = useState(false);
 
   const visibleProducts = showAll
@@ -38,5 +38,3 @@ const FeaturedProducts: FC<FeaturedProductsProps> = ({ products, category }) => 
     </section>
   );
 };
-
-export default FeaturedProducts;

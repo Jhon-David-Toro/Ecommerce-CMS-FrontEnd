@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { SizeSelectorProps } from './SizeSelector.types';
 import clsx from 'clsx';
-import Button from '@/components/ui/Button/Button';
+import { Button } from "@/components/ui/Button";
 import styles from './SizeSelector.module.scss';
 
-const SizeSelector: FC<SizeSelectorProps> = ({ sizes, selectedSize, onSizeChange }) => {
+export const SizeSelector: FC<SizeSelectorProps> = ({ sizes, selectedSize, onSizeChange }) => {
   return (
     <section className={styles.sizes}>
       <p>Choose Size</p>
@@ -26,5 +26,3 @@ const SizeSelector: FC<SizeSelectorProps> = ({ sizes, selectedSize, onSizeChange
     </section>
   );
 };
-
-export default SizeSelector;

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { render, screen } from '@testing-library/react';
-import ZoomLens from './ZoomLens';
+import { ZoomLens } from "./ZoomLens";
 
 const mockLensPosition = {
   x: 100,

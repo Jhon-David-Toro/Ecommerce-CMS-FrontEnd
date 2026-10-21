@@ -1,6 +1,6 @@
 import { Color } from "@/lib/catalog/color.types";
 
-export interface ColorSelectorProps {
+export interface SelectColorProps {
     colors: Color[];
     selectedColor: string;
     onColorChange: (colorName: string) => void;

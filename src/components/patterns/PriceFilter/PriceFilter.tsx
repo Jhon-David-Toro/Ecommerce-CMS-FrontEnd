@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useFilterStore } from '@/lib/catalog/filters/filtersStore';
-import FilterSection from '@/components/patterns/FilterSection/FilterSection';
+import { FilterSection } from "@/components/patterns/FilterSection";
 import styles from './PriceFilter.module.scss';
 
-const PriceFilter = () => {
+export const PriceFilter = () => {
   const { priceRange, setPriceRange } = useFilterStore();
   const [activeSlider, setActiveSlider] = useState<'min' | 'max' | null>(null);
 
@@ -64,5 +64,3 @@ const PriceFilter = () => {
     </FilterSection>
   );
 };
-
-export default PriceFilter;

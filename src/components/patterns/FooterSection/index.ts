@@ -1,0 +1,1 @@
+export { FooterSectionComponent } from "./FooterSection";

@@ -1,4 +1,4 @@
-import Products from '@/components/sections/Products/Products';
+import { Products } from "@/components/sections/Products";
 
 const ProductsPage = () => {
   return (

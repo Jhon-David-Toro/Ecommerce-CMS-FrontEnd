@@ -6,9 +6,9 @@ import { IMAGE_CONFIG } from '@/lib/catalog/imageConfig.constants';
 import clsx from 'clsx';
 import Image from 'next/image';
 import styles from './Thumbnail.module.scss';
-import Skeleton from '@/components/ui/Skeleton/Skeleton';
+import { Skeleton } from "@/components/ui/Skeleton";
 
-const Thumbnail: FC<ThumbnailProps> = ({
+export const Thumbnail: FC<ThumbnailProps> = ({
   image,
   isSelected,
   onSelect,
@@ -44,5 +44,3 @@ const Thumbnail: FC<ThumbnailProps> = ({
     </button>
   );
 };
-
-export default Thumbnail;

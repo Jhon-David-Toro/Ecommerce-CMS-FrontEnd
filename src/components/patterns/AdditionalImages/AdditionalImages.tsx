@@ -3,10 +3,10 @@
 import { FC } from 'react';
 import { IMAGE_CONFIG } from '@/lib/catalog/imageConfig.constants';
 import { AdditionalImagesProps } from './AdditionalImages.types';
-import Thumbnail from '@/components/patterns/Thumbnail/Thumbnail';
+import { Thumbnail } from "@/components/patterns/Thumbnail";
 import styles from './AdditionalImages.module.scss';
 
-const AdditionalImages: FC<AdditionalImagesProps> = ({
+export const AdditionalImages: FC<AdditionalImagesProps> = ({
   currentMainImage,
   mainImage,
   setCurrentMainImage,
@@ -36,5 +36,3 @@ const AdditionalImages: FC<AdditionalImagesProps> = ({
     </article>
   );
 };
-
-export default AdditionalImages;

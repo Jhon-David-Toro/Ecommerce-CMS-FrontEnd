@@ -5,10 +5,10 @@ import type { MenuData } from '@/lib/site/menu.types';
 import { Bars3Icon, MagnifyingGlassIcon, ShoppingCartIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import menuData from '@/assets/menu.json';
-import Sidebar from '@/components/sections/Sidebar/Sidebar';
+import { Sidebar } from "@/components/sections/Sidebar";
 import styles from './Navbar.module.scss';
 
-const Navbar: FC = () => {
+export const Navbar: FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const data: MenuData = menuData;
 
@@ -44,5 +44,3 @@ const Navbar: FC = () => {
     </header>
   );
 };
-
-export default Navbar;

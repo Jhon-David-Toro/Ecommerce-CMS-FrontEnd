@@ -3,7 +3,7 @@ import { FooterLink } from '@/components/sections/Footer/Footer.constants';
 import Image from 'next/image';
 import styles from './FooterSocialIcons.module.scss';
 
-const FooterSocialIcons: FC<{ links: FooterLink[] }> = ({ links }) => (
+export const FooterSocialIcons: FC<{ links: FooterLink[] }> = ({ links }) => (
   <div className={styles.social} role="navigation" aria-label="Social Media Links">
     {links.map((link) => (
       <a
@@ -24,5 +24,3 @@ const FooterSocialIcons: FC<{ links: FooterLink[] }> = ({ links }) => (
     ))}
   </div>
 );
-
-export default FooterSocialIcons;

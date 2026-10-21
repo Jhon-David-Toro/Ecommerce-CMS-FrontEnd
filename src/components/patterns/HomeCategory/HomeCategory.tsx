@@ -6,9 +6,9 @@ import Link from 'next/link';
 import categories from '@/assets/home-category.json';
 import clsx from 'clsx';
 import { useState } from 'react';
-import Skeleton from '@/components/ui/Skeleton/Skeleton';
+import { Skeleton } from "@/components/ui/Skeleton";
 
-const HomeCategory = () => {
+export const HomeCategory = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
@@ -48,5 +48,3 @@ const HomeCategory = () => {
     </section>
   );
 };
-
-export default HomeCategory;

@@ -7,7 +7,7 @@ import Link from 'next/link';
 import type { SidebarProps } from './Sidebar.types';
 import styles from './Sidebar.module.scss';
 
-const Sidebar: FC<SidebarProps> = ({ isOpen, toggleSidebar, menu }) => {
+export const Sidebar: FC<SidebarProps> = ({ isOpen, toggleSidebar, menu }) => {
   return (
     <dialog role='dialog' open={isOpen} className={clsx(styles.sidebar, {[styles.open] : isOpen})}>
       <strong className={styles.navbar__brand}>SHOP.COM</strong>
@@ -24,5 +24,3 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, toggleSidebar, menu }) => {
     </dialog>
   );
 };
-
-export default Sidebar;

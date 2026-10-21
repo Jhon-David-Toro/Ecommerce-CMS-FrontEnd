@@ -3,11 +3,11 @@
 import { FC } from 'react';
 import { goToPreviousPage, goToNextPage, generatePageElements } from './Pagination.utils';
 import { PageElement, PaginationProps } from './Pagination.types';
-import Button from '@/components/ui/Button/Button';
+import { Button } from "@/components/ui/Button";
 import styles from './Pagination.module.scss';
 import { useMediaQuery } from 'react-responsive';
 
-const Pagination: FC<PaginationProps> = ({ currentPage, totalPages, onPageChange }) => {
+export const Pagination: FC<PaginationProps> = ({ currentPage, totalPages, onPageChange }) => {
   const isMobile = useMediaQuery({ maxWidth: 576 });
   const renderPageElements = () => {
     const elements: PageElement[] = generatePageElements(
@@ -70,5 +70,3 @@ const Pagination: FC<PaginationProps> = ({ currentPage, totalPages, onPageChange
     </nav>
   );
 };
-
-export default Pagination;

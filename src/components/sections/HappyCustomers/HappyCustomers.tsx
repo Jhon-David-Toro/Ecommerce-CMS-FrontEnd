@@ -2,8 +2,8 @@ import type { CSSProperties } from "react";
 
 import { useWindowWidth } from "@/lib/shared/dom/useWindowWidth";
 
-import HappyCard from "@/components/patterns/HappyCard/HappyCard";
-import SliderButton from "@/components/ui/SliderButton/SliderButton";
+import { HappyCard } from "@/components/patterns/HappyCard";
+import { SliderButton } from "@/components/ui/SliderButton";
 import { CUSTOMER_REVIEWS } from "./HappyCustomers.constants";
 import { getItemsPerSlide } from "./HappyCustomers.utils";
 import { useSlider } from "./hooks/useSlider";
@@ -14,7 +14,7 @@ import styles from "./HappyCustomers.module.scss";
  *
  * @returns The reviews section.
  */
-const HappyCustomers = () => {
+export const HappyCustomers = () => {
   const itemsPerSlide = getItemsPerSlide(useWindowWidth());
   const { currentSlide, next, previous, isStatic } = useSlider({ total: CUSTOMER_REVIEWS.length, itemsPerSlide });
   const trackStyle = { "--slide-offset": `${(currentSlide * 100) / itemsPerSlide}%` } as CSSProperties;
@@ -40,5 +40,3 @@ const HappyCustomers = () => {
     </section>
   );
 };
-
-export default HappyCustomers;

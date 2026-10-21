@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { render, screen } from '@testing-library/react';
-import ProductPrice from './ProductPrice';
+import { ProductPrice } from "./ProductPrice";
 
 describe(ProductPrice.name, () => {
   it('should render the price correctly when there is no discount', () => {

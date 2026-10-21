@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { render, screen } from '@testing-library/react';
-import ZoomedImage from './ZoomedImage';
+import { ZoomedImage } from "./ZoomedImage";
 
 describe(ZoomedImage.name, () => {
   const props = {

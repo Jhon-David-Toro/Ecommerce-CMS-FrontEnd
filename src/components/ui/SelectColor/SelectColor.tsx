@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import { ColorSelectorProps } from './SelectColor.types';
+import { SelectColorProps } from './SelectColor.types';
 import clsx from 'clsx';
 import styles from './SelectColor.module.scss';
 
-const ColorSelector: FC<ColorSelectorProps> = ({ colors, selectedColor, onColorChange }) => {
+export const SelectColor: FC<SelectColorProps> = ({ colors, selectedColor, onColorChange }) => {
   return (
     <section className={styles.colors}>
       <p>Select Colors</p>
@@ -22,5 +22,3 @@ const ColorSelector: FC<ColorSelectorProps> = ({ colors, selectedColor, onColorC
     </section>
   );
 };
-
-export default ColorSelector;

@@ -3,7 +3,7 @@ import { ZoomedImageProps } from './ZoomedImage.types';
 import Image from 'next/image';
 import styles from './ZoomedImage.module.scss';
 
-const ZoomedImage: FC<ZoomedImageProps> = ({
+export const ZoomedImage: FC<ZoomedImageProps> = ({
   currentMainImage,
   width,
   height,
@@ -26,5 +26,3 @@ const ZoomedImage: FC<ZoomedImageProps> = ({
     </article>
   );
 };
-
-export default ZoomedImage;

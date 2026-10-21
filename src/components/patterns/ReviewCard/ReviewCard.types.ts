@@ -1,13 +1,5 @@
-export interface Review {
-    id: string;
-    author: string;
-    rating: number;
-    text: string;
-    date: string;
-    verified: boolean;
-}
-  
-  
+import type { Review } from "@/lib/catalog/review.types";
+
 export interface ReviewCardProps {
-    review: Review;
+  review: Review;
 }

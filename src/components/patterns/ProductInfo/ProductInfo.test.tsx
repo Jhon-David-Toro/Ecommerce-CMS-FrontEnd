@@ -1,95 +1,35 @@
-import { describe, expect, it, vi } from "vitest";
-import { render, screen } from '@testing-library/react';
-import ProductInfo from './ProductInfo';
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { describe, expect, it } from "vitest";
 
-vi.mock('@/components/ui/Rating/Rating', () => {
-  const MockRating: React.FC<{ rating: number }> = ({ rating }) => (
-    <div data-testid="mock-rating">Rating: {rating}</div>
-  );
-  return { default: MockRating };
-});
+import mockProduct from "@/assets/mockProduct.json";
 
-vi.mock('@/components/ui/Button/Button', () => {
-  const MockButton: React.FC<{ text: string }> = ({ text }) => (
-    <button>{text}</button>
-  );
-  return { default: MockButton };
-});
+import { ProductInfo } from "./ProductInfo";
 
-vi.mock('@/components/ui/QuantityControl/QuantityControl', () => {
-  const MockQuantityControl: React.FC<{
-    quantity: number;
-    setQuantity: (q: number) => void;
-  }> = ({ quantity }) => <div>Quantity: {quantity}</div>;
-  return { default: MockQuantityControl };
-});
-
-vi.mock('@/components/patterns/ProductPrice/ProductPrice', () => {
-  const MockProductPrice: React.FC<{
-    price: number;
-    discountPrice: number;
-    discount?: number;
-  }> = ({ price, discountPrice }) => (
-    <div>{`Price: ${price}, Discounted: ${discountPrice}`}</div>
-  );
-  return { default: MockProductPrice };
-});
-
-vi.mock('@/components/ui/SelectColor/SelectColor', () => {
-  const MockColorSelector: React.FC<{
-    colors: { name: string; hex: string }[];
-    selectedColor: string;
-    onColorChange: (color: string) => void;
-  }> = ({ selectedColor }) => <div>Selected Color: {selectedColor}</div>;
-  return { default: MockColorSelector };
-});
-
-vi.mock('@/components/patterns/SizeSelector/SizeSelector', () => {
-  const MockSizeSelector: React.FC<{
-    sizes: string[];
-    selectedSize: string;
-    onSizeChange: (size: string) => void;
-  }> = ({ selectedSize }) => <div>Selected Size: {selectedSize}</div>;
-  return { default: MockSizeSelector };
-});
-
-vi.mock('@/components/ui/Divider/Divider', () => {
-  const MockDivider: React.FC = () => <hr />;
-  return { default: MockDivider };
-});
-
-const mockProduct = {
-  id: '1',
-  name: 'Cool T-Shirt',
-  rating: 4.5,
-  reviewsCount: 100,
-  price: 50,
-  discountPrice: 40,
-  discount: 20,
-  description: {
-    overview: 'This is a stylish t-shirt.',
-    features: ['Soft fabric', 'Durable'],
-    origin: 'Spain',
-    company: {
-      name: 'CoolBrand',
-      description: 'Eco-friendly fashion',
-    },
-    careInstructions: 'Wash at 30°C',
-  },
-  mainImage: 'image.jpg',
-  additionalImages: ['img1.jpg', 'img2.jpg'],
-  colors: [
-    { name: 'Black', hex: '#000000' },
-    { name: 'White', hex: '#FFFFFF' },
-  ],
-  sizes: ['S', 'M', 'L'],
-};
-
-describe(ProductInfo.name, () => {
-  it('renders product name and description', () => {
+describe("ProductInfo", () => {
+  it("shows the name, the overview and the call to action", () => {
     render(<ProductInfo product={mockProduct} />);
+    expect(screen.getByRole("heading", { level: 2, name: mockProduct.name })).toBeInTheDocument();
+    expect(screen.getByText(mockProduct.description.overview)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Add to Cart" })).toBeInTheDocument();
+  });
 
-    expect(screen.getByText('Cool T-Shirt')).toBeInTheDocument();
-    expect(screen.getByText('This is a stylish t-shirt.')).toBeInTheDocument();
+  it("preselects the first color and the first size", () => {
+    render(<ProductInfo product={mockProduct} />);
+    expect(screen.getByRole("button", { name: mockProduct.colors[0].name, pressed: true })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: mockProduct.sizes[0], pressed: true })).toBeInTheDocument();
+  });
+
+  it("changes the selected color", async () => {
+    render(<ProductInfo product={mockProduct} />);
+    await userEvent.click(screen.getByRole("button", { name: mockProduct.colors[1].name }));
+    expect(screen.getByRole("button", { name: mockProduct.colors[1].name, pressed: true })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: mockProduct.colors[0].name, pressed: false })).toBeInTheDocument();
+  });
+
+  it("changes the selected size", async () => {
+    render(<ProductInfo product={mockProduct} />);
+    await userEvent.click(screen.getByRole("button", { name: mockProduct.sizes[1] }));
+    expect(screen.getByRole("button", { name: mockProduct.sizes[1], pressed: true })).toBeInTheDocument();
   });
 });

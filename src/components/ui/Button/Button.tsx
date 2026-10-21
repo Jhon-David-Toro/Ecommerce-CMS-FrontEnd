@@ -4,7 +4,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import styles from './Button.module.scss';
 import clsx from 'clsx';
 
-const Button: FC<ButtonProps> = ({
+export const Button: FC<ButtonProps> = ({
   type,
   text,
   onClick,
@@ -54,5 +54,3 @@ const Button: FC<ButtonProps> = ({
     </Component>
   );
 };
-
-export default Button;

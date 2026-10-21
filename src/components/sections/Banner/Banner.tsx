@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styles from './Banner.module.scss';
 
-const Banner = () => {
+export const Banner = () => {
   return (
     <header className={styles.banner}>
       <p className={styles.banner__paragraph}>Sign up and get 20% off to your first order.{' '} <Link href="/" passHref className={styles.signup}>Sign Up Now</Link></p>
@@ -12,5 +12,3 @@ const Banner = () => {
     </header>
   );
 };
-
-export default Banner;

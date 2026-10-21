@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 import categories from "@/assets/home-category.json";
-import HomeCategories from "./HomeCategories";
+import { HomeCategories } from "./HomeCategories";
 
 describe("HomeCategories", () => {
   it("shows the section title", () => {

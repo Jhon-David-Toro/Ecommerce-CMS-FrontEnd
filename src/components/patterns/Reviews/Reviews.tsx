@@ -2,14 +2,14 @@
 
 import { FC, useState } from 'react';
 import { ReviewsProps } from './Reviews.types';
-import ReviewCard from '@/components/patterns/ReviewCard/ReviewCard';
+import { ReviewCard } from "@/components/patterns/ReviewCard";
 import styles from './Reviews.module.scss';
-import Button from '@/components/ui/Button/Button';
-import Select from '@/components/ui/Select/Select';
+import { Button } from "@/components/ui/Button";
+import { Select } from "@/components/ui/Select";
 
 const SORT_OPTIONS = ['Latest', 'Oldest'] as const;
 
-const Reviews: FC<ReviewsProps> = ({ review }) => {
+export const Reviews: FC<ReviewsProps> = ({ review }) => {
   const [sortOrder, setSortOrder] = useState<string>('Latest');
   const [visibleReviews, setVisibleReviews] = useState(6);
 
@@ -66,5 +66,3 @@ const Reviews: FC<ReviewsProps> = ({ review }) => {
     </section>
   );
 };
-
-export default Reviews;

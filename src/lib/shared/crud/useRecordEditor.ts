@@ -3,17 +3,7 @@ import { useState } from "react";
 import type { Entity } from "@/lib/mock/repository.types";
 
 import type { EditTarget, RecordEditorOptions } from "./crud.types";
-
-/**
- * Keeps the record that is being deleted, which the confirmation dialog shows.
- *
- * @returns The record and the actions that set or clear it.
- */
-const useDeleteTarget = <T extends Entity>() => {
-  const [toDelete, setToDelete] = useState<T | null>(null);
-
-  return { toDelete, askDelete: (record: T) => setToDelete(record), cancelDelete: () => setToDelete(null) };
-};
+import { useConfirmedDelete } from "./useConfirmedDelete";
 
 /**
  * Keeps the record that is being edited, or "new" while a record is being created.
@@ -42,7 +32,7 @@ const useEditTarget = <T extends Entity>() => {
  */
 export const useRecordEditor = <T extends Entity, V>({ repository, toInput, reload }: RecordEditorOptions<T, V>) => {
   const edit = useEditTarget<T>();
-  const remove = useDeleteTarget<T>();
+  const remove = useConfirmedDelete<T>({ remove: repository.remove, reload });
 
   /**
    * Creates or updates the record being edited and refreshes the list.
@@ -56,14 +46,5 @@ export const useRecordEditor = <T extends Entity, V>({ repository, toInput, relo
     reload();
   };
 
-  /**
-   * Deletes the record chosen in the confirmation dialog and refreshes the list.
-   */
-  const confirmDelete = async () => {
-    if (remove.toDelete) await repository.remove(remove.toDelete.id);
-    remove.cancelDelete();
-    reload();
-  };
-
-  return { ...edit, ...remove, save, confirmDelete };
+  return { ...edit, ...remove, save };
 };

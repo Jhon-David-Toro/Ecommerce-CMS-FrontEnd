@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
-import { LayoutBody } from "./layout";
+import { LayoutBody } from "@/app/(pages)/layout";
 
 describe("LayoutBody", () => {
   it("wraps the page content in the main landmark", () => {

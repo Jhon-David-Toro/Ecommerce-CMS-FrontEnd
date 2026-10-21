@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import Home from "./page";
+import Home from "@/app/(pages)/page";
 
 const catalog = {
   newArrivals: [{ id: 1, name: "New jacket", price: 100, rating: 4, image: "/new.png" }],

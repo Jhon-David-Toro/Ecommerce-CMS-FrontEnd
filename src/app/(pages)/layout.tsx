@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
-import Navbar from "@/app/components/navbar/Navbar";
-import Footer from "@/app/components/footer/Footer";
-import Banner from "@/app/components/banner/Banner";
-import "../styles.scss";
+import Navbar from "@/components/sections/Navbar/Navbar";
+import Footer from "@/components/sections/Footer/Footer";
+import Banner from "@/components/sections/Banner/Banner";
+import "@/app/styles.scss";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 

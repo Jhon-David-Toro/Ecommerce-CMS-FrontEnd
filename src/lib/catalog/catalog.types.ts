@@ -1,4 +1,4 @@
-import type { Product } from "@/app/shared-components/product/interfaces/Product.interface";
+import type { Product } from "@/lib/catalog/product.types";
 
 export interface Catalog {
   newArrivals: Product[];

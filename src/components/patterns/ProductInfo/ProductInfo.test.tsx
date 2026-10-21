@@ -1,0 +1,95 @@
+import { describe, expect, it, vi } from "vitest";
+import { render, screen } from '@testing-library/react';
+import ProductInfo from './ProductInfo';
+
+vi.mock('@/components/ui/Rating/Rating', () => {
+  const MockRating: React.FC<{ rating: number }> = ({ rating }) => (
+    <div data-testid="mock-rating">Rating: {rating}</div>
+  );
+  return { default: MockRating };
+});
+
+vi.mock('@/components/ui/Button/Button', () => {
+  const MockButton: React.FC<{ text: string }> = ({ text }) => (
+    <button>{text}</button>
+  );
+  return { default: MockButton };
+});
+
+vi.mock('@/components/ui/QuantityControl/QuantityControl', () => {
+  const MockQuantityControl: React.FC<{
+    quantity: number;
+    setQuantity: (q: number) => void;
+  }> = ({ quantity }) => <div>Quantity: {quantity}</div>;
+  return { default: MockQuantityControl };
+});
+
+vi.mock('@/components/patterns/ProductPrice/ProductPrice', () => {
+  const MockProductPrice: React.FC<{
+    price: number;
+    discountPrice: number;
+    discount?: number;
+  }> = ({ price, discountPrice }) => (
+    <div>{`Price: ${price}, Discounted: ${discountPrice}`}</div>
+  );
+  return { default: MockProductPrice };
+});
+
+vi.mock('@/components/ui/SelectColor/SelectColor', () => {
+  const MockColorSelector: React.FC<{
+    colors: { name: string; hex: string }[];
+    selectedColor: string;
+    onColorChange: (color: string) => void;
+  }> = ({ selectedColor }) => <div>Selected Color: {selectedColor}</div>;
+  return { default: MockColorSelector };
+});
+
+vi.mock('@/components/patterns/SizeSelector/SizeSelector', () => {
+  const MockSizeSelector: React.FC<{
+    sizes: string[];
+    selectedSize: string;
+    onSizeChange: (size: string) => void;
+  }> = ({ selectedSize }) => <div>Selected Size: {selectedSize}</div>;
+  return { default: MockSizeSelector };
+});
+
+vi.mock('@/components/ui/Divider/Divider', () => {
+  const MockDivider: React.FC = () => <hr />;
+  return { default: MockDivider };
+});
+
+const mockProduct = {
+  id: '1',
+  name: 'Cool T-Shirt',
+  rating: 4.5,
+  reviewsCount: 100,
+  price: 50,
+  discountPrice: 40,
+  discount: 20,
+  description: {
+    overview: 'This is a stylish t-shirt.',
+    features: ['Soft fabric', 'Durable'],
+    origin: 'Spain',
+    company: {
+      name: 'CoolBrand',
+      description: 'Eco-friendly fashion',
+    },
+    careInstructions: 'Wash at 30°C',
+  },
+  mainImage: 'image.jpg',
+  additionalImages: ['img1.jpg', 'img2.jpg'],
+  colors: [
+    { name: 'Black', hex: '#000000' },
+    { name: 'White', hex: '#FFFFFF' },
+  ],
+  sizes: ['S', 'M', 'L'],
+};
+
+describe(ProductInfo.name, () => {
+  it('renders product name and description', () => {
+    render(<ProductInfo product={mockProduct} />);
+
+    expect(screen.getByText('Cool T-Shirt')).toBeInTheDocument();
+    expect(screen.getByText('This is a stylish t-shirt.')).toBeInTheDocument();
+  });
+});

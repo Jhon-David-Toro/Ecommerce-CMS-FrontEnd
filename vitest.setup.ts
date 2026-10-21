@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom/vitest";
-import "@/app/__mocks__/__shared-components__/vercel-speed-insights";
-import "@/app/__mocks__/__shared-components__/vercel-analytics";
-import "@/app/__mocks__/next/image/image";
+import "@/test/mocks/vercel-speed-insights";
+import "@/test/mocks/vercel-analytics";
+import "@/test/mocks/next-image";
 
 import { cleanup } from "@testing-library/react";
 import { afterEach, vi } from "vitest";

@@ -9,6 +9,10 @@
   border: utils.pxToRem(1px) solid var(--color-border);
   border-radius: var(--radius-card);
 
+  > button {
+    align-self: flex-start;
+  }
+
   &__legend {
     padding: 0 utils.pxToRem(8px);
     font-size: utils.pxToRem(16px);

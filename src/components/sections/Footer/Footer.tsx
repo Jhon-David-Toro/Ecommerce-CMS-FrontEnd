@@ -1,37 +1,37 @@
-import { FC } from 'react';
-import { footerSections, socialLinks } from './Footer.constants';
+import type { FC } from "react";
+
+import { FooterPaymentMethods } from "@/components/patterns/FooterPaymentMethods";
+import { FooterSection } from "@/components/patterns/FooterSection";
 import { FooterSocialIcons } from "@/components/patterns/FooterSocialIcons";
-import { FooterSectionComponent } from "@/components/patterns/FooterSection";
-import { PaymentMethods } from "@/components/patterns/FooterPaymentMethods";
-import styles from './Footer.module.scss';
+import { FOOTER_COLUMNS, SOCIAL_LINKS } from "@/lib/site/footer.constants";
 
-export const Footer: FC = () => {
-  const currentYear = new Date().getFullYear();
+import { BRAND_NAME, COPYRIGHT_NAME, FIRST_YEAR, FOOTER_TAGLINE } from "./Footer.constants";
+import styles from "./Footer.module.scss";
 
-  return (
-    <footer className={styles.footer} role="contentinfo">
-      <div className={styles.footer__container}>
-        <section className={styles.footer__column} aria-labelledby="footer-shop">
-          <h3 className={styles.footer__title} id="footer-shop">
-            SHOP.CO
-          </h3>
-          <p className={styles.footer__text}>
-            We have clothes that suits your style and which you’re proud to wear. From women to men.
-          </p>
-          <FooterSocialIcons links={socialLinks} />
-        </section>
-
-        {footerSections.map((section) => (
-          <FooterSectionComponent key={section.title} section={section} />
-        ))}
-      </div>
-
-      <div className={styles.footer__bottom}>
-        <p className={styles.footer__bottom_copyright}>
-          Shop.co © 2025-{currentYear}, All Rights Reserved
-        </p>
-        <PaymentMethods />
-      </div>
-    </footer>
-  );
-};
+/**
+ * Footer: brand column, link columns, copyright and accepted payment methods.
+ *
+ * @returns The page footer.
+ */
+export const Footer: FC = () => (
+  <footer className={styles.footer} role="contentinfo">
+    <div className={styles.footer__container}>
+      <section className={styles.footer__column} aria-labelledby="footer-shop">
+        <h3 className={styles.footer__title} id="footer-shop">
+          {BRAND_NAME}
+        </h3>
+        <p className={styles.footer__text}>{FOOTER_TAGLINE}</p>
+        <FooterSocialIcons links={SOCIAL_LINKS} />
+      </section>
+      {FOOTER_COLUMNS.map((column) => (
+        <FooterSection key={column.title} section={column} />
+      ))}
+    </div>
+    <div className={styles.footer__bottom}>
+      <p className={styles.footer__bottom_copyright}>
+        {COPYRIGHT_NAME} © {FIRST_YEAR}-{new Date().getFullYear()}, All Rights Reserved
+      </p>
+      <FooterPaymentMethods />
+    </div>
+  </footer>
+);

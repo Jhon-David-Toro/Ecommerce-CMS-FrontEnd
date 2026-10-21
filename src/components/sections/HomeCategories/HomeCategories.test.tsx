@@ -7,7 +7,7 @@ import { HomeCategories } from "./HomeCategories";
 describe("HomeCategories", () => {
   it("shows the section title", () => {
     render(<HomeCategories />);
-    expect(screen.getByRole("heading", { level: 2, name: /browse by dess style/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2, name: /browse by dress style/i })).toBeInTheDocument();
   });
 
   it("lists every category", () => {

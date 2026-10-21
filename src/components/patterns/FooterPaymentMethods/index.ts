@@ -1,1 +1,1 @@
-export { PaymentMethods } from "./FooterPaymentMethods";
+export { FooterPaymentMethods } from "./FooterPaymentMethods";

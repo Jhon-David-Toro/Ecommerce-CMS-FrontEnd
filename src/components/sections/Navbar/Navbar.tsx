@@ -1,44 +1,42 @@
-'use client';
+"use client";
 
-import { FC, useState } from 'react';
-import type { MenuData } from '@/lib/site/menu.types';
-import { Bars3Icon, MagnifyingGlassIcon, ShoppingCartIcon, UserCircleIcon } from '@heroicons/react/24/outline';
-import Link from 'next/link';
-import menuData from '@/assets/menu.json';
+import Link from "next/link";
+import type { FC } from "react";
+
+import menuData from "@/assets/menu.json";
 import { Sidebar } from "@/components/sections/Sidebar";
-import styles from './Navbar.module.scss';
+import type { MenuData } from "@/lib/site/menu.types";
+import { useToggle } from "@/lib/shared/state/useToggle";
 
+import { NavbarActions } from "./parts/NavbarActions";
+import { NavbarBrand } from "./parts/NavbarBrand";
+import { NavbarSearch } from "./parts/NavbarSearch";
+import styles from "./Navbar.module.scss";
+
+/**
+ * Navbar: brand, main links, search box and account icons, with a sidebar menu on small screens.
+ *
+ * @returns The page header.
+ */
 export const Navbar: FC = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const [isSidebarOpen, toggleSidebar] = useToggle();
   const data: MenuData = menuData;
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
 
   return (
     <header className={styles.navbar}>
       <nav className={styles.navbar__container}>
         <ul className={styles.navbar__list}>
-          <section className={styles.navbar__logo}>
-            <Bars3Icon onClick={toggleSidebar} className={styles.navbar__hamburger} />
-            <Link className={styles.navbar__brand} href="/"><strong>SHOP.COM</strong></Link>
-          </section>
-          {data.navbar.map((item, index) => (
-            <li key={index} className={styles.navbar__item}>
-              <Link href={item.href} className={styles.navbar__link}>{item.label}</Link>
+          <NavbarBrand onMenuClick={toggleSidebar} />
+          {data.navbar.map((item) => (
+            <li key={item.label} className={styles.navbar__item}>
+              <Link href={item.href} className={styles.navbar__link}>
+                {item.label}
+              </Link>
             </li>
           ))}
-          <section className={styles.navbar__search}>
-            <label htmlFor="search" className={styles.navbar__search_icon}><MagnifyingGlassIcon /></label>
-            <input type="text" id="search" name="search" placeholder="Buscar productos..." aria-label="Buscar productos" className={styles.navbar__search_input}/>
-          </section>
-          <section className={styles.navbar__right_icon}>
-            <ShoppingCartIcon className={styles.navbar__icon} />
-            <UserCircleIcon className={styles.navbar__icon} />
-          </section>
+          <NavbarSearch />
+          <NavbarActions />
         </ul>
-
         <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} menu={data.sidebar} />
       </nav>
     </header>

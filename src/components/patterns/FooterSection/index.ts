@@ -1,1 +1,2 @@
-export { FooterSectionComponent } from "./FooterSection";
+export { FooterSection } from "./FooterSection";
+export type { FooterSectionProps } from "./FooterSection.types";

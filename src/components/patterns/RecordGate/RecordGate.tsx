@@ -1,7 +1,7 @@
+import { ActionEmptyState } from "@/components/patterns/ActionEmptyState";
 import { Spinner } from "@/components/ui/Spinner";
 
 import type { RecordGateProps } from "./RecordGate.types";
-import { NotFoundState } from "./parts/NotFoundState";
 
 /**
  * RecordGate: shows a spinner while a record loads, a not found message when it does not exist, and the content once it does.
@@ -16,7 +16,16 @@ import { NotFoundState } from "./parts/NotFoundState";
  */
 export const RecordGate = <T,>({ record, isLoading, loadingLabel, notFound, children }: RecordGateProps<T>) => {
   if (isLoading) return <Spinner label={loadingLabel} />;
-  if (!record) return <NotFoundState {...notFound} />;
+  if (!record) {
+    return (
+      <ActionEmptyState
+        title={notFound.title}
+        description={notFound.description}
+        actionLabel={notFound.backLabel}
+        actionHref={notFound.backHref}
+      />
+    );
+  }
 
   return <>{children(record)}</>;
 };

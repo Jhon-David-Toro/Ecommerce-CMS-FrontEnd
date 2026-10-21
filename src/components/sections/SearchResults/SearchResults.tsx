@@ -1,17 +1,13 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-
-import { ProductCard } from "@/components/patterns/ProductCard";
+import { EmptyGate } from "@/components/patterns/EmptyGate";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
-import { Button } from "@/components/ui/Button";
-import { EmptyState } from "@/components/ui/EmptyState";
 import { Spinner } from "@/components/ui/Spinner";
-import { listProducts } from "@/lib/catalog/catalog.api";
-import { searchProducts } from "@/lib/catalog/catalog.utils";
-import { useQuery } from "@/lib/shared/async/useQuery";
 
-import { NO_OPTIONS } from "./SearchResults.constants";
+import { EMPTY_RESULTS, SEARCH_TRAIL } from "./SearchResults.constants";
+import { getSearchTitle } from "./SearchResults.utils";
+import { useSearchResults } from "./hooks/useSearchResults";
+import { ResultsGrid } from "./parts/ResultsGrid";
 import styles from "./SearchResults.module.scss";
 
 /**
@@ -20,33 +16,17 @@ import styles from "./SearchResults.module.scss";
  * @returns The search results page content.
  */
 export const SearchResults = () => {
-  const query = useSearchParams().get("q") ?? "";
-  const { data, isLoading } = useQuery(listProducts, NO_OPTIONS);
+  const { query, results, isLoading } = useSearchResults();
 
   if (isLoading) return <Spinner label="Searching" />;
 
-  const results = searchProducts(data ?? [], query);
-
   return (
     <section className={styles.search}>
-      <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Search" }]} />
-      <h1 className={styles.search__title}>{query ? `RESULTS FOR "${query.toUpperCase()}"` : "SEARCH"}</h1>
-      {results.length === 0 ? (
-        <EmptyState
-          title="No products found"
-          description="Try a different word or browse the whole catalog."
-          action={<Button type="primary" size="medium" text="Browse products" href="/products" typeAttribute="button" />}
-        />
-      ) : (
-        <>
-          <p className={styles.search__count}>{results.length} products</p>
-          <div className={styles.search__grid}>
-            {results.map((product) => (
-              <ProductCard key={product.id} {...product} />
-            ))}
-          </div>
-        </>
-      )}
+      <Breadcrumb items={SEARCH_TRAIL} />
+      <h1 className={styles.search__title}>{getSearchTitle(query)}</h1>
+      <EmptyGate count={results.length} empty={EMPTY_RESULTS}>
+        <ResultsGrid results={results} />
+      </EmptyGate>
     </section>
   );
 };

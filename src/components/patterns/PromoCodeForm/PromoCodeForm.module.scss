@@ -21,13 +21,15 @@
     outline: none;
   }
 
-  &__error {
+  &__message {
     font-size: utils.pxToRem(13px);
-    color: var(--color-danger);
-  }
 
-  &__ok {
-    font-size: utils.pxToRem(13px);
-    color: var(--color-success);
+    &_invalid {
+      color: var(--color-danger);
+    }
+
+    &_valid {
+      color: var(--color-success);
+    }
   }
 }

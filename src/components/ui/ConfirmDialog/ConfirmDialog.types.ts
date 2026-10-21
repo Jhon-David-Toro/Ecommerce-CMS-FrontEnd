@@ -6,3 +6,5 @@ export interface ConfirmDialogProps {
   onConfirm: () => void;
   onCancel: () => void;
 }
+
+export type ConfirmDialogBodyProps = Omit<ConfirmDialogProps, "open">;

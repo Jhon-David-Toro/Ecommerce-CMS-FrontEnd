@@ -1,15 +1,8 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect } from "react";
-
-import { Button } from "@/components/ui/Button";
-import { EmptyState } from "@/components/ui/EmptyState";
-import { Spinner } from "@/components/ui/Spinner";
-import { useAuth } from "@/lib/auth/useAuth";
-
 import type { AuthGateProps } from "./AuthGate.types";
-import { buildLoginHref } from "./AuthGate.utils";
+import { useGateStatus } from "./hooks/useGateStatus";
+import { GateFallback } from "./parts/GateFallback";
 
 /**
  * AuthGate: shows its content only to signed-in users (optionally of one role) and sends everyone else to sign in.
@@ -20,25 +13,9 @@ import { buildLoginHref } from "./AuthGate.utils";
  * @returns The protected content, a spinner while checking, or an access denied message.
  */
 export const AuthGate = ({ role, children }: AuthGateProps) => {
-  const { user, isReady } = useAuth();
-  const router = useRouter();
-  const pathname = usePathname();
+  const status = useGateStatus(role);
 
-  useEffect(() => {
-    if (isReady && !user) router.replace(buildLoginHref(pathname));
-  }, [isReady, user, router, pathname]);
-
-  if (!isReady || !user) return <Spinner label="Checking your session" />;
-
-  if (role && user.role !== role) {
-    return (
-      <EmptyState
-        title="Access denied"
-        description="Your account does not have permission to see this page."
-        action={<Button type="primary" size="medium" text="Go home" href="/" typeAttribute="button" />}
-      />
-    );
-  }
+  if (status !== "allowed") return <GateFallback status={status} />;
 
   return <>{children}</>;
 };

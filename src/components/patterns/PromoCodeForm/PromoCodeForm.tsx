@@ -6,6 +6,7 @@ import type { FC, SubmitEvent } from "react";
 import { Button } from "@/components/ui/Button";
 
 import type { PromoCodeFormProps } from "./PromoCodeForm.types";
+import { PromoFeedback } from "./parts/PromoFeedback";
 import styles from "./PromoCodeForm.module.scss";
 
 /**
@@ -43,12 +44,7 @@ export const PromoCodeForm: FC<PromoCodeFormProps> = ({ appliedCode, discountPer
         />
         <Button type="primary" size="small" text="Apply" typeAttribute="submit" />
       </div>
-      {appliedCode && discountPercent === 0 && (
-        <p className={styles.promo__error} role="alert">
-          This promo code is not valid.
-        </p>
-      )}
-      {appliedCode && discountPercent > 0 && <p className={styles.promo__ok}>{discountPercent}% discount applied.</p>}
+      <PromoFeedback appliedCode={appliedCode} discountPercent={discountPercent} />
     </form>
   );
 };

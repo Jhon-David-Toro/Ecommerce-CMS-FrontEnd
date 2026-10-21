@@ -3,3 +3,10 @@ export interface PromoCodeFormProps {
   discountPercent: number;
   onApply: (code: string) => void;
 }
+
+export type PromoStatus = "none" | "valid" | "invalid";
+
+export interface PromoFeedbackProps {
+  appliedCode: string;
+  discountPercent: number;
+}

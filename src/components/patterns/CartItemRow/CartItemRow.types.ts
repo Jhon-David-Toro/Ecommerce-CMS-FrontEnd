@@ -5,3 +5,13 @@ export interface CartItemRowProps {
   onQuantityChange: (key: string, quantity: number) => void;
   onRemove: (key: string) => void;
 }
+
+export interface CartItemBodyProps {
+  item: CartItem;
+}
+
+export interface RemoveButtonProps {
+  name: string;
+  itemKey: string;
+  onRemove: (key: string) => void;
+}

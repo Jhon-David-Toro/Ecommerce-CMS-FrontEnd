@@ -1,12 +1,10 @@
 "use client";
 
 import { BrandsBanner } from "@/components/patterns/BrandsBanner";
-import { Button } from "@/components/ui/Button";
 import { useSiteContent } from "@/lib/content/useSiteContent";
 
-import { HERO_IMAGE_SIZES } from "./Hero.constants";
-import { HeroImage } from "./parts/HeroImage";
-import { HeroStats } from "./parts/HeroStats";
+import { HeroCopy } from "./parts/HeroCopy";
+import { HeroImages } from "./parts/HeroImages";
 import styles from "./Hero.module.scss";
 
 /**
@@ -19,14 +17,8 @@ export const Hero = () => {
 
   return (
     <section className={styles.hero}>
-      <HeroImage src={hero.desktopImage} {...HERO_IMAGE_SIZES.desktop} className={styles.hero__image} />
-      <HeroImage src={hero.mobileImage} {...HERO_IMAGE_SIZES.mobile} className={styles.hero__image_mobile} />
-      <article className={styles.hero__article}>
-        <h1 className={styles.hero__article_title}>{hero.title}</h1>
-        <p className={styles.hero__article_paragraph}>{hero.paragraph}</p>
-        <Button type="primary" text={hero.ctaText} href={hero.ctaHref} size="medium" typeAttribute="button" />
-        <HeroStats stats={stats} />
-      </article>
+      <HeroImages desktopImage={hero.desktopImage} mobileImage={hero.mobileImage} />
+      <HeroCopy hero={hero} stats={stats} />
       <BrandsBanner />
     </section>
   );

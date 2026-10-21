@@ -2,10 +2,12 @@ import { usePathname, useRouter } from "next/navigation";
 
 import { useAuth } from "@/lib/auth/useAuth";
 
+import { buildSearchHref } from "../AdminShell.utils";
+
 /**
- * Gives the admin frame the current path, the signed-in user and a way to sign out.
+ * Gives the admin frame the current path, the signed-in user and a way to sign out and to search.
  *
- * @returns The path, the user and the sign out handler.
+ * @returns The path, the user and the sign out and search handlers.
  */
 export const useAdminSession = () => {
   const pathname = usePathname();
@@ -20,5 +22,12 @@ export const useAdminSession = () => {
     router.replace("/login");
   };
 
-  return { pathname, user, handleSignOut };
+  /**
+   * Opens the product list filtered by the text typed in the top bar.
+   *
+   * @param text Text to look for.
+   */
+  const handleSearch = (text: string) => router.push(buildSearchHref(text));
+
+  return { pathname, user, handleSignOut, handleSearch };
 };

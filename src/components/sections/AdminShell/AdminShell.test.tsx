@@ -7,7 +7,7 @@ import { useAuthStore } from "@/lib/auth/authStore";
 
 import { AdminShell } from "./AdminShell";
 import { ADMIN_NAV } from "./AdminShell.constants";
-import { isActiveLink } from "./AdminShell.utils";
+import { buildSearchHref, isActiveLink } from "./AdminShell.utils";
 
 describe("AdminShell", () => {
   const replace = vi.fn();
@@ -46,11 +46,26 @@ describe("AdminShell", () => {
     expect(screen.getByRole("link", { name: "Visit store" })).toHaveAttribute("href", "/");
   });
 
+  it("searches the products from the top bar", async () => {
+    const push = vi.fn();
+    vi.mocked(useRouter).mockReturnValue({ push, replace, back: vi.fn(), refresh: vi.fn() } as never);
+    render(<AdminShell>content</AdminShell>);
+    await userEvent.type(screen.getByRole("searchbox", { name: "Search products" }), "shirt{Enter}");
+    expect(push).toHaveBeenCalledWith("/admin/products?q=shirt");
+  });
+
   it("signs out and goes to the sign in page", async () => {
     render(<AdminShell>content</AdminShell>);
     await userEvent.click(screen.getByRole("button", { name: "Sign out" }));
     expect(useAuthStore.getState().user).toBeNull();
     expect(replace).toHaveBeenCalledWith("/login");
+  });
+});
+
+describe("buildSearchHref", () => {
+  it("opens the product list with the text", () => {
+    expect(buildSearchHref(" red shirt ")).toBe("/admin/products?q=red%20shirt");
+    expect(buildSearchHref("  ")).toBe("/admin/products");
   });
 });
 

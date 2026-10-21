@@ -23,4 +23,13 @@ export interface AdminNavLinkProps {
 export interface AdminTopBarProps {
   userName?: string;
   onSignOut: () => void;
+  onSearch: (text: string) => void;
+}
+
+export interface AdminSearchProps {
+  onSearch: (text: string) => void;
+}
+
+export interface AdminProfileProps {
+  userName?: string;
 }

@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import { AdminProducts } from "@/components/sections/AdminProducts";
 
 /**
@@ -5,6 +7,10 @@ import { AdminProducts } from "@/components/sections/AdminProducts";
  *
  * @returns The product list.
  */
-const AdminProductsPage = () => <AdminProducts />;
+const AdminProductsPage = () => (
+  <Suspense>
+    <AdminProducts />
+  </Suspense>
+);
 
 export default AdminProductsPage;

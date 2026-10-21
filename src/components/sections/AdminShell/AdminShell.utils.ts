@@ -17,3 +17,11 @@ export const isActiveLink = (pathname: string, { href, exact }: Pick<AdminNavIte
  * @returns The first letter in upper case, or an empty string without a name.
  */
 export const getInitial = (name?: string) => name?.trim().charAt(0).toUpperCase() ?? "";
+
+/**
+ * Builds the address of the product list for a search typed in the top bar.
+ *
+ * @param text Text to look for.
+ * @returns The products address, with the text as the `q` parameter when there is any.
+ */
+export const buildSearchHref = (text: string) => (text.trim() ? `/admin/products?q=${encodeURIComponent(text.trim())}` : "/admin/products");

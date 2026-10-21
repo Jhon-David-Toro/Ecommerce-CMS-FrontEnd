@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 import { AdminListView } from "@/components/patterns/AdminListView";
@@ -24,9 +25,14 @@ import { ProductDeleteDialog } from "./parts/ProductDeleteDialog";
  */
 export const AdminProducts = () => {
   const { data, isLoading, reload } = useQuery(listProducts, ALL_PRODUCTS);
+  const initialQuery = useSearchParams().get("q") ?? "";
   const [status, setStatus] = useState("");
   const remove = useConfirmedDelete<Product>({ remove: deleteProduct, reload });
-  const controls = useTableControls(filterByStatus(data ?? NO_PRODUCTS, status), { pageSize: PAGE_SIZE, matches: matchesProduct });
+  const controls = useTableControls(filterByStatus(data ?? NO_PRODUCTS, status), {
+    pageSize: PAGE_SIZE,
+    matches: matchesProduct,
+    initialQuery,
+  });
   const table = useProductTable(remove.askDelete);
 
   if (isLoading) return <Spinner label="Loading products" />;

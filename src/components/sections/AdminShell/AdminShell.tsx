@@ -16,13 +16,13 @@ import styles from "./AdminShell.module.scss";
  * @returns The admin frame.
  */
 export const AdminShell: FC<AdminShellProps> = ({ children }) => {
-  const { pathname, user, handleSignOut } = useAdminSession();
+  const { pathname, user, handleSignOut, handleSearch } = useAdminSession();
 
   return (
     <div className={styles.shell}>
       <AdminSidebar pathname={pathname} />
       <div className={styles.shell__body}>
-        <AdminTopBar userName={user?.name} onSignOut={handleSignOut} />
+        <AdminTopBar userName={user?.name} onSignOut={handleSignOut} onSearch={handleSearch} />
         <main className={styles.shell__main}>{children}</main>
       </div>
     </div>

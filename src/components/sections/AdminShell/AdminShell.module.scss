@@ -126,6 +126,38 @@
     padding: utils.pxToRem(20px) utils.pxToRem(32px) 0;
   }
 
+  &__search {
+    position: relative;
+    flex: 1;
+    max-width: utils.pxToRem(420px);
+    margin-right: auto;
+
+    input {
+      width: 100%;
+      padding: utils.pxToRem(10px) utils.pxToRem(16px) utils.pxToRem(10px) utils.pxToRem(44px);
+      font: inherit;
+      background-color: white;
+      border: utils.pxToRem(1px) solid var(--color-border);
+      border-radius: 999px;
+      outline: none;
+
+      &:focus-visible {
+        border-color: black;
+      }
+    }
+  }
+
+  &__searchIcon {
+    position: absolute;
+    top: 50%;
+    left: utils.pxToRem(16px);
+    width: utils.pxToRem(18px);
+    height: utils.pxToRem(18px);
+    color: var(--color-muted);
+    pointer-events: none;
+    transform: translateY(-50%);
+  }
+
   &__store {
     display: flex;
     gap: utils.pxToRem(8px);

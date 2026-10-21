@@ -1,5 +1,7 @@
 import type { FC } from "react";
 
+import { cx } from "@/lib/shared/classnames/cx";
+
 import { CANCEL_LABEL, STATUS_ICONS } from "./OrderActions.constants";
 import type { OrderActionsProps } from "./OrderActions.types";
 import { getActions } from "./OrderActions.utils";
@@ -17,7 +19,7 @@ import styles from "./OrderActions.module.scss";
  * @returns The buttons, or nothing for an order that is finished.
  */
 export const OrderActions: FC<OrderActionsProps> = ({ order, onChange, compact = false, inverted = false }) => (
-  <div className={styles.actions}>
+  <div className={cx(styles.actions, inverted && styles.actions_inverted)}>
     {getActions(order.status, CANCEL_LABEL).map((action) => (
       <OrderActionButton
         key={action.to}

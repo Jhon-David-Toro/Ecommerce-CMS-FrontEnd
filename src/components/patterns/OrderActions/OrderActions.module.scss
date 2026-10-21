@@ -5,6 +5,10 @@
   flex-wrap: wrap;
   gap: utils.pxToRem(8px);
   justify-content: flex-end;
+
+  &_inverted {
+    justify-content: flex-start;
+  }
 }
 
 .button {

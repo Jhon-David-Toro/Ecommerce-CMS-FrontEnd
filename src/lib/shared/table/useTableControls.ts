@@ -8,11 +8,12 @@ import type { TableControlsOptions } from "./table.types";
  * @param rows All the rows.
  * @param options Table options.
  * @param options.pageSize Rows on each page.
+ * @param options.initialQuery Search text the list starts with.
  * @param options.matches Tells whether a row matches the search text.
  * @returns The search text and its setter, the rows of the current page, the page state and the number of matches.
  */
-export const useTableControls = <T>(rows: T[], { pageSize, matches }: TableControlsOptions<T>) => {
-  const [query, setQueryState] = useState("");
+export const useTableControls = <T>(rows: T[], { pageSize, matches, initialQuery = "" }: TableControlsOptions<T>) => {
+  const [query, setQueryState] = useState(initialQuery);
   const [page, setPage] = useState(1);
 
   const filtered = useMemo(() => {

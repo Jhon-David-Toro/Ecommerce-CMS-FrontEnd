@@ -11,3 +11,8 @@ export interface DashboardPanelProps {
   title: string;
   children: ReactNode;
 }
+
+export interface DashboardRangeProps {
+  value: string;
+  onChange: (value: string) => void;
+}

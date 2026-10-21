@@ -22,3 +22,28 @@
   }
 }
 
+
+.range {
+  position: relative;
+
+  &__select {
+    padding: utils.pxToRem(10px) utils.pxToRem(44px) utils.pxToRem(10px) utils.pxToRem(18px);
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    appearance: none;
+    background-color: white;
+    border: utils.pxToRem(1px) solid var(--color-border);
+    border-radius: 999px;
+  }
+
+  &__chevron {
+    position: absolute;
+    top: 50%;
+    right: utils.pxToRem(16px);
+    width: utils.pxToRem(20px);
+    height: utils.pxToRem(20px);
+    pointer-events: none;
+    transform: translateY(-50%);
+  }
+}

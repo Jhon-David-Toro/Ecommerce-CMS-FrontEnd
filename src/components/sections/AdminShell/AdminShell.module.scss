@@ -8,6 +8,7 @@
 
   @include utils.media-ltlg() {
     grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
   }
 
   &__sidebar {
@@ -30,6 +31,7 @@
       height: auto;
       padding: utils.pxToRem(12px) utils.pxToRem(16px);
       overflow-x: auto;
+      scrollbar-width: none;
       border-right: 0;
       border-bottom: utils.pxToRem(1px) solid var(--color-border);
     }
@@ -120,10 +122,19 @@
 
   &__top {
     display: flex;
+    flex-wrap: wrap;
+
+    @include utils.media-xs() {
+      flex-wrap: nowrap;
+    }
     gap: utils.pxToRem(12px);
     align-items: center;
     justify-content: flex-end;
     padding: utils.pxToRem(20px) utils.pxToRem(32px) 0;
+
+    @include utils.media-ltlg() {
+      padding: utils.pxToRem(16px) utils.pxToRem(16px) 0;
+    }
   }
 
   &__search {
@@ -131,6 +142,17 @@
     flex: 1;
     max-width: utils.pxToRem(420px);
     margin-right: auto;
+
+    @include utils.media-ltlg() {
+      flex-basis: 100%;
+      max-width: none;
+      margin-right: 0;
+    }
+
+    @include utils.media-xs() {
+      flex: 1 1 0;
+      min-width: 0;
+    }
 
     input {
       width: 100%;
@@ -166,6 +188,7 @@
     font-weight: 500;
     color: black;
     text-decoration: none;
+    white-space: nowrap;
     background-color: white;
     border: utils.pxToRem(1px) solid var(--color-border);
     border-radius: utils.pxToRem(999px);
@@ -177,6 +200,12 @@
 
     &:hover {
       border-color: black;
+    }
+  }
+
+  &__storeText {
+    @include utils.media-xs() {
+      display: none;
     }
   }
 
@@ -202,9 +231,18 @@
 
   &__user {
     font-weight: 600;
+    white-space: nowrap;
+
+    @include utils.media-xs() {
+      display: none;
+    }
   }
 
   &__chevron {
+    @include utils.media-xs() {
+      display: none;
+    }
+
     width: utils.pxToRem(16px);
     height: utils.pxToRem(16px);
   }
@@ -238,6 +276,10 @@
     max-width: utils.pxToRem(1280px);
     padding: utils.pxToRem(24px) utils.pxToRem(32px) utils.pxToRem(48px);
     margin: 0 auto;
+
+    @include utils.media-ltlg() {
+      padding: utils.pxToRem(16px) utils.pxToRem(16px) utils.pxToRem(32px);
+    }
   }
 }
 

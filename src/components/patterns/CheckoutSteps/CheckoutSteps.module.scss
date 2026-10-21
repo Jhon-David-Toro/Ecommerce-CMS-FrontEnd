@@ -7,6 +7,10 @@
   align-items: center;
   padding: 0;
   list-style: none;
+
+  @include utils.media-xs() {
+    flex-wrap: nowrap;
+  }
 }
 
 .step {
@@ -15,6 +19,15 @@
   align-items: center;
   font-size: utils.pxToRem(15px);
   color: var(--color-muted);
+
+  @include utils.media-xs() {
+    position: relative;
+    flex: 1;
+    flex-direction: column;
+    gap: utils.pxToRem(6px);
+    font-size: utils.pxToRem(12px);
+    text-align: center;
+  }
 
   &__dot {
     display: flex;
@@ -38,6 +51,14 @@
     height: utils.pxToRem(2px);
     margin: 0 utils.pxToRem(6px);
     background-color: #e0e0e0;
+
+    @include utils.media-xs() {
+      position: absolute;
+      top: utils.pxToRem(15px);
+      left: calc(50% + #{utils.pxToRem(22px)});
+      width: calc(100% - #{utils.pxToRem(44px)});
+      margin: 0;
+    }
   }
 
   &_done,

@@ -18,6 +18,10 @@
     gap: utils.pxToRem(20px);
     align-items: start;
 
+    > * {
+      min-width: 0;
+    }
+
     > aside {
       position: sticky;
       top: utils.pxToRem(16px);

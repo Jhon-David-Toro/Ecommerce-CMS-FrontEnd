@@ -5,6 +5,14 @@
   grid-template-columns: repeat(auto-fit, minmax(utils.pxToRem(200px), 1fr));
   gap: utils.pxToRem(16px);
   margin-bottom: utils.pxToRem(24px);
+
+  @include utils.media-ltlg() {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include utils.media-xs() {
+    grid-template-columns: 1fr;
+  }
 }
 
 .panels {

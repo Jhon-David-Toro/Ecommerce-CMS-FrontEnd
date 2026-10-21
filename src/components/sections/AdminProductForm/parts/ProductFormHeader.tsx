@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import { PageHeader } from "@/components/patterns/PageHeader";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
@@ -22,7 +20,7 @@ export const ProductFormHeader = ({ title, isSaving, failure }: ProductFormHeade
       title={title}
       actions={
         <>
-          <Link href={LIST_ROUTE}>Cancel</Link>
+          <Button type="secondary" size="small" text="Cancel" href={LIST_ROUTE} typeAttribute="button" />
           <Button type="primary" size="small" text={isSaving ? "Saving..." : "Save product"} typeAttribute="submit" disabled={isSaving} />
         </>
       }

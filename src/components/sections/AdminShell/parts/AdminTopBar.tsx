@@ -18,8 +18,8 @@ import styles from "../AdminShell.module.scss";
 export const AdminTopBar = ({ userName, onSignOut, onSearch }: AdminTopBarProps) => (
   <header className={styles.shell__top}>
     <AdminSearch onSearch={onSearch} />
-    <Link href="/" className={styles.shell__store}>
-      <BuildingStorefrontIcon /> Visit store
+    <Link href="/" className={styles.shell__store} aria-label="Visit store">
+      <BuildingStorefrontIcon /> <span className={styles.shell__storeText}>Visit store</span>
     </Link>
     <AdminProfile userName={userName} />
     <button type="button" className={styles.shell__signout} aria-label="Sign out" onClick={onSignOut}>

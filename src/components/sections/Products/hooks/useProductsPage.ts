@@ -13,7 +13,7 @@ import { usePagination } from "./usePagination";
 /**
  * Gathers the state of the products page: filtered products, current page and the filter panel behavior.
  *
- * @returns Refs for the panel and the page, the filtered products, the pagination state and the page changer.
+ * @returns Refs for the panel and the page, the functions that open and close the panel, the filtered products, the pagination state and the page changer.
  */
 export const useProductsPage = () => {
   const { isFiltersOpen, setIsFiltersOpen } = useFilterStore();
@@ -25,6 +25,9 @@ export const useProductsPage = () => {
 
   useClickOutside(filtersRef, () => isFiltersOpen && setIsFiltersOpen(false));
   useEscKey(pageRef, () => setIsFiltersOpen(false), isFiltersOpen);
+
+  const openFilters = () => setIsFiltersOpen(true);
+  const closeFilters = () => setIsFiltersOpen(false);
 
   /**
    * Shows another page and scrolls back to the top.
@@ -40,6 +43,8 @@ export const useProductsPage = () => {
     title: getScopeTitle(scope),
     isLoading,
     isFiltersOpen,
+    openFilters,
+    closeFilters,
     filtersRef,
     pageRef,
     total: products.length,

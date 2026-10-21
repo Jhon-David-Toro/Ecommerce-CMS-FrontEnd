@@ -6,6 +6,11 @@ export interface ProductsGridProps {
 
 export interface ProductsFiltersProps {
   isOpen: boolean;
+  onClose: () => void;
+}
+
+export interface FiltersToggleProps {
+  onOpen: () => void;
 }
 
 export interface CatalogScope {

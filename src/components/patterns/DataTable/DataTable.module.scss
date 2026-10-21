@@ -12,6 +12,10 @@
   font-size: utils.pxToRem(14px);
   border-collapse: collapse;
 
+  @include utils.media-ltlg() {
+    min-width: utils.pxToRem(640px);
+  }
+
   th,
   td {
     padding: utils.pxToRem(12px) utils.pxToRem(16px);

@@ -24,13 +24,11 @@ const StatsCounter: FC<StatsCounterProps> = ({ endValue, label, duration = 2000 
     return () => clearInterval(interval);
   }, [endValue, duration]);
 
-  useEffect(() => {
-    incrementValue();
-  }, [incrementValue]);
+  useEffect(() => incrementValue(), [incrementValue]);
 
   return (
     <section className={styles.stat}>
-      <h3 className={styles.stat__number}>{count.toLocaleString()}+</h3>
+      <h3 className={styles.stat__number}>{count.toLocaleString('en-US')}+</h3>
       <p className={styles.stat__label}>{label}</p>
     </section>
   );

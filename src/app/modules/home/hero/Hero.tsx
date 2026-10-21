@@ -18,7 +18,7 @@ const Hero = () => {
       <Image
         className={styles.hero__image}
         src="https://res.cloudinary.com/dxspvj1rj/image/upload/v1743273819/hero_oqglpz.png"
-        alt="Imagen de Cloudinary"
+        alt="Fashion collection"
         width={1440}
         height={663}
         priority
@@ -30,7 +30,7 @@ const Hero = () => {
       <Image
         className={styles.hero__image_mobile}
         src="https://res.cloudinary.com/dxspvj1rj/image/upload/v1743282458/hero-mobile_pjl4my.svg"
-        alt="Imagen de Cloudinary"
+        alt="Fashion collection"
         width={390}
         height={448}
         priority

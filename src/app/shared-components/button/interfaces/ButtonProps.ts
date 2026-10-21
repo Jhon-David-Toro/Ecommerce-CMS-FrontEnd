@@ -11,4 +11,5 @@ export interface ButtonProps {
     typeAttribute : 'button' | 'submit' | 'reset';
     href?: string;
     id?: string;
+    ariaPressed?: boolean;
 }

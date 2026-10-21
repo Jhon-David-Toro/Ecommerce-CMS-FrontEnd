@@ -17,7 +17,8 @@ const SizeSelector: FC<SizeSelectorProps> = ({ sizes, selectedSize, onSizeChange
             size="extra-small-product"
             margin="zero"
             className={clsx(styles.sizes__button, { [styles.selected]: selectedSize === size })}
-            onClick={() => onSizeChange(size)} 
+            ariaPressed={selectedSize === size}
+            onClick={() => onSizeChange(size)}
             typeAttribute='submit'
           />
         ))}

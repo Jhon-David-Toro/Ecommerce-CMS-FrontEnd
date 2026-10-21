@@ -17,6 +17,7 @@ const Button: FC<ButtonProps> = ({
   href,
   typeAttribute = 'submit',
   id,
+  ariaPressed,
 }) => {
   const icons: { [key: string]: JSX.Element } = {
     'chevron-left': <ArrowLeftIcon className={styles.iconSvg} />,
@@ -44,6 +45,7 @@ const Button: FC<ButtonProps> = ({
       className={classes}
       onClick={onClick}
       id={id}
+      aria-pressed={ariaPressed}
       disabled={!href ? disabled : undefined}
     >
       {iconPosition === 'left' && renderIcon()}

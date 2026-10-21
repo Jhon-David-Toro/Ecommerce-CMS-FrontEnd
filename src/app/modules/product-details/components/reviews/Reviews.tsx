@@ -57,7 +57,7 @@ const Reviews: FC<ReviewsProps> = ({ review }) => {
       {visibleReviews < review.length && (
         <Button
           type="secondary"
-          text="Cargar más reseñas"
+          text="Load More Reviews"
           size="medium"
           onClick={loadMoreReviews}
           typeAttribute="button"

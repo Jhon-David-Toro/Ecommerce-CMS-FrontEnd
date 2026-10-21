@@ -7,7 +7,7 @@ import styles from './Tabs.module.scss';
 
 const Tabs: FC<TabsProps> = ({ onTabChange }) => {
   const [activeTab, setActiveTab] = useState('Rating & Reviews');
-  const tabs = ['Product Details', 'Calificación y reseñas', 'FAQs'];
+  const tabs = ['Product Details', 'Rating & Reviews', 'FAQs'];
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
@@ -20,6 +20,7 @@ const Tabs: FC<TabsProps> = ({ onTabChange }) => {
         <button
           key={tab}
           className={clsx(styles.tabs__tab, { [styles.active]: activeTab === tab })}
+          aria-pressed={activeTab === tab}
           onClick={() => handleTabClick(tab)}
         >
           {tab}

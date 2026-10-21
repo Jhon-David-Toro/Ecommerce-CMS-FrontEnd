@@ -13,6 +13,8 @@ const ColorSelector: FC<ColorSelectorProps> = ({ colors, selectedColor, onColorC
             key={color.name}
             className={clsx(styles.colors__options_button, {[styles.selected] : selectedColor === color.name})}
             style={{ backgroundColor: color.hex }}
+            aria-label={color.name}
+            aria-pressed={selectedColor === color.name}
             onClick={() => onColorChange(color.name)}
           />
         ))}

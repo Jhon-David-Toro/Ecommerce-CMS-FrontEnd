@@ -1,5 +1,6 @@
 "use client";
 
+import { EnvelopeIcon, LockClosedIcon, UserIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 import { AuthLayout } from "@/components/patterns/AuthLayout";
@@ -7,7 +8,7 @@ import { Input } from "@/components/ui/Input";
 import { useAuth } from "@/lib/auth/useAuth";
 import { useAuthForm } from "@/lib/auth/useAuthForm";
 
-import { INITIAL_REGISTER, REGISTER_FALLBACK_ERROR } from "./Register.constants";
+import { INITIAL_REGISTER, REGISTER_BULLETS, REGISTER_FALLBACK_ERROR } from "./Register.constants";
 import { toRegisterInput, validateRegister } from "./Register.utils";
 
 /**
@@ -26,6 +27,8 @@ export const Register = () => {
 
   return (
     <AuthLayout
+      headline="Join the store in a minute."
+      bullets={REGISTER_BULLETS}
       title="Create your account"
       subtitle="It takes a minute and lets you track your orders."
       form={form}
@@ -37,10 +40,26 @@ export const Register = () => {
         </>
       }
     >
-      <Input label="Full name" autoComplete="name" error={form.errors.name} {...form.field("name")} />
-      <Input label="Email" type="email" autoComplete="email" error={form.errors.email} {...form.field("email")} />
-      <Input label="Password" type="password" autoComplete="new-password" error={form.errors.password} {...form.field("password")} />
-      <Input label="Confirm password" type="password" autoComplete="new-password" error={form.errors.confirm} {...form.field("confirm")} />
+      <Input label="Full name" icon={UserIcon} autoComplete="name" error={form.errors.name} {...form.field("name")} />
+      <Input label="Email" type="email" icon={EnvelopeIcon} autoComplete="email" error={form.errors.email} {...form.field("email")} />
+      <Input
+        label="Password"
+        type="password"
+        icon={LockClosedIcon}
+        revealable
+        autoComplete="new-password"
+        error={form.errors.password}
+        {...form.field("password")}
+      />
+      <Input
+        label="Confirm password"
+        type="password"
+        icon={LockClosedIcon}
+        revealable
+        autoComplete="new-password"
+        error={form.errors.confirm}
+        {...form.field("confirm")}
+      />
     </AuthLayout>
   );
 };

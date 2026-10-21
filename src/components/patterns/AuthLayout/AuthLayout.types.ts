@@ -14,7 +14,18 @@ export interface AuthFormProps {
 }
 
 export interface AuthLayoutProps extends AuthFormProps {
+  headline: string;
+  bullets: string[];
   title: string;
   subtitle: string;
   footer: ReactNode;
+}
+
+export interface AuthBrandPanelProps {
+  headline: string;
+  bullets: string[];
+}
+
+export interface BrandBulletsProps {
+  bullets: string[];
 }

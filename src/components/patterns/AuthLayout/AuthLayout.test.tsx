@@ -21,6 +21,8 @@ const buildForm = (overrides: Partial<AuthLayoutForm> = {}): AuthLayoutForm => (
 const renderLayout = (form: AuthLayoutForm) =>
   render(
     <AuthLayout
+      headline="Clothes that fit."
+      bullets={["Track orders"]}
       title="Welcome back"
       subtitle="Sign in."
       form={form}

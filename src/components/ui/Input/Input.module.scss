@@ -10,6 +10,39 @@
     font-weight: 500;
   }
 
+  &__control {
+    position: relative;
+  }
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    left: utils.pxToRem(16px);
+    width: utils.pxToRem(20px);
+    height: utils.pxToRem(20px);
+    color: #8a8a8a;
+    pointer-events: none;
+    transform: translateY(-50%);
+  }
+
+  &__toggle {
+    position: absolute;
+    top: 50%;
+    right: utils.pxToRem(14px);
+    display: flex;
+    padding: utils.pxToRem(4px);
+    color: #8a8a8a;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transform: translateY(-50%);
+
+    svg {
+      width: utils.pxToRem(20px);
+      height: utils.pxToRem(20px);
+    }
+  }
+
   &__input {
     width: 100%;
     padding: utils.pxToRem(12px) utils.pxToRem(16px);
@@ -39,6 +72,14 @@
     font-size: utils.pxToRem(13px);
     color: var(--color-muted);
   }
+}
+
+.withIcon {
+  padding-left: utils.pxToRem(48px);
+}
+
+.withToggle {
+  padding-right: utils.pxToRem(48px);
 }
 
 .invalid {

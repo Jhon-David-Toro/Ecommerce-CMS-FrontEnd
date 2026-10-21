@@ -1,5 +1,6 @@
 "use client";
 
+import { EnvelopeIcon, LockClosedIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 import { AuthLayout } from "@/components/patterns/AuthLayout";
@@ -7,7 +8,7 @@ import { Input } from "@/components/ui/Input";
 import { useAuth } from "@/lib/auth/useAuth";
 import { useAuthForm } from "@/lib/auth/useAuthForm";
 
-import { INITIAL_LOGIN, LOGIN_FALLBACK_ERROR } from "./Login.constants";
+import { INITIAL_LOGIN, LOGIN_BULLETS, LOGIN_FALLBACK_ERROR } from "./Login.constants";
 import { validateLogin } from "./Login.utils";
 
 /**
@@ -21,6 +22,8 @@ export const Login = () => {
 
   return (
     <AuthLayout
+      headline="Clothes that fit your style."
+      bullets={LOGIN_BULLETS}
       title="Welcome back"
       subtitle="Sign in to see your orders and check out faster."
       form={form}
@@ -32,8 +35,16 @@ export const Login = () => {
         </>
       }
     >
-      <Input label="Email" type="email" autoComplete="email" error={form.errors.email} {...form.field("email")} />
-      <Input label="Password" type="password" autoComplete="current-password" error={form.errors.password} {...form.field("password")} />
+      <Input label="Email" type="email" icon={EnvelopeIcon} autoComplete="email" error={form.errors.email} {...form.field("email")} />
+      <Input
+        label="Password"
+        type="password"
+        icon={LockClosedIcon}
+        revealable
+        autoComplete="current-password"
+        error={form.errors.password}
+        {...form.field("password")}
+      />
     </AuthLayout>
   );
 };

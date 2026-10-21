@@ -21,5 +21,11 @@
   &__actions {
     display: flex;
     gap: utils.pxToRem(12px);
+
+    > a,
+    > button {
+      width: auto;
+      min-width: utils.pxToRem(120px);
+    }
   }
 }

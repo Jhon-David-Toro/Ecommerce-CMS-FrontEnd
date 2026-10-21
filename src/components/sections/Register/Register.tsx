@@ -40,13 +40,29 @@ export const Register = () => {
         </>
       }
     >
-      <Input label="Full name" icon={UserIcon} autoComplete="name" error={form.errors.name} {...form.field("name")} />
-      <Input label="Email" type="email" icon={EnvelopeIcon} autoComplete="email" error={form.errors.email} {...form.field("email")} />
+      <Input
+        label="Full name"
+        icon={UserIcon}
+        placeholder="Your full name"
+        autoComplete="name"
+        error={form.errors.name}
+        {...form.field("name")}
+      />
+      <Input
+        label="Email"
+        type="email"
+        icon={EnvelopeIcon}
+        placeholder="you@example.com"
+        autoComplete="email"
+        error={form.errors.email}
+        {...form.field("email")}
+      />
       <Input
         label="Password"
         type="password"
         icon={LockClosedIcon}
         revealable
+        placeholder="At least 6 characters"
         autoComplete="new-password"
         error={form.errors.password}
         {...form.field("password")}
@@ -56,6 +72,7 @@ export const Register = () => {
         type="password"
         icon={LockClosedIcon}
         revealable
+        placeholder="Repeat your password"
         autoComplete="new-password"
         error={form.errors.confirm}
         {...form.field("confirm")}

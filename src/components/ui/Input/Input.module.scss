@@ -53,6 +53,10 @@
     outline: none;
     transition: border-color 0.2s;
 
+    &::placeholder {
+      color: #8a8a8a;
+    }
+
     &:focus {
       border-color: var(--color-ink);
     }

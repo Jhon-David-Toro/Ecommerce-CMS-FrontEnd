@@ -48,7 +48,7 @@ describe("AdminReviews", () => {
   it("filters by status", async () => {
     await addPendingReview();
     render(<AdminReviews />);
-    await userEvent.selectOptions(await screen.findByLabelText("Status"), "approved");
+    await userEvent.click(await screen.findByRole("button", { name: "Approved" }));
     expect(screen.queryByRole("cell", { name: "Pending Pat" })).not.toBeInTheDocument();
   });
 });

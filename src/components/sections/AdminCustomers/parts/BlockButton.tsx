@@ -1,3 +1,6 @@
+import { LockClosedIcon, LockOpenIcon } from "@heroicons/react/24/outline";
+
+import { ActionButton } from "@/components/ui/ActionButton";
 import { ROLES } from "@/lib/auth/auth.constants";
 
 import type { BlockButtonProps } from "../AdminCustomers.types";
@@ -16,8 +19,12 @@ export const BlockButton = ({ user, onBlockedChange }: BlockButtonProps) => {
   if (user.role === ROLES.admin) return null;
 
   return (
-    <button type="button" onClick={() => onBlockedChange(user.id, !user.blocked)} aria-label={`${label} ${user.name}`}>
-      {label}
-    </button>
+    <ActionButton
+      label={label}
+      icon={user.blocked ? LockOpenIcon : LockClosedIcon}
+      tone={user.blocked ? "neutral" : "danger"}
+      aria-label={`${label} ${user.name}`}
+      onClick={() => onBlockedChange(user.id, !user.blocked)}
+    />
   );
 };

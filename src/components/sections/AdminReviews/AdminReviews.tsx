@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { AdminListView } from "@/components/patterns/AdminListView";
-import { FilterSelect } from "@/components/patterns/FilterSelect";
+import { ChipFilter } from "@/components/patterns/ChipFilter";
 import { Spinner } from "@/components/ui/Spinner";
 import { listProducts } from "@/lib/catalog/catalog.api";
 import { listReviews } from "@/lib/catalog/reviews.api";
@@ -34,7 +34,7 @@ export const AdminReviews = () => {
       title="Reviews"
       description="Approve what shoppers say before it shows on the product page."
       searchLabel="Search reviews"
-      filters={<FilterSelect label="Status" options={STATUS_FILTERS} value={status} onChange={setStatus} />}
+      filters={<ChipFilter label="Status" options={STATUS_FILTERS} value={status} onChange={setStatus} />}
       controls={controls}
       table={table}
     />

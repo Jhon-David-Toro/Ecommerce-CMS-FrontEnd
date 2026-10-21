@@ -1,41 +1,61 @@
-@use 'src/styles/utils' as utils;
+@use "src/styles/utils" as utils;
 
 .banner {
-    background-color: black;
-    color: white;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: utils.pxToRem(38px);
+  font-size: utils.pxToRem(14px);
+  color: white;
+  background-color: black;
+
+  @include utils.media-xs() {
+    height: max-content;
+  }
+
+  &__paragraph {
+    flex-grow: 1;
+    margin: 0;
+    text-align: center;
+    @include utils.container();
+  }
+
+  &__close {
+    position: absolute;
+    top: 50%;
+    right: utils.pxToRem(16px);
     display: flex;
     align-items: center;
     justify-content: center;
-    height: utils.pxToRem(38px);
-    font-size: utils.pxToRem(14px);
-    position: relative;
+    width: utils.pxToRem(26px);
+    height: utils.pxToRem(26px);
+    padding: 0;
+    color: white;
+    cursor: pointer;
+    background: none;
+    border: 0;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    transition: background-color 0.2s;
 
-    @include utils.media-xs(){
-        height: max-content;
+    @include utils.media-xs() {
+      display: none;
     }
 
-    &__paragraph {
-        margin: 0;
-        text-align: center;
-        flex-grow: 1;
-        @include utils.container();
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
     }
 
-    &__close {
-        position: absolute;
-        right: 0;
-        cursor: pointer;
-        width: utils.pxToRem(20px);
-        height: utils.pxToRem(20px);
-
-        @include utils.media-xs(){
-            display: none;
-        }
+    svg {
+      width: utils.pxToRem(16px);
+      height: utils.pxToRem(16px);
     }
+  }
 
-    .signup {
-        color: white;
-        font-size: utils.pxToRem(16px);
-        text-underline-offset: utils.pxToRem(5px);
-    }
+  .signup {
+    font-size: utils.pxToRem(16px);
+    color: white;
+    text-underline-offset: utils.pxToRem(5px);
+  }
 }

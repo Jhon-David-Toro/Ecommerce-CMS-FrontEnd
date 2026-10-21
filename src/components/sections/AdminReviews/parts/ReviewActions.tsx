@@ -1,4 +1,9 @@
+import { CheckIcon, TrashIcon, XMarkIcon } from "@heroicons/react/24/outline";
+
+import { ActionButton } from "@/components/ui/ActionButton";
+
 import type { ReviewActionsProps } from "../AdminReviews.types";
+import styles from "../AdminReviews.module.scss";
 
 /**
  * Reviews/Actions: the Approve, Reject and Delete buttons of a review row.
@@ -10,15 +15,26 @@ import type { ReviewActionsProps } from "../AdminReviews.types";
  * @returns The buttons.
  */
 export const ReviewActions = ({ review, onModerate, onRemove }: ReviewActionsProps) => (
-  <>
-    <button type="button" onClick={() => onModerate(review.id, "approved")} aria-label={`Approve review by ${review.author}`}>
-      Approve
-    </button>{" "}
-    <button type="button" onClick={() => onModerate(review.id, "rejected")} aria-label={`Reject review by ${review.author}`}>
-      Reject
-    </button>{" "}
-    <button type="button" onClick={() => onRemove(review.id)} aria-label={`Delete review by ${review.author}`}>
-      Delete
-    </button>
-  </>
+  <div className={styles.actions}>
+    <ActionButton
+      label="Approve"
+      icon={CheckIcon}
+      tone="success"
+      aria-label={`Approve review by ${review.author}`}
+      onClick={() => onModerate(review.id, "approved")}
+    />
+    <ActionButton
+      label="Reject"
+      icon={XMarkIcon}
+      aria-label={`Reject review by ${review.author}`}
+      onClick={() => onModerate(review.id, "rejected")}
+    />
+    <ActionButton
+      label="Delete"
+      icon={TrashIcon}
+      tone="danger"
+      aria-label={`Delete review by ${review.author}`}
+      onClick={() => onRemove(review.id)}
+    />
+  </div>
 );

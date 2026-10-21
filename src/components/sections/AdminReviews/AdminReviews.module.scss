@@ -1,0 +1,8 @@
+@use "src/styles/utils" as utils;
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: utils.pxToRem(8px);
+  justify-content: flex-end;
+}

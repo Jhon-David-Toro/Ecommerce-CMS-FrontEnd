@@ -35,12 +35,21 @@ export const Login = () => {
         </>
       }
     >
-      <Input label="Email" type="email" icon={EnvelopeIcon} autoComplete="email" error={form.errors.email} {...form.field("email")} />
+      <Input
+        label="Email"
+        type="email"
+        icon={EnvelopeIcon}
+        placeholder="you@example.com"
+        autoComplete="email"
+        error={form.errors.email}
+        {...form.field("email")}
+      />
       <Input
         label="Password"
         type="password"
         icon={LockClosedIcon}
         revealable
+        placeholder="Your password"
         autoComplete="current-password"
         error={form.errors.password}
         {...form.field("password")}

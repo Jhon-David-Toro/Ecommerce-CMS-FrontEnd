@@ -12,7 +12,7 @@ export const NO_PRODUCTS: Product[] = [];
 export const PAGE_SIZE = 10;
 
 export const STATUS_FILTERS = [
-  { value: "", label: "All statuses" },
+  { value: "", label: "All" },
   { value: "pending", label: "Pending" },
   { value: "approved", label: "Approved" },
   { value: "rejected", label: "Rejected" },

@@ -1,14 +1,11 @@
-import Image from "next/image";
 import type { FC } from "react";
 
-import { OrderSummary } from "@/components/patterns/OrderSummary";
-import { Badge } from "@/components/ui/Badge";
-import { ORDER_STATUSES, PAYMENT_METHODS } from "@/lib/orders/order.constants";
-import { getDiscountPercent, getStatusTone } from "@/lib/orders/order.utils";
-import { formatDate, formatPrice } from "@/lib/shared/format/format";
-
-import { ORDER_IMAGE_SIZE } from "./OrderDetails.constants";
 import type { OrderDetailsProps } from "./OrderDetails.types";
+import { AddressBlock } from "./parts/AddressBlock";
+import { OrderHeader } from "./parts/OrderHeader";
+import { OrderItemList } from "./parts/OrderItemList";
+import { OrderTotals } from "./parts/OrderTotals";
+import { PaymentBlock } from "./parts/PaymentBlock";
 import styles from "./OrderDetails.module.scss";
 
 /**
@@ -21,51 +18,14 @@ import styles from "./OrderDetails.module.scss";
  */
 export const OrderDetails: FC<OrderDetailsProps> = ({ order, children }) => (
   <article className={styles.order}>
-    <header className={styles.order__header}>
-      <h2 className={styles.order__number}>Order {order.number}</h2>
-      <Badge tone={getStatusTone(order.status)}>{ORDER_STATUSES[order.status]}</Badge>
-      <p className={styles.order__date}>Placed on {formatDate(new Date(order.createdAt).toISOString())}</p>
-    </header>
+    <OrderHeader order={order} />
     <div className={styles.order__layout}>
       <div className={styles.order__main}>
-        <ul className={styles.order__items} aria-label="Items">
-          {order.items.map((item) => (
-            <li key={`${item.productId}-${item.color}-${item.size}`} className={styles.order__item}>
-              <Image src={item.image} alt={item.name} {...ORDER_IMAGE_SIZE} className={styles.order__image} />
-              <div>
-                <p className={styles.order__name}>{item.name}</p>
-                <p className={styles.order__option}>
-                  {item.size} · {item.color} · x{item.quantity}
-                </p>
-              </div>
-              <p className={styles.order__price}>{formatPrice(item.price * item.quantity)}</p>
-            </li>
-          ))}
-        </ul>
-        <section className={styles.order__block} aria-label="Delivery address">
-          <h3>Delivery address</h3>
-          <p>{order.address.fullName}</p>
-          <p>{order.address.street}</p>
-          <p>
-            {order.address.city}
-            {order.address.state && `, ${order.address.state}`} {order.address.postalCode}
-          </p>
-          <p>{order.address.country}</p>
-          <p>{order.address.phone}</p>
-          <p>{order.email}</p>
-        </section>
-        <section className={styles.order__block} aria-label="Payment">
-          <h3>Payment</h3>
-          <p>{PAYMENT_METHODS[order.paymentMethod]}</p>
-          {order.notes && <p>Notes: {order.notes}</p>}
-        </section>
+        <OrderItemList items={order.items} />
+        <AddressBlock address={order.address} email={order.email} />
+        <PaymentBlock order={order} />
       </div>
-      <OrderSummary
-        totals={{ subtotal: order.subtotal, discount: order.discount, shipping: order.shipping, total: order.total }}
-        discountPercent={getDiscountPercent(order.subtotal, order.discount)}
-      >
-        {children}
-      </OrderSummary>
+      <OrderTotals order={order}>{children}</OrderTotals>
     </div>
   </article>
 );

@@ -1,0 +1,34 @@
+@use "src/styles/utils" as utils;
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: utils.pxToRem(8px);
+
+  &__chip {
+    height: utils.pxToRem(40px);
+    padding: 0 utils.pxToRem(18px);
+    font: inherit;
+    font-size: utils.pxToRem(14px);
+    font-weight: 500;
+    color: #444;
+    white-space: nowrap;
+    cursor: pointer;
+    background-color: var(--color-surface);
+    border: utils.pxToRem(1px) solid transparent;
+    border-radius: 999px;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+
+    &:hover {
+      background-color: #e6e6e6;
+    }
+
+    &_active,
+    &_active:hover {
+      color: white;
+      background-color: black;
+    }
+  }
+}

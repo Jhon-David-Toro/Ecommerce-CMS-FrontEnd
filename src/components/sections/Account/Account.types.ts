@@ -9,12 +9,14 @@ export interface AccountProfileProps {
 
 export interface AccountOrdersProps {
   orders: Order[] | null;
+  onOrdersChange: () => void;
 }
 
 export interface AccountTabContentProps {
   tab: string;
   orders: Order[] | null;
   user: PublicUser;
+  onOrdersChange: () => void;
 }
 
 export interface AccountSettingsProps {

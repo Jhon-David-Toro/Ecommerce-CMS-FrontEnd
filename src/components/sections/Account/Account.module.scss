@@ -50,6 +50,12 @@
     margin-left: auto;
   }
 
+  &__orders {
+    display: flex;
+    flex-direction: column;
+    gap: utils.pxToRem(20px);
+  }
+
   &__settings {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

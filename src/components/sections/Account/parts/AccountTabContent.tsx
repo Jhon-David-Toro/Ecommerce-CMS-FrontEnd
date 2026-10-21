@@ -10,7 +10,8 @@ import { AccountSettings } from "./AccountSettings";
  * @param props.tab Label of the open tab.
  * @param props.orders Orders of the customer; null while they load.
  * @param props.user Signed-in customer.
+ * @param props.onOrdersChange Reloads the orders after one of them changes.
  * @returns The content of the tab.
  */
-export const AccountTabContent = ({ tab, orders, user }: AccountTabContentProps) =>
-  tab === TAB_SETTINGS ? <AccountSettings user={user} /> : <AccountOrders orders={orders} />;
+export const AccountTabContent = ({ tab, orders, user, onOrdersChange }: AccountTabContentProps) =>
+  tab === TAB_SETTINGS ? <AccountSettings user={user} /> : <AccountOrders orders={orders} onOrdersChange={onOrdersChange} />;

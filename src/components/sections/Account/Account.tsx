@@ -16,7 +16,7 @@ import styles from "./Account.module.scss";
  * @returns The account page content.
  */
 export const Account = () => {
-  const { user, orders, tab, setTab, handleSignOut } = useAccount();
+  const { user, orders, reload, tab, setTab, handleSignOut } = useAccount();
 
   if (!user) return <Spinner label="Loading your account" />;
 
@@ -25,7 +25,7 @@ export const Account = () => {
       <AccountHeader />
       <AccountProfile user={user} onSignOut={handleSignOut} />
       <Tabs tabs={ACCOUNT_TABS} initialTab={TAB_ORDERS} onTabChange={setTab} />
-      <AccountTabContent tab={tab} orders={orders} user={user} />
+      <AccountTabContent tab={tab} orders={orders} user={user} onOrdersChange={reload} />
     </section>
   );
 };

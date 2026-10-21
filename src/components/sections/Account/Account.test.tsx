@@ -42,8 +42,9 @@ describe("Account", () => {
     await orderRepository.create(mine);
     await orderRepository.create({ ...mine, number: "SH-0002", userId: 9 });
     render(<Account />);
-    expect(await screen.findByRole("link", { name: "SH-0001" })).toHaveAttribute("href", "/account/orders/1");
-    expect(screen.queryByRole("link", { name: "SH-0002" })).not.toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: "Order SH-0001" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "View details" })).toHaveAttribute("href", "/account/orders/1");
+    expect(screen.queryByRole("heading", { name: "Order SH-0002" })).not.toBeInTheDocument();
   });
 
   it("changes the name of the customer", async () => {

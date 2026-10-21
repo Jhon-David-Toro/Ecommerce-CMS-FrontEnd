@@ -13,3 +13,7 @@ export const PROFILE_SAVED = "Your details were updated.";
 export const PASSWORD_SAVED = "Your password was changed.";
 
 export const SAVE_FALLBACK = "We could not save the changes. Please try again.";
+
+export const ORDER_FILTERS = { all: "all", progress: "progress", delivered: "delivered" } as const;
+
+export const IN_PROGRESS_STATUSES = ["pending", "paid", "shipped"];

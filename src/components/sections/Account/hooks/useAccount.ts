@@ -10,12 +10,12 @@ import { NO_USER_ID, TAB_ORDERS } from "../Account.constants";
 /**
  * Loads the signed-in customer with their orders, remembers the open tab and offers a way to sign out.
  *
- * @returns The user, their orders (null while loading), the tab with its setter and the sign out handler.
+ * @returns The user, their orders (null while loading) with a way to reload them, the tab with its setter and the sign out handler.
  */
 export const useAccount = () => {
   const router = useRouter();
   const { user, signOut } = useAuth();
-  const { data: orders } = useQuery(listOrders, { userId: user?.id ?? NO_USER_ID });
+  const { data: orders, reload } = useQuery(listOrders, { userId: user?.id ?? NO_USER_ID });
   const [tab, setTab] = useState(TAB_ORDERS);
 
   /**
@@ -26,5 +26,5 @@ export const useAccount = () => {
     router.replace("/");
   };
 
-  return { user, orders, tab, setTab, handleSignOut };
+  return { user, orders, reload, tab, setTab, handleSignOut };
 };

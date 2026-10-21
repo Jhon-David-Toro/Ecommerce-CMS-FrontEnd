@@ -24,8 +24,39 @@
   }
 
   &__items {
-    padding-left: utils.pxToRem(18px);
-    font-size: utils.pxToRem(14px);
+    display: flex;
+    flex-direction: column;
+    gap: utils.pxToRem(14px);
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: utils.pxToRem(64px) 1fr auto;
+    gap: utils.pxToRem(14px);
+    align-items: center;
+  }
+
+  &__itemImage {
+    width: utils.pxToRem(64px);
+    height: utils.pxToRem(64px);
+    object-fit: cover;
+    background-color: var(--color-surface);
+    border-radius: utils.pxToRem(12px);
+  }
+
+  &__itemName {
+    font-size: utils.pxToRem(15px);
+    font-weight: 600;
+  }
+
+  &__itemOptions {
+    font-size: utils.pxToRem(13px);
     color: var(--color-muted);
+  }
+
+  &__itemPrice {
+    font-weight: 700;
   }
 }

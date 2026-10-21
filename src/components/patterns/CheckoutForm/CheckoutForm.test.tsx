@@ -32,7 +32,7 @@ describe("CheckoutForm", () => {
     const onSubmit = vi.fn();
     render(<CheckoutForm defaultEmail="ana@mail.test" isSubmitting={false} onSubmit={onSubmit} />);
     await fillAddress();
-    await userEvent.selectOptions(screen.getByLabelText("Payment method"), "bank_transfer");
+    await userEvent.click(screen.getByRole("radio", { name: /Bank transfer/ }));
     await userEvent.click(screen.getByRole("button", { name: "Place order" }));
     expect(onSubmit).toHaveBeenCalledWith(
       expect.objectContaining({ fullName: "Ana Gomez", paymentMethod: "bank_transfer", country: "Peru" }),

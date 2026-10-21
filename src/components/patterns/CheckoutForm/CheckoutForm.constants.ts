@@ -16,3 +16,8 @@ export const EMPTY_CHECKOUT = {
 };
 
 export const DEFAULT_PAYMENT_METHOD: PaymentMethod = "cash_on_delivery";
+
+export const PAYMENT_DESCRIPTIONS: Record<PaymentMethod, string> = {
+  cash_on_delivery: "Pay when the order reaches you",
+  bank_transfer: "We send you the account by email",
+};

@@ -1,15 +1,13 @@
 import { FieldGroup } from "@/components/patterns/FieldGroup";
-import { SelectInput } from "@/components/ui/SelectInput";
 import { TextArea } from "@/components/ui/TextArea";
-import { PAYMENT_METHODS } from "@/lib/orders/order.constants";
 
 import { PAYMENT_OPTIONS } from "../CheckoutForm.constants";
 import type { PaymentFieldsProps } from "../CheckoutForm.types";
-import { toPaymentMethod } from "../CheckoutForm.utils";
+import { PaymentOption } from "./PaymentOption";
 import styles from "../CheckoutForm.module.scss";
 
 /**
- * CheckoutForm/Payment: payment method, what it means and notes for the order.
+ * CheckoutForm/Payment: payment method as two cards and notes for the order.
  *
  * @param props Component props.
  * @param props.field Builds the props of a text field.
@@ -18,14 +16,12 @@ import styles from "../CheckoutForm.module.scss";
  * @returns The group of fields.
  */
 export const PaymentFields = ({ field, method, onMethodChange }: PaymentFieldsProps) => (
-  <FieldGroup legend="Payment">
-    <SelectInput
-      label="Payment method"
-      options={PAYMENT_OPTIONS}
-      value={method}
-      onChange={(event) => onMethodChange(toPaymentMethod(event.target.value))}
-    />
-    <p className={styles.form__hint}>{PAYMENT_METHODS[method]}: you pay when the order is confirmed with you.</p>
+  <FieldGroup legend="Payment method">
+    <div className={styles.form__options} role="radiogroup" aria-label="Payment method">
+      {PAYMENT_OPTIONS.map((option) => (
+        <PaymentOption key={option.value} option={option} selected={option.value === method} onSelect={onMethodChange} />
+      ))}
+    </div>
     <TextArea label="Order notes (optional)" {...field("notes")} />
   </FieldGroup>
 );

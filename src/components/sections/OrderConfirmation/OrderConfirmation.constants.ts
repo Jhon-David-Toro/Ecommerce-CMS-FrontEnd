@@ -4,3 +4,5 @@ export const NOT_FOUND = {
   backLabel: "Continue shopping",
   backHref: "/products",
 };
+
+export const ALL_DONE_STEP = 4;

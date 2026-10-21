@@ -1,11 +1,14 @@
+import { CheckoutSteps } from "@/components/patterns/CheckoutSteps";
 import { OrderDetails } from "@/components/patterns/OrderDetails";
 import { Button } from "@/components/ui/Button";
 
+import { ALL_DONE_STEP } from "../OrderConfirmation.constants";
 import type { ConfirmationContentProps } from "../OrderConfirmation.types";
+import { ConfirmationHero } from "./ConfirmationHero";
 import styles from "../OrderConfirmation.module.scss";
 
 /**
- * OrderConfirmation/Content: thank you message, the details of the order and a link to keep shopping.
+ * OrderConfirmation/Content: thank you message, ticked progress, the details of the order and the buttons to keep going.
  *
  * @param props Component props.
  * @param props.order Order that was just placed.
@@ -13,9 +16,12 @@ import styles from "../OrderConfirmation.module.scss";
  */
 export const ConfirmationContent = ({ order }: ConfirmationContentProps) => (
   <section className={styles.confirmation}>
-    <h1 className={styles.confirmation__title}>THANK YOU FOR YOUR ORDER!</h1>
-    <p className={styles.confirmation__text}>We sent the details to {order.email}. We will let you know when your order ships.</p>
+    <ConfirmationHero email={order.email} />
+    <CheckoutSteps current={ALL_DONE_STEP} />
     <OrderDetails order={order} />
-    <Button type="primary" size="medium" text="Continue shopping" href="/products" typeAttribute="button" />
+    <div className={styles.confirmation__actions}>
+      <Button type="primary" size="medium" text="Continue shopping" href="/products" typeAttribute="button" />
+      <Button type="secondary" size="medium" text="View my orders" href="/account" typeAttribute="button" />
+    </div>
   </section>
 );

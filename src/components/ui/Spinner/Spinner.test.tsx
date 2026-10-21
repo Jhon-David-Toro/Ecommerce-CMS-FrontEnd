@@ -13,4 +13,9 @@ describe("Spinner", () => {
     render(<Spinner label="Loading orders" />);
     expect(screen.getByRole("status")).toHaveTextContent("Loading orders");
   });
+
+  it("has an inline size for buttons and text", () => {
+    render(<Spinner size="inline" label="Saving" />);
+    expect(screen.getByRole("status")).toHaveTextContent("Saving");
+  });
 });

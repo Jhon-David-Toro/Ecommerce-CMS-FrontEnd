@@ -2,16 +2,39 @@
 
 .spinner {
   display: flex;
-  gap: utils.pxToRem(10px);
   align-items: center;
   justify-content: center;
-  padding: utils.pxToRem(32px);
   color: var(--color-muted);
 
+  &_block {
+    flex-direction: column;
+    gap: utils.pxToRem(18px);
+    min-height: utils.pxToRem(240px);
+    padding: utils.pxToRem(48px) utils.pxToRem(16px);
+    font-weight: 500;
+
+    .spinner__ring {
+      width: utils.pxToRem(56px);
+      height: utils.pxToRem(56px);
+      border-width: utils.pxToRem(5px);
+    }
+  }
+
+  &_inline {
+    display: inline-flex;
+    gap: utils.pxToRem(10px);
+    font-size: utils.pxToRem(14px);
+
+    .spinner__ring {
+      width: utils.pxToRem(18px);
+      height: utils.pxToRem(18px);
+      border-width: utils.pxToRem(2px);
+    }
+  }
+
   &__ring {
-    width: utils.pxToRem(20px);
-    height: utils.pxToRem(20px);
-    border: utils.pxToRem(2px) solid var(--color-border);
+    border-style: solid;
+    border-color: #e6e6e6;
     border-top-color: var(--color-ink);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;

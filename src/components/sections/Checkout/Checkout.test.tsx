@@ -31,7 +31,7 @@ describe("Checkout", () => {
   it("lists what is being bought", async () => {
     useCartStore.getState().addItem(line);
     render(<Checkout />);
-    expect(await screen.findByRole("list", { name: "Items in your order" })).toHaveTextContent("2 x Gradient Shirt (Large, White)");
+    expect(await screen.findByRole("list", { name: "Items in your order" })).toHaveTextContent("Gradient Shirt");
   });
 
   it("places the order, empties the cart and opens the confirmation", async () => {

@@ -34,3 +34,9 @@ export interface PaymentFieldsProps {
   method: PaymentMethod;
   onMethodChange: (method: PaymentMethod) => void;
 }
+
+export interface PaymentOptionProps {
+  option: { value: PaymentMethod; label: string };
+  selected: boolean;
+  onSelect: (method: PaymentMethod) => void;
+}

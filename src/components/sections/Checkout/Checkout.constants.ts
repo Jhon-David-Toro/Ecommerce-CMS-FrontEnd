@@ -8,3 +8,7 @@ export const EMPTY_CHECKOUT_CART = {
   actionLabel: "Continue shopping",
   actionHref: "/products",
 };
+
+export const DETAILS_STEP = 2;
+
+export const ITEM_IMAGE_SIZE = { width: 64, height: 64 } as const;

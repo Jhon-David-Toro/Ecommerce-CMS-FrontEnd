@@ -1,0 +1,57 @@
+@use "src/styles/utils" as utils;
+
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: utils.pxToRem(12px) 0;
+  align-items: center;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  display: flex;
+  gap: utils.pxToRem(10px);
+  align-items: center;
+  font-size: utils.pxToRem(15px);
+  color: var(--color-muted);
+
+  &__dot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: utils.pxToRem(32px);
+    height: utils.pxToRem(32px);
+    font-size: utils.pxToRem(14px);
+    font-weight: 600;
+    background-color: var(--color-surface);
+    border-radius: 50%;
+  }
+
+  &__check {
+    width: utils.pxToRem(16px);
+    height: utils.pxToRem(16px);
+  }
+
+  &__line {
+    width: utils.pxToRem(48px);
+    height: utils.pxToRem(2px);
+    margin: 0 utils.pxToRem(6px);
+    background-color: #e0e0e0;
+  }
+
+  &_done,
+  &_active {
+    font-weight: 600;
+    color: var(--color-ink);
+
+    .step__dot {
+      color: white;
+      background-color: black;
+    }
+  }
+
+  &_done .step__line {
+    background-color: black;
+  }
+}

@@ -122,6 +122,18 @@
   padding: utils.pxToRem(48px) utils.pxToRem(24px);
   margin: 0 auto;
 
+  &__logo {
+    display: none;
+    font-size: utils.pxToRem(26px);
+    font-weight: 900;
+    color: var(--color-ink);
+    text-decoration: none;
+
+    @include utils.media-ltlg() {
+      display: block;
+    }
+  }
+
   &__title {
     font-size: utils.pxToRem(36px);
     font-weight: 900;

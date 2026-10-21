@@ -23,6 +23,6 @@ export const ProductPrice: FC<ProductPriceProps> = ({ price, discountPrice, disc
     ) : (
       formatPrice(price, currency)
     )}
-    {discount && <span className={styles.discount}>-{discount}%</span>}
+    {discount ? <span className={styles.discount}>-{discount}%</span> : null}
   </p>
 );

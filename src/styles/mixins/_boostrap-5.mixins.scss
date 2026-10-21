@@ -45,6 +45,12 @@ $columns: (
     margin-right: auto;
     margin-left: auto;
 
+    @media (max-width: (map.get($breakpoints, xs) - 1px)) {
+        padding-right: 16px;
+        padding-left: 16px;
+        box-sizing: border-box;
+    }
+
     @media (min-width: map.get($breakpoints, xs)) and (max-width: (map.get($breakpoints, sm) - 1px)) {
         max-width: map.get($container-max-widths, xs);
     }

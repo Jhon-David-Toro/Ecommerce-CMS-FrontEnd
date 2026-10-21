@@ -17,8 +17,20 @@ import styles from "./Products.module.scss";
  * @returns The products page content.
  */
 export const Products = () => {
-  const { title, isFiltersOpen, openFilters, closeFilters, filtersRef, pageRef, total, currentPage, totalPages, pageItems, changePage } =
-    useProductsPage();
+  const {
+    title,
+    isLoading,
+    isFiltersOpen,
+    openFilters,
+    closeFilters,
+    filtersRef,
+    pageRef,
+    total,
+    currentPage,
+    totalPages,
+    pageItems,
+    changePage,
+  } = useProductsPage();
 
   return (
     <main className={styles.products} ref={pageRef}>
@@ -26,7 +38,7 @@ export const Products = () => {
       <section className={styles.products__cards}>
         <FiltersToggle onOpen={openFilters} />
         <TitleAllProducts heading={title} currentPage={currentPage} productsPerPage={PRODUCTS_PER_PAGE} totalProducts={total} />
-        <ProductsGrid products={pageItems} />
+        <ProductsGrid products={pageItems} isLoading={isLoading} />
         <Divider />
         <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={changePage} />
       </section>

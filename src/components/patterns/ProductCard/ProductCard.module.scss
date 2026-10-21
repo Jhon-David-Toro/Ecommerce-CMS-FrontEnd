@@ -8,33 +8,40 @@
   margin-bottom: utils.pxToRem(32px);
   max-width: max-content;
 
+  @include utils.media-ltmd() {
+    width: 100%;
+    max-width: none;
+    margin-bottom: utils.pxToRem(16px);
+  }
+
   &__loading {
     pointer-events: none;
     opacity: 0;
   }
 
   &__link {
-    text-decoration: none;
+    width: 100%;
     color: inherit;
+    text-decoration: none;
   }
 
   &__name {
     font-size: utils.pxToRem(20px);
     text-decoration: none;
+
+    @include utils.media-xs() {
+      font-size: utils.pxToRem(15px);
+    }
   }
 
   &__image {
     object-fit: cover;
     border-radius: utils.pxToRem(8px);
 
-    @include utils.media-sm() {
-      width: utils.pxToRem(240px);
-      height: utils.pxToRem(240px);
-    }
-
-    @include utils.media-xs() {
-      width: utils.pxToRem(340px);
-      height: utils.pxToRem(340px);
+    @include utils.media-ltmd() {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
     }
   }
 

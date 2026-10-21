@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { FC } from "react";
 
 import type { AuthLayoutProps } from "./AuthLayout.types";
@@ -21,6 +22,9 @@ export const AuthLayout: FC<AuthLayoutProps> = ({ headline, bullets, title, subt
   <div className={styles.screen}>
     <AuthBrandPanel headline={headline} bullets={bullets} />
     <section className={styles.auth}>
+      <Link href="/" className={styles.auth__logo}>
+        SHOP.CO
+      </Link>
       <h1 className={styles.auth__title}>{title}</h1>
       <p className={styles.auth__subtitle}>{subtitle}</p>
       <AuthForm {...rest} />

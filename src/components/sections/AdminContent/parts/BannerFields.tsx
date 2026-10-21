@@ -1,8 +1,8 @@
+import { FieldGroup, FieldRow } from "@/components/patterns/FieldGroup";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { Input } from "@/components/ui/Input";
 
 import type { BannerFieldsProps } from "../AdminContent.types";
-import styles from "../AdminContent.module.scss";
 
 /**
  * Content/Banner: the promotional strip at the top of the store.
@@ -15,13 +15,12 @@ import styles from "../AdminContent.module.scss";
  * @returns The group of fields.
  */
 export const BannerFields = ({ field, errors, enabled, onEnabledChange }: BannerFieldsProps) => (
-  <fieldset className={styles.group}>
-    <legend className={styles.group__legend}>Top banner</legend>
+  <FieldGroup legend="Top banner">
     <Checkbox label="Show the banner" checked={enabled} onChange={(event) => onEnabledChange(event.target.checked)} />
     <Input label="Banner text" error={errors.bannerText} {...field("bannerText")} />
-    <div className={styles.group__row}>
+    <FieldRow>
       <Input label="Banner link text" {...field("bannerLinkText")} />
       <Input label="Banner link address" {...field("bannerLinkHref")} />
-    </div>
-  </fieldset>
+    </FieldRow>
+  </FieldGroup>
 );

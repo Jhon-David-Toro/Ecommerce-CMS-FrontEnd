@@ -23,6 +23,11 @@ export interface ContentFormBodyProps {
   content: SiteContent;
 }
 
+export interface ContentHeaderProps {
+  notice: string;
+  onReset: () => void;
+}
+
 export interface ContentFieldsProps {
   field: (name: keyof ContentFormValues & string) => FieldProps;
   errors: Errors;

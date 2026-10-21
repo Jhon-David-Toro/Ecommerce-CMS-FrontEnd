@@ -4,7 +4,7 @@ import type { Product, ProductInput } from "@/lib/catalog/product.types";
 import { compact, minNumber, required } from "@/lib/shared/forms/validators";
 import { slugify, toLines } from "@/lib/shared/text/text";
 
-import { COLOR_SEPARATOR, EMPTY_PRODUCT_FORM, LINE_SEPARATOR } from "./AdminProductForm.constants";
+import { CHOOSE_OPTION, COLOR_SEPARATOR, EMPTY_PRODUCT_FORM, LINE_SEPARATOR } from "./AdminProductForm.constants";
 import type { ProductFormValues } from "./AdminProductForm.types";
 
 /**
@@ -140,3 +140,22 @@ export const validateProduct = (values: ProductFormValues) =>
     sizes: values.sizes.length ? undefined : "Choose at least one size.",
     colors: parseColors(values.colors).length ? undefined : "Add at least one color.",
   });
+
+/**
+ * Builds the options of a select from a list of named records, with a "Choose..." option first.
+ *
+ * @param records Records to pick from; null while they load.
+ * @returns The select options.
+ */
+export const toOptions = (records: { name: string }[] | null) => [
+  CHOOSE_OPTION,
+  ...(records ?? []).map(({ name }) => ({ value: name, label: name })),
+];
+
+/**
+ * Chooses the title of the product form.
+ *
+ * @param existing Product being edited; omitted for a new product.
+ * @returns The headline of the page.
+ */
+export const getFormTitle = (existing?: Product) => (existing ? `Edit ${existing.name}` : "New product");

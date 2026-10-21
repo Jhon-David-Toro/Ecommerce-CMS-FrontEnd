@@ -1,11 +1,10 @@
 "use client";
 
-import { Button } from "@/components/ui/Button";
-import { EmptyState } from "@/components/ui/EmptyState";
-import { Spinner } from "@/components/ui/Spinner";
+import { RecordGate } from "@/components/patterns/RecordGate";
 import { getProduct } from "@/lib/catalog/catalog.api";
 import { useQuery } from "@/lib/shared/async/useQuery";
 
+import { NOT_FOUND } from "./AdminProductForm.constants";
 import type { AdminProductFormProps } from "./AdminProductForm.types";
 import { ProductFormBody } from "./parts/ProductFormBody";
 
@@ -20,16 +19,10 @@ export const AdminProductForm = ({ productId }: AdminProductFormProps) => {
   const { data: product, isLoading } = useQuery(getProduct, productId ?? 0);
 
   if (productId === undefined) return <ProductFormBody />;
-  if (isLoading) return <Spinner label="Loading product" />;
 
-  if (!product) {
-    return (
-      <EmptyState
-        title="Product not found"
-        action={<Button type="primary" size="medium" text="Back to products" href="/admin/products" typeAttribute="button" />}
-      />
-    );
-  }
-
-  return <ProductFormBody key={product.id} existing={product} />;
+  return (
+    <RecordGate record={product} isLoading={isLoading} loadingLabel="Loading product" notFound={NOT_FOUND}>
+      {(found) => <ProductFormBody key={found.id} existing={found} />}
+    </RecordGate>
+  );
 };

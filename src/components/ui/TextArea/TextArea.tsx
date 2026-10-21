@@ -1,5 +1,6 @@
 import { useId } from "react";
 
+import { FieldMessage, getDescribedBy } from "@/components/ui/FieldMessage";
 import { cx } from "@/lib/shared/classnames/cx";
 
 import type { TextAreaProps } from "./TextArea.types";
@@ -24,13 +25,15 @@ export const TextArea = ({ label, error, hint, className, ...rest }: TextAreaPro
       <label className={styles.field__label} htmlFor={id}>
         {label}
       </label>
-      <textarea id={id} className={cx(styles.field__input, error && styles.invalid)} aria-invalid={Boolean(error)} rows={4} {...rest} />
-      {error && (
-        <p className={styles.field__error} role="alert">
-          {error}
-        </p>
-      )}
-      {!error && hint && <p className={styles.field__hint}>{hint}</p>}
+      <textarea
+        id={id}
+        className={cx(styles.field__input, error && styles.invalid)}
+        aria-invalid={Boolean(error)}
+        aria-describedby={getDescribedBy(id, error, hint)}
+        rows={4}
+        {...rest}
+      />
+      <FieldMessage id={id} error={error} hint={hint} />
     </div>
   );
 };

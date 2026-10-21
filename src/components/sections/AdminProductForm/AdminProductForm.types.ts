@@ -1,6 +1,5 @@
-import type { ProductStatus } from "@/lib/catalog/product.types";
+import type { Product, ProductStatus } from "@/lib/catalog/product.types";
 import type { FieldProps, Errors } from "@/lib/shared/forms/forms.types";
-import type { Brand, Category } from "@/lib/taxonomy/taxonomy.types";
 
 export interface ProductFormValues {
   name: string;
@@ -29,17 +28,28 @@ export interface AdminProductFormProps {
   productId?: number;
 }
 
+export interface ProductFormBodyProps {
+  existing?: Product;
+}
+
+export interface ProductFormHeaderProps {
+  title: string;
+  isSaving: boolean;
+  failure: string;
+}
+
 export interface FieldGroupProps {
   field: (name: keyof ProductFormValues & string) => FieldProps;
   errors: Errors;
 }
 
-export interface BasicsFieldsProps extends FieldGroupProps {
-  brands: Brand[];
-  categories: Category[];
-}
-
 export interface MediaFieldsProps extends FieldGroupProps {
   sizes: string[];
+  onSizesChange: (sizes: string[]) => void;
+}
+
+export interface SizeCheckboxesProps {
+  sizes: string[];
+  error?: string;
   onSizesChange: (sizes: string[]) => void;
 }

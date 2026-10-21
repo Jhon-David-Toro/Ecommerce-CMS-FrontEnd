@@ -1,8 +1,9 @@
+import { FieldGroup, FieldRow } from "@/components/patterns/FieldGroup";
 import { Input } from "@/components/ui/Input";
 import { TextArea } from "@/components/ui/TextArea";
 
 import type { ContentFieldsProps } from "../AdminContent.types";
-import styles from "../AdminContent.module.scss";
+import { HeroPictures } from "./HeroPictures";
 
 /**
  * Content/Hero: headline, text, button, pictures and numbers of the home page hero.
@@ -13,18 +14,14 @@ import styles from "../AdminContent.module.scss";
  * @returns The group of fields.
  */
 export const HeroFields = ({ field, errors }: ContentFieldsProps) => (
-  <fieldset className={styles.group}>
-    <legend className={styles.group__legend}>Home hero</legend>
+  <FieldGroup legend="Home hero">
     <Input label="Headline" error={errors.heroTitle} {...field("heroTitle")} />
     <TextArea label="Paragraph" {...field("heroParagraph")} />
-    <div className={styles.group__row}>
+    <FieldRow>
       <Input label="Button text" {...field("heroCtaText")} />
       <Input label="Button address" error={errors.heroCtaHref} {...field("heroCtaHref")} />
-    </div>
-    <div className={styles.group__row}>
-      <Input label="Desktop picture address" type="url" {...field("heroDesktopImage")} />
-      <Input label="Mobile picture address" type="url" {...field("heroMobileImage")} />
-    </div>
+    </FieldRow>
+    <HeroPictures field={field} errors={errors} />
     <TextArea label="Numbers" hint="One per line as number | label." error={errors.stats} {...field("stats")} />
-  </fieldset>
+  </FieldGroup>
 );

@@ -1,5 +1,6 @@
 import { useId } from "react";
 
+import { FieldMessage, getDescribedBy } from "@/components/ui/FieldMessage";
 import { cx } from "@/lib/shared/classnames/cx";
 
 import type { InputProps } from "./Input.types";
@@ -18,7 +19,6 @@ import styles from "./Input.module.scss";
  */
 export const Input = ({ label, error, hint, className, ...rest }: InputProps) => {
   const id = useId();
-  const describedBy = error ? `${id}-error` : hint ? `${id}-hint` : undefined;
 
   return (
     <div className={cx(styles.field, className)}>
@@ -29,20 +29,10 @@ export const Input = ({ label, error, hint, className, ...rest }: InputProps) =>
         id={id}
         className={cx(styles.field__input, error && styles.invalid)}
         aria-invalid={Boolean(error)}
-        aria-describedby={describedBy}
+        aria-describedby={getDescribedBy(id, error, hint)}
         {...rest}
       />
-      {error ? (
-        <p id={`${id}-error`} className={styles.field__error} role="alert">
-          {error}
-        </p>
-      ) : (
-        hint && (
-          <p id={`${id}-hint`} className={styles.field__hint}>
-            {hint}
-          </p>
-        )
-      )}
+      <FieldMessage id={id} error={error} hint={hint} />
     </div>
   );
 };

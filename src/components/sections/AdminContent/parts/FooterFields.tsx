@@ -1,7 +1,7 @@
+import { FieldGroup } from "@/components/patterns/FieldGroup";
 import { TextArea } from "@/components/ui/TextArea";
 
 import type { ContentFieldsProps } from "../AdminContent.types";
-import styles from "../AdminContent.module.scss";
 
 /**
  * Content/Footer: the sentence under the logo and the link columns.
@@ -12,8 +12,7 @@ import styles from "../AdminContent.module.scss";
  * @returns The group of fields.
  */
 export const FooterFields = ({ field, errors }: ContentFieldsProps) => (
-  <fieldset className={styles.group}>
-    <legend className={styles.group__legend}>Footer</legend>
+  <FieldGroup legend="Footer">
     <TextArea label="Footer tagline" {...field("footerTagline")} />
     <TextArea
       label="Footer columns"
@@ -21,5 +20,5 @@ export const FooterFields = ({ field, errors }: ContentFieldsProps) => (
       error={errors.footerColumns}
       {...field("footerColumns")}
     />
-  </fieldset>
+  </FieldGroup>
 );

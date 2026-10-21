@@ -1,60 +1,22 @@
-'use client';
+import type { FC } from "react";
 
-import { FC } from 'react';
-import { ProductDescriptionProps } from './ProductDescription.types';
-import clsx from 'clsx';
-import styles from './ProductDescription.module.scss';
+import type { ProductDescriptionProps } from "./ProductDescription.types";
+import { buildSections } from "./ProductDescription.utils";
+import { DescriptionSection } from "./parts/DescriptionSection";
+import styles from "./ProductDescription.module.scss";
 
-export const ProductDescription: FC<ProductDescriptionProps> = ({ description }) => {
-  return (
-    <div className={styles.details}>
-      <h2 className={styles.details__title}>Product Description</h2>
-
-      <section className={styles.details__section}>
-        <h3 className={styles.details__section__subtitle}>Overview</h3>
-        <p className={styles.details__section__text}>{description.overview}</p>
-      </section>
-
-      <section className={styles.details__section}>
-        <h3 className={styles.details__section__subtitle}>Key Features</h3>
-        <ul className={styles.details__section__featureList}>
-          {description.features.map((feature, index) => (
-            <li
-              key={index}
-              className={styles.details__section__featureList__featureItem}
-            >
-              {feature}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className={styles.details__section}>
-        <h3 className={styles.details__section__subtitle}>Origin</h3>
-        <p className={styles.details__section__text}>{description.origin}</p>
-      </section>
-
-      <section className={styles.details__section}>
-        <h3 className={styles.details__section__subtitle}>About the Company</h3>
-        <p
-          className={clsx(
-            styles.details__section__text,
-            styles['details__section__text--companyName']
-          )}
-        >
-          {description.company.name}
-        </p>
-        <p className={styles.details__section__text}>
-          {description.company.description}
-        </p>
-      </section>
-
-      <section className={styles.details__section}>
-        <h3 className={styles.details__section__subtitle}>Care Instructions</h3>
-        <p className={styles.details__section__text}>
-          {description.careInstructions}
-        </p>
-      </section>
-    </div>
-  );
-};
+/**
+ * ProductDescription: overview, features, origin, company and care instructions of a product.
+ *
+ * @param props Component props.
+ * @param props.description Description of the product.
+ * @returns The description.
+ */
+export const ProductDescription: FC<ProductDescriptionProps> = ({ description }) => (
+  <div className={styles.details}>
+    <h2 className={styles.details__title}>Product Description</h2>
+    {buildSections(description).map((section) => (
+      <DescriptionSection key={section.title} section={section} />
+    ))}
+  </div>
+);

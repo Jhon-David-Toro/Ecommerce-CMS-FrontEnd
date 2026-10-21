@@ -1,13 +1,29 @@
-'use client';
+"use client";
 
-import { FC, useState } from 'react';
-import { ThumbnailProps } from './Thumbnail.types';
-import { IMAGE_CONFIG } from '@/lib/catalog/imageConfig.constants';
-import clsx from 'clsx';
-import Image from 'next/image';
-import styles from './Thumbnail.module.scss';
+import Image from "next/image";
+import type { FC } from "react";
+
 import { Skeleton } from "@/components/ui/Skeleton";
+import { IMAGE_CONFIG } from "@/lib/catalog/imageConfig.constants";
+import { cx } from "@/lib/shared/classnames/cx";
+import { useImageLoaded } from "@/lib/shared/dom/useImageLoaded";
 
+import type { ThumbnailProps } from "./Thumbnail.types";
+import styles from "./Thumbnail.module.scss";
+
+/**
+ * Thumbnail: small picture that works as a tab to pick the main product image.
+ *
+ * @param props Component props.
+ * @param props.image Picture address.
+ * @param props.isSelected Marks the thumbnail as the selected tab.
+ * @param props.onSelect Called when the thumbnail is chosen.
+ * @param props.alt Alternative text of the picture.
+ * @param props.ariaLabel Accessible name of the tab.
+ * @param props.width Picture width in pixels.
+ * @param props.height Picture height in pixels.
+ * @returns The thumbnail tab.
+ */
 export const Thumbnail: FC<ThumbnailProps> = ({
   image,
   isSelected,
@@ -17,30 +33,19 @@ export const Thumbnail: FC<ThumbnailProps> = ({
   width = IMAGE_CONFIG.THUMBNAIL_WIDTH,
   height = IMAGE_CONFIG.THUMBNAIL_HEIGHT,
 }) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const { isLoaded, onLoad } = useImageLoaded();
 
   return (
     <button
-      className={clsx(styles.thumbnail, {
-        [styles.selected]: isSelected,
-        [styles.loading]: !imageLoaded,
-      })}
+      className={cx(styles.thumbnail, { [styles.selected]: isSelected, [styles.loading]: !isLoaded })}
       onClick={onSelect}
       role="tab"
       aria-selected={isSelected}
       aria-label={ariaLabel}
-      disabled={!imageLoaded}
+      disabled={!isLoaded}
     >
-      {!imageLoaded && <Skeleton />}
-
-      <Image
-        src={image}
-        alt={alt}
-        width={width}
-        height={height}
-        className={styles.thumbnail__image}
-        onLoad={() => setImageLoaded(true)}
-      />
+      {!isLoaded && <Skeleton />}
+      <Image src={image} alt={alt} width={width} height={height} className={styles.thumbnail__image} onLoad={onLoad} />
     </button>
   );
 };

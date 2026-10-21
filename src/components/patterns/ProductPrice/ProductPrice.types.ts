@@ -1,6 +1,6 @@
 export interface ProductPriceProps {
-    price: number;
-    discountPrice?: number;
-    discount?: number;
-    currency?: string;
+  price: number;
+  discountPrice?: number | null;
+  discount?: number;
+  currency?: string;
 }

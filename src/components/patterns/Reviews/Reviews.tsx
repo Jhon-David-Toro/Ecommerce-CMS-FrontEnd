@@ -1,65 +1,44 @@
-'use client';
+"use client";
 
-import { FC, useState } from 'react';
-import { ReviewsProps } from './Reviews.types';
+import { useState } from "react";
+import type { FC } from "react";
+
 import { ReviewCard } from "@/components/patterns/ReviewCard";
-import styles from './Reviews.module.scss';
 import { Button } from "@/components/ui/Button";
-import { Select } from "@/components/ui/Select";
 
-const SORT_OPTIONS = ['Latest', 'Oldest'] as const;
+import { REVIEWS_PAGE_SIZE, SORT_ORDERS } from "./Reviews.constants";
+import type { ReviewsProps } from "./Reviews.types";
+import { sortReviews } from "./Reviews.utils";
+import { ReviewsHeader } from "./parts/ReviewsHeader";
+import styles from "./Reviews.module.scss";
 
+/**
+ * Reviews: sortable list of customer reviews that loads six more at a time.
+ *
+ * @param props Component props.
+ * @param props.review Reviews of the product.
+ * @returns The reviews section.
+ */
 export const Reviews: FC<ReviewsProps> = ({ review }) => {
-  const [sortOrder, setSortOrder] = useState<string>('Latest');
-  const [visibleReviews, setVisibleReviews] = useState(6);
-
-  const sortedReviews = [...review].sort((a, b) => {
-    if (sortOrder === 'Latest') {
-      return new Date(b.date).getTime() - new Date(a.date).getTime();
-    }
-
-    return new Date(a.date).getTime() - new Date(b.date).getTime();
-  });
-
-  const loadMoreReviews = () => {
-    setVisibleReviews(prev => prev + 6);
-  };
+  const [sortOrder, setSortOrder] = useState<string>(SORT_ORDERS.latest);
+  const [visibleReviews, setVisibleReviews] = useState(REVIEWS_PAGE_SIZE);
 
   return (
     <section className={styles.reviews}>
-      <header className={styles.reviews__header}>
-        <h2 className={styles.reviews__header_tally}>
-          All Reviews{' '}
-          <span className={styles.reviews__header_length}>
-            ({review.length})
-          </span>
-        </h2>
-
-        <div className={styles.reviews__controls}>
-          <Select
-            value={sortOrder}
-            options={SORT_OPTIONS}
-            onChange={setSortOrder}
-          />
-
-          <button className={styles.reviews__writeReview}>
-            Write a Review
-          </button>
-        </div>
-      </header>
-
+      <ReviewsHeader total={review.length} sortOrder={sortOrder} onSortChange={setSortOrder} />
       <article className={styles.reviews__list}>
-        {sortedReviews.slice(0, visibleReviews).map(review => (
-          <ReviewCard key={review.id} review={review} />
-        ))}
+        {sortReviews(review, sortOrder)
+          .slice(0, visibleReviews)
+          .map((item) => (
+            <ReviewCard key={item.id} review={item} />
+          ))}
       </article>
-
       {visibleReviews < review.length && (
         <Button
           type="secondary"
           text="Load More Reviews"
           size="medium"
-          onClick={loadMoreReviews}
+          onClick={() => setVisibleReviews((count) => count + REVIEWS_PAGE_SIZE)}
           typeAttribute="button"
         />
       )}

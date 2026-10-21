@@ -1,34 +1,30 @@
-'use client'
+"use client";
 
-import { useEffect, useState, useCallback, FC } from 'react';
-import type { StatsCounterProps } from './StatsCounter.types';
-import styles from './StatsCounter.module.scss';
+import { useEffect, useState } from "react";
+import type { FC } from "react";
 
-export const StatsCounter: FC<StatsCounterProps> = ({ endValue, label, duration = 2000 }) => {
+import { COUNTER_LOCALE, DEFAULT_DURATION_MS } from "./StatsCounter.constants";
+import type { StatsCounterProps } from "./StatsCounter.types";
+import { startCounter } from "./StatsCounter.utils";
+import styles from "./StatsCounter.module.scss";
+
+/**
+ * StatsCounter: number that counts up to its final value, with a label.
+ *
+ * @param props Component props.
+ * @param props.endValue Final value.
+ * @param props.label Text under the number.
+ * @param props.duration Time the count takes, in milliseconds.
+ * @returns The counter.
+ */
+export const StatsCounter: FC<StatsCounterProps> = ({ endValue, label, duration = DEFAULT_DURATION_MS }) => {
   const [count, setCount] = useState(0);
 
-  const incrementValue = useCallback(() => {
-    const increment = Math.ceil(endValue / (duration / 100));
-    let currentValue = 0;
-
-    const interval = setInterval(() => {
-      currentValue += increment;
-      if (currentValue >= endValue) {
-        clearInterval(interval);
-        setCount(endValue);
-      } else {
-        setCount(currentValue);
-      }
-    }, 100);
-
-    return () => clearInterval(interval);
-  }, [endValue, duration]);
-
-  useEffect(() => incrementValue(), [incrementValue]);
+  useEffect(() => startCounter({ endValue, duration, onChange: setCount }), [endValue, duration]);
 
   return (
     <section className={styles.stat}>
-      <h3 className={styles.stat__number}>{count.toLocaleString('en-US')}+</h3>
+      <h3 className={styles.stat__number}>{count.toLocaleString(COUNTER_LOCALE)}+</h3>
       <p className={styles.stat__label}>{label}</p>
     </section>
   );

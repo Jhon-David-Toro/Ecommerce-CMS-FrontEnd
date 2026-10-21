@@ -1,16 +1,21 @@
-'use client'
+"use client";
 
-import { FC, useState } from 'react';
-import { ProductInfoProps } from './ProductInfo.types';
-import { Rating } from "@/components/ui/Rating";
-import { Button } from "@/components/ui/Button";
-import { QuantityControl } from "@/components/ui/QuantityControl";
-import { ProductPrice } from "@/components/patterns/ProductPrice";
-import { SelectColor } from "@/components/ui/SelectColor";
-import { SizeSelector } from "@/components/patterns/SizeSelector";
-import { Divider } from "@/components/ui/Divider";
-import styles from './ProductInfo.module.scss';
+import { useState } from "react";
+import type { FC } from "react";
 
+import { ProductInfoOptions } from "./parts/ProductInfoOptions";
+import { ProductInfoPurchase } from "./parts/ProductInfoPurchase";
+import { ProductInfoSummary } from "./parts/ProductInfoSummary";
+import type { ProductInfoProps } from "./ProductInfo.types";
+import styles from "./ProductInfo.module.scss";
+
+/**
+ * ProductInfo: summary, color and size options and purchase controls of a product.
+ *
+ * @param props Component props.
+ * @param props.product Product to show.
+ * @returns The product information.
+ */
 export const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
   const [selectedColor, setSelectedColor] = useState(product.colors[0].name);
   const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
@@ -18,33 +23,15 @@ export const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
 
   return (
     <article className={styles.product}>
-      <h2 className={styles.product__title}>{product.name}</h2>
-      <Rating rating={product.rating} size="extra-medium" />
-      <ProductPrice price={product.price} discountPrice={product.discountPrice} discount={product.discount} />
-      <p className={styles.product__description}>{product.description.overview}</p>
-
-      <Divider/>
-      <SelectColor
-        colors={product.colors}
+      <ProductInfoSummary product={product} />
+      <ProductInfoOptions
+        product={product}
         selectedColor={selectedColor}
         onColorChange={setSelectedColor}
-      />
-
-      <Divider/>
-      <SizeSelector
-        sizes={product.sizes}
         selectedSize={selectedSize}
         onSizeChange={setSelectedSize}
       />
-
-      <Divider/>
-      <section className={styles.product__addToCart}>
-        <QuantityControl
-          quantity={quantity}
-          setQuantity={setQuantity}
-        />
-        <Button id="add-to-cart" type='primary' text='Add to Cart' size='extra-large' typeAttribute='button' />
-      </section>
+      <ProductInfoPurchase quantity={quantity} setQuantity={setQuantity} />
     </article>
   );
 };

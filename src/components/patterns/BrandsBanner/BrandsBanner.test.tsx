@@ -1,27 +1,17 @@
+import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { render, screen } from '@testing-library/react';
+
+import { BRANDS } from "./BrandsBanner.constants";
 import { BrandsBanner } from "./BrandsBanner";
 
-describe(BrandsBanner.name, () => {
-  it('renders without crashing', () => {
+describe("BrandsBanner", () => {
+  it("shows one logo per brand", () => {
     render(<BrandsBanner />);
-    const banner = screen.getByRole('img', { name: /brand 0/i });
-    expect(banner).toBeInTheDocument();
+    expect(screen.getAllByRole("img")).toHaveLength(BRANDS.length);
   });
 
-  it('renders exactly 5 brand images', () => {
+  it("names every logo after its brand", () => {
     render(<BrandsBanner />);
-    const images = screen.getAllByRole('img');
-    expect(images).toHaveLength(5);
-  });
-
-  it('each image has correct src and alt attributes', () => {
-    render(<BrandsBanner />);
-    const images = screen.getAllByRole('img');
-
-    images.forEach((img, index) => {
-      expect(img).toHaveAttribute('alt', `Brand ${index}`);
-      expect(img).toHaveAttribute('src');
-    });
+    BRANDS.forEach(({ name }) => expect(screen.getByRole("img", { name })).toBeInTheDocument());
   });
 });

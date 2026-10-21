@@ -16,7 +16,7 @@ import { ProductInfo } from "@/components/patterns/ProductInfo";
 import { Reviews } from "@/components/patterns/Reviews";
 import { Tabs } from "@/components/ui/Tabs";
 import { useAnimatedTab } from "./hooks/useAnimatedTab";
-import type { Product } from "@/lib/catalog/productDetails.types";
+import type { ProductDetail } from "@/lib/catalog/productDetails.types";
 import type { Review } from "@/lib/catalog/review.types";
 import { DEFAULT_TAB, PRODUCT_TABS, TAB_LABELS } from "./ProductDetails.constants";
 import styles from "./ProductDetails.module.scss";
@@ -27,7 +27,7 @@ import styles from "./ProductDetails.module.scss";
  * @returns The product page content.
  */
 export const ProductDetails = () => {
-  const product: Product = mockProduct;
+  const product: ProductDetail = mockProduct;
   const reviews = useFetchJson<Review[]>(CATALOG_URLS.reviews);
   const faqs = useFetchJson<FAQ[]>(CATALOG_URLS.faqs);
   const catalog = useFetchJson<Catalog>(CATALOG_URLS.products);

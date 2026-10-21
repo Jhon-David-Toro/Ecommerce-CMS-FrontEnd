@@ -1,7 +1,6 @@
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
 import type { ReactNode } from "react";
 
 import { Banner } from "@/components/sections/Banner";
@@ -9,10 +8,8 @@ import { Footer } from "@/components/sections/Footer";
 import { Navbar } from "@/components/sections/Navbar";
 
 import { SITE_DESCRIPTION, SITE_TITLE } from "./layout.constants";
+import { poppins } from "./layout.fonts";
 import "../styles.scss";
-
-// next/font only accepts literal options, so they cannot live in a constants file
-const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
 export const metadata: Metadata = {
   title: SITE_TITLE,

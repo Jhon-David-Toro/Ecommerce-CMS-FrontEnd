@@ -1,4 +1,4 @@
-import { REVENUE_STATUSES, STATUS_TONES } from "./order.constants";
+import { CANCELLABLE_STATUSES, ORDER_NEXT_STEP, REVENUE_STATUSES, STATUS_TONES } from "./order.constants";
 import type { Order, OrderItem, OrderStatus, StatusTone } from "./order.types";
 
 /**
@@ -44,6 +44,22 @@ export const getRevenue = (orders: Order[]) =>
  * @returns The tone of the badge.
  */
 export const getStatusTone = (status: OrderStatus): StatusTone => STATUS_TONES[status];
+
+/**
+ * Finds the step that moves an order forward.
+ *
+ * @param status Current status of the order.
+ * @returns The next status with the text of the action, or undefined for an order that is finished.
+ */
+export const getNextStep = (status: OrderStatus) => ORDER_NEXT_STEP[status];
+
+/**
+ * Tells whether an order can still be cancelled.
+ *
+ * @param status Current status of the order.
+ * @returns True until the order is delivered or cancelled.
+ */
+export const canCancel = (status: OrderStatus) => CANCELLABLE_STATUSES.includes(status);
 
 /**
  * Works out the percentage that a discount represents of a subtotal.

@@ -3,15 +3,15 @@
 import { useParams } from "next/navigation";
 
 import { RecordGate } from "@/components/patterns/RecordGate";
+import type { OrderStatus } from "@/lib/orders/order.types";
 import { getOrder, setOrderStatus } from "@/lib/orders/orders.api";
 import { useQuery } from "@/lib/shared/async/useQuery";
 
 import { NOT_FOUND } from "./AdminOrder.constants";
-import { toOrderStatus } from "./AdminOrder.utils";
 import { OrderContent } from "./parts/OrderContent";
 
 /**
- * AdminOrder: details of one order with a control to move it to another status.
+ * AdminOrder: details of one order with the buttons that confirm payment, ship, deliver or cancel it.
  *
  * @returns The order page content.
  */
@@ -20,13 +20,13 @@ export const AdminOrder = () => {
   const { data: order, isLoading, reload } = useQuery(getOrder, Number(params.id));
 
   /**
-   * Saves the status picked in the select and refreshes the order.
+   * Saves the new status and refreshes the order.
    *
    * @param id Order id.
-   * @param value Status value picked.
+   * @param status Status to move to.
    */
-  const handleStatusChange = async (id: number, value: string) => {
-    await setOrderStatus(id, toOrderStatus(value));
+  const handleStatusChange = async (id: number, status: OrderStatus) => {
+    await setOrderStatus(id, status);
     reload();
   };
 

@@ -11,6 +11,7 @@ import { useTableControls } from "@/lib/shared/table/useTableControls";
 
 import { NO_FILTERS, NO_ROWS, PAGE_SIZE, STATUS_FILTERS } from "./AdminOrders.constants";
 import { filterByStatus, matchesOrder } from "./AdminOrders.utils";
+import { useOrderStatusChange } from "./hooks/useOrderStatusChange";
 import { useOrderTable } from "./hooks/useOrderTable";
 
 /**
@@ -19,10 +20,10 @@ import { useOrderTable } from "./hooks/useOrderTable";
  * @returns The orders page content.
  */
 export const AdminOrders = () => {
-  const { data, isLoading } = useQuery(listOrders, NO_FILTERS);
+  const { data, isLoading, reload } = useQuery(listOrders, NO_FILTERS);
   const [status, setStatus] = useState("");
   const controls = useTableControls(filterByStatus(data ?? NO_ROWS, status), { pageSize: PAGE_SIZE, matches: matchesOrder });
-  const table = useOrderTable();
+  const table = useOrderTable(useOrderStatusChange(reload));
 
   if (isLoading) return <Spinner label="Loading orders" />;
 

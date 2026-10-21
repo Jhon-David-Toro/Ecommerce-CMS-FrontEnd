@@ -7,7 +7,6 @@ import { getOrder, orderRepository } from "@/lib/orders/orders.api";
 import { buildOrder } from "@/test/factories";
 
 import { AdminOrder } from "./AdminOrder";
-import { toOrderStatus } from "./AdminOrder.utils";
 
 describe("AdminOrder", () => {
   beforeEach(() => {
@@ -21,22 +20,24 @@ describe("AdminOrder", () => {
     expect(screen.getByRole("link", { name: "Back to orders" })).toHaveAttribute("href", "/admin/orders");
   });
 
-  it("shows the order and changes its status", async () => {
+  it("walks the order from pending to shipped with the buttons", async () => {
     const { id, ...order } = buildOrder();
     void id;
     await orderRepository.create(order);
     render(<AdminOrder />);
-    const select = await screen.findByLabelText("Order status");
-    expect(select).toHaveValue("pending");
-    await userEvent.selectOptions(select, "shipped");
-    expect(await screen.findByDisplayValue("Shipped")).toBeInTheDocument();
+    await userEvent.click(await screen.findByRole("button", { name: "Confirm payment" }));
+    await userEvent.click(await screen.findByRole("button", { name: "Mark as shipped" }));
+    expect(await screen.findByRole("button", { name: "Mark as delivered" })).toBeInTheDocument();
     expect((await getOrder(1))?.status).toBe("shipped");
   });
-});
 
-describe("toOrderStatus", () => {
-  it("returns known statuses and falls back to pending", () => {
-    expect(toOrderStatus("paid")).toBe("paid");
-    expect(toOrderStatus("nope")).toBe("pending");
+  it("cancels an order", async () => {
+    const { id, ...order } = buildOrder();
+    void id;
+    await orderRepository.create(order);
+    render(<AdminOrder />);
+    await userEvent.click(await screen.findByRole("button", { name: "Cancel order" }));
+    expect((await getOrder(1))?.status).toBe("cancelled");
+    expect(await screen.findByText("Cancelled")).toBeInTheDocument();
   });
 });

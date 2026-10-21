@@ -12,6 +12,7 @@ export const CATEGORY_CONFIG: TaxonomyConfig<Category> = {
   deleteNote: "Products keep their category name.",
   imageLabel: "Image address",
   withDescription: true,
+  getImage: (category) => category.image,
   load: listCategories,
   repository: categoryRepository,
   emptyValues: buildEmptyValues(),

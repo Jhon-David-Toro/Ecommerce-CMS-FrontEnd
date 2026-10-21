@@ -18,13 +18,18 @@
     gap: utils.pxToRem(20px);
     align-items: start;
 
+    > aside {
+      position: sticky;
+      top: utils.pxToRem(16px);
+    }
+
     @include utils.media-ltlg() {
       grid-template-columns: 1fr;
     }
   }
 
   &__items {
-    padding: utils.pxToRem(8px) utils.pxToRem(24px);
+    padding: utils.pxToRem(4px) utils.pxToRem(24px);
     list-style: none;
     border: utils.pxToRem(1px) solid var(--color-border);
     border-radius: var(--radius-card);

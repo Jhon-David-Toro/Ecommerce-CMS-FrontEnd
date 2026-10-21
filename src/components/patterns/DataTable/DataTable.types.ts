@@ -4,7 +4,7 @@ export interface Column<T> {
   key: string;
   header: string;
   render: (row: T) => ReactNode;
-  align?: "left" | "right";
+  align?: "left" | "center" | "right";
 }
 
 export interface DataTableProps<T> {

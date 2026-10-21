@@ -1,11 +1,11 @@
 "use client";
 
-import { XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useState } from "react";
 
 import { useSiteContent } from "@/lib/content/useSiteContent";
 
+import { BannerClose } from "./parts/BannerClose";
 import styles from "./Banner.module.scss";
 
 /**
@@ -27,9 +27,7 @@ export const Banner = () => {
           {banner.linkText}
         </Link>
       </p>
-      <button type="button" className={styles.banner__close} aria-label="Close banner" onClick={() => setIsClosed(true)}>
-        <XMarkIcon />
-      </button>
+      <BannerClose onClose={() => setIsClosed(true)} />
     </header>
   );
 };

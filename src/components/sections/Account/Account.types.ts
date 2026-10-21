@@ -1,6 +1,6 @@
 import type { PublicUser } from "@/lib/auth/auth.types";
 import type { Order } from "@/lib/orders/order.types";
-import type { Errors } from "@/lib/shared/forms/forms.types";
+import type { Errors, FieldProps } from "@/lib/shared/forms/forms.types";
 
 export interface AccountProfileProps {
   user: PublicUser;
@@ -38,4 +38,13 @@ export interface AccountFormOptions<V> {
   submit: (values: V) => Promise<void>;
   success: string;
   resetOnSuccess?: boolean;
+}
+
+export interface AccountNoticeProps {
+  notice: { message: string; failed: boolean };
+}
+
+export interface PasswordFieldsProps {
+  field: (name: keyof PasswordValues & string) => FieldProps;
+  errors: Errors;
 }

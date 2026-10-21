@@ -1,6 +1,6 @@
-import type { Order } from "@/lib/orders/order.types";
+import type { Order, OrderStatus } from "@/lib/orders/order.types";
 
 export interface OrderContentProps {
   order: Order;
-  onStatusChange: (id: number, value: string) => void;
+  onStatusChange: (id: number, status: OrderStatus) => void;
 }

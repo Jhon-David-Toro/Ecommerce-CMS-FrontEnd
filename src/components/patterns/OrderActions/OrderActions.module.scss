@@ -1,0 +1,56 @@
+@use "src/styles/utils" as utils;
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: utils.pxToRem(8px);
+  justify-content: flex-end;
+}
+
+.button {
+  display: inline-flex;
+  gap: utils.pxToRem(8px);
+  align-items: center;
+  justify-content: center;
+  padding: utils.pxToRem(10px) utils.pxToRem(16px);
+  font: inherit;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  border: utils.pxToRem(1px) solid transparent;
+  border-radius: 999px;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+
+  &__icon {
+    width: utils.pxToRem(20px);
+    height: utils.pxToRem(20px);
+  }
+
+  &_primary {
+    color: white;
+    background-color: black;
+
+    &:hover {
+      background-color: #333;
+    }
+  }
+
+  &_danger {
+    color: var(--color-danger);
+    background-color: white;
+    border-color: var(--color-danger);
+
+    &:hover {
+      background-color: rgba(255, 51, 51, 0.1);
+    }
+  }
+
+  &_compact {
+    width: utils.pxToRem(34px);
+    height: utils.pxToRem(34px);
+    padding: 0;
+    border-radius: utils.pxToRem(8px);
+  }
+}

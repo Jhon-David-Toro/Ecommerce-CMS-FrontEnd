@@ -1,9 +1,10 @@
-import type { ReactNode } from "react";
+import type { ComponentType, ReactNode } from "react";
 
 export interface AdminNavItem {
   label: string;
   href: string;
   exact?: boolean;
+  icon: ComponentType<{ className?: string }>;
 }
 
 export interface AdminShellProps {

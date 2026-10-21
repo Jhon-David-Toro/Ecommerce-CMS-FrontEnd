@@ -20,6 +20,7 @@ export const AdminNavLink = ({ item, pathname }: AdminNavLinkProps) => {
   return (
     <li>
       <Link href={item.href} className={cx(styles.shell__link, active && styles.active)} aria-current={active ? "page" : undefined}>
+        <item.icon className={styles.shell__icon} />
         {item.label}
       </Link>
     </li>

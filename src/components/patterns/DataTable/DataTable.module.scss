@@ -2,6 +2,7 @@
 
 .wrapper {
   overflow-x: auto;
+  background-color: white;
   border: utils.pxToRem(1px) solid var(--color-border);
   border-radius: var(--radius-card);
 }
@@ -32,6 +33,14 @@
 
   [data-align="right"] {
     text-align: right;
+  }
+
+  [data-align="center"] {
+    text-align: center;
+  }
+
+  tbody tr:hover td {
+    background-color: #fafafa;
   }
 
   a {

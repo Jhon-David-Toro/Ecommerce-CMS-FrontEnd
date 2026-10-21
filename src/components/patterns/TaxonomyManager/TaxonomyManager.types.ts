@@ -15,6 +15,7 @@ export interface TaxonomyConfig<T extends TaxonomyRecord> {
   deleteNote: string;
   imageLabel: string;
   withDescription?: boolean;
+  getImage: (record: T) => string;
   load: () => Promise<T[]>;
   repository: Repository<T>;
   emptyValues: TaxonomyValues;
@@ -49,6 +50,7 @@ export interface TaxonomyDeleteDialogProps<T extends TaxonomyRecord> {
 }
 
 export interface TaxonomyColumnHandlers<T> {
+  getImage: (record: T) => string;
   onEdit: (record: T) => void;
   onDelete: (record: T) => void;
 }

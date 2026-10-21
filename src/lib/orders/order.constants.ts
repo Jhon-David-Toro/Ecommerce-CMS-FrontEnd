@@ -30,3 +30,11 @@ export const STATUS_TONES = {
 } as const;
 
 export const ORDER_STATUS_FLOW: OrderStatus[] = ["pending", "paid", "shipped", "delivered", "cancelled"];
+
+export const ORDER_NEXT_STEP: Partial<Record<OrderStatus, { to: OrderStatus; label: string }>> = {
+  pending: { to: "paid", label: "Confirm payment" },
+  paid: { to: "shipped", label: "Mark as shipped" },
+  shipped: { to: "delivered", label: "Mark as delivered" },
+};
+
+export const CANCELLABLE_STATUSES: OrderStatus[] = ["pending", "paid", "shipped"];

@@ -22,7 +22,7 @@ import { TaxonomyHeader } from "./parts/TaxonomyHeader";
 export const TaxonomyManager = <T extends TaxonomyRecord>({ config }: TaxonomyManagerProps<T>) => {
   const { data, isLoading, reload } = useQuery(config.load, NO_ARGS);
   const editor = useRecordEditor({ repository: config.repository, toInput: config.toInput, reload });
-  const columns = useTaxonomyColumns({ onEdit: editor.startEdit, onDelete: editor.askDelete });
+  const columns = useTaxonomyColumns({ getImage: config.getImage, onEdit: editor.startEdit, onDelete: editor.askDelete });
 
   if (isLoading) return <Spinner label={`Loading ${config.title.toLowerCase()}`} />;
 

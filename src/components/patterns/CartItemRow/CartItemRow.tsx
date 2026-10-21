@@ -26,8 +26,8 @@ export const CartItemRow: FC<CartItemRowProps> = ({ item, onQuantityChange, onRe
     <li className={styles.row}>
       <Image src={item.image} alt={item.name} {...CART_IMAGE_SIZE} className={styles.row__image} />
       <CartItemBody item={item} />
-      <RemoveButton name={item.name} itemKey={key} onRemove={onRemove} />
-      <div className={styles.row__quantity}>
+      <div className={styles.row__actions}>
+        <RemoveButton name={item.name} itemKey={key} onRemove={onRemove} />
         <QuantityControl quantity={item.quantity} onQuantityChange={(quantity) => onQuantityChange(key, quantity)} />
       </div>
     </li>

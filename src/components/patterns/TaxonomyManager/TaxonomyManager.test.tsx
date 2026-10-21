@@ -20,6 +20,7 @@ const config: TaxonomyConfig<Tag> = {
   singular: "tag",
   deleteNote: "Products keep their tags.",
   imageLabel: "Picture address",
+  getImage: (tag) => tag.picture,
   load: () => repository.list(),
   repository,
   emptyValues: buildEmptyValues(),

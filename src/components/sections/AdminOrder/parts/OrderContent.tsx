@@ -1,12 +1,12 @@
+import { OrderActions } from "@/components/patterns/OrderActions";
 import { OrderDetails } from "@/components/patterns/OrderDetails";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
-import { SelectInput } from "@/components/ui/SelectInput";
 
-import { STATUS_OPTIONS } from "../AdminOrder.constants";
+import { ORDER_TRAIL_ROOT } from "../AdminOrder.constants";
 import type { OrderContentProps } from "../AdminOrder.types";
 
 /**
- * AdminOrder/Content: breadcrumb, details of the order and the control that changes its status.
+ * AdminOrder/Content: breadcrumb, details of the order and the buttons that move it along.
  *
  * @param props Component props.
  * @param props.order Order to show.
@@ -15,14 +15,9 @@ import type { OrderContentProps } from "../AdminOrder.types";
  */
 export const OrderContent = ({ order, onStatusChange }: OrderContentProps) => (
   <section>
-    <Breadcrumb items={[{ label: "Orders", href: "/admin/orders" }, { label: order.number }]} />
+    <Breadcrumb items={[ORDER_TRAIL_ROOT, { label: order.number }]} />
     <OrderDetails order={order}>
-      <SelectInput
-        label="Order status"
-        options={STATUS_OPTIONS}
-        value={order.status}
-        onChange={(event) => onStatusChange(order.id, event.target.value)}
-      />
+      <OrderActions order={order} onChange={onStatusChange} />
     </OrderDetails>
   </section>
 );

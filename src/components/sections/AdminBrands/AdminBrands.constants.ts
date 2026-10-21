@@ -11,6 +11,7 @@ export const BRAND_CONFIG: TaxonomyConfig<Brand> = {
   singular: "brand",
   deleteNote: "Products keep their brand name.",
   imageLabel: "Logo address",
+  getImage: (brand) => brand.logo,
   load: listBrands,
   repository: brandRepository,
   emptyValues: buildEmptyValues(),

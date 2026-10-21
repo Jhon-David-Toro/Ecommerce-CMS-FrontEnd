@@ -56,12 +56,12 @@ describe("AdminShell", () => {
 
 describe("isActiveLink", () => {
   it("matches the dashboard only exactly", () => {
-    expect(isActiveLink("/admin", { label: "D", href: "/admin", exact: true })).toBe(true);
-    expect(isActiveLink("/admin/orders", { label: "D", href: "/admin", exact: true })).toBe(false);
+    expect(isActiveLink("/admin", { href: "/admin", exact: true })).toBe(true);
+    expect(isActiveLink("/admin/orders", { href: "/admin", exact: true })).toBe(false);
   });
 
   it("matches nested paths of a section", () => {
-    expect(isActiveLink("/admin/orders/3", { label: "O", href: "/admin/orders" })).toBe(true);
-    expect(isActiveLink("/admin/ordersX", { label: "O", href: "/admin/orders" })).toBe(false);
+    expect(isActiveLink("/admin/orders/3", { href: "/admin/orders" })).toBe(true);
+    expect(isActiveLink("/admin/ordersX", { href: "/admin/orders" })).toBe(false);
   });
 });

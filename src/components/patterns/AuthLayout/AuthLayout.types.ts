@@ -6,12 +6,15 @@ export interface AuthLayoutForm {
   handleSubmit: (event: SubmitEvent<HTMLFormElement>) => void;
 }
 
-export interface AuthLayoutProps {
-  title: string;
-  subtitle: string;
+export interface AuthFormProps {
   form: AuthLayoutForm;
   submitLabel: string;
   pendingLabel: string;
-  footer: ReactNode;
   children: ReactNode;
+}
+
+export interface AuthLayoutProps extends AuthFormProps {
+  title: string;
+  subtitle: string;
+  footer: ReactNode;
 }

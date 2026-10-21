@@ -1,0 +1,14 @@
+@use "src/styles/utils" as utils;
+
+.thumb {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: utils.pxToRem(44px);
+  height: utils.pxToRem(44px);
+  font-weight: 800;
+  color: var(--color-muted);
+  object-fit: cover;
+  background-color: var(--color-surface);
+  border-radius: utils.pxToRem(10px);
+}

@@ -3,9 +3,9 @@
 .row {
   position: relative;
   display: grid;
-  grid-template-columns: utils.pxToRem(100px) 1fr auto;
+  grid-template-columns: utils.pxToRem(124px) 1fr auto;
   gap: utils.pxToRem(16px);
-  padding: utils.pxToRem(16px) 0;
+  padding: utils.pxToRem(20px) 0;
   border-bottom: utils.pxToRem(1px) solid var(--color-border);
 
   &:last-child {
@@ -13,8 +13,8 @@
   }
 
   &__image {
-    width: utils.pxToRem(100px);
-    height: utils.pxToRem(100px);
+    width: utils.pxToRem(124px);
+    height: utils.pxToRem(124px);
     object-fit: cover;
     background-color: var(--color-surface);
     border-radius: var(--radius-field);
@@ -45,7 +45,6 @@
   }
 
   &__remove {
-    align-self: start;
     padding: 0;
     color: var(--color-danger);
     cursor: pointer;
@@ -58,9 +57,10 @@
     height: utils.pxToRem(22px);
   }
 
-  &__quantity {
-    grid-column: 3;
-    grid-row: 1;
-    align-self: end;
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
   }
 }

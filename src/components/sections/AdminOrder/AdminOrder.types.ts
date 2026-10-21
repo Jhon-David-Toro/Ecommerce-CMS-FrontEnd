@@ -4,3 +4,7 @@ export interface OrderContentProps {
   order: Order;
   onStatusChange: (id: number, status: OrderStatus) => void;
 }
+
+export interface OrderProgressProps {
+  status: OrderStatus;
+}

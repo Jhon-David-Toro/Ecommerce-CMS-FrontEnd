@@ -2,6 +2,8 @@ export type StepState = "done" | "active" | "todo";
 
 export interface CheckoutStepsProps {
   current: number;
+  labels?: string[];
+  label?: string;
 }
 
 export interface StepItemProps {

@@ -7,6 +7,7 @@ import { getOrder, orderRepository } from "@/lib/orders/orders.api";
 import { buildOrder } from "@/test/factories";
 
 import { AdminOrder } from "./AdminOrder";
+import { getProgressStage, hasActions } from "./AdminOrder.utils";
 
 describe("AdminOrder", () => {
   beforeEach(() => {
@@ -39,5 +40,20 @@ describe("AdminOrder", () => {
     await userEvent.click(await screen.findByRole("button", { name: "Cancel order" }));
     expect((await getOrder(1))?.status).toBe("cancelled");
     expect(await screen.findByText("Cancelled")).toBeInTheDocument();
+  });
+});
+
+describe("AdminOrder utils", () => {
+  it("places an order on the progress line", () => {
+    expect(getProgressStage("pending")).toBe(1);
+    expect(getProgressStage("shipped")).toBe(3);
+    expect(getProgressStage("delivered")).toBe(5);
+    expect(getProgressStage("cancelled")).toBe(0);
+  });
+
+  it("tells when an order has actions left", () => {
+    expect(hasActions("paid")).toBe(true);
+    expect(hasActions("delivered")).toBe(false);
+    expect(hasActions("cancelled")).toBe(false);
   });
 });

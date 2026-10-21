@@ -47,6 +47,25 @@
     }
   }
 
+  &_inverted#{&}_primary {
+    color: black;
+    background-color: white;
+
+    &:hover {
+      background-color: #e6e6e6;
+    }
+  }
+
+  &_inverted#{&}_danger {
+    color: white;
+    background-color: transparent;
+    border-color: rgba(255, 255, 255, 0.5);
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+
   &_compact {
     padding: utils.pxToRem(7px) utils.pxToRem(14px);
     font-size: utils.pxToRem(13px);

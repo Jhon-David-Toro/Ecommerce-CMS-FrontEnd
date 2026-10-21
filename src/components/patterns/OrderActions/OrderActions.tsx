@@ -13,9 +13,10 @@ import styles from "./OrderActions.module.scss";
  * @param props.order Order to act on.
  * @param props.onChange Called with the order id and the status to move to.
  * @param props.compact Shows text-only buttons, for table rows.
+ * @param props.inverted Draws the buttons for a dark background.
  * @returns The buttons, or nothing for an order that is finished.
  */
-export const OrderActions: FC<OrderActionsProps> = ({ order, onChange, compact = false }) => (
+export const OrderActions: FC<OrderActionsProps> = ({ order, onChange, compact = false, inverted = false }) => (
   <div className={styles.actions}>
     {getActions(order.status, CANCEL_LABEL).map((action) => (
       <OrderActionButton
@@ -24,6 +25,7 @@ export const OrderActions: FC<OrderActionsProps> = ({ order, onChange, compact =
         icon={STATUS_ICONS[action.to]}
         tone={action.to === "cancelled" ? "danger" : "primary"}
         compact={compact}
+        inverted={inverted}
         onClick={() => onChange(order.id, action.to)}
       />
     ))}

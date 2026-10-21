@@ -1,8 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { calculateLensPosition, calculateZoomedImageTranslate } from './MainImage.utils';
-import { IMAGE_CONFIG } from '@/lib/catalog/imageConfig.constants';
 
-describe('calculateLensPosition', () => {
+import { IMAGE_CONFIG } from "@/lib/catalog/imageConfig.constants";
+
+import { calculateLensPosition, calculateZoomedImageTranslate } from "./MainImage.utils";
+
+describe("calculateLensPosition", () => {
   const rect = {
     top: 0,
     left: 0,
@@ -10,12 +12,12 @@ describe('calculateLensPosition', () => {
     height: 300,
   };
 
-  it('should return centered lens position when mouse is well within bounds', () => {
+  it("should return centered lens position when mouse is well within bounds", () => {
     const result = calculateLensPosition(200, 150, rect);
     expect(result).toEqual({ x: 200, y: 150 });
   });
 
-  it('should clamp lens position to minimum edges', () => {
+  it("should clamp lens position to minimum edges", () => {
     const result = calculateLensPosition(10, 10, rect);
     expect(result).toEqual({
       x: IMAGE_CONFIG.LENS_SIZE / 2,
@@ -23,7 +25,7 @@ describe('calculateLensPosition', () => {
     });
   });
 
-  it('should clamp lens position to maximum edges', () => {
+  it("should clamp lens position to maximum edges", () => {
     const result = calculateLensPosition(390, 290, rect);
     expect(result).toEqual({
       x: rect.width - IMAGE_CONFIG.LENS_SIZE / 2,
@@ -32,11 +34,11 @@ describe('calculateLensPosition', () => {
   });
 });
 
-describe('calculateZoomedImageTranslate', () => {
+describe("calculateZoomedImageTranslate", () => {
   const width = 400;
   const height = 300;
 
-  it('should calculate correct translate values within bounds', () => {
+  it("should calculate correct translate values within bounds", () => {
     const lensPosition = { x: 150, y: 100 };
     const result = calculateZoomedImageTranslate(lensPosition, width, height);
 
@@ -46,14 +48,14 @@ describe('calculateZoomedImageTranslate', () => {
     expect(result).toEqual({ x: expectedX, y: expectedY });
   });
 
-  it('should clamp translateX to the maximum value', () => {
+  it("should clamp translateX to the maximum value", () => {
     const lensPosition = { x: width, y: height / 2 };
     const result = calculateZoomedImageTranslate(lensPosition, width, height);
 
     expect(result.x).toBeLessThanOrEqual(width * IMAGE_CONFIG.ZOOM_FACTOR - width);
   });
 
-  it('should clamp translateY to the maximum value', () => {
+  it("should clamp translateY to the maximum value", () => {
     const lensPosition = { x: width / 2, y: height };
     const result = calculateZoomedImageTranslate(lensPosition, width, height);
 

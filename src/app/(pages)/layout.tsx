@@ -1,40 +1,55 @@
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import { SpeedInsights } from "@vercel/speed-insights/next"
-import { Analytics } from "@vercel/analytics/react"
-import { Navbar } from "@/components/sections/Navbar";
-import { Footer } from "@/components/sections/Footer";
-import { Banner } from "@/components/sections/Banner";
-import "@/app/styles.scss";
+import type { ReactNode } from "react";
 
+import { Banner } from "@/components/sections/Banner";
+import { Footer } from "@/components/sections/Footer";
+import { Navbar } from "@/components/sections/Navbar";
+
+import { SITE_DESCRIPTION, SITE_TITLE } from "./layout.constants";
+import "../styles.scss";
+
+// next/font only accepts literal options, so they cannot live in a constants file
 const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
 export const metadata: Metadata = {
-  title: "Labs Develop",
-  description: "Labs Develop",
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
 };
 
-function LayoutBody({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <Banner />
-      <Navbar />
-      <main>{children}</main>
-      <Footer />
-      <SpeedInsights />
-      <Analytics />
-    </>
-  );
-}
+/**
+ * Page chrome: promotion banner, navigation, main content, footer and analytics.
+ *
+ * @param props Component props.
+ * @param props.children Page content.
+ * @returns The page body.
+ */
+export const LayoutBody = ({ children }: { children: ReactNode }) => (
+  <>
+    <Banner />
+    <Navbar />
+    <main>{children}</main>
+    <Footer />
+    <SpeedInsights />
+    <Analytics />
+  </>
+);
 
-export default function RootLayout({children}: Readonly<{children: React.ReactNode;}>) {
+/**
+ * Root layout of the site.
+ *
+ * @param props Component props.
+ * @param props.children Page content.
+ * @returns The HTML document.
+ */
+export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en">
       <body className={poppins.className}>
         <LayoutBody>{children}</LayoutBody>
       </body>
-    </html> 
+    </html>
   );
 }
-
-export { LayoutBody }; 

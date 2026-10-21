@@ -6,9 +6,9 @@ import type { FC } from "react";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { useImageLoaded } from "@/lib/shared/dom/useImageLoaded";
 
-import { useImageZoom } from "./hooks/useImageZoom";
 import type { MainImageProps } from "./MainImage.types";
 import { getImageSize } from "./MainImage.utils";
+import { useImageZoom } from "./hooks/useImageZoom";
 import { MainImageZoom } from "./parts/MainImageZoom";
 import styles from "./MainImage.module.scss";
 

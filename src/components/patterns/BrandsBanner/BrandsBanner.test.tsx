@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
-import { BRANDS } from "./BrandsBanner.constants";
 import { BrandsBanner } from "./BrandsBanner";
+import { BRANDS } from "./BrandsBanner.constants";
 
 describe("BrandsBanner", () => {
   it("shows one logo per brand", () => {

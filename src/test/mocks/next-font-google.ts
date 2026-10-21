@@ -1,3 +1,3 @@
 export const Poppins = () => ({
-    className: 'mocked-poppins-font',
+  className: "mocked-poppins-font",
 });

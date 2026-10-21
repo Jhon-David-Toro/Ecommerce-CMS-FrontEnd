@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 
-import productsData from "../../../../../public/data/all-products.json";
 import { useFilterStore } from "@/lib/catalog/filters/filtersStore";
 import type { Product } from "@/lib/catalog/product.types";
 
+import productsData from "../../../../../public/data/all-products.json";
 import { filterProducts } from "../Products.utils";
 
 /**

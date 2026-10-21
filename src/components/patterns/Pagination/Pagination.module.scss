@@ -60,7 +60,7 @@
     }
   }
 
-  // Responsive para pantallas pequeñas (móviles)
+  // Responsive rules for small screens (phones)
   @media (max-width: utils.pxToRem(480px)) {
     gap: utils.pxToRem(8px);
     margin-top: utils.pxToRem(16px);
@@ -72,10 +72,10 @@
       button {
         padding: utils.pxToRem(4px) utils.pxToRem(8px);
         font-size: utils.pxToRem(12px);
-        min-width: utils.pxToRem(28px); // Evita que los botones sean demasiado pequeños
+        min-width: utils.pxToRem(28px); // Keeps the buttons from getting too small
       }
 
-      // Opcional: Oculta los puntos suspensivos en móviles
+      // Optional: hides the ellipsis on phones
       span.ellipsis {
         display: none;
       }

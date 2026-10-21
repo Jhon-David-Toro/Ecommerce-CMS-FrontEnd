@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 
 import type { Review } from "@/lib/catalog/review.types";
+
 import { Reviews } from "./Reviews";
 
 const reviews: Review[] = [

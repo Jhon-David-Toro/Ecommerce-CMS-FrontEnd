@@ -1,13 +1,12 @@
 "use client";
 
+import { FeaturedProducts } from "@/components/sections/FeaturedProducts";
+import { HappyCustomers } from "@/components/sections/HappyCustomers";
+import { Hero } from "@/components/sections/Hero";
+import { HomeCategories } from "@/components/sections/HomeCategories";
 import { CATALOG_URLS } from "@/lib/catalog/catalog.constants";
 import type { Catalog } from "@/lib/catalog/catalog.types";
 import { useFetchJson } from "@/lib/shared/http/useFetchJson";
-
-import { HappyCustomers } from "@/components/sections/HappyCustomers";
-import { HomeCategories } from "@/components/sections/HomeCategories";
-import { FeaturedProducts } from "@/components/sections/FeaturedProducts";
-import { Hero } from "@/components/sections/Hero";
 
 /**
  * Home: hero, product highlights, categories and customer reviews.

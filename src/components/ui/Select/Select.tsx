@@ -1,8 +1,8 @@
 "use client";
 
+import type { SelectProps } from "./Select.types";
 import { useSelect } from "./hooks/useSelect";
 import { SelectListbox } from "./parts/SelectListbox";
-import type { SelectProps } from "./Select.types";
 import styles from "./Select.module.scss";
 
 /**

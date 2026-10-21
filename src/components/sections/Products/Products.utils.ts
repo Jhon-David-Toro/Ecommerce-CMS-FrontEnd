@@ -15,11 +15,26 @@ export const matchesSelection = (selected: string[], value?: string) =>
   selected.length === 0 || (value !== undefined && selected.includes(value));
 
 export const filterCreators: Record<keyof Omit<FilterCriteria, "sortBy">, FilterCreator> = {
-  category: ({ category }) => (product) => matchesSelection(category, product.category),
-  priceRange: ({ priceRange }) => (product) => product.price >= priceRange[0] && product.price <= priceRange[1],
-  colors: ({ colors }) => (product) => matchesSelection(colors, product.color),
-  sizes: ({ sizes }) => (product) => matchesSelection(sizes, product.size),
-  dressStyles: ({ dressStyles }) => (product) => matchesSelection(dressStyles, product.dressStyle),
+  category:
+    ({ category }) =>
+    (product) =>
+      matchesSelection(category, product.category),
+  priceRange:
+    ({ priceRange }) =>
+    (product) =>
+      product.price >= priceRange[0] && product.price <= priceRange[1],
+  colors:
+    ({ colors }) =>
+    (product) =>
+      matchesSelection(colors, product.color),
+  sizes:
+    ({ sizes }) =>
+    (product) =>
+      matchesSelection(sizes, product.size),
+  dressStyles:
+    ({ dressStyles }) =>
+    (product) =>
+      matchesSelection(dressStyles, product.dressStyle),
 };
 
 /**

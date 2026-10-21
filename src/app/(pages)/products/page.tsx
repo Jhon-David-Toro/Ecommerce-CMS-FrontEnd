@@ -1,11 +1,10 @@
 import { Products } from "@/components/sections/Products";
 
-const ProductsPage = () => {
-  return (
-    <>
-      <Products/>
-    </>
-  )
-}
+/**
+ * Products page.
+ *
+ * @returns The products listing.
+ */
+const ProductsPage = () => <Products />;
 
 export default ProductsPage;

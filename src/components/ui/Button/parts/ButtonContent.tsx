@@ -1,7 +1,7 @@
 import { ICON_POSITIONS } from "../Button.constants";
 import type { ButtonContentProps } from "../Button.types";
-import styles from "../Button.module.scss";
 import { ButtonIcon } from "./ButtonIcon";
+import styles from "../Button.module.scss";
 
 /**
  * Button/Content: label with an optional icon on the left or right.

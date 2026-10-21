@@ -3,10 +3,10 @@
 import { useState } from "react";
 import type { FC } from "react";
 
+import type { ProductInfoProps } from "./ProductInfo.types";
 import { ProductInfoOptions } from "./parts/ProductInfoOptions";
 import { ProductInfoPurchase } from "./parts/ProductInfoPurchase";
 import { ProductInfoSummary } from "./parts/ProductInfoSummary";
-import type { ProductInfoProps } from "./ProductInfo.types";
 import styles from "./ProductInfo.module.scss";
 
 /**

@@ -1,8 +1,8 @@
 import { FilterSection } from "@/components/patterns/FilterSection";
 import { useFilterStore } from "@/lib/catalog/filters/filtersStore";
 import { cx } from "@/lib/shared/classnames/cx";
-import { KEYS } from "@/lib/shared/dom/keys.constants";
 import { toggleItem } from "@/lib/shared/collections/collections";
+import { KEYS } from "@/lib/shared/dom/keys.constants";
 
 import { FILTER_COLORS } from "./ColorFilter.constants";
 import styles from "./ColorFilter.module.scss";

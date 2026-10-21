@@ -1,20 +1,19 @@
+import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { render, screen } from '@testing-library/react';
+
 import { Banner } from "./Banner";
 
 describe(Banner.name, () => {
-  it('Renders correctly with the message and link', () => {
+  it("Renders correctly with the message and link", () => {
     render(<Banner />);
 
-    expect(
-      screen.getByText(/Sign up and get 20% off to your first order/i)
-    ).toBeInTheDocument();
+    expect(screen.getByText(/Sign up and get 20% off to your first order/i)).toBeInTheDocument();
 
-    const link = screen.getByRole('link', { name: /Sign Up Now/i });
+    const link = screen.getByRole("link", { name: /Sign Up Now/i });
     expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute('href', '/');
+    expect(link).toHaveAttribute("href", "/");
 
-    const icon = screen.getByRole('img', { name: /close icon/i });
+    const icon = screen.getByRole("img", { name: /close icon/i });
     expect(icon).toBeInTheDocument();
   });
 });

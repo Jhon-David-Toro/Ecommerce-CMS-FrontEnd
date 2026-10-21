@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import mockProduct from "@/assets/mockProduct.json";
+
 import { ProductDetails } from "./ProductDetails";
 
 const responses: Record<string, unknown> = {

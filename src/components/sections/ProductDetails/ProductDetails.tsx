@@ -13,9 +13,9 @@ import type { Review } from "@/lib/catalog/review.types";
 import { cx } from "@/lib/shared/classnames/cx";
 import { useFetchJson } from "@/lib/shared/http/useFetchJson";
 
+import { DEFAULT_TAB, TAB_LABELS } from "./ProductDetails.constants";
 import { useAnimatedTab } from "./hooks/useAnimatedTab";
 import { ProductTabContent } from "./parts/ProductTabContent";
-import { DEFAULT_TAB, TAB_LABELS } from "./ProductDetails.constants";
 import styles from "./ProductDetails.module.scss";
 
 /**

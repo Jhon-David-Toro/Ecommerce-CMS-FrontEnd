@@ -5,9 +5,9 @@ import type { FC } from "react";
 import { ReviewCard } from "@/components/patterns/ReviewCard";
 import { Button } from "@/components/ui/Button";
 
+import type { ReviewsProps } from "./Reviews.types";
 import { useReviewsList } from "./hooks/useReviewsList";
 import { ReviewsHeader } from "./parts/ReviewsHeader";
-import type { ReviewsProps } from "./Reviews.types";
 import styles from "./Reviews.module.scss";
 
 /**

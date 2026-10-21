@@ -1,16 +1,17 @@
+import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it } from "vitest";
-import { render, screen } from '@testing-library/react';
+
 import { ProductDescription } from "./ProductDescription";
 
 const mockDescription = {
-  overview: 'This is a great product.',
-  features: ['Feature one', 'Feature two', 'Feature three'],
-  origin: 'Made in Spain',
+  overview: "This is a great product.",
+  features: ["Feature one", "Feature two", "Feature three"],
+  origin: "Made in Spain",
   company: {
-    name: 'Awesome Inc.',
-    description: 'We make awesome products.',
+    name: "Awesome Inc.",
+    description: "We make awesome products.",
   },
-  careInstructions: 'Keep away from fire. Hand wash only.',
+  careInstructions: "Keep away from fire. Hand wash only.",
 };
 
 describe(ProductDescription.name, () => {
@@ -18,35 +19,35 @@ describe(ProductDescription.name, () => {
     render(<ProductDescription description={mockDescription} />);
   });
 
-  it('renders the title', () => {
-    expect(screen.getByRole('heading', { name: 'Product Description' })).toBeInTheDocument();
+  it("renders the title", () => {
+    expect(screen.getByRole("heading", { name: "Product Description" })).toBeInTheDocument();
   });
 
-  it('renders the overview section', () => {
-    expect(screen.getByText('Overview')).toBeInTheDocument();
+  it("renders the overview section", () => {
+    expect(screen.getByText("Overview")).toBeInTheDocument();
     expect(screen.getByText(mockDescription.overview)).toBeInTheDocument();
   });
 
-  it('renders the key features list', () => {
-    expect(screen.getByText('Key Features')).toBeInTheDocument();
+  it("renders the key features list", () => {
+    expect(screen.getByText("Key Features")).toBeInTheDocument();
     mockDescription.features.forEach((feature) => {
       expect(screen.getByText(feature)).toBeInTheDocument();
     });
   });
 
-  it('renders the origin section', () => {
-    expect(screen.getByText('Origin')).toBeInTheDocument();
+  it("renders the origin section", () => {
+    expect(screen.getByText("Origin")).toBeInTheDocument();
     expect(screen.getByText(mockDescription.origin)).toBeInTheDocument();
   });
 
-  it('renders the company section', () => {
-    expect(screen.getByText('About the Company')).toBeInTheDocument();
+  it("renders the company section", () => {
+    expect(screen.getByText("About the Company")).toBeInTheDocument();
     expect(screen.getByText(mockDescription.company.name)).toBeInTheDocument();
     expect(screen.getByText(mockDescription.company.description)).toBeInTheDocument();
   });
 
-  it('renders the care instructions', () => {
-    expect(screen.getByText('Care Instructions')).toBeInTheDocument();
+  it("renders the care instructions", () => {
+    expect(screen.getByText("Care Instructions")).toBeInTheDocument();
     expect(screen.getByText(mockDescription.careInstructions)).toBeInTheDocument();
   });
 });

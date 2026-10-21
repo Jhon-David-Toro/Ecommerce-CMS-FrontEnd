@@ -1,5 +1,5 @@
 export interface SizeSelectorProps {
-    sizes: string[];
-    selectedSize: string;
-    onSizeChange: (size: string) => void;
+  sizes: string[];
+  selectedSize: string;
+  onSizeChange: (size: string) => void;
 }

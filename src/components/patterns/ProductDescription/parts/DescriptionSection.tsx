@@ -1,8 +1,8 @@
 import { SECTION_KINDS } from "../ProductDescription.constants";
 import type { DescriptionSectionProps } from "../ProductDescription.types";
-import styles from "../ProductDescription.module.scss";
 import { DescriptionList } from "./DescriptionList";
 import { DescriptionText } from "./DescriptionText";
+import styles from "../ProductDescription.module.scss";
 
 /**
  * ProductDescription/Section: titled block of paragraphs or bullet points.

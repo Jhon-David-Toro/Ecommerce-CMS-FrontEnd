@@ -4,10 +4,10 @@ import { Pagination } from "@/components/patterns/Pagination";
 import { TitleAllProducts } from "@/components/patterns/TitleAllProducts";
 import { Divider } from "@/components/ui/Divider";
 
+import { PRODUCTS_PER_PAGE } from "./Products.constants";
 import { useProductsPage } from "./hooks/useProductsPage";
 import { ProductsFilters } from "./parts/ProductsFilters";
 import { ProductsGrid } from "./parts/ProductsGrid";
-import { PRODUCTS_PER_PAGE } from "./Products.constants";
 import styles from "./Products.module.scss";
 
 /**

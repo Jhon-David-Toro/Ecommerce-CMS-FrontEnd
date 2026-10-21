@@ -2,8 +2,8 @@
 
 import { FilterSection } from "@/components/patterns/FilterSection";
 
-import { usePriceFilter } from "./hooks/usePriceFilter";
 import { PRICE_BOUNDS } from "./PriceFilter.constants";
+import { usePriceFilter } from "./hooks/usePriceFilter";
 import { PriceSlider } from "./parts/PriceSlider";
 import styles from "./PriceFilter.module.scss";
 

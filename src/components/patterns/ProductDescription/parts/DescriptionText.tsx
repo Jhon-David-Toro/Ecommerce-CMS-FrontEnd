@@ -15,7 +15,10 @@ export const DescriptionText = ({ section }: DescriptionSectionProps) => (
     {section.items.map((item, index) => (
       <p
         key={item}
-        className={cx(styles.details__section__text, section.emphasizeFirst && index === 0 && styles["details__section__text--companyName"])}
+        className={cx(
+          styles.details__section__text,
+          section.emphasizeFirst && index === 0 && styles["details__section__text--companyName"],
+        )}
       >
         {item}
       </p>

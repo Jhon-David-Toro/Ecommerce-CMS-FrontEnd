@@ -1,5 +1,5 @@
 export interface HappyCardProps {
-    name: string;
-    rating: number;
-    text: string;
+  name: string;
+  rating: number;
+  text: string;
 }

@@ -2,12 +2,12 @@
 
 import { FC, useState } from "react";
 
-import { useWindowWidth } from "@/lib/shared/dom/useWindowWidth";
-
-import { IMAGE_CONFIG } from "@/lib/catalog/imageConfig.constants";
-import { ProductImagesProps } from "./ProductImages.types";
 import { AdditionalImages } from "@/components/patterns/AdditionalImages";
 import { MainImage } from "@/components/patterns/MainImage";
+import { IMAGE_CONFIG } from "@/lib/catalog/imageConfig.constants";
+import { useWindowWidth } from "@/lib/shared/dom/useWindowWidth";
+
+import { ProductImagesProps } from "./ProductImages.types";
 import styles from "./ProductImages.module.scss";
 
 /**

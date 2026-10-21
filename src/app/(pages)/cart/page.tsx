@@ -8,3 +8,5 @@ import { Cart } from "@/components/sections/Cart";
 const CartPage = () => <Cart />;
 
 export default CartPage;
+
+export const metadata = { title: "Cart" };

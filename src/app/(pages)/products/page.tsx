@@ -8,3 +8,5 @@ import { Products } from "@/components/sections/Products";
 const ProductsPage = () => <Products />;
 
 export default ProductsPage;
+
+export const metadata = { title: "Products" };

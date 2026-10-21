@@ -15,3 +15,5 @@ const RegisterPage = () => (
 );
 
 export default RegisterPage;
+
+export const metadata = { title: "Create account" };

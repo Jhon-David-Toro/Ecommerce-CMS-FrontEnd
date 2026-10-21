@@ -8,3 +8,5 @@ import { Checkout } from "@/components/sections/Checkout";
 const CheckoutPage = () => <Checkout />;
 
 export default CheckoutPage;
+
+export const metadata = { title: "Checkout" };

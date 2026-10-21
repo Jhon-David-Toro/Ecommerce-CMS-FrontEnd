@@ -5,6 +5,7 @@ import type { Review } from "@/lib/catalog/review.types";
 
 export interface ProductTabContentProps {
   activeTab: string;
+  productId: number;
   description: ProductDescription;
   reviews: Review[] | null;
   faqs: FAQ[];

@@ -13,3 +13,5 @@ const AccountPage = () => (
 );
 
 export default AccountPage;
+
+export const metadata = { title: "My account" };

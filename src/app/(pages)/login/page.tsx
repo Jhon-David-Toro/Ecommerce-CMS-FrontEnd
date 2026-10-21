@@ -15,3 +15,5 @@ const LoginPage = () => (
 );
 
 export default LoginPage;
+
+export const metadata = { title: "Sign in" };

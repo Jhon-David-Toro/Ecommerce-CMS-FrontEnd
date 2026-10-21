@@ -1,0 +1,18 @@
+@use "src/styles/utils" as utils;
+
+.orders {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: utils.pxToRem(12px);
+    text-align: left;
+    border-bottom: utils.pxToRem(1px) solid var(--color-border);
+  }
+
+  a {
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+}

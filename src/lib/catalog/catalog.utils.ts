@@ -41,3 +41,20 @@ export const getRelated = (products: Product[], currentId: number, limit: number
  * @returns True when the stock is at or below the threshold.
  */
 export const isLowStock = (product: Product, threshold: number) => product.stock <= threshold;
+
+/**
+ * Finds the products whose name, category, brand, dress style or overview contain every word of a query.
+ *
+ * @param products Products to search.
+ * @param query Text typed by the shopper.
+ * @returns The matching products; all of them for an empty query.
+ */
+export const searchProducts = (products: Product[], query: string) => {
+  const words = query.toLowerCase().split(/\s+/).filter(Boolean);
+  return products.filter((product) => {
+    const haystack = [product.name, product.category, product.brand, product.dressStyle, product.description.overview]
+      .join(" ")
+      .toLowerCase();
+    return words.every((word) => haystack.includes(word));
+  });
+};

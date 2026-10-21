@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { buildProduct } from "@/test/factories";
 
 import { deleteProduct, getProduct, listProducts, saveProduct } from "./catalog.api";
-import { getNewArrivals, getRelated, getTopSelling, isLowStock } from "./catalog.utils";
+import { getNewArrivals, getRelated, getTopSelling, isLowStock, searchProducts } from "./catalog.utils";
 import { createReview, deleteReview, listReviews, setReviewStatus } from "./reviews.api";
 
 const products = [
@@ -28,6 +28,26 @@ describe("catalog utils", () => {
   it("detects low stock", () => {
     expect(isLowStock(buildProduct({ stock: 3 }), 10)).toBe(true);
     expect(isLowStock(buildProduct({ stock: 30 }), 10)).toBe(false);
+  });
+});
+
+describe("searchProducts", () => {
+  const list = [
+    buildProduct({ id: 1, name: "Skinny Fit Jeans", brand: "Zara" }),
+    buildProduct({ id: 2, name: "Gradient Shirt", category: "Shirts", brand: "Gucci" }),
+  ];
+
+  it("matches any field, ignoring case", () => {
+    expect(searchProducts(list, "JEANS").map((p) => p.id)).toEqual([1]);
+    expect(searchProducts(list, "gucci").map((p) => p.id)).toEqual([2]);
+  });
+
+  it("needs every word to match", () => {
+    expect(searchProducts(list, "skinny gucci")).toEqual([]);
+  });
+
+  it("returns everything for an empty query", () => {
+    expect(searchProducts(list, "  ")).toHaveLength(2);
   });
 });
 

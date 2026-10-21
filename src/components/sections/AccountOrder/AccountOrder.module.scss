@@ -1,0 +1,9 @@
+@use "src/styles/utils" as utils;
+
+.order {
+  display: flex;
+  flex-direction: column;
+  gap: utils.pxToRem(20px);
+  padding: utils.pxToRem(24px) 0 utils.pxToRem(64px);
+  @include utils.container();
+}

@@ -1,0 +1,55 @@
+@use "src/styles/utils" as utils;
+
+.account {
+  display: flex;
+  flex-direction: column;
+  gap: utils.pxToRem(20px);
+  padding: utils.pxToRem(24px) 0 utils.pxToRem(64px);
+  @include utils.container();
+
+  &__title {
+    font-size: utils.pxToRem(36px);
+    font-weight: 900;
+  }
+
+  &__subtitle {
+    font-size: utils.pxToRem(22px);
+  }
+
+  &__profile {
+    display: flex;
+    flex-wrap: wrap;
+    gap: utils.pxToRem(16px);
+    align-items: center;
+    justify-content: space-between;
+    padding: utils.pxToRem(20px) utils.pxToRem(24px);
+    border: utils.pxToRem(1px) solid var(--color-border);
+    border-radius: var(--radius-card);
+  }
+
+  &__name {
+    font-size: utils.pxToRem(20px);
+    font-weight: 700;
+  }
+
+  &__email {
+    color: var(--color-muted);
+  }
+
+  &__orders {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+      padding: utils.pxToRem(12px);
+      text-align: left;
+      border-bottom: utils.pxToRem(1px) solid var(--color-border);
+    }
+
+    a {
+      font-weight: 600;
+      color: var(--color-ink);
+    }
+  }
+}

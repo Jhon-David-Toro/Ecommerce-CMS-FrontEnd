@@ -23,3 +23,15 @@ export const toLines = (text: string) =>
     .split("\n")
     .map((line) => line.trim())
     .filter(Boolean);
+
+/**
+ * Splits text into paragraphs separated by blank lines.
+ *
+ * @param text Text with paragraphs.
+ * @returns The trimmed, non-empty paragraphs.
+ */
+export const toParagraphs = (text: string) =>
+  text
+    .split(/\n\s*\n/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);

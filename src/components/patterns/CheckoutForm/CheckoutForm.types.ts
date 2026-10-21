@@ -1,4 +1,5 @@
 import type { PaymentMethod } from "@/lib/orders/order.types";
+import type { Errors, FieldProps } from "@/lib/shared/forms/forms.types";
 
 export interface CheckoutValues {
   email: string;
@@ -21,4 +22,15 @@ export interface CheckoutFormProps {
   error?: string;
   isSubmitting: boolean;
   onSubmit: (values: CheckoutSubmission) => void;
+}
+
+export interface CheckoutFieldsProps {
+  field: (name: keyof CheckoutValues & string) => FieldProps;
+  errors: Errors;
+}
+
+export interface PaymentFieldsProps {
+  field: (name: keyof CheckoutValues & string) => FieldProps;
+  method: PaymentMethod;
+  onMethodChange: (method: PaymentMethod) => void;
 }

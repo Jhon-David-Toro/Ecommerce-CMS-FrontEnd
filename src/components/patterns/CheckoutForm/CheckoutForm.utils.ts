@@ -1,6 +1,7 @@
+import type { PaymentMethod } from "@/lib/orders/order.types";
 import { compact, email, required } from "@/lib/shared/forms/validators";
 
-import { EMPTY_CHECKOUT } from "./CheckoutForm.constants";
+import { DEFAULT_PAYMENT_METHOD, EMPTY_CHECKOUT, PAYMENT_OPTIONS } from "./CheckoutForm.constants";
 import type { CheckoutValues } from "./CheckoutForm.types";
 
 /**
@@ -27,3 +28,12 @@ export const validateCheckout = (values: CheckoutValues) =>
     postalCode: required(values.postalCode),
     country: required(values.country),
   });
+
+/**
+ * Narrows the value of the payment select to a payment method.
+ *
+ * @param value Raw value from the select.
+ * @returns The matching method, or the default one when the value is unknown.
+ */
+export const toPaymentMethod = (value: string): PaymentMethod =>
+  PAYMENT_OPTIONS.find((option) => option.value === value)?.value ?? DEFAULT_PAYMENT_METHOD;

@@ -7,7 +7,7 @@ describe(Button.name, () => {
   it('renders the button with the correct text', () => {
     render(<Button type="primary" text="Click me" onClick={mockClick} size="medium" margin="zero" typeAttribute='submit' />);
 
-    const button = screen.getByRole('submit');
+    const button = screen.getByRole('button');
     expect(button).toBeInTheDocument();
     expect(button).toHaveTextContent('Click me');
   });
@@ -15,7 +15,7 @@ describe(Button.name, () => {
   it('calls the onClick handler when clicked', () => {
     render(<Button type="primary" text="Click me" onClick={mockClick} size="medium" margin="zero" typeAttribute='submit' />);
     
-    const button = screen.getByRole('submit');
+    const button = screen.getByRole('button');
     fireEvent.click(button);
 
     expect(mockClick).toHaveBeenCalledTimes(1);
@@ -33,7 +33,7 @@ describe(Button.name, () => {
         typeAttribute='submit'/>
     );
 
-    const button = screen.getByRole('submit');
+    const button = screen.getByRole('button');
 
     expect(button).toHaveClass('button');
     expect(button).toHaveClass('button--secondary');

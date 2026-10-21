@@ -1,4 +1,4 @@
-@use '@/styles/utils' as utils;
+@use 'src/styles/utils' as utils;
 
 .product {
   padding: utils.pxToRem(20px);

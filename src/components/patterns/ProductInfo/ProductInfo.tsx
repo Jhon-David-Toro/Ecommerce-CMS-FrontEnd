@@ -2,11 +2,11 @@
 
 import type { FC } from "react";
 
+import type { ProductInfoProps } from "./ProductInfo.types";
 import { useProductOptions } from "./hooks/useProductOptions";
 import { ProductInfoOptions } from "./parts/ProductInfoOptions";
 import { ProductInfoPurchase } from "./parts/ProductInfoPurchase";
 import { ProductInfoSummary } from "./parts/ProductInfoSummary";
-import type { ProductInfoProps } from "./ProductInfo.types";
 import styles from "./ProductInfo.module.scss";
 
 /**

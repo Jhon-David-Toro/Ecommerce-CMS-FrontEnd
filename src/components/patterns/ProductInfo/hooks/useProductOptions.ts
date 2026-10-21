@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import type { Product } from "@/lib/catalog/product.types";
 import { useCart } from "@/lib/cart/useCart";
+import type { Product } from "@/lib/catalog/product.types";
 
 import { buildCartItem } from "../ProductInfo.utils";
 

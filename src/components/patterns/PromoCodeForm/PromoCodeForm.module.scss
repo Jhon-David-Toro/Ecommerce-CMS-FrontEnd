@@ -1,0 +1,33 @@
+@use "src/styles/utils" as utils;
+
+.promo {
+  display: flex;
+  flex-direction: column;
+  gap: utils.pxToRem(8px);
+
+  &__row {
+    display: flex;
+    gap: utils.pxToRem(12px);
+  }
+
+  &__input {
+    flex: 1;
+    min-width: 0;
+    padding: utils.pxToRem(12px) utils.pxToRem(16px);
+    font: inherit;
+    background-color: var(--color-surface);
+    border: none;
+    border-radius: 999px;
+    outline: none;
+  }
+
+  &__error {
+    font-size: utils.pxToRem(13px);
+    color: var(--color-danger);
+  }
+
+  &__ok {
+    font-size: utils.pxToRem(13px);
+    color: var(--color-success);
+  }
+}

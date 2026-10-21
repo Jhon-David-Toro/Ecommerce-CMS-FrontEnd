@@ -1,0 +1,66 @@
+@use "src/styles/utils" as utils;
+
+.row {
+  position: relative;
+  display: grid;
+  grid-template-columns: utils.pxToRem(100px) 1fr auto;
+  gap: utils.pxToRem(16px);
+  padding: utils.pxToRem(16px) 0;
+  border-bottom: utils.pxToRem(1px) solid var(--color-border);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &__image {
+    width: utils.pxToRem(100px);
+    height: utils.pxToRem(100px);
+    object-fit: cover;
+    background-color: var(--color-surface);
+    border-radius: var(--radius-field);
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: utils.pxToRem(4px);
+  }
+
+  &__name {
+    font-size: utils.pxToRem(18px);
+    font-weight: 700;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  &__option {
+    font-size: utils.pxToRem(14px);
+    color: var(--color-muted);
+  }
+
+  &__price {
+    margin-top: auto;
+    font-size: utils.pxToRem(22px);
+    font-weight: 700;
+  }
+
+  &__remove {
+    align-self: start;
+    padding: 0;
+    color: var(--color-danger);
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  &__removeIcon {
+    width: utils.pxToRem(22px);
+    height: utils.pxToRem(22px);
+  }
+
+  &__quantity {
+    grid-column: 3;
+    grid-row: 1;
+    align-self: end;
+  }
+}

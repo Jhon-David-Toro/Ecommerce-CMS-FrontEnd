@@ -10,10 +10,10 @@ import { Spinner } from "@/components/ui/Spinner";
 import { Tabs } from "@/components/ui/Tabs";
 import { cx } from "@/lib/shared/classnames/cx";
 
+import { DEFAULT_TAB, TAB_LABELS } from "./ProductDetails.constants";
 import { useAnimatedTab } from "./hooks/useAnimatedTab";
 import { useProductPage } from "./hooks/useProductPage";
 import { ProductTabContent } from "./parts/ProductTabContent";
-import { DEFAULT_TAB, TAB_LABELS } from "./ProductDetails.constants";
 import styles from "./ProductDetails.module.scss";
 
 /**

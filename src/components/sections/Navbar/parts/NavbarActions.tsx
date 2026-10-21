@@ -3,8 +3,8 @@
 import { ShoppingCartIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
-import { useCart } from "@/lib/cart/useCart";
 import { useAuth } from "@/lib/auth/useAuth";
+import { useCart } from "@/lib/cart/useCart";
 
 import { getAccountHref } from "../Navbar.utils";
 import styles from "../Navbar.module.scss";

@@ -1,0 +1,30 @@
+@use "src/styles/utils" as utils;
+
+.auth {
+  display: flex;
+  flex-direction: column;
+  gap: utils.pxToRem(20px);
+  max-width: utils.pxToRem(440px);
+  padding: utils.pxToRem(48px) utils.pxToRem(16px) utils.pxToRem(80px);
+  margin: 0 auto;
+
+  &__title {
+    font-size: utils.pxToRem(36px);
+    font-weight: 900;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: utils.pxToRem(16px);
+  }
+
+  &__switch {
+    color: var(--color-muted);
+
+    a {
+      font-weight: 600;
+      color: var(--color-ink);
+    }
+  }
+}

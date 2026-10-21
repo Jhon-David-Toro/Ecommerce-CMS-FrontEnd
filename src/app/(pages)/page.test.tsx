@@ -19,7 +19,7 @@ describe("Home page", () => {
 
   it("requests the catalog on mount", async () => {
     render(<Home />);
-    await waitFor(() => expect(fetch).toHaveBeenCalledWith("/data/products.json"));
+    await waitFor(() => expect(fetch).toHaveBeenCalledWith("/data/products.json", expect.anything()));
   });
 
   it("renders the hero and both product sections", async () => {

@@ -1,32 +1,29 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from "react";
-import Hero from "@/app/modules/home/hero/Hero";
-import HomeProducts from "@/app/modules/home/home-products/FeaturedProducts";
-import HomeCategories from "@/app/modules/home/home-categories/HomeCategories";
-import { Product } from "@/app/shared-components/product/interfaces/Product.interface";
+import { CATALOG_URLS } from "@/lib/catalog/catalog.constants";
+import type { Catalog } from "@/lib/catalog/catalog.types";
+import { useFetchJson } from "@/lib/shared/http/useFetchJson";
+
 import HappyCustomers from "@/app/modules/home/happy-customers/HappyCustomers";
+import HomeCategories from "@/app/modules/home/home-categories/HomeCategories";
+import HomeProducts from "@/app/modules/home/home-products/FeaturedProducts";
+import Hero from "@/app/modules/home/hero/Hero";
 
+/**
+ * Home: hero, product highlights, categories and customer reviews.
+ *
+ * @returns The home page.
+ */
 export default function Home() {
-  const [products, setProducts] = useState<{ newArrivals: Product[]; topSelling: Product[] } | null>(null);
+  const catalog = useFetchJson<Catalog>(CATALOG_URLS.products);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    const res = await fetch('/data/products.json');
-    const data = await res.json();
-    setProducts(data);
-  };
-  
   return (
     <>
       <Hero />
-      <HomeProducts products={products?.newArrivals ?? []} category="New Arrivals" />
-      <HomeProducts products={products?.topSelling ?? []} category="Top Selling" />
-      <HomeCategories/>
-      <HappyCustomers/>
+      <HomeProducts products={catalog?.newArrivals ?? []} category="New Arrivals" />
+      <HomeProducts products={catalog?.topSelling ?? []} category="Top Selling" />
+      <HomeCategories />
+      <HappyCustomers />
     </>
   );
 }

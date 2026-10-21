@@ -1,30 +1,30 @@
-'use client';
+"use client";
 
-import { useState, useEffect, FC } from 'react';
-import { ProductImagesProps } from '../../interfaces/product-images/ProductImages.interface';
-import { IMAGE_CONFIG } from '../../constants/ImageConfig.constant';
-import AdditionalImages from '../additional-images/AdditionalImages';
-import MainImage from '../main-image/MainImage';
-import styles from './ProductImages.module.scss';
+import { FC, useState } from "react";
 
+import { useWindowWidth } from "@/lib/shared/dom/useWindowWidth";
+
+import { IMAGE_CONFIG } from "../../constants/ImageConfig.constant";
+import { ProductImagesProps } from "../../interfaces/product-images/ProductImages.interface";
+import AdditionalImages from "../additional-images/AdditionalImages";
+import MainImage from "../main-image/MainImage";
+import styles from "./ProductImages.module.scss";
+
+/**
+ * Product gallery: zoomable main image with its thumbnails.
+ *
+ * @param props Component props.
+ * @param props.mainImage Image shown first.
+ * @param props.additionalImages Extra images of the product.
+ * @returns The gallery.
+ */
 const ProductImages: FC<ProductImagesProps> = ({ mainImage, additionalImages }) => {
   const [currentMainImage, setCurrentMainImage] = useState(mainImage);
-  const [isMobile, setIsMobile] = useState(false);
-  
-  useEffect(() => {
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const isMobile = useWindowWidth() <= IMAGE_CONFIG.IS_MOBILE;
 
-  const handleResize = () => setIsMobile(window.innerWidth <= IMAGE_CONFIG.IS_MOBILE);
-  
   return (
     <section className={styles.product__images} aria-label="Product images">
-      <MainImage
-        currentMainImage={currentMainImage}
-        isMobile={isMobile}
-      />
+      <MainImage currentMainImage={currentMainImage} isMobile={isMobile} />
       <AdditionalImages
         currentMainImage={currentMainImage}
         mainImage={mainImage}

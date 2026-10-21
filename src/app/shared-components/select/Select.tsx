@@ -1,65 +1,67 @@
-'use client';
+"use client";
 
-import { useState, useRef, useEffect } from 'react';
-import { SelectProps } from './interfaces/SelectProps.interface';
-import styles from './Select.module.scss';
+import { useRef, useState } from "react";
 
+import { useClickOutside } from "@/lib/shared/dom/useClickOutside";
+
+import { SelectProps } from "./interfaces/SelectProps.interface";
+import styles from "./Select.module.scss";
+
+/**
+ * Select: button that opens a listbox of options.
+ *
+ * @param props Component props.
+ * @param props.value Selected option.
+ * @param props.options Available options.
+ * @param props.onChange Called with the option the user picks.
+ * @returns The select.
+ */
 const Select = ({ value, options, onChange }: SelectProps) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const containerRef = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-    const handleToggle = () => setIsOpen(prev => !prev);
+  useClickOutside(containerRef, () => setIsOpen(false));
 
-    const handleSelect = (option: string) => {
-        onChange(option);
-        setIsOpen(false);
-    };
+  /**
+   * Reports the picked option and closes the listbox.
+   *
+   * @param option Option the user picked.
+   */
+  const handleSelect = (option: string) => {
+    onChange(option);
+    setIsOpen(false);
+  };
 
-    useEffect(() => {
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, []);
+  return (
+    <div className={styles.select} ref={containerRef}>
+      <button
+        type="button"
+        className={styles.select__trigger}
+        onClick={() => setIsOpen((open) => !open)}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+      >
+        <span>{value}</span>
+        <span className={styles.select__arrow} />
+      </button>
 
-    const handleClickOutside = (event: MouseEvent) => {
-        if (
-            containerRef.current &&
-            !containerRef.current.contains(event.target as Node)
-        ) {
-            setIsOpen(false);
-        }
-    };
-
-    return (
-        <div className={styles.select} ref={containerRef}>
-            <button
-                type="button"
-                className={styles.select__trigger}
-                onClick={handleToggle}
-                aria-haspopup="listbox"
-                aria-expanded={isOpen}
+      {isOpen && (
+        <ul className={styles.select__options} role="listbox">
+          {options.map((option) => (
+            <li
+              key={option}
+              role="option"
+              aria-selected={option === value}
+              className={`${styles.select__option} ${option === value ? styles["select__option--active"] : ""}`}
+              onClick={() => handleSelect(option)}
             >
-                <span>{value}</span>
-                <span className={styles.select__arrow} />
-            </button>
-
-            {isOpen && (
-                <ul className={styles.select__options} role="listbox">
-                    {options.map(option => (
-                        <li
-                            key={option}
-                            role="option"
-                            aria-selected={option === value}
-                            className={`${styles.select__option} ${option === value ? styles['select__option--active'] : ''
-                                }`}
-                            onClick={() => handleSelect(option)}
-                        >
-                            {option}
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </div>
-    );
+              {option}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
 };
 
 export default Select;

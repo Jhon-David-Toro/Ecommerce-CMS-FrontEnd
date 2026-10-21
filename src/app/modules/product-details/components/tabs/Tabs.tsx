@@ -3,11 +3,12 @@
 import { FC, useState } from 'react';
 import { TabsProps } from '../../interfaces/tabs/Tabs.interface';
 import clsx from 'clsx';
+import { DEFAULT_TAB, TAB_LABELS } from '../../ProductDetails.constants';
 import styles from './Tabs.module.scss';
 
 const Tabs: FC<TabsProps> = ({ onTabChange }) => {
-  const [activeTab, setActiveTab] = useState('Rating & Reviews');
-  const tabs = ['Product Details', 'Rating & Reviews', 'FAQs'];
+  const [activeTab, setActiveTab] = useState<string>(DEFAULT_TAB);
+  const tabs = TAB_LABELS;
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);

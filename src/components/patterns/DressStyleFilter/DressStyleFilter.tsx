@@ -1,43 +1,15 @@
-import { useFilterStore } from '@/lib/catalog/filters/filtersStore';
-import { FilterSection } from "@/components/patterns/FilterSection";
-import clsx from 'clsx';
-import styles from './DressStyleFilter.module.scss';
+import { CheckboxFilter } from "@/components/patterns/CheckboxFilter";
+import { useFilterStore } from "@/lib/catalog/filters/filtersStore";
 
-const dressStyles = ['Casual', 'Formal', 'Party', 'Gym'];
+import { DRESS_STYLES } from "./DressStyleFilter.constants";
 
+/**
+ * DressStyleFilter: dress style checkboxes connected to the filter store.
+ *
+ * @returns The dress style filter.
+ */
 export const DressStyleFilter = () => {
-  const { dressStyles: selectedDressStyles, setDressStyles } = useFilterStore();
+  const { dressStyles, setDressStyles } = useFilterStore();
 
-  const toggleSelection = (item: string) => {
-    setDressStyles(
-      selectedDressStyles.includes(item)
-        ? selectedDressStyles.filter((i) => i !== item)
-        : [...selectedDressStyles, item]
-    );
-  };
-
-  return (
-    <FilterSection title="Dress Style">
-      <section className={styles.dress}>
-        {dressStyles.map((cat) => (
-          <label
-            key={cat}
-            className={clsx(styles.dress__option, {
-              [styles.selected]: selectedDressStyles.includes(cat),
-            })}
-          >
-            <input
-              type="checkbox"
-              checked={cat.includes(cat)}
-              onChange={() => toggleSelection(cat)}
-              className={clsx(styles.checkbox, {
-                [styles.selected]: selectedDressStyles.includes(cat),
-              })}
-            />
-            <span className={styles.dress__label}>{cat}</span>
-          </label>
-        ))}
-      </section>
-    </FilterSection>
-  );
+  return <CheckboxFilter title="Dress Style" options={DRESS_STYLES} selected={dressStyles} onChange={setDressStyles} />;
 };

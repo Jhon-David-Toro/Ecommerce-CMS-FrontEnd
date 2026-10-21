@@ -1,36 +1,32 @@
-
-import { useFilterStore } from '@/lib/catalog/filters/filtersStore';
-import { Button } from "@/components/ui/Button";
 import { FilterSection } from "@/components/patterns/FilterSection";
-import clsx from 'clsx';
-import styles from './SizeFilter.module.scss';
+import { Button } from "@/components/ui/Button";
+import { useFilterStore } from "@/lib/catalog/filters/filtersStore";
+import { cx } from "@/lib/shared/classnames/cx";
+import { toggleItem } from "@/lib/shared/collections/collections";
 
-const sizes = ['XX-Small', 'X-Small', 'Small', 'Medium', 'Large', 'X-Large', 'XX-Large', '3X-Large'];
+import { FILTER_SIZES } from "./SizeFilter.constants";
+import styles from "./SizeFilter.module.scss";
 
+/**
+ * SizeFilter: size buttons connected to the filter store.
+ *
+ * @returns The size filter.
+ */
 export const SizeFilter = () => {
-  const { sizes: selectedSizes, setSizes } = useFilterStore();
-
-  const toggleSelection = (item: string) => {
-    setSizes(
-      selectedSizes.includes(item)
-        ? selectedSizes.filter((i) => i !== item)
-        : [...selectedSizes, item]
-    );
-  };
+  const { sizes, setSizes } = useFilterStore();
 
   return (
     <FilterSection title="Size">
-      {sizes.map((size) => (
+      {FILTER_SIZES.map((size) => (
         <Button
           key={size}
-          className={clsx(styles.sizeButton, {
-            [styles.selected]: selectedSizes.includes(size),
-          })}
-          onClick={() => toggleSelection(size)}
+          className={cx(styles.sizeButton, { [styles.selected]: sizes.includes(size) })}
+          onClick={() => setSizes(toggleItem(sizes, size))}
           text={size}
-          type='tertiary'
-          size='extra-small-filter'
-          typeAttribute='button'
+          type="tertiary"
+          size="extra-small-filter"
+          typeAttribute="button"
+          ariaPressed={sizes.includes(size)}
         />
       ))}
     </FilterSection>

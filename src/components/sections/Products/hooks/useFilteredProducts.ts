@@ -1,15 +1,21 @@
-import { useMemo } from 'react';
-import type { Product } from '@/lib/catalog/product.types';
-import { useFilterStore } from '@/lib/catalog/filters/filtersStore';
-import { createFilterPipeline } from '../Products.utils';
-import productsData from '../../../../../public/data/all-products.json';
+import { useMemo } from "react";
 
+import productsData from "../../../../../public/data/all-products.json";
+import { useFilterStore } from "@/lib/catalog/filters/filtersStore";
+import type { Product } from "@/lib/catalog/product.types";
+
+import { filterProducts } from "../Products.utils";
+
+/**
+ * Applies the filters and sort order of the filter store to the product catalog.
+ *
+ * @returns The products that match, in display order.
+ */
 export const useFilteredProducts = (): Product[] => {
   const { category, priceRange, colors, sizes, dressStyles, sortBy } = useFilterStore();
 
-  return useMemo(() => {
-    const { filters, sortedProducts } = createFilterPipeline({ category, priceRange, colors, sizes, dressStyles, sortBy });
-    const matching: Product[] = productsData.filter((product) => filters.every((filter) => filter(product)));
-    return sortedProducts(matching);
-  }, [category, priceRange, colors, sizes, dressStyles, sortBy]);
+  return useMemo(
+    () => filterProducts(productsData, { category, priceRange, colors, sizes, dressStyles, sortBy }),
+    [category, priceRange, colors, sizes, dressStyles, sortBy],
+  );
 };

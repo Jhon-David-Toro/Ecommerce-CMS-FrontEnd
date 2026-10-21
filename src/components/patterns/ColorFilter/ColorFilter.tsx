@@ -1,36 +1,35 @@
-import { useFilterStore } from '@/lib/catalog/filters/filtersStore';
-import clsx from 'clsx';
 import { FilterSection } from "@/components/patterns/FilterSection";
-import styles from './ColorFilter.module.scss';
+import { useFilterStore } from "@/lib/catalog/filters/filtersStore";
+import { cx } from "@/lib/shared/classnames/cx";
+import { KEYS } from "@/lib/shared/dom/keys.constants";
+import { toggleItem } from "@/lib/shared/collections/collections";
 
-const colors = ['#00C12B', '#F50606', '#F5DD06', '#F57906', '#06CAF5', '#063AF5', '#7D06F5', '#F506A4', 'white', 'black'];
+import { FILTER_COLORS } from "./ColorFilter.constants";
+import styles from "./ColorFilter.module.scss";
 
+/**
+ * ColorFilter: color swatches connected to the filter store.
+ *
+ * @returns The color filter.
+ */
 export const ColorFilter = () => {
-  const { colors: selectedColors, setColors } = useFilterStore();
-
-  const toggleSelection = (item: string) => {
-    setColors(
-      selectedColors.includes(item)
-        ? selectedColors.filter((i) => i !== item)
-        : [...selectedColors, item]
-    );
-  };
+  const { colors, setColors } = useFilterStore();
 
   return (
     <FilterSection title="Colors">
       <section className={styles.color}>
-        {colors.map((color) => (
+        {FILTER_COLORS.map((color) => (
           <article
             key={color}
-            className={clsx(styles.color__circle, {
-              [styles.selected]: selectedColors.includes(color),
-            })}
+            className={cx(styles.color__circle, { [styles.selected]: colors.includes(color) })}
             style={{ backgroundColor: color }}
             data-color={color}
-            onClick={() => toggleSelection(color)}
+            onClick={() => setColors(toggleItem(colors, color))}
             role="button"
+            aria-label={color}
+            aria-pressed={colors.includes(color)}
             tabIndex={0}
-            onKeyDown={(e) => e.key === 'Enter' && toggleSelection(color)}
+            onKeyDown={(event) => event.key === KEYS.enter && setColors(toggleItem(colors, color))}
           />
         ))}
       </section>

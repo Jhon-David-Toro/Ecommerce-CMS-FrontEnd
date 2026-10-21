@@ -1,6 +1,3 @@
-export const SORT_OPTIONS = [
-  'Most Popular',
-  'Price: Low to High',
-  'Price: High to Low',
-  'Newest',
-] as const;
+export const DEFAULT_TITLE = "All Products";
+
+export const NO_PRODUCTS_TEXT = "No Products Found";

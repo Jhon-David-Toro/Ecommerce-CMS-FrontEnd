@@ -1,60 +1,50 @@
-import { useState } from 'react';
-import { useFilterStore } from '@/lib/catalog/filters/filtersStore';
-import { FilterSection } from "@/components/patterns/FilterSection";
-import styles from './PriceFilter.module.scss';
+"use client";
 
+import { useState } from "react";
+
+import { FilterSection } from "@/components/patterns/FilterSection";
+import { useFilterStore } from "@/lib/catalog/filters/filtersStore";
+
+import { PRICE_BOUNDS } from "./PriceFilter.constants";
+import type { PriceBound } from "./PriceFilter.types";
+import { movePriceBound } from "./PriceFilter.utils";
+import { PriceSlider } from "./parts/PriceSlider";
+import styles from "./PriceFilter.module.scss";
+
+/**
+ * PriceFilter: two overlapping sliders that set the price range in the filter store.
+ *
+ * @returns The price filter.
+ */
 export const PriceFilter = () => {
   const { priceRange, setPriceRange } = useFilterStore();
-  const [activeSlider, setActiveSlider] = useState<'min' | 'max' | null>(null);
+  const [activeSlider, setActiveSlider] = useState<PriceBound | null>(null);
 
-  const handleMinPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (activeSlider !== 'min') return;
-    const newMin = parseInt(e.target.value);
-    const currentMax = priceRange[1];
-    const minGap = 10;
-    if (newMin <= currentMax - minGap) {
-      setPriceRange([newMin, currentMax]);
-    }
-  };
-
-  const handleMaxPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (activeSlider !== 'max') return;
-    const newMax = parseInt(e.target.value);
-    const currentMin = priceRange[0];
-    const minGap = 10;
-    if (newMax >= currentMin + minGap) {
-      setPriceRange([currentMin, newMax]);
-    }
+  /**
+   * Applies a slider move, ignoring the slider that is not being dragged.
+   *
+   * @param bound Slider that fired the change.
+   * @param value New value of that slider.
+   */
+  const handleChange = (bound: PriceBound, value: number) => {
+    const next = activeSlider === bound ? movePriceBound(priceRange, bound, value) : null;
+    if (next) setPriceRange(next);
   };
 
   return (
     <FilterSection title="Price">
       <section className={styles.price}>
         <section className={styles.price__range}>
-          <input
-            type="range"
-            min="0"
-            max="250"
-            value={priceRange[0]}
-            onChange={handleMinPriceChange}
-            onMouseDown={() => setActiveSlider('min')}
-            onMouseUp={() => setActiveSlider(null)}
-            onTouchStart={() => setActiveSlider('min')}
-            onTouchEnd={() => setActiveSlider(null)}
-            style={{ '--min-value': priceRange[0], '--max-value': priceRange[1] } as React.CSSProperties}
-          />
-          <input
-            type="range"
-            min="0"
-            max="250"
-            value={priceRange[1]}
-            onChange={handleMaxPriceChange}
-            onMouseDown={() => setActiveSlider('max')}
-            onMouseUp={() => setActiveSlider(null)}
-            onTouchStart={() => setActiveSlider('max')}
-            onTouchEnd={() => setActiveSlider(null)}
-            style={{ '--min-value': priceRange[0], '--max-value': priceRange[1] } as React.CSSProperties}
-          />
+          {PRICE_BOUNDS.map((bound) => (
+            <PriceSlider
+              key={bound}
+              bound={bound}
+              priceRange={priceRange}
+              onActivate={setActiveSlider}
+              onDeactivate={() => setActiveSlider(null)}
+              onChange={handleChange}
+            />
+          ))}
         </section>
         <div className={styles.price__labels}>
           <span>${priceRange[0]}</span>

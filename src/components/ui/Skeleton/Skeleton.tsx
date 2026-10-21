@@ -1,5 +1,8 @@
-import styles from './Skeleton.module.scss';
+import styles from "./Skeleton.module.scss";
 
-export const Skeleton = () => {
-  return <div className={styles.skeleton} />;
-};
+/**
+ * Skeleton: animated placeholder shown while an image loads.
+ *
+ * @returns The placeholder block.
+ */
+export const Skeleton = () => <div className={styles.skeleton} />;

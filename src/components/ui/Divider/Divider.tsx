@@ -1,7 +1,8 @@
-import styles from './Divider.module.scss';
+import styles from "./Divider.module.scss";
 
-export const Divider = () => {
-  return (
-    <hr role='separator' className={styles.hr}/>
-  )
-}
+/**
+ * Divider: horizontal rule between groups of content.
+ *
+ * @returns The separator.
+ */
+export const Divider = () => <hr className={styles.hr} />;

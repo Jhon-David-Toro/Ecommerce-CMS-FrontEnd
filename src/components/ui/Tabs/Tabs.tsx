@@ -1,15 +1,30 @@
-'use client';
+"use client";
 
-import { FC, useState } from 'react';
-import { TabsProps } from './Tabs.types';
-import clsx from 'clsx';
-import { DEFAULT_TAB, TAB_LABELS } from '@/components/sections/ProductDetails/ProductDetails.constants';
-import styles from './Tabs.module.scss';
+import { useState } from "react";
+import type { FC } from "react";
 
-export const Tabs: FC<TabsProps> = ({ onTabChange }) => {
-  const [activeTab, setActiveTab] = useState<string>(DEFAULT_TAB);
-  const tabs = TAB_LABELS;
+import { cx } from "@/lib/shared/classnames/cx";
 
+import type { TabsProps } from "./Tabs.types";
+import styles from "./Tabs.module.scss";
+
+/**
+ * Tabs: row of toggle buttons that picks one section of content.
+ *
+ * @param props Component props.
+ * @param props.tabs Labels of the tabs.
+ * @param props.initialTab Label of the tab that starts active.
+ * @param props.onTabChange Called with the label of the tab the user picks.
+ * @returns The tab bar.
+ */
+export const Tabs: FC<TabsProps> = ({ tabs, initialTab, onTabChange }) => {
+  const [activeTab, setActiveTab] = useState(initialTab);
+
+  /**
+   * Activates a tab and reports it.
+   *
+   * @param tab Label of the picked tab.
+   */
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
     onTabChange(tab);
@@ -20,7 +35,7 @@ export const Tabs: FC<TabsProps> = ({ onTabChange }) => {
       {tabs.map((tab) => (
         <button
           key={tab}
-          className={clsx(styles.tabs__tab, { [styles.active]: activeTab === tab })}
+          className={cx(styles.tabs__tab, { [styles.active]: activeTab === tab })}
           aria-pressed={activeTab === tab}
           onClick={() => handleTabClick(tab)}
         >

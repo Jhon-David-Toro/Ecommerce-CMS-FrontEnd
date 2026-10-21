@@ -1,30 +1,31 @@
-import { FC } from 'react';
-import { StarIcon } from '@heroicons/react/24/solid';
-import { RatingProps } from './Rating.types';
-import styles from './Rating.module.scss';
+import { StarIcon } from "@heroicons/react/24/solid";
+import type { FC } from "react";
 
-export const Rating: FC<RatingProps> = ({ rating, size, numbers = true }) => {
-  const fullStars = Math.floor(rating);
-  const halfStar = rating % 1 >= 0.5;
-  const emptyStars = 5 - Math.ceil(rating);
+import { cx } from "@/lib/shared/classnames/cx";
 
-  return (
-    <section className={`${styles.rating} ${styles[size]}`}>
-      {Array.from({ length: fullStars }, (_, i) => (
-        <StarIcon key={`full-${i}`} className={`${styles.star} ${styles.full} ${styles[size]}`} />
-      ))}
+import { MAX_RATING } from "./Rating.constants";
+import type { RatingProps } from "./Rating.types";
+import { buildStars } from "./Rating.utils";
+import styles from "./Rating.module.scss";
 
-      {halfStar && (
-        <StarIcon
-          key="half"
-          className={`${styles.star} ${styles.half} ${styles[size]}`}
-        />
-      )}
-
-      {Array.from({ length: emptyStars }, (_, i) => (
-        <StarIcon key={`empty-${i}`} className={`${styles.star} ${styles.empty} ${styles[size]}`} />
-      ))}
-      {numbers && <p className={styles.rating__number}>{rating}/<span className={styles.rating__number_last}>5</span></p>}
-    </section>
-  );
-};
+/**
+ * Rating: five stars (full, half or empty) with an optional numeric value.
+ *
+ * @param props Component props.
+ * @param props.rating Rating value between 0 and 5.
+ * @param props.size Size preset.
+ * @param props.numbers Shows the numeric value beside the stars.
+ * @returns The rating.
+ */
+export const Rating: FC<RatingProps> = ({ rating, size, numbers = true }) => (
+  <section className={cx(styles.rating, styles[size])}>
+    {buildStars(rating).map((kind, index) => (
+      <StarIcon key={`${kind}-${index}`} className={cx(styles.star, styles[kind], styles[size])} />
+    ))}
+    {numbers && (
+      <p className={styles.rating__number}>
+        {rating}/<span className={styles.rating__number_last}>{MAX_RATING}</span>
+      </p>
+    )}
+  </section>
+);

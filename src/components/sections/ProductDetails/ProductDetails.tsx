@@ -18,7 +18,7 @@ import { Tabs } from "@/components/ui/Tabs";
 import { useAnimatedTab } from "./hooks/useAnimatedTab";
 import type { Product } from "@/lib/catalog/productDetails.types";
 import type { Review } from "@/lib/catalog/review.types";
-import { PRODUCT_TABS } from "./ProductDetails.constants";
+import { DEFAULT_TAB, PRODUCT_TABS, TAB_LABELS } from "./ProductDetails.constants";
 import styles from "./ProductDetails.module.scss";
 
 /**
@@ -45,7 +45,7 @@ export const ProductDetails = () => {
         <ProductImages mainImage={product.mainImage} additionalImages={product.additionalImages} />
         <ProductInfo product={product} />
       </main>
-      <Tabs onTabChange={changeTab} />
+      <Tabs tabs={TAB_LABELS} initialTab={DEFAULT_TAB} onTabChange={changeTab} />
       <div className={clsx(styles.tabContent, { [styles.animate]: animate })}>
         {tabContent[activeTab as keyof typeof tabContent]}
       </div>

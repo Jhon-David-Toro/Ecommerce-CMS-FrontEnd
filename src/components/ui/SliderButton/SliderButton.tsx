@@ -1,16 +1,24 @@
-import { FC } from 'react';
-import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/16/solid';
-import { SliderButtonProps } from './SliderButton.types';
-import styles from './SliderButton.module.scss';
+import type { FC } from "react";
 
+import { ARROW_ICONS } from "./SliderButton.constants";
+import type { SliderButtonProps } from "./SliderButton.types";
+import styles from "./SliderButton.module.scss";
+
+/**
+ * SliderButton: round arrow button that moves a slider left or right.
+ *
+ * @param props Component props.
+ * @param props.direction Side the arrow points to.
+ * @param props.onClick Called when the button is pressed.
+ * @param props.disabled Disables the button.
+ * @returns The arrow button.
+ */
 export const SliderButton: FC<SliderButtonProps> = ({ direction, onClick, disabled }) => {
+  const Icon = ARROW_ICONS[direction];
+
   return (
-    <button
-      className={`${styles.arrow}`}
-      onClick={onClick}
-      disabled={disabled}
-    >
-      {direction === 'left' ? <ArrowLeftIcon className={styles.arrow__size}/> : <ArrowRightIcon className={styles.arrow__size}/>}
+    <button className={styles.arrow} onClick={onClick} disabled={disabled} aria-label={`Slide ${direction}`}>
+      <Icon className={styles.arrow__size} />
     </button>
   );
 };

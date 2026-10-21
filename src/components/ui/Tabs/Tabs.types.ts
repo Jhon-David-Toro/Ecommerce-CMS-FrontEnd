@@ -1,3 +1,5 @@
 export interface TabsProps {
-    onTabChange: (tab: string) => void;
+  tabs: readonly string[];
+  initialTab: string;
+  onTabChange: (tab: string) => void;
 }

@@ -1,37 +1,24 @@
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
-import { render, screen, fireEvent } from '@testing-library/react';
+
 import { SliderButton } from "./SliderButton";
-import { SVGProps } from 'react';
 
-vi.mock('@heroicons/react/16/solid', () => ({
-  ArrowLeftIcon: (props: SVGProps<SVGSVGElement>) => <svg data-testid="left-icon" {...props} />,
-  ArrowRightIcon: (props: SVGProps<SVGSVGElement>) => <svg data-testid="right-icon" {...props} />,
-}));
-
-describe(SliderButton.name, () => {
-  it('renders the left arrow icon when direction is "left"', () => {
-    render(<SliderButton direction="left" onClick={() => {}} disabled={false} />);
-    expect(screen.getByTestId('left-icon')).toBeInTheDocument();
+describe("SliderButton", () => {
+  it.each(["left", "right"] as const)("is labelled with its %s direction", (direction) => {
+    render(<SliderButton direction={direction} onClick={vi.fn()} disabled={false} />);
+    expect(screen.getByRole("button", { name: `Slide ${direction}` })).toBeInTheDocument();
   });
 
-  it('renders the right arrow icon when direction is "right"', () => {
-    render(<SliderButton direction="right" onClick={() => {}} disabled={false} />);
-    expect(screen.getByTestId('right-icon')).toBeInTheDocument();
+  it("calls onClick when pressed", async () => {
+    const onClick = vi.fn();
+    render(<SliderButton direction="right" onClick={onClick} disabled={false} />);
+    await userEvent.click(screen.getByRole("button"));
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
 
-  it('calls the onClick function when clicked', () => {
-    const handleClick = vi.fn();
-    render(<SliderButton direction="right" onClick={handleClick} disabled={false} />);
-
-    const button = screen.getByRole('button');
-    fireEvent.click(button);
-
-    expect(handleClick).toHaveBeenCalledTimes(1);
-  });
-
-  it('disables the button when disabled is true', () => {
-    render(<SliderButton direction="left" onClick={() => {}} disabled={true} />);
-    const button = screen.getByRole('button');
-    expect(button).toBeDisabled();
+  it("is disabled when requested", () => {
+    render(<SliderButton direction="left" onClick={vi.fn()} disabled />);
+    expect(screen.getByRole("button")).toBeDisabled();
   });
 });

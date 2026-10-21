@@ -1,10 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
-
-import { useClickOutside } from "@/lib/shared/dom/useClickOutside";
-
-import { SelectProps } from "./Select.types";
+import { useSelect } from "./hooks/useSelect";
+import { SelectListbox } from "./parts/SelectListbox";
+import type { SelectProps } from "./Select.types";
 import styles from "./Select.module.scss";
 
 /**
@@ -17,49 +15,15 @@ import styles from "./Select.module.scss";
  * @returns The select.
  */
 export const Select = ({ value, options, onChange }: SelectProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useClickOutside(containerRef, () => setIsOpen(false));
-
-  /**
-   * Reports the picked option and closes the listbox.
-   *
-   * @param option Option the user picked.
-   */
-  const handleSelect = (option: string) => {
-    onChange(option);
-    setIsOpen(false);
-  };
+  const { containerRef, isOpen, toggle, select } = useSelect({ onChange });
 
   return (
     <div className={styles.select} ref={containerRef}>
-      <button
-        type="button"
-        className={styles.select__trigger}
-        onClick={() => setIsOpen((open) => !open)}
-        aria-haspopup="listbox"
-        aria-expanded={isOpen}
-      >
+      <button type="button" className={styles.select__trigger} onClick={toggle} aria-haspopup="listbox" aria-expanded={isOpen}>
         <span>{value}</span>
         <span className={styles.select__arrow} />
       </button>
-
-      {isOpen && (
-        <ul className={styles.select__options} role="listbox">
-          {options.map((option) => (
-            <li
-              key={option}
-              role="option"
-              aria-selected={option === value}
-              className={`${styles.select__option} ${option === value ? styles["select__option--active"] : ""}`}
-              onClick={() => handleSelect(option)}
-            >
-              {option}
-            </li>
-          ))}
-        </ul>
-      )}
+      {isOpen && <SelectListbox value={value} options={options} onSelect={select} />}
     </div>
   );
 };

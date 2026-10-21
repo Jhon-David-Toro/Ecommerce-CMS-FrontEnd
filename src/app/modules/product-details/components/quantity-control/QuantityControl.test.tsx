@@ -1,16 +1,16 @@
+import { describe, expect, it, vi } from "vitest";
 import { render, screen, fireEvent } from '@testing-library/react';
 import QuantityControl from './QuantityControl';
-import '@testing-library/jest-dom';
 
 describe(QuantityControl.name, () => {
   it('renders with the initial quantity', () => {
-    const setQuantity = jest.fn();
+    const setQuantity = vi.fn();
     render(<QuantityControl quantity={2} setQuantity={setQuantity} />);
     expect(screen.getByText('2')).toBeInTheDocument();
   });
 
   it('increments the quantity when "+" button is clicked', () => {
-    const setQuantity = jest.fn();
+    const setQuantity = vi.fn();
     render(<QuantityControl quantity={2} setQuantity={setQuantity} />);
     const incrementButton = screen.getByText('+');
     fireEvent.click(incrementButton);
@@ -18,7 +18,7 @@ describe(QuantityControl.name, () => {
   });
 
   it('decrements the quantity when "−" button is clicked', () => {
-    const setQuantity = jest.fn();
+    const setQuantity = vi.fn();
     render(<QuantityControl quantity={2} setQuantity={setQuantity} />);
     const decrementButton = screen.getByText('−');
     fireEvent.click(decrementButton);
@@ -26,7 +26,7 @@ describe(QuantityControl.name, () => {
   });
 
   it('does not decrement below 1', () => {
-    const setQuantity = jest.fn();
+    const setQuantity = vi.fn();
     render(<QuantityControl quantity={1} setQuantity={setQuantity} />);
     const decrementButton = screen.getByText('−');
     fireEvent.click(decrementButton);

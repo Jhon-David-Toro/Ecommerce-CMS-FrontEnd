@@ -1,6 +1,6 @@
+import { describe, expect, it } from "vitest";
 import { render, screen, fireEvent } from '@testing-library/react';
 import FaqItem from './FaqItem';
-import '@testing-library/jest-dom';
 
 describe(FaqItem.name, () => {
   const mockFaq = {

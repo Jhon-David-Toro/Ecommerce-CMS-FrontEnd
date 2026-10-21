@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { calculateLensPosition, calculateZoomedImageTranslate } from './imageZoomUtils';
 import { IMAGE_CONFIG } from '../constants/ImageConfig.constant';
 

@@ -1,8 +1,9 @@
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { render, screen, fireEvent } from '@testing-library/react';
 import Sidebar from './Sidebar';
 
 describe(Sidebar.name, () => {
-  const mockToggle = jest.fn();
+  const mockToggle = vi.fn();
   const mockMenu = [
     { label: 'Home', href: '/' },
     { label: 'Products', href: '/products' },

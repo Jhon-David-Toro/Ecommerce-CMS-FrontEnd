@@ -1,9 +1,9 @@
+import { describe, expect, it, vi } from "vitest";
 import { render, screen } from '@testing-library/react';
 import { FAQ } from './interfaces/fag/faq.interface';
 import Faqs from './Faqs';
-import '@testing-library/jest-dom';
 
-jest.mock('./components/faq-list/FaqList', () => {
+vi.mock('./components/faq-list/FaqList', () => {
   const FaqList = ({ faqs }: { faqs: FAQ[] }) => (
     <div>
       <ul>
@@ -16,7 +16,7 @@ jest.mock('./components/faq-list/FaqList', () => {
 
   FaqList.displayName = 'FaqList';
 
-  return FaqList;
+  return { default: FaqList };
 });
 
 describe(Faqs.name, () => {

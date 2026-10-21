@@ -1,31 +1,31 @@
+import { beforeEach, describe, expect, it, type Mock, vi } from "vitest";
 import { render } from '@testing-library/react';
 import ProductImages from './ProductImages';
-import '@testing-library/jest-dom';
 import { AdditionalImagesProps } from '../../interfaces/additional-images/AdditionalImages.interface';
 import { MainImageProps } from '../../interfaces/main-image/MainImage.interface';
 
-jest.mock('../../constants/ImageConfig.constant', () => ({
+vi.mock('../../constants/ImageConfig.constant', () => ({
     IMAGE_CONFIG: {
         IS_MOBILE: 768,
     },
 }));
 
-jest.mock('../main-image/MainImage', () => {
+vi.mock('../main-image/MainImage', () => {
     const Mock = ({ currentMainImage }: MainImageProps) => (
         <div data-testid="main-image">MainImage: {currentMainImage}</div>
     );
     Mock.displayName = 'MainImage';
-    return Mock;
+    return { default: Mock };
 });
 
-jest.mock('../additional-images/AdditionalImages', () => {
+vi.mock('../additional-images/AdditionalImages', () => {
     const Mock = ({ additionalImages }: AdditionalImagesProps) => (
         <div data-testid="additional-images">
             AdditionalImages: {additionalImages.join(', ')}
         </div>
     );
     Mock.displayName = 'AdditionalImages';
-    return Mock;
+    return { default: Mock };
 });
 
 

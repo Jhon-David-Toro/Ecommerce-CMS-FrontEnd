@@ -1,60 +1,32 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import SelectColor from './SelectColor';
-import '@testing-library/jest-dom';
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { describe, expect, it, vi } from "vitest";
 
-describe(SelectColor.name, () => {
-  const mockOnColorChange = jest.fn();
+import SelectColor from "./SelectColor";
 
-  const mockColors = [
-    { name: 'Red', hex: '#ff0000' },
-    { name: 'Green', hex: '#00ff00' },
-    { name: 'Blue', hex: '#0000ff' },
-  ];
+const colors = [
+  { name: "Red", hex: "#ff0000" },
+  { name: "Green", hex: "#00ff00" },
+  { name: "Blue", hex: "#0000ff" },
+];
 
-  beforeEach(() => {
-    mockOnColorChange.mockClear();
+describe("SelectColor", () => {
+  it("shows the title and one button per color", () => {
+    render(<SelectColor colors={colors} selectedColor="Green" onColorChange={vi.fn()} />);
+    expect(screen.getByText("Select Colors")).toBeInTheDocument();
+    expect(screen.getAllByRole("button")).toHaveLength(colors.length);
   });
 
-  it('renders the title and all color buttons', () => {
-    render(
-      <SelectColor
-        colors={mockColors}
-        selectedColor="Green"
-        onColorChange={mockOnColorChange}
-      />
-    );
-
-    expect(screen.getByText('Select Colors')).toBeInTheDocument();
-    const buttons = screen.getAllByRole('button');
-    expect(buttons).toHaveLength(mockColors.length);
+  it("marks only the selected color as pressed", () => {
+    render(<SelectColor colors={colors} selectedColor="Green" onColorChange={vi.fn()} />);
+    expect(screen.getByRole("button", { name: "Green", pressed: true })).toHaveStyle({ backgroundColor: "#00ff00" });
+    expect(screen.getByRole("button", { name: "Red", pressed: false })).toBeInTheDocument();
   });
 
-  it('applies the selected class to the correct color', () => {
-    const { container } = render(
-      <SelectColor
-        colors={mockColors}
-        selectedColor="Green"
-        onColorChange={mockOnColorChange}
-      />
-    );
-
-    const selectedButton = container.querySelector(`.${'colors__options_button'}.${'selected'}`);
-    expect(selectedButton).toBeInTheDocument();
-    expect(selectedButton).toHaveStyle({ backgroundColor: '#00ff00' });
-  });
-
-  it('calls onColorChange when a color button is clicked', () => {
-    render(
-      <SelectColor
-        colors={mockColors}
-        selectedColor="Red"
-        onColorChange={mockOnColorChange}
-      />
-    );
-
-    const greenButton = screen.getAllByRole('button')[1];
-    fireEvent.click(greenButton);
-
-    expect(mockOnColorChange).toHaveBeenCalledWith('Green');
+  it("reports the chosen color", async () => {
+    const onColorChange = vi.fn();
+    render(<SelectColor colors={colors} selectedColor="Red" onColorChange={onColorChange} />);
+    await userEvent.click(screen.getByRole("button", { name: "Green" }));
+    expect(onColorChange).toHaveBeenCalledWith("Green");
   });
 });

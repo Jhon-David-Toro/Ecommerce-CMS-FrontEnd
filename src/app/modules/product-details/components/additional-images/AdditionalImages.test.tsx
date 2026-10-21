@@ -1,65 +1,41 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import AdditionalImages from './AdditionalImages';
-import '@testing-library/jest-dom';
-import Image from 'next/image';
+import { fireEvent, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { describe, expect, it, vi } from "vitest";
 
-jest.mock('../thumbnail/Thumbnail', () => {
-    const Thumbnail: React.FC<{
-      image: string;
-      isSelected: boolean;
-      onSelect: () => void;
-      alt: string;
-      ariaLabel: string;
-    }> = ({ image, isSelected, onSelect, alt }) => (
-      <div
-        role="tab"
-        aria-selected={isSelected}
-        onClick={onSelect}
-        data-testid={`thumbnail-${alt}`}
-      >
-        <Image src={image} alt={alt} />
-      </div>
-    );
-  
-    Thumbnail.displayName = 'Thumbnail';
-  
-    return Thumbnail;
+import AdditionalImages from "./AdditionalImages";
+
+const mainImage = "/main.jpg";
+const additionalImages = ["/image1.jpg", "/image2.jpg"];
+
+const renderThumbnails = (setCurrentMainImage = vi.fn()) => {
+  render(
+    <AdditionalImages
+      currentMainImage={mainImage}
+      mainImage={mainImage}
+      setCurrentMainImage={setCurrentMainImage}
+      additionalImages={additionalImages}
+    />,
+  );
+  screen.getAllByRole("img").forEach((image) => fireEvent.load(image));
+  return setCurrentMainImage;
+};
+
+describe("AdditionalImages", () => {
+  it("renders the main image and the additional images as tabs", () => {
+    renderThumbnails();
+    expect(screen.getByRole("tablist", { name: "Thumbnail images" })).toBeInTheDocument();
+    expect(screen.getAllByRole("tab")).toHaveLength(3);
   });
 
-describe('AdditionalImages', () => {
-  const mockSetCurrentMainImage = jest.fn();
-  const mockMainImage = 'mockMainImage.jpg';
-  const mockAdditionalImages = ['image1.jpg', 'image2.jpg'];
-
-  beforeEach(() => {
-    render(
-      <AdditionalImages
-        currentMainImage={mockMainImage}
-        mainImage={mockMainImage}
-        setCurrentMainImage={mockSetCurrentMainImage}
-        additionalImages={mockAdditionalImages}
-      />
-    );
+  it("selects the thumbnail of the current main image", () => {
+    renderThumbnails();
+    expect(screen.getByRole("tab", { name: "Select main product image", selected: true })).toBeInTheDocument();
+    expect(screen.getByRole("tab", { name: "Select thumbnail 1 of the product", selected: false })).toBeInTheDocument();
   });
 
-  it('renders main image and additional images as thumbnails', () => {
-    expect(screen.getByTestId('thumbnail-Thumbnail of the main image')).toBeInTheDocument();
-    
-    mockAdditionalImages.forEach((image, index) => {
-      expect(screen.getByTestId(`thumbnail-Miniature ${index + 1} of the product`)).toBeInTheDocument();
-    });
-  });
-
-  it('marks the current main image thumbnail as selected', () => {
-    expect(screen.getByTestId('thumbnail-Thumbnail of the main image')).toHaveAttribute('aria-selected', 'true');
-    
-    mockAdditionalImages.forEach((image, index) => {
-      expect(screen.getByTestId(`thumbnail-Miniature ${index + 1} of the product`)).toHaveAttribute('aria-selected', 'false');
-    });
-  });
-
-  it('calls setCurrentMainImage when a thumbnail is clicked', () => {
-    fireEvent.click(screen.getByTestId('thumbnail-Miniature 1 of the product'));
-    expect(mockSetCurrentMainImage).toHaveBeenCalledWith(mockAdditionalImages[0]);
+  it("changes the main image when a thumbnail is clicked", async () => {
+    const setCurrentMainImage = renderThumbnails();
+    await userEvent.click(screen.getByRole("tab", { name: "Select thumbnail 1 of the product" }));
+    expect(setCurrentMainImage).toHaveBeenCalledWith("/image1.jpg");
   });
 });

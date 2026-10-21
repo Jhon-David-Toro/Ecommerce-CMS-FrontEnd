@@ -1,16 +1,20 @@
-import { render, screen } from '@testing-library/react';
-import ProductPage from './page';
+import { render, screen } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-jest.mock('@/app/modules/product-details/ProductDetails', () => {
-  const MockProductDetails = () => <div data-testid="product-details">Product Details</div>;
-  MockProductDetails.displayName = 'MockProductDetails';
-  return MockProductDetails;
-});
+import ProductPage from "./page";
 
-describe(ProductPage.name, () => {
-  it('renders the ProductDetails component', () => {
+describe("ProductPage", () => {
+  beforeEach(() => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ json: () => Promise.resolve([]) }));
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it("renders the product details", async () => {
     render(<ProductPage />);
-
-    expect(screen.getByTestId('product-details')).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2, name: "One Life Graphic T-Shirt" })).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: "YOU MIGHT ALSO LIKE" })).toBeInTheDocument();
   });
 });

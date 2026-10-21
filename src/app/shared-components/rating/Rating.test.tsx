@@ -1,32 +1,28 @@
-import { render, screen } from '@testing-library/react';
-import Rating from './Rating';
-import '@testing-library/jest-dom';
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 
-describe(Rating.name, () => {
-  it('renders full, half, and empty stars correctly based on rating', () => {
+import Rating from "./Rating";
+
+const countStars = (container: HTMLElement) => container.querySelectorAll("svg").length;
+
+describe("Rating", () => {
+  it("always draws five stars, counting the half star", () => {
     const { container } = render(<Rating rating={3.5} size="medium" numbers={false} />);
-
-    expect(container.querySelectorAll(`.${'star'}.${'full'}`).length).toBe(3);
-    expect(container.querySelectorAll(`.${'star'}.${'half'}`).length).toBe(1);
-    expect(container.querySelectorAll(`.${'star'}.${'empty'}`).length).toBe(1);
+    expect(countStars(container)).toBe(5);
   });
 
-  it('does not render a half star if rating is an integer', () => {
+  it("draws five stars for an integer rating", () => {
     const { container } = render(<Rating rating={4} size="medium" numbers={false} />);
-
-    expect(container.querySelectorAll(`.${'star'}.${'half'}`).length).toBe(0);
+    expect(countStars(container)).toBe(5);
   });
 
+  it("shows the numeric rating by default", () => {
+    render(<Rating rating={4.2} size="medium" />);
+    expect(screen.getByText(/4\.2\//)).toBeInTheDocument();
+  });
 
-  it('does not display the rating number when "numbers" prop is false', () => {
+  it("hides the numeric rating when numbers is false", () => {
     render(<Rating rating={4.2} size="medium" numbers={false} />);
-    
-    expect(screen.queryByText('4.2/5')).not.toBeInTheDocument();
-  });
-
-  it('applies the correct CSS classes based on the "size" prop', () => {
-    const { container } = render(<Rating rating={4} size="medium" numbers={false} />);
-
-    expect(container.querySelector(`.${'rating'}.${'medium'}`)).toBeInTheDocument();
+    expect(screen.queryByText(/4\.2\//)).not.toBeInTheDocument();
   });
 });

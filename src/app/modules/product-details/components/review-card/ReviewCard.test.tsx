@@ -1,9 +1,10 @@
+import { describe, expect, it, vi } from "vitest";
 import { render, screen } from '@testing-library/react';
 import { Review } from '../../interfaces/review-card/ReviewCard.interface';
 import ReviewCard from './ReviewCard';
 import { RatingProps } from '@/app/shared-components/rating/interfaces/Rating.interface';
 
-jest.mock('@/app/shared-components/rating/Rating', () => ({
+vi.mock('@/app/shared-components/rating/Rating', () => ({
   __esModule: true,
   default: ({ rating }: RatingProps) => <div data-testid="rating">Rating: {rating}</div>,
 }));

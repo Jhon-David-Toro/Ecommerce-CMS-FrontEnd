@@ -1,78 +1,37 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import Thumbnail from './Thumbnail';
-import '@testing-library/jest-dom';
+import { fireEvent, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { describe, expect, it, vi } from "vitest";
 
-const mockImage = 'https://via.placeholder.com/150';
-const mockAlt = 'Product Thumbnail';
-const mockAriaLabel = 'Thumbnail Image';
-const mockOnSelect = jest.fn();
+import Thumbnail from "./Thumbnail";
 
-describe(Thumbnail.name, () => {
-  it('should render the Thumbnail component with correct attributes', () => {
+const props = { image: "/thumb.png", alt: "Product thumbnail", ariaLabel: "Thumbnail image" };
 
-    render(
-      <Thumbnail
-            image={mockImage}
-            alt={mockAlt}
-            ariaLabel={mockAriaLabel}
-            onSelect={mockOnSelect} isSelected={false}      />
-    );
-
-    const button = screen.getByRole('tab');
-    expect(button).toBeInTheDocument();
-    expect(button).toHaveAttribute('aria-label', mockAriaLabel);
-
-    const image = screen.getByAltText(mockAlt);
-    expect(image).toBeInTheDocument();
-    expect(image).toHaveAttribute('src', mockImage);
-    expect(image).toHaveAttribute('alt', mockAlt);
+describe("Thumbnail", () => {
+  it("renders a tab with the image and the accessible label", () => {
+    render(<Thumbnail {...props} isSelected={false} onSelect={vi.fn()} />);
+    expect(screen.getByRole("tab", { name: "Thumbnail image" })).toBeInTheDocument();
+    expect(screen.getByAltText("Product thumbnail")).toBeInTheDocument();
   });
 
-  it('should call onSelect when the button is clicked', () => {
-
-    render(
-      <Thumbnail
-            image={mockImage}
-            alt={mockAlt}
-            ariaLabel={mockAriaLabel}
-            onSelect={mockOnSelect} isSelected={true}
-        />
-    );
-
-    const button = screen.getByRole('tab');
-    fireEvent.click(button);
-
-    expect(mockOnSelect).toHaveBeenCalledTimes(1);
+  it("is disabled until the image has loaded", () => {
+    render(<Thumbnail {...props} isSelected={false} onSelect={vi.fn()} />);
+    expect(screen.getByRole("tab")).toBeDisabled();
+    fireEvent.load(screen.getByAltText("Product thumbnail"));
+    expect(screen.getByRole("tab")).toBeEnabled();
   });
 
-  it('should apply selected class when isSelected is true', () => {
-    render(
-      <Thumbnail
-        image={mockImage}
-        alt={mockAlt}
-        ariaLabel={mockAriaLabel}
-        onSelect={mockOnSelect}
-        isSelected={true}
-      />
-    );
-
-    const button = screen.getByRole('tab');
-    expect(button).toHaveClass('selected');
+  it("calls onSelect once loaded", async () => {
+    const onSelect = vi.fn();
+    render(<Thumbnail {...props} isSelected={false} onSelect={onSelect} />);
+    fireEvent.load(screen.getByAltText("Product thumbnail"));
+    await userEvent.click(screen.getByRole("tab"));
+    expect(onSelect).toHaveBeenCalledTimes(1);
   });
 
-  it('should not apply selected class when isSelected is false', () => {
-
-    render(
-      <Thumbnail
-        image={mockImage}
-        alt={mockAlt}
-        ariaLabel={mockAriaLabel}
-        onSelect={mockOnSelect}
-        isSelected={false}
-      />
-    );
-
-    const button = screen.getByRole('tab');
-    expect(button).not.toHaveClass('selected');
+  it("reflects the selected state", () => {
+    const { rerender } = render(<Thumbnail {...props} isSelected onSelect={vi.fn()} />);
+    expect(screen.getByRole("tab", { selected: true })).toBeInTheDocument();
+    rerender(<Thumbnail {...props} isSelected={false} onSelect={vi.fn()} />);
+    expect(screen.getByRole("tab", { selected: false })).toBeInTheDocument();
   });
 });

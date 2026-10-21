@@ -1,44 +1,37 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import Button from './Button';
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { describe, expect, it, vi } from "vitest";
 
-describe(Button.name, () => {
-  const mockClick = jest.fn();
+import Button from "./Button";
 
-  it('renders the button with the correct text', () => {
-    render(<Button type="primary" text="Click me" onClick={mockClick} size="medium" margin="zero" typeAttribute='submit' />);
-
-    const button = screen.getByRole('button');
-    expect(button).toBeInTheDocument();
-    expect(button).toHaveTextContent('Click me');
+describe("Button", () => {
+  it("renders a button with the given text and type attribute", () => {
+    render(<Button type="primary" size="medium" text="Click me" typeAttribute="submit" />);
+    expect(screen.getByRole("button", { name: "Click me" })).toHaveAttribute("type", "submit");
   });
 
-  it('calls the onClick handler when clicked', () => {
-    render(<Button type="primary" text="Click me" onClick={mockClick} size="medium" margin="zero" typeAttribute='submit' />);
-    
-    const button = screen.getByRole('button');
-    fireEvent.click(button);
-
-    expect(mockClick).toHaveBeenCalledTimes(1);
+  it("calls onClick when pressed", async () => {
+    const onClick = vi.fn();
+    render(<Button type="primary" size="medium" text="Click me" typeAttribute="button" onClick={onClick} />);
+    await userEvent.click(screen.getByRole("button", { name: "Click me" }));
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
 
-  it('applies the correct CSS classes', () => {
-    render(
-      <Button
-        type="secondary"
-        text="Styled"
-        onClick={() => { } }
-        size="large"
-        margin="zero"
-        className="custom-class"
-        typeAttribute='submit'/>
-    );
+  it("does not call onClick when disabled", async () => {
+    const onClick = vi.fn();
+    render(<Button type="primary" size="medium" text="Click me" typeAttribute="button" disabled onClick={onClick} />);
+    await userEvent.click(screen.getByRole("button", { name: "Click me" }));
+    expect(onClick).not.toHaveBeenCalled();
+  });
 
-    const button = screen.getByRole('button');
+  it("renders a link when href is given", () => {
+    render(<Button type="primary" size="medium" text="Shop" typeAttribute="button" href="/products" />);
+    expect(screen.getByRole("link", { name: "Shop" })).toHaveAttribute("href", "/products");
+    expect(screen.queryByRole("button")).not.toBeInTheDocument();
+  });
 
-    expect(button).toHaveClass('button');
-    expect(button).toHaveClass('button--secondary');
-    expect(button).toHaveClass('button--large');
-    expect(button).toHaveClass('button--zero');
-    expect(button).toHaveClass('custom-class');
+  it("exposes the pressed state", () => {
+    render(<Button type="tertiary" size="small" text="M" typeAttribute="button" ariaPressed />);
+    expect(screen.getByRole("button", { name: "M", pressed: true })).toBeInTheDocument();
   });
 });

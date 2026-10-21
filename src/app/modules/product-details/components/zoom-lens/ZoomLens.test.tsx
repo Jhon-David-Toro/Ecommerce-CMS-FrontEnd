@@ -1,6 +1,6 @@
+import { describe, expect, it } from "vitest";
 import { render, screen } from '@testing-library/react';
 import ZoomLens from './ZoomLens';
-import '@testing-library/jest-dom';
 
 const mockLensPosition = {
   x: 100,

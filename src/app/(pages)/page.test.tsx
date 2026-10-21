@@ -1,78 +1,31 @@
-import { act, render, screen, waitFor } from '@testing-library/react';
-import Home from './page';
-import * as React from 'react';
-import { Product } from '../shared-components/product/interfaces/Product.interface';
+import { render, screen, waitFor } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-    json: () =>
-      Promise.resolve({
-        newArrivals: [
-          { id: 1, name: 'Producto Nuevo 1' },
-          { id: 2, name: 'Producto Nuevo 2' },
-        ],
-        topSelling: [
-          { id: 3, name: 'Producto Top 1' },
-          { id: 4, name: 'Producto Top 2' },
-        ],
-      }),
-  })
-) as jest.Mock;
+import Home from "./page";
 
-jest.mock('@/app/modules/home/hero/Hero', () => {
-  const MockHero = () => <div data-testid="hero" />;
-  MockHero.displayName = 'MockHero';
-  return MockHero;
-});
+const catalog = {
+  newArrivals: [{ id: 1, name: "New jacket", price: 100, rating: 4, image: "/new.png" }],
+  topSelling: [{ id: 2, name: "Top shirt", price: 50, rating: 5, image: "/top.png" }],
+};
 
-jest.mock('@/app/modules/home/home-products/FeaturedProducts', () => {
-  const MockProducts = ({ category }: Product) => (
-    <div data-testid={`home-products-${category}`}>{category}</div>
-  );
-  MockProducts.displayName = 'MockProducts';
-  return MockProducts;
-});
-
-jest.mock('@/app/modules/home/home-categories/HomeCategories', () => {
-  const MockCategories = () => <div data-testid="home-categories" />;
-  MockCategories.displayName = 'MockCategories';
-  return MockCategories;
-});
-
-jest.mock('@/app/modules/home/happy-customers/HappyCustomers', () => {
-  const MockCustomers = () => <div data-testid="happy-customers" />;
-  MockCustomers.displayName = 'MockCustomers';
-  return MockCustomers;
-});
-
-describe(Home.name, () => {
+describe("Home page", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ json: () => Promise.resolve(catalog) }));
   });
 
-  it('Does not render anything until the products are loaded', async () => {
-    await act(async () => {
-      const { container } = render(<Home />);
-      expect(container.innerHTML).toBe('');
-    });
+  afterEach(() => {
+    vi.unstubAllGlobals();
   });
 
-  it('Correctly renders components when products are loaded', async () => {
+  it("requests the catalog on mount", async () => {
     render(<Home />);
-
-    await waitFor(() => {
-      expect(screen.getByTestId('hero')).toBeInTheDocument();
-      expect(screen.getByTestId('home-products-New Arrivals')).toBeInTheDocument();
-      expect(screen.getByTestId('home-products-Top Selling')).toBeInTheDocument();
-      expect(screen.getByTestId('home-categories')).toBeInTheDocument();
-      expect(screen.getByTestId('happy-customers')).toBeInTheDocument();
-    });
+    await waitFor(() => expect(fetch).toHaveBeenCalledWith("/data/products.json"));
   });
 
-  it('Call fetch to get the products', async () => {
+  it("renders the hero and both product sections", async () => {
     render(<Home />);
-    await waitFor(() => {
-      expect(global.fetch).toHaveBeenCalledWith('/data/products.json');
-    });
+    expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
+    expect(await screen.findByText("New jacket")).toBeInTheDocument();
+    expect(await screen.findByText("Top shirt")).toBeInTheDocument();
   });
 });

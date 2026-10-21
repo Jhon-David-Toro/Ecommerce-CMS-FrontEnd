@@ -1,30 +1,30 @@
+import { describe, expect, it, vi } from "vitest";
 import { render, screen } from '@testing-library/react';
 import ProductInfo from './ProductInfo';
-import '@testing-library/jest-dom';
 
-jest.mock('@/app/shared-components/rating/Rating', () => {
+vi.mock('@/app/shared-components/rating/Rating', () => {
   const MockRating: React.FC<{ rating: number }> = ({ rating }) => (
     <div data-testid="mock-rating">Rating: {rating}</div>
   );
-  return MockRating;
+  return { default: MockRating };
 });
 
-jest.mock('@/app/shared-components/button/Button', () => {
+vi.mock('@/app/shared-components/button/Button', () => {
   const MockButton: React.FC<{ text: string }> = ({ text }) => (
     <button>{text}</button>
   );
-  return MockButton;
+  return { default: MockButton };
 });
 
-jest.mock('@/app/modules/product-details/components/quantity-control/QuantityControl', () => {
+vi.mock('@/app/modules/product-details/components/quantity-control/QuantityControl', () => {
   const MockQuantityControl: React.FC<{
     quantity: number;
     setQuantity: (q: number) => void;
   }> = ({ quantity }) => <div>Quantity: {quantity}</div>;
-  return MockQuantityControl;
+  return { default: MockQuantityControl };
 });
 
-jest.mock('@/app/shared-components/product-price/ProductPrice', () => {
+vi.mock('@/app/shared-components/product-price/ProductPrice', () => {
   const MockProductPrice: React.FC<{
     price: number;
     discountPrice: number;
@@ -32,30 +32,30 @@ jest.mock('@/app/shared-components/product-price/ProductPrice', () => {
   }> = ({ price, discountPrice }) => (
     <div>{`Price: ${price}, Discounted: ${discountPrice}`}</div>
   );
-  return MockProductPrice;
+  return { default: MockProductPrice };
 });
 
-jest.mock('@/app/shared-components/select-color/SelectColor', () => {
+vi.mock('@/app/shared-components/select-color/SelectColor', () => {
   const MockColorSelector: React.FC<{
     colors: { name: string; hex: string }[];
     selectedColor: string;
     onColorChange: (color: string) => void;
   }> = ({ selectedColor }) => <div>Selected Color: {selectedColor}</div>;
-  return MockColorSelector;
+  return { default: MockColorSelector };
 });
 
-jest.mock('@/app/modules/product-details/components/size-selector/SizeSelector', () => {
+vi.mock('@/app/modules/product-details/components/size-selector/SizeSelector', () => {
   const MockSizeSelector: React.FC<{
     sizes: string[];
     selectedSize: string;
     onSizeChange: (size: string) => void;
   }> = ({ selectedSize }) => <div>Selected Size: {selectedSize}</div>;
-  return MockSizeSelector;
+  return { default: MockSizeSelector };
 });
 
-jest.mock('@/app/modules/product-details/components/divider/Divider', () => {
+vi.mock('@/app/modules/product-details/components/divider/Divider', () => {
   const MockDivider: React.FC = () => <hr />;
-  return MockDivider;
+  return { default: MockDivider };
 });
 
 const mockProduct = {

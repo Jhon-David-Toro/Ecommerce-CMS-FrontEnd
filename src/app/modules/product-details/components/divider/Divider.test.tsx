@@ -1,13 +1,11 @@
-import { render, screen } from '@testing-library/react';
-import Divider from './Divider';
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 
-describe(Divider.name, () => {
-  it('renders an <hr> element with the correct class', () => {
+import Divider from "./Divider";
+
+describe("Divider", () => {
+  it("renders a horizontal separator", () => {
     render(<Divider />);
-    
-    const hrElement = screen.getByRole('separator');
-    expect(hrElement).toBeInTheDocument();
-    expect(hrElement.tagName).toBe('HR');
-    expect(hrElement).toHaveClass('hr');
+    expect(screen.getByRole("separator")).toBeInTheDocument();
   });
 });

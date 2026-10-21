@@ -1,16 +1,11 @@
-import { render, screen } from '@testing-library/react';
-import ProductsPage from './page';
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 
-jest.mock('@/app/modules/products/Products', () => {
-  const MockProducts = () => <div data-testid="products">Products</div>;
-  MockProducts.displayName = 'MockProducts';
-  return MockProducts;
-});
+import ProductsPage from "./page";
 
-describe(ProductsPage.name, () => {
-  it('renders the Products component', () => {
+describe("ProductsPage", () => {
+  it("renders the products listing", () => {
     render(<ProductsPage />);
-
-    expect(screen.getByTestId('products')).toBeInTheDocument();
+    expect(screen.getByRole("main")).toBeInTheDocument();
   });
 });

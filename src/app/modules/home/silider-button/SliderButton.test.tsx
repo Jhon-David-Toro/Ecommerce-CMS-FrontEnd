@@ -1,8 +1,9 @@
+import { describe, expect, it, vi } from "vitest";
 import { render, screen, fireEvent } from '@testing-library/react';
 import SliderButton from './SliderButton';
 import { SVGProps } from 'react';
 
-jest.mock('@heroicons/react/16/solid', () => ({
+vi.mock('@heroicons/react/16/solid', () => ({
   ArrowLeftIcon: (props: SVGProps<SVGSVGElement>) => <svg data-testid="left-icon" {...props} />,
   ArrowRightIcon: (props: SVGProps<SVGSVGElement>) => <svg data-testid="right-icon" {...props} />,
 }));
@@ -19,7 +20,7 @@ describe(SliderButton.name, () => {
   });
 
   it('calls the onClick function when clicked', () => {
-    const handleClick = jest.fn();
+    const handleClick = vi.fn();
     render(<SliderButton direction="right" onClick={handleClick} disabled={false} />);
 
     const button = screen.getByRole('button');

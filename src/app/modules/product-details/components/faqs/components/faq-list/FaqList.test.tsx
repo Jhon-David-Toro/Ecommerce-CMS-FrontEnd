@@ -1,13 +1,13 @@
+import { describe, expect, it, vi } from "vitest";
 import { render, screen } from '@testing-library/react';
 import FaqList from './FaqList';
-import '@testing-library/jest-dom';
 
-jest.mock('../faq-item/FaqItem', () => {
+vi.mock('../faq-item/FaqItem', () => {
     const MockFaqItem = ({ faq }: { faq: { id: string; question: string; answer: string } }) => (
       <li data-testid="faq-item">{faq.question}</li>
     );
     MockFaqItem.displayName = 'MockFaqItem';
-    return MockFaqItem;
+    return { default: MockFaqItem };
 });
   
 describe(FaqList.name, () => {

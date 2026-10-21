@@ -1,14 +1,25 @@
-import ReactDOMServer from 'react-dom/server';
-import RootLayout from './layout';
-import '@/app/__mocks__/__shared-components__/globalMocks';
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 
-describe(RootLayout.name, () => {
-  it('Renders layout structure with mocked components', () => {
-    ReactDOMServer.renderToString(
-      <RootLayout>
-        <div data-testid="page-content">Contenido de la página</div>
-      </RootLayout>
+import { LayoutBody } from "./layout";
+
+describe("LayoutBody", () => {
+  it("wraps the page content in the main landmark", () => {
+    render(
+      <LayoutBody>
+        <p>Page content</p>
+      </LayoutBody>,
     );
+    expect(screen.getByRole("main")).toHaveTextContent("Page content");
+  });
 
+  it("renders the navigation and the footer around the content", () => {
+    render(
+      <LayoutBody>
+        <p>Page content</p>
+      </LayoutBody>,
+    );
+    expect(screen.getAllByRole("navigation").length).toBeGreaterThan(0);
+    expect(screen.getByRole("contentinfo")).toBeInTheDocument();
   });
 });

@@ -1,6 +1,6 @@
+import { beforeEach, describe, expect, it } from "vitest";
 import { render, screen } from '@testing-library/react';
 import ProductDescription from './ProductDescription';
-import '@testing-library/jest-dom';
 
 const mockDescription = {
   overview: 'This is a great product.',

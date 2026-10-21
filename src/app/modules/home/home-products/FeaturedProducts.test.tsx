@@ -1,56 +1,38 @@
-import { render, screen } from '@testing-library/react';
-import FeaturedProducts from './FeaturedProducts';
-import type { Product } from '@/app/shared-components/product/interfaces/Product.interface';
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { describe, expect, it } from "vitest";
 
-jest.mock('@/app/shared-components/button/Button', () => ({
-  __esModule: true,
-  default: ({ text }: { text: string }) => <button>{text}</button>,
-}));
+import type { Product } from "@/app/shared-components/product/interfaces/Product.interface";
 
-jest.mock('@/app/shared-components/product/ProductCard', () => ({
-  __esModule: true,
-  default: ({ name }: { name: string }) => (
-    <div data-testid="product-card">{name}</div>
-  ),
-}));
+import FeaturedProducts from "./FeaturedProducts";
 
-describe('FeaturedProducts Component', () => {
-  const mockProducts: Product[] = [
-    {
-      id: 1,
-      name: 'T-shirt',
-      price: 30,
-      discountPrice: 25,
-      rating: 4.3,
-      image: '/tshirt.jpg',
-      category: 'clothing',
-      discount: 20,
-    },
-    {
-      id: 2,
-      name: 'Sneakers',
-      price: 100,
-      discountPrice: null,
-      rating: 4.8,
-      image: '/sneakers.jpg',
-    },
-  ];
+const buildProducts = (count: number): Product[] =>
+  Array.from({ length: count }, (_, index) => ({
+    id: index + 1,
+    name: `Product ${index + 1}`,
+    price: 30,
+    discountPrice: null,
+    rating: 4,
+    image: `/product-${index + 1}.jpg`,
+  }));
 
-  it('renders the category title', () => {
-    render(<FeaturedProducts category="Top Picks" products={mockProducts} />);
-    expect(screen.getByText('Top Picks')).toBeInTheDocument();
+describe("FeaturedProducts", () => {
+  it("shows the section title", () => {
+    render(<FeaturedProducts category="Top Picks" products={buildProducts(2)} />);
+    expect(screen.getByRole("heading", { level: 2, name: "Top Picks" })).toBeInTheDocument();
   });
 
-  it('renders all ProductCards passed', () => {
-    render(<FeaturedProducts category="Top Picks" products={mockProducts} />);
-    const productCards = screen.getAllByTestId('product-card');
-    expect(productCards).toHaveLength(2);
-    expect(screen.getByText('T-shirt')).toBeInTheDocument();
-    expect(screen.getByText('Sneakers')).toBeInTheDocument();
+  it("shows every product when there are four or fewer, without the View All button", () => {
+    render(<FeaturedProducts category="Top Picks" products={buildProducts(4)} />);
+    expect(screen.getAllByRole("img", { name: /Product \d/ })).toHaveLength(4);
+    expect(screen.queryByRole("button", { name: "View All" })).not.toBeInTheDocument();
   });
 
-  it('renders the "View All" button', () => {
-    render(<FeaturedProducts category="Top Picks" products={mockProducts} />);
-    expect(screen.getByRole('button', { name: /View All/i })).toBeInTheDocument();
+  it("shows four products first and the rest after View All", async () => {
+    render(<FeaturedProducts category="Top Picks" products={buildProducts(6)} />);
+    expect(screen.queryByText("Product 5")).not.toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: "View All" }));
+    expect(screen.getByText("Product 5")).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "View All" })).not.toBeInTheDocument();
   });
 });

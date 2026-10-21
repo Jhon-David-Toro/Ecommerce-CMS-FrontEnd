@@ -1,36 +1,43 @@
-import { render, screen, act } from '@testing-library/react';
-import StatsCounter from './StatsCounter';
-import '@testing-library/jest-dom';
+import { act, render, screen } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-jest.useFakeTimers();
+import StatsCounter from "./StatsCounter";
 
-describe(StatsCounter.name, () => {
-  it('Render the label correctly', () => {
-    render(<StatsCounter endValue={1000} label="Active users" />);
-    expect(screen.getByText('Active users')).toBeInTheDocument();
+describe("StatsCounter", () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
   });
 
-  it('Renders multiple counters independently', () => {
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it("shows the label and starts at zero", () => {
+    render(<StatsCounter endValue={1000} label="Active users" />);
+    expect(screen.getByText("Active users")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 3 })).toHaveTextContent("0+");
+  });
+
+  it("counts up to the end value", () => {
+    render(<StatsCounter endValue={2000} label="Products" duration={1000} />);
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
+    expect(screen.getByRole("heading", { level: 3 })).toHaveTextContent("2,000+");
+  });
+
+  it("keeps several counters independent", () => {
     render(
       <>
-        <StatsCounter endValue={200} label="International Brands" duration={1000} />
-        <StatsCounter endValue={2000} label="High-Quality Products" duration={1000} />
-        <StatsCounter endValue={30000} label="Happy Customers" duration={1000} />
-      </>
+        <StatsCounter endValue={200} label="Brands" duration={1000} />
+        <StatsCounter endValue={30000} label="Customers" duration={1000} />
+      </>,
     );
-
     act(() => {
-      jest.advanceTimersByTime(1000);
+      vi.advanceTimersByTime(1000);
     });
-
-    const headings = screen.getAllByRole('heading', { level: 3 });
-
-    expect(headings[0]).toHaveTextContent('200+');
-    expect(headings[1]).toHaveTextContent('2,000+');
-    expect(headings[2]).toHaveTextContent('30,000+');
-
-    expect(screen.getByText('International Brands')).toBeInTheDocument();
-    expect(screen.getByText('High-Quality Products')).toBeInTheDocument();
-    expect(screen.getByText('Happy Customers')).toBeInTheDocument();
+    const [brands, customers] = screen.getAllByRole("heading", { level: 3 });
+    expect(brands).toHaveTextContent("200+");
+    expect(customers).toHaveTextContent("30,000+");
   });
 });

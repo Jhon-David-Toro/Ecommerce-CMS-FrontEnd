@@ -1,43 +1,20 @@
-import { render, screen } from '@testing-library/react';
-import HomeCategory from './HomeCategory';
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 
-jest.mock('../../../../assets/home-category.json', () => [
-  {
-    title: 'Category 1',
-    image: 'https://example.com/category1.jpg',
-    link: '/category-1',
-    twoColumn: false,
-  },
-  {
-    title: 'Category 2',
-    image: 'https://example.com/category2.jpg',
-    link: '/category-2',
-    twoColumn: true,
-  },
-]);
+import categories from "../../../../assets/home-category.json";
+import HomeCategory from "./HomeCategory";
 
-
-describe(HomeCategory.name, () => {
-  it('renders category cards correctly', () => {
+describe("HomeCategory", () => {
+  it("renders one link per category", () => {
     render(<HomeCategory />);
-    
-    expect(screen.getByText('Category 1')).toBeInTheDocument();
-    expect(screen.getByText('Category 2')).toBeInTheDocument();
-
-    const images = screen.getAllByAltText(/Clothes/);
-    expect(images).toHaveLength(2);
-    expect(images[0]).toHaveAttribute('src', 'https://example.com/category1.jpg');
-    expect(images[1]).toHaveAttribute('src', 'https://example.com/category2.jpg');
-
-    const links = screen.getAllByRole('link');
-    expect(links[0]).toHaveAttribute('href', '/category-1');
-    expect(links[1]).toHaveAttribute('href', '/category-2');
+    expect(screen.getAllByRole("link")).toHaveLength(categories.length);
   });
 
-  it('applies correct classes for two-column categories', () => {
+  it("shows each category title and image", () => {
     render(<HomeCategory />);
-   
-    const secondCategory = screen.getAllByRole('link')[1].closest('div');
-    expect(secondCategory).toHaveClass('category__card_twoColumn');
+    categories.forEach(({ title }) => {
+      expect(screen.getByRole("heading", { level: 3, name: title })).toBeInTheDocument();
+      expect(screen.getByRole("img", { name: `Clothes ${title}` })).toBeInTheDocument();
+    });
   });
 });

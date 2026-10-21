@@ -7,3 +7,9 @@ export interface ProductsGridProps {
 export interface ProductsFiltersProps {
   isOpen: boolean;
 }
+
+export interface CatalogScope {
+  query: string;
+  view: string;
+  brand: string;
+}

@@ -18,3 +18,8 @@
     outline: none;
   }
 }
+
+.toolbar__search::-webkit-search-cancel-button {
+  cursor: pointer;
+  filter: grayscale(1) brightness(0);
+}

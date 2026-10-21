@@ -1,16 +1,16 @@
 import { Suspense } from "react";
 
-import { SearchResults } from "@/components/sections/SearchResults";
+import { Products } from "@/components/sections/Products";
 import { Spinner } from "@/components/ui/Spinner";
 
 /**
- * Search results page.
+ * Search results page: the products page narrowed by the `q` text of the address.
  *
  * @returns The products that match the search.
  */
 const SearchPage = () => (
   <Suspense fallback={<Spinner />}>
-    <SearchResults />
+    <Products />
   </Suspense>
 );
 

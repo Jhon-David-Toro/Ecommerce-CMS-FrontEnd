@@ -20,3 +20,14 @@
   color: var(--color-info);
   background-color: rgba(25, 118, 210, 0.1);
 }
+
+.alert {
+  margin-top: utils.pxToRem(16px);
+
+  a {
+    font-weight: 600;
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: utils.pxToRem(3px);
+  }
+}

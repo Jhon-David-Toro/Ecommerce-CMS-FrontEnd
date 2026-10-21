@@ -21,7 +21,8 @@ export const Login = () => {
 
   return (
     <AuthLayout
-      title="SIGN IN"
+      title="Welcome back"
+      subtitle="Sign in to see your orders and check out faster."
       form={form}
       submitLabel="Sign in"
       pendingLabel="Signing in..."

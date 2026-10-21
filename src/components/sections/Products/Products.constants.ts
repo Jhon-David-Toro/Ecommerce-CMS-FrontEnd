@@ -11,3 +11,9 @@ export const SORT_COMPARATORS: Record<string, ProductComparator> = {
   [SORT_LABELS.newest]: (a, b) => b.createdAt - a.createdAt,
   [SORT_LABELS.popular]: (a, b) => b.rating - a.rating,
 };
+
+export const VIEWS = { sale: "sale", newest: "new" } as const;
+
+export const NEW_ARRIVALS_LIMIT = 12;
+
+export const VIEW_TITLES: Record<string, string> = { [VIEWS.sale]: "On Sale", [VIEWS.newest]: "New Arrivals" };

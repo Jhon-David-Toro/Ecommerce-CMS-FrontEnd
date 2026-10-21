@@ -9,6 +9,7 @@ export const AUTH_ERRORS = {
   emailTaken: "An account with this email already exists.",
   blocked: "This account has been blocked.",
   weakPassword: "The password must have at least 6 characters.",
+  wrongPassword: "The current password is not correct.",
 } as const;
 
 export const MIN_PASSWORD_LENGTH = 6;

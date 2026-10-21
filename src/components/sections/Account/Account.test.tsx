@@ -46,6 +46,27 @@ describe("Account", () => {
     expect(screen.queryByRole("link", { name: "SH-0002" })).not.toBeInTheDocument();
   });
 
+  it("changes the name of the customer", async () => {
+    render(<Account />);
+    await userEvent.click(await screen.findByRole("button", { name: "Account settings" }));
+    const name = screen.getByLabelText("Full name");
+    await userEvent.clear(name);
+    await userEvent.type(name, "Renamed Customer");
+    await userEvent.click(screen.getByRole("button", { name: "Save details" }));
+    expect(await screen.findByText("Your details were updated.")).toBeInTheDocument();
+    expect(useAuthStore.getState().user?.name).toBe("Renamed Customer");
+  });
+
+  it("rejects a wrong current password", async () => {
+    render(<Account />);
+    await userEvent.click(await screen.findByRole("button", { name: "Account settings" }));
+    await userEvent.type(screen.getByLabelText("Current password"), "wrong-one");
+    await userEvent.type(screen.getByLabelText("New password"), "newpass1");
+    await userEvent.type(screen.getByLabelText("Repeat new password"), "newpass1");
+    await userEvent.click(screen.getByRole("button", { name: "Change password" }));
+    expect(await screen.findByText("The current password is not correct.")).toBeInTheDocument();
+  });
+
   it("signs out and goes home", async () => {
     render(<Account />);
     await userEvent.click(await screen.findByRole("button", { name: "Sign out" }));

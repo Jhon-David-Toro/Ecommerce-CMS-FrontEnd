@@ -3,7 +3,6 @@
 import type { FC } from "react";
 
 import { FooterSection } from "@/components/patterns/FooterSection";
-import { NewsletterForm } from "@/components/patterns/NewsletterForm";
 import { useSiteContent } from "@/lib/content/useSiteContent";
 
 import { FooterBottom } from "./parts/FooterBottom";
@@ -26,7 +25,6 @@ export const Footer: FC = () => {
           <FooterSection key={column.title} section={column} />
         ))}
       </div>
-      <NewsletterForm />
       <FooterBottom />
     </footer>
   );

@@ -1,41 +1,35 @@
 "use client";
 
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { useState } from "react";
 
 import { useSiteContent } from "@/lib/content/useSiteContent";
 
 import styles from "./Banner.module.scss";
 
 /**
- * Banner: promotion strip with a link, editable from the admin panel and hidden when switched off.
+ * Banner: promotion strip with a link, editable from the admin panel, hidden when switched off and closable by the shopper.
  *
- * @returns The promotion banner, or nothing when disabled.
+ * @returns The promotion banner, or nothing when disabled or closed.
  */
 export const Banner = () => {
   const { banner } = useSiteContent();
+  const [isClosed, setIsClosed] = useState(false);
 
-  if (!banner.enabled) return null;
+  if (!banner.enabled || isClosed) return null;
 
   return (
     <header className={styles.banner}>
       <p className={styles.banner__paragraph}>
         {banner.text}{" "}
-        <Link href={banner.linkHref} passHref className={styles.signup}>
+        <Link href={banner.linkHref} className={styles.signup}>
           {banner.linkText}
         </Link>
       </p>
-      <svg
-        className={styles.banner__close}
-        role="img"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth="1.5"
-        aria-label="Close icon"
-        stroke="currentColor"
-      >
-        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-      </svg>
+      <button type="button" className={styles.banner__close} aria-label="Close banner" onClick={() => setIsClosed(true)}>
+        <XMarkIcon />
+      </button>
     </header>
   );
 };

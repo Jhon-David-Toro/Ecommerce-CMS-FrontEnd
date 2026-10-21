@@ -8,6 +8,7 @@ export interface AuthLayoutForm {
 
 export interface AuthLayoutProps {
   title: string;
+  subtitle: string;
   form: AuthLayoutForm;
   submitLabel: string;
   pendingLabel: string;

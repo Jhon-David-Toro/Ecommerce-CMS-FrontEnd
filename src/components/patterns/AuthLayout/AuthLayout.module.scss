@@ -1,11 +1,55 @@
 @use "src/styles/utils" as utils;
 
+.screen {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+
+  @include utils.media-ltlg() {
+    grid-template-columns: 1fr;
+  }
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: utils.pxToRem(48px);
+  color: white;
+  background-color: black;
+
+  @include utils.media-ltlg() {
+    display: none;
+  }
+
+  &__logo {
+    font-size: utils.pxToRem(32px);
+    font-weight: 900;
+    color: white;
+  }
+
+  &__text {
+    max-width: utils.pxToRem(420px);
+    font-size: utils.pxToRem(36px);
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  &__back {
+    color: white;
+    text-decoration: underline;
+    text-underline-offset: utils.pxToRem(4px);
+  }
+}
+
 .auth {
   display: flex;
   flex-direction: column;
-  gap: utils.pxToRem(20px);
+  gap: utils.pxToRem(16px);
+  justify-content: center;
+  width: 100%;
   max-width: utils.pxToRem(440px);
-  padding: utils.pxToRem(48px) utils.pxToRem(16px) utils.pxToRem(80px);
+  padding: utils.pxToRem(48px) utils.pxToRem(24px);
   margin: 0 auto;
 
   &__title {
@@ -13,10 +57,15 @@
     font-weight: 900;
   }
 
+  &__subtitle {
+    color: var(--color-muted);
+  }
+
   &__form {
     display: flex;
     flex-direction: column;
     gap: utils.pxToRem(16px);
+    margin-top: utils.pxToRem(8px);
   }
 
   &__switch {

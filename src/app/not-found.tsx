@@ -1,17 +1,16 @@
-import { Button } from "@/components/ui/Button";
-import { EmptyState } from "@/components/ui/EmptyState";
+import { NotFoundPage } from "@/components/sections/NotFoundPage";
+
+import { LayoutBody } from "./(pages)/layout";
 
 /**
- * Page shown when no route matches the address.
+ * Page shown when no route matches the address, inside the storefront banner, navigation and footer.
  *
- * @returns The not found message.
+ * @returns The not found page.
  */
 export default function NotFound() {
   return (
-    <EmptyState
-      title="Page not found"
-      description="The page you are looking for does not exist or was moved."
-      action={<Button type="primary" size="medium" text="Back to the store" href="/" typeAttribute="button" />}
-    />
+    <LayoutBody>
+      <NotFoundPage />
+    </LayoutBody>
   );
 }

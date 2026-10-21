@@ -26,7 +26,8 @@ export const Register = () => {
 
   return (
     <AuthLayout
-      title="CREATE ACCOUNT"
+      title="Create your account"
+      subtitle="It takes a minute and lets you track your orders."
       form={form}
       submitLabel="Create account"
       pendingLabel="Creating account..."

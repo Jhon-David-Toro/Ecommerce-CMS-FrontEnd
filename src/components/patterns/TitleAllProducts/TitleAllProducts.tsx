@@ -22,7 +22,7 @@ export const TitleAllProducts = (props: TitleAllProductsProps) => {
 
   return (
     <section className={styles.container}>
-      <h2 className={styles.container__title}>{getTitle(selectedCategoryName)}</h2>
+      <h2 className={styles.container__title}>{getTitle(props.heading || selectedCategoryName)}</h2>
       <div className={styles.container__info}>
         <p className={styles.container__showing}>{getShowingText(props)}</p>
         <Select value={sortBy} options={SORT_OPTIONS} onChange={setSortBy} />

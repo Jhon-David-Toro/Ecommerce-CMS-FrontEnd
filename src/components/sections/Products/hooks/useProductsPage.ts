@@ -5,6 +5,8 @@ import { useClickOutside } from "@/lib/shared/dom/useClickOutside";
 import { useEscKey } from "@/lib/shared/dom/useEscKey";
 
 import { PRODUCTS_PER_PAGE } from "../Products.constants";
+import { getScopeTitle } from "../Products.utils";
+import { useCatalogScope } from "./useCatalogScope";
 import { useFilteredProducts } from "./useFilteredProducts";
 import { usePagination } from "./usePagination";
 
@@ -15,7 +17,8 @@ import { usePagination } from "./usePagination";
  */
 export const useProductsPage = () => {
   const { isFiltersOpen, setIsFiltersOpen } = useFilterStore();
-  const { products, isLoading } = useFilteredProducts();
+  const scope = useCatalogScope();
+  const { products, isLoading } = useFilteredProducts(scope);
   const { currentPage, totalPages, pageItems, setCurrentPage } = usePagination(products, PRODUCTS_PER_PAGE);
   const filtersRef = useRef<HTMLElement>(null);
   const pageRef = useRef<HTMLElement>(null);
@@ -33,5 +36,16 @@ export const useProductsPage = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  return { isLoading, isFiltersOpen, filtersRef, pageRef, total: products.length, currentPage, totalPages, pageItems, changePage };
+  return {
+    title: getScopeTitle(scope),
+    isLoading,
+    isFiltersOpen,
+    filtersRef,
+    pageRef,
+    total: products.length,
+    currentPage,
+    totalPages,
+    pageItems,
+    changePage,
+  };
 };

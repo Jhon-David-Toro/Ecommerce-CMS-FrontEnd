@@ -99,6 +99,11 @@
     padding-left: utils.pxToRem(10px);
     background-color: transparent;
 
+    &::-webkit-search-cancel-button {
+      cursor: pointer;
+      filter: grayscale(1) brightness(0);
+    }
+
     &:focus {
       outline: none;
     }

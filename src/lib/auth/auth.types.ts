@@ -28,6 +28,8 @@ export interface AuthState {
   signIn: (credentials: Credentials) => Promise<PublicUser>;
   signUp: (input: RegisterInput) => Promise<PublicUser>;
   signOut: () => Promise<void>;
+  saveProfile: (input: ProfileInput) => Promise<PublicUser>;
+  savePassword: (input: PasswordInput) => Promise<void>;
 }
 
 export interface AuthFormOptions<V> {
@@ -35,4 +37,14 @@ export interface AuthFormOptions<V> {
   validate: (values: V) => Record<string, string>;
   authenticate: (values: V) => Promise<PublicUser>;
   fallbackError: string;
+}
+
+export interface ProfileInput {
+  name: string;
+  email: string;
+}
+
+export interface PasswordInput {
+  current: string;
+  next: string;
 }

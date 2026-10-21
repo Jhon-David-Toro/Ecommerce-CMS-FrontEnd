@@ -91,3 +91,35 @@ export const getCurrentUser = async () => {
  */
 export const updateUser = async (id: number, patch: Partial<Pick<User, "role" | "blocked" | "name">>) =>
   toPublicUser(await userRepository.update(id, patch));
+
+/**
+ * Changes the name and email of a user.
+ *
+ * @param id User id.
+ * @param input New name and email.
+ * @param input.name New name.
+ * @param input.email New email.
+ * @returns The updated user.
+ * @throws When another account already uses the email.
+ */
+export const updateProfile = async (id: number, { name, email }: { name: string; email: string }) => {
+  const normalizedEmail = email.trim().toLowerCase();
+  const taken = (await userRepository.list()).some((user) => user.id !== id && user.email === normalizedEmail);
+  if (taken) throw new Error(AUTH_ERRORS.emailTaken);
+  return toPublicUser(await userRepository.update(id, { name: name.trim(), email: normalizedEmail }));
+};
+
+/**
+ * Changes the password of a user after checking the current one.
+ *
+ * @param id User id.
+ * @param current Current password.
+ * @param next New password.
+ * @throws When the current password is wrong or the new one is too short.
+ */
+export const changePassword = async (id: number, current: string, next: string) => {
+  const user = await userRepository.getById(id);
+  if (!user || user.password !== current) throw new Error(AUTH_ERRORS.wrongPassword);
+  if (next.length < MIN_PASSWORD_LENGTH) throw new Error(AUTH_ERRORS.weakPassword);
+  await userRepository.update(id, { password: next });
+};

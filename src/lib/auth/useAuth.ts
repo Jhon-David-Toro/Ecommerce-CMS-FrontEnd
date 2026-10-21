@@ -8,11 +8,11 @@ import { useAuthStore } from "./authStore";
  * @returns The signed-in user, whether the session was already checked and the auth actions.
  */
 export const useAuth = () => {
-  const { user, isReady, hydrate, signIn, signUp, signOut } = useAuthStore();
+  const { user, isReady, hydrate, signIn, signUp, signOut, saveProfile, savePassword } = useAuthStore();
 
   useEffect(() => {
     if (!isReady) void hydrate();
   }, [isReady, hydrate]);
 
-  return { user, isReady, signIn, signUp, signOut };
+  return { user, isReady, signIn, signUp, signOut, saveProfile, savePassword };
 };

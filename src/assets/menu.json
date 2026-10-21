@@ -1,15 +1,38 @@
 {
-    "navbar": [
-      { "label": "Shop", "href": "/" },
-      { "label": "On Sale", "href": "/" },
-      { "label": "New Arrivals", "href": "/" },
-      { "label": "Brands", "href": "/t" }
-    ],
-    "sidebar": [
-      { "label": "Shop", "href": "/" },
-      { "label": "On Sale", "href": "/" },
-      { "label": "New Arrivals", "href": "/" },
-      { "label": "Brands", "href": "/" }
-    ]
-  }
-  
+  "navbar": [
+    {
+      "label": "Shop",
+      "href": "/products"
+    },
+    {
+      "label": "On Sale",
+      "href": "/products?view=sale"
+    },
+    {
+      "label": "New Arrivals",
+      "href": "/products?view=new"
+    },
+    {
+      "label": "Brands",
+      "href": "/brands"
+    }
+  ],
+  "sidebar": [
+    {
+      "label": "Shop",
+      "href": "/products"
+    },
+    {
+      "label": "On Sale",
+      "href": "/products?view=sale"
+    },
+    {
+      "label": "New Arrivals",
+      "href": "/products?view=new"
+    },
+    {
+      "label": "Brands",
+      "href": "/brands"
+    }
+  ]
+}

@@ -16,13 +16,13 @@ import styles from "./Products.module.scss";
  * @returns The products page content.
  */
 export const Products = () => {
-  const { isFiltersOpen, filtersRef, pageRef, total, currentPage, totalPages, pageItems, changePage } = useProductsPage();
+  const { title, isFiltersOpen, filtersRef, pageRef, total, currentPage, totalPages, pageItems, changePage } = useProductsPage();
 
   return (
     <main className={styles.products} ref={pageRef}>
       <ProductsFilters ref={filtersRef} isOpen={isFiltersOpen} />
       <section className={styles.products__cards}>
-        <TitleAllProducts currentPage={currentPage} productsPerPage={PRODUCTS_PER_PAGE} totalProducts={total} />
+        <TitleAllProducts heading={title} currentPage={currentPage} productsPerPage={PRODUCTS_PER_PAGE} totalProducts={total} />
         <ProductsGrid products={pageItems} />
         <Divider />
         <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={changePage} />

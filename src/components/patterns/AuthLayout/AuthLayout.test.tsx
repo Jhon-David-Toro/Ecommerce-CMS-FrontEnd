@@ -21,7 +21,8 @@ const buildForm = (overrides: Partial<AuthLayoutForm> = {}): AuthLayoutForm => (
 const renderLayout = (form: AuthLayoutForm) =>
   render(
     <AuthLayout
-      title="SIGN IN"
+      title="Welcome back"
+      subtitle="Sign in."
       form={form}
       submitLabel="Sign in"
       pendingLabel="Signing in..."
@@ -34,7 +35,7 @@ const renderLayout = (form: AuthLayoutForm) =>
 describe("AuthLayout", () => {
   it("shows the title, the fields and the link to the other page", () => {
     renderLayout(buildForm());
-    expect(screen.getByRole("heading", { name: "SIGN IN" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Welcome back" })).toBeInTheDocument();
     expect(screen.getByLabelText("Email")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Create an account" })).toBeInTheDocument();
   });

@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { AdminListView } from "@/components/patterns/AdminListView";
-import { FilterSelect } from "@/components/patterns/FilterSelect";
+import { ChipFilter } from "@/components/patterns/ChipFilter";
 import { Button } from "@/components/ui/Button";
 import { Spinner } from "@/components/ui/Spinner";
 import { deleteProduct, listProducts } from "@/lib/catalog/catalog.api";
@@ -37,7 +37,7 @@ export const AdminProducts = () => {
       description="Everything you sell, published or not."
       actions={<Button type="primary" size="small" text="New product" href="/admin/products/new" typeAttribute="button" />}
       searchLabel="Search products"
-      filters={<FilterSelect label="Status" options={STATUS_FILTERS} value={status} onChange={setStatus} />}
+      filters={<ChipFilter label="Status" options={STATUS_FILTERS} value={status} onChange={setStatus} />}
       controls={controls}
       table={table}
     >

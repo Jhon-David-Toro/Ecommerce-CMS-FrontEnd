@@ -29,7 +29,7 @@ describe("AdminProducts", () => {
     void id;
     await productRepository.create(draft);
     render(<AdminProducts />);
-    await userEvent.selectOptions(await screen.findByLabelText("Status"), "draft");
+    await userEvent.click(await screen.findByRole("button", { name: "Draft" }));
     expect(screen.getByRole("link", { name: "Secret draft" })).toBeInTheDocument();
     expect(screen.queryByRole("link", { name: "One Life Graphic T-Shirt" })).not.toBeInTheDocument();
   });

@@ -2,16 +2,39 @@
 
 .card {
   padding: utils.pxToRem(20px);
+  background-color: white;
   border: utils.pxToRem(1px) solid var(--color-border);
-  border-radius: var(--radius-card);
+  border-radius: utils.pxToRem(16px);
+
+  &__head {
+    display: flex;
+    gap: utils.pxToRem(12px);
+    align-items: center;
+    justify-content: space-between;
+  }
 
   &__label {
     font-size: utils.pxToRem(14px);
     color: var(--color-muted);
   }
 
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: utils.pxToRem(36px);
+    height: utils.pxToRem(36px);
+    background-color: #f0f0f2;
+    border-radius: utils.pxToRem(10px);
+
+    svg {
+      width: utils.pxToRem(20px);
+      height: utils.pxToRem(20px);
+    }
+  }
+
   &__value {
-    margin: utils.pxToRem(6px) 0;
+    margin: utils.pxToRem(10px) 0 utils.pxToRem(4px);
     font-size: utils.pxToRem(30px);
     font-weight: 800;
   }

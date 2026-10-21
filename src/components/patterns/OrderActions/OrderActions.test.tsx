@@ -22,9 +22,9 @@ describe("OrderActions", () => {
     expect(screen.queryByRole("button")).not.toBeInTheDocument();
   });
 
-  it("keeps the labels as accessible names when compact", () => {
+  it("shows text-only buttons when compact", () => {
     render(<OrderActions order={buildOrder({ status: "paid" })} onChange={vi.fn()} compact />);
-    expect(screen.getByRole("button", { name: "Mark as shipped" })).toHaveTextContent("");
+    expect(screen.getByRole("button", { name: "Mark as shipped" })).toHaveTextContent("Mark as shipped");
   });
 });
 

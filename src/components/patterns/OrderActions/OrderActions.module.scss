@@ -48,9 +48,7 @@
   }
 
   &_compact {
-    width: utils.pxToRem(34px);
-    height: utils.pxToRem(34px);
-    padding: 0;
-    border-radius: utils.pxToRem(8px);
+    padding: utils.pxToRem(7px) utils.pxToRem(14px);
+    font-size: utils.pxToRem(13px);
   }
 }

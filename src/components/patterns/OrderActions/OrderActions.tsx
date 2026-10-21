@@ -12,7 +12,7 @@ import styles from "./OrderActions.module.scss";
  * @param props Component props.
  * @param props.order Order to act on.
  * @param props.onChange Called with the order id and the status to move to.
- * @param props.compact Shows only icons, for table rows; the labels stay as accessible names.
+ * @param props.compact Shows text-only buttons, for table rows.
  * @returns The buttons, or nothing for an order that is finished.
  */
 export const OrderActions: FC<OrderActionsProps> = ({ order, onChange, compact = false }) => (

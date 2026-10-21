@@ -3,14 +3,14 @@
 import { useState } from "react";
 
 import { AdminListView } from "@/components/patterns/AdminListView";
-import { FilterSelect } from "@/components/patterns/FilterSelect";
+import { ChipFilter } from "@/components/patterns/ChipFilter";
 import { Spinner } from "@/components/ui/Spinner";
 import { listOrders } from "@/lib/orders/orders.api";
 import { useQuery } from "@/lib/shared/async/useQuery";
 import { useTableControls } from "@/lib/shared/table/useTableControls";
 
-import { NO_FILTERS, NO_ROWS, PAGE_SIZE, STATUS_FILTERS } from "./AdminOrders.constants";
-import { filterByStatus, matchesOrder } from "./AdminOrders.utils";
+import { NO_FILTERS, NO_ROWS, PAGE_SIZE } from "./AdminOrders.constants";
+import { buildStatusChips, filterByStatus, matchesOrder } from "./AdminOrders.utils";
 import { useOrderStatusChange } from "./hooks/useOrderStatusChange";
 import { useOrderTable } from "./hooks/useOrderTable";
 
@@ -32,7 +32,7 @@ export const AdminOrders = () => {
       title="Orders"
       description="Follow every purchase from payment to delivery."
       searchLabel="Search orders"
-      filters={<FilterSelect label="Status" options={STATUS_FILTERS} value={status} onChange={setStatus} />}
+      filters={<ChipFilter label="Status" options={buildStatusChips(data ?? NO_ROWS)} value={status} onChange={setStatus} />}
       controls={controls}
       table={table}
     />

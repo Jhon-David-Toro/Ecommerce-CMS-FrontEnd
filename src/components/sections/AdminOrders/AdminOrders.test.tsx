@@ -42,7 +42,7 @@ describe("AdminOrders", () => {
   it("filters by status", async () => {
     await seedOrders();
     render(<AdminOrders />);
-    await userEvent.selectOptions(await screen.findByLabelText("Status"), "delivered");
+    await userEvent.click(await screen.findByRole("button", { name: /^Delivered/ }));
     const table = screen.getByRole("table", { name: "Orders" });
     expect(within(table).getAllByRole("row")).toHaveLength(2);
     expect(within(table).getByText("SH-0002")).toBeInTheDocument();

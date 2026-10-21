@@ -1,0 +1,37 @@
+@use "src/styles/utils" as utils;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: utils.pxToRem(20px);
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: utils.pxToRem(14px);
+    padding: utils.pxToRem(20px);
+    border: utils.pxToRem(1px) solid var(--color-border);
+    border-radius: var(--radius-card);
+  }
+
+  &__legend {
+    padding: 0 utils.pxToRem(8px);
+    font-size: utils.pxToRem(18px);
+    font-weight: 700;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: utils.pxToRem(14px);
+
+    @include utils.media-xs() {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__hint {
+    font-size: utils.pxToRem(13px);
+    color: var(--color-muted);
+  }
+}

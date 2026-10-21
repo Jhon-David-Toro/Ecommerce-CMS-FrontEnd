@@ -29,6 +29,7 @@ export interface Order {
   email: string;
   items: OrderItem[];
   subtotal: number;
+  discount: number;
   shipping: number;
   total: number;
   status: OrderStatus;
@@ -43,3 +44,5 @@ export type OrderInput = Omit<Order, "id" | "number" | "status" | "createdAt">;
 export interface OrderListOptions {
   userId?: number;
 }
+
+export type StatusTone = "warning" | "info" | "success" | "danger";

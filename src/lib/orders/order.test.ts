@@ -12,6 +12,7 @@ const input = (quantity: number): OrderInput => ({
   email: "customer@shop.test",
   items: [{ productId: 1, name: "Shirt", image: "/x.png", price: 50, quantity, color: "Blue", size: "Large" }],
   subtotal: 50 * quantity,
+  discount: 0,
   shipping: 15,
   total: 50 * quantity + 15,
   paymentMethod: "cash_on_delivery",

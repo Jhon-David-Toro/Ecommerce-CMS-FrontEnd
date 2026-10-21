@@ -1,5 +1,5 @@
-import { REVENUE_STATUSES } from "./order.constants";
-import type { Order, OrderItem } from "./order.types";
+import { REVENUE_STATUSES, STATUS_TONES } from "./order.constants";
+import type { Order, OrderItem, OrderStatus, StatusTone } from "./order.types";
 
 /**
  * Sums the lines of an order.
@@ -36,3 +36,20 @@ export const buildOrderNumber = (id: number, prefix: string) => `${prefix}${Stri
  */
 export const getRevenue = (orders: Order[]) =>
   orders.filter((order) => REVENUE_STATUSES.includes(order.status)).reduce((sum, order) => sum + order.total, 0);
+
+/**
+ * Picks the badge color that represents an order status.
+ *
+ * @param status Order status.
+ * @returns The tone of the badge.
+ */
+export const getStatusTone = (status: OrderStatus): StatusTone => STATUS_TONES[status];
+
+/**
+ * Works out the percentage that a discount represents of a subtotal.
+ *
+ * @param subtotal Amount before the discount.
+ * @param discount Discount amount.
+ * @returns The discount as a whole percentage, or 0 for an empty subtotal.
+ */
+export const getDiscountPercent = (subtotal: number, discount: number) => (subtotal > 0 ? Math.round((discount / subtotal) * 100) : 0);

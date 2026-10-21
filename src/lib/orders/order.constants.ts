@@ -20,3 +20,13 @@ export const ORDER_NUMBER_PREFIX = "SH-";
 export const EMPTY_ADDRESS = { fullName: "", phone: "", street: "", city: "", state: "", postalCode: "", country: "" };
 
 export const REVENUE_STATUSES: OrderStatus[] = ["paid", "shipped", "delivered"];
+
+export const STATUS_TONES = {
+  pending: "warning",
+  paid: "info",
+  shipped: "info",
+  delivered: "success",
+  cancelled: "danger",
+} as const;
+
+export const ORDER_STATUS_FLOW: OrderStatus[] = ["pending", "paid", "shipped", "delivered", "cancelled"];

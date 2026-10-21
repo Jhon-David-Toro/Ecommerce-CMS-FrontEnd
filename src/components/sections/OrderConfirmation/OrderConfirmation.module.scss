@@ -1,0 +1,19 @@
+@use "src/styles/utils" as utils;
+
+.confirmation {
+  display: flex;
+  flex-direction: column;
+  gap: utils.pxToRem(20px);
+  align-items: flex-start;
+  padding: utils.pxToRem(32px) 0 utils.pxToRem(64px);
+  @include utils.container();
+
+  &__title {
+    font-size: utils.pxToRem(32px);
+    font-weight: 900;
+  }
+
+  &__text {
+    color: var(--color-muted);
+  }
+}

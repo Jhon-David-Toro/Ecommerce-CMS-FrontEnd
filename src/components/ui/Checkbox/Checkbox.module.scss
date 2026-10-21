@@ -1,0 +1,15 @@
+@use "src/styles/utils" as utils;
+
+.checkbox {
+  display: inline-flex;
+  gap: utils.pxToRem(10px);
+  align-items: center;
+  font-size: utils.pxToRem(15px);
+  cursor: pointer;
+
+  &__input {
+    width: utils.pxToRem(18px);
+    height: utils.pxToRem(18px);
+    accent-color: var(--color-ink);
+  }
+}

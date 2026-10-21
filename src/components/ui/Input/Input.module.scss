@@ -1,0 +1,46 @@
+@use "src/styles/utils" as utils;
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: utils.pxToRem(6px);
+
+  &__label {
+    font-size: utils.pxToRem(14px);
+    font-weight: 500;
+  }
+
+  &__input {
+    width: 100%;
+    padding: utils.pxToRem(12px) utils.pxToRem(16px);
+    font: inherit;
+    background-color: var(--color-surface);
+    border: utils.pxToRem(1px) solid transparent;
+    border-radius: var(--radius-field);
+    outline: none;
+    transition: border-color 0.2s;
+
+    &:focus {
+      border-color: var(--color-ink);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  &__error {
+    font-size: utils.pxToRem(13px);
+    color: var(--color-danger);
+  }
+
+  &__hint {
+    font-size: utils.pxToRem(13px);
+    color: var(--color-muted);
+  }
+}
+
+.invalid {
+  border-color: var(--color-danger);
+}

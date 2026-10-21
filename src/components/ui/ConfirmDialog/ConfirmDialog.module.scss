@@ -1,0 +1,36 @@
+@use "src/styles/utils" as utils;
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: utils.pxToRem(16px);
+  background-color: rgba(0, 0, 0, 0.45);
+}
+
+.dialog {
+  width: 100%;
+  max-width: utils.pxToRem(420px);
+  padding: utils.pxToRem(24px);
+  background-color: white;
+  border-radius: var(--radius-card);
+
+  &__title {
+    margin-bottom: utils.pxToRem(8px);
+    font-size: utils.pxToRem(20px);
+  }
+
+  &__message {
+    margin-bottom: utils.pxToRem(20px);
+    color: var(--color-muted);
+  }
+
+  &__actions {
+    display: flex;
+    gap: utils.pxToRem(12px);
+    justify-content: flex-end;
+  }
+}

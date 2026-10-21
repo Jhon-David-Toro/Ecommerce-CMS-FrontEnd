@@ -1,0 +1,25 @@
+@use "src/styles/utils" as utils;
+
+.spinner {
+  display: flex;
+  gap: utils.pxToRem(10px);
+  align-items: center;
+  justify-content: center;
+  padding: utils.pxToRem(32px);
+  color: var(--color-muted);
+
+  &__ring {
+    width: utils.pxToRem(20px);
+    height: utils.pxToRem(20px);
+    border: utils.pxToRem(2px) solid var(--color-border);
+    border-top-color: var(--color-ink);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

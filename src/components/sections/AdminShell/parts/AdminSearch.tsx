@@ -31,7 +31,7 @@ export const AdminSearch = ({ onSearch }: AdminSearchProps) => {
       <input
         type="search"
         value={text}
-        placeholder="Search products..."
+        placeholder="Search..."
         aria-label="Search products"
         onChange={(event) => setText(event.target.value)}
       />

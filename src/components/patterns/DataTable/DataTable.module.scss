@@ -12,10 +12,6 @@
   font-size: utils.pxToRem(14px);
   border-collapse: collapse;
 
-  @include utils.media-ltlg() {
-    min-width: utils.pxToRem(640px);
-  }
-
   th,
   td {
     padding: utils.pxToRem(12px) utils.pxToRem(16px);
@@ -50,5 +46,72 @@
   a {
     font-weight: 600;
     color: var(--color-ink);
+  }
+}
+
+@media (max-width: utils.pxToRem(720px)) {
+  .wrapper {
+    overflow: visible;
+    background: none;
+    border: 0;
+  }
+
+  .table {
+    display: block;
+
+    thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+
+    tbody {
+      display: flex;
+      flex-direction: column;
+      gap: utils.pxToRem(12px);
+    }
+
+    tbody tr {
+      display: flex;
+      flex-direction: column;
+      gap: utils.pxToRem(8px);
+      padding: utils.pxToRem(14px) utils.pxToRem(16px);
+      background-color: white;
+      border: utils.pxToRem(1px) solid var(--color-border);
+      border-radius: utils.pxToRem(16px);
+    }
+
+    tbody tr:hover td {
+      background-color: transparent;
+    }
+
+    td {
+      display: flex;
+      gap: utils.pxToRem(16px);
+      align-items: center;
+      justify-content: space-between;
+      padding: 0;
+      text-align: right;
+      border-bottom: 0;
+
+      &[data-label]::before {
+        flex-shrink: 0;
+        font-size: utils.pxToRem(12px);
+        color: var(--color-muted);
+        text-align: left;
+        text-transform: uppercase;
+        content: attr(data-label);
+      }
+
+      &:not([data-label]) {
+        justify-content: flex-start;
+      }
+
+      &[data-align="right"]:not([data-label]) {
+        justify-content: flex-end;
+      }
+    }
   }
 }

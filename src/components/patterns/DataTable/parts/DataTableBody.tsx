@@ -14,7 +14,7 @@ export const DataTableBody = <T,>({ columns, rows, getRowKey }: DataTableBodyPro
     {rows.map((row) => (
       <tr key={getRowKey(row)}>
         {columns.map((column) => (
-          <td key={column.key} data-align={column.align}>
+          <td key={column.key} data-align={column.align} data-label={column.header || undefined}>
             {column.render(row)}
           </td>
         ))}

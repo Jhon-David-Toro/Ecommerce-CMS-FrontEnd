@@ -4,15 +4,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   gap: utils.pxToRem(16px);
   margin-top: utils.pxToRem(32px);
 
   .pageNumbers {
     display: flex;
     gap: utils.pxToRem(8px);
+    padding: 0;
+    list-style: none;
 
     button {
-      padding: utils.pxToRem(8px) utils.pxToRem(12px);
+      min-width: utils.pxToRem(40px);
+      height: utils.pxToRem(40px);
+      padding: 0 utils.pxToRem(8px);
       border: none;
       background: none;
       cursor: pointer;
@@ -21,7 +26,7 @@
       font-size: utils.pxToRem(16px);
 
       &.active {
-        background: #f0f0f0;
+        background: black;
         color: #fff;
       }
 
@@ -45,7 +50,9 @@
       gap: utils.pxToRem(6px);
 
       button {
-        padding: utils.pxToRem(6px) utils.pxToRem(10px);
+        min-width: utils.pxToRem(36px);
+        height: utils.pxToRem(36px);
+        padding: 0 utils.pxToRem(6px);
         font-size: utils.pxToRem(14px);
       }
 
@@ -70,9 +77,10 @@
       gap: utils.pxToRem(4px);
 
       button {
-        padding: utils.pxToRem(4px) utils.pxToRem(8px);
+        min-width: utils.pxToRem(32px);
+        height: utils.pxToRem(32px);
+        padding: 0 utils.pxToRem(4px);
         font-size: utils.pxToRem(12px);
-        min-width: utils.pxToRem(28px); // Keeps the buttons from getting too small
       }
 
       // Optional: hides the ellipsis on phones

@@ -2,12 +2,12 @@
 
 .shell {
   display: grid;
-  grid-template-columns: utils.pxToRem(88px) 1fr;
+  grid-template-columns: utils.pxToRem(88px) minmax(0, 1fr);
   min-height: 100vh;
   background-color: #f6f6f8;
 
   @include utils.media-ltlg() {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto 1fr;
   }
 
@@ -119,6 +119,7 @@
     display: flex;
     flex-direction: column;
     min-width: 0;
+    max-width: 100%;
   }
 
   &__top {
@@ -145,7 +146,7 @@
     margin-right: auto;
 
     @include utils.media-ltlg() {
-      flex: 1 1 0;
+      flex: 1 1 utils.pxToRem(200px);
       min-width: 0;
       max-width: none;
       margin-right: 0;

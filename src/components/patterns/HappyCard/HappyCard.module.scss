@@ -11,12 +11,16 @@
     justify-content: center;
 
     @include utils.media-xs(){
-      width: utils.pxToRem(335px);
-      height: utils.pxToRem(240px);
+      flex-shrink: 0;
+      width: min(85vw, #{utils.pxToRem(340px)});
+      height: auto;
+      min-height: utils.pxToRem(220px);
     }
     @include utils.media-sm(){
-      width: utils.pxToRem(500px);
-      height: utils.pxToRem(240px);
+      flex-shrink: 0;
+      width: min(70vw, #{utils.pxToRem(440px)});
+      height: auto;
+      min-height: utils.pxToRem(220px);
     }
     @include utils.media-md(){
       width: utils.pxToRem(325px);

@@ -4,6 +4,10 @@
   flex: 1;
   min-width: utils.pxToRem(200px);
 
+  @include utils.media-xs(){
+    min-width: 0;
+  }
+
   @include utils.media-ltlg(){
     margin-bottom: utils.pxToRem(30px);
   }

@@ -1,25 +1,10 @@
-import { readJson, writeJson } from "@/lib/shared/storage/storage";
+import { IS_API_ENABLED } from "@/lib/shared/http/api.constants";
 
-import { DEFAULT_SETTINGS, SETTINGS_STORAGE_KEY } from "./settings.constants";
-import type { StoreSettings } from "./settings.types";
+import * as mock from "./settings.mock";
+import * as remote from "./settings.remote";
 
-/**
- * Reads the store settings.
- *
- * @returns The saved settings merged over the defaults.
- */
-export const getSettings = async (): Promise<StoreSettings> => ({
-  ...DEFAULT_SETTINGS,
-  ...readJson<Partial<StoreSettings>>(SETTINGS_STORAGE_KEY, {}),
-});
+const source = IS_API_ENABLED ? remote : mock;
 
-/**
- * Saves the store settings.
- *
- * @param settings Settings to store.
- * @returns The saved settings.
- */
-export const saveSettings = async (settings: StoreSettings) => {
-  writeJson(SETTINGS_STORAGE_KEY, settings);
-  return settings;
-};
+export const getSettings = source.getSettings;
+export const saveSettings = source.saveSettings;
+export const lookupPromoPercent = source.lookupPromoPercent;

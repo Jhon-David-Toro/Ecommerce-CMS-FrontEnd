@@ -1,4 +1,4 @@
-import { useAuthStore } from "@/lib/auth/authStore";
+import { isAdminSession } from "@/lib/auth/auth.session";
 import { createRepository } from "@/lib/mock/repository";
 import { IS_API_ENABLED } from "@/lib/shared/http/api.constants";
 import { createRemoteRepository } from "@/lib/shared/http/remoteRepository";
@@ -12,8 +12,7 @@ import type { Brand, Category } from "./taxonomy.types";
  * @param resource Name of the resource in the API, such as "categories".
  * @returns A function that gives the path at the moment of the request.
  */
-export const taxonomyListPath = (resource: string) => () =>
-  useAuthStore.getState().user?.role === "admin" ? `/api/admin/${resource}` : `/api/public/${resource}`;
+export const taxonomyListPath = (resource: string) => () => (isAdminSession() ? `/api/admin/${resource}` : `/api/public/${resource}`);
 
 export const categoryRepository = IS_API_ENABLED
   ? createRemoteRepository<Category>({ listPath: taxonomyListPath("categories"), itemPath: "/api/admin/categories" })

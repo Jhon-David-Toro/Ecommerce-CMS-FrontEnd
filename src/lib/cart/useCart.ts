@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 
-import { getSettings } from "@/lib/settings/settings.api";
-import { findPromoPercent } from "@/lib/settings/settings.utils";
+import { getSettings, lookupPromoPercent } from "@/lib/settings/settings.api";
 import { useQuery } from "@/lib/shared/async/useQuery";
 
 import type { CartTotals } from "./cart.types";
@@ -16,12 +15,13 @@ import { useCartStore } from "./cartStore";
 export const useCart = () => {
   const { items, promoCode, isReady, hydrate, addItem, setQuantity, removeItem, applyPromo, clear } = useCartStore();
   const { data: settings } = useQuery(getSettings, undefined);
+  const { data: promoPercent } = useQuery(lookupPromoPercent, promoCode);
 
   useEffect(() => {
     if (!isReady) hydrate();
   }, [isReady, hydrate]);
 
-  const discountPercent = settings ? findPromoPercent(settings.promoCodes, promoCode) : 0;
+  const discountPercent = promoPercent ?? 0;
   const totals: CartTotals = calculateTotals({
     items,
     shippingFee: settings?.shippingFee ?? 0,

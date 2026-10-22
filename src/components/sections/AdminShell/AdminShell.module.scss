@@ -1,117 +1,56 @@
 @use "src/styles/utils" as utils;
 
 .shell {
+  --sidebar-w: #{utils.pxToRem(248px)};
+
   display: grid;
-  grid-template-columns: utils.pxToRem(88px) minmax(0, 1fr);
+  grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
   min-height: 100vh;
   background-color: #f6f6f8;
+  transition: grid-template-columns 0.2s ease;
+
+  &_collapsed {
+    --sidebar-w: #{utils.pxToRem(88px)};
+  }
 
   @include utils.media-ltlg() {
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: auto 1fr;
   }
 
-  &__sidebar {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    gap: utils.pxToRem(24px);
-    align-items: center;
-    height: 100vh;
-    padding: utils.pxToRem(20px) 0;
-    background-color: white;
-    border-right: utils.pxToRem(1px) solid var(--color-border);
-
-    @include utils.media-ltlg() {
-      position: static;
-      flex-direction: row;
-      width: 100%;
-      height: auto;
-      justify-content: safe center;
-      padding: utils.pxToRem(8px) utils.pxToRem(16px);
-      overflow-x: auto;
-      scrollbar-width: none;
-      border-right: 0;
-      border-bottom: utils.pxToRem(1px) solid var(--color-border);
-    }
-  }
-
-  &__brand {
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    width: utils.pxToRem(44px);
-    height: utils.pxToRem(44px);
-    font-size: utils.pxToRem(22px);
-    font-weight: 900;
-    color: white;
-    text-decoration: none;
-    background-color: black;
-    border-radius: utils.pxToRem(12px);
-  }
-
-  &__nav {
-    display: flex;
-    flex-direction: column;
-    gap: utils.pxToRem(6px);
+  &__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
     padding: 0;
-    list-style: none;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 0;
 
-    @include utils.media-ltlg() {
-      flex-direction: row;
+    @include utils.media-gtmd() {
+      display: none;
     }
   }
 
-  &__icon {
+  &__menu {
+    display: none;
     flex-shrink: 0;
-    width: utils.pxToRem(22px);
-    height: utils.pxToRem(22px);
-  }
-
-  &__link {
-    position: relative;
-    display: flex;
     align-items: center;
     justify-content: center;
-    width: utils.pxToRem(48px);
-    height: utils.pxToRem(48px);
-    color: var(--color-muted);
-    text-decoration: none;
-    border-radius: utils.pxToRem(12px);
+    width: utils.pxToRem(40px);
+    height: utils.pxToRem(40px);
+    color: black;
+    cursor: pointer;
+    background-color: white;
+    border: utils.pxToRem(1px) solid var(--color-border);
+    border-radius: 50%;
 
-    &:hover,
-    &:focus-visible {
-      color: black;
-      background-color: #f0f0f2;
+    @include utils.media-ltlg() {
+      display: flex;
     }
 
-    &::after {
-      position: absolute;
-      left: calc(100% + #{utils.pxToRem(12px)});
-      z-index: 20;
-      padding: utils.pxToRem(6px) utils.pxToRem(10px);
-      font-size: utils.pxToRem(12px);
-      font-weight: 500;
-      color: white;
-      white-space: nowrap;
-      pointer-events: none;
-      content: attr(data-label);
-      background-color: black;
-      border-radius: utils.pxToRem(8px);
-      opacity: 0;
-      transition: opacity 0.15s;
-
-      @include utils.media-ltlg() {
-        display: none;
-      }
-    }
-
-    &:hover::after,
-    &:focus-visible::after {
-      opacity: 1;
+    svg {
+      width: utils.pxToRem(22px);
+      height: utils.pxToRem(22px);
     }
   }
 
@@ -281,13 +220,230 @@
   }
 }
 
-.active {
-  color: white;
-  background-color: black;
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: utils.pxToRem(16px);
+  height: 100vh;
+  padding: utils.pxToRem(20px) utils.pxToRem(16px);
+  overflow: hidden;
+  background-color: white;
+  border-right: utils.pxToRem(1px) solid var(--color-border);
+
+  @include utils.media-ltlg() {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 60;
+    width: min(utils.pxToRem(290px), 85vw);
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+
+    &_open {
+      transform: translateX(0);
+      box-shadow: 0 0 utils.pxToRem(40px) rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 utils.pxToRem(4px);
+  }
+
+  &__close {
+    display: none;
+    padding: utils.pxToRem(6px);
+    color: var(--color-muted);
+    cursor: pointer;
+    background: none;
+    border: 0;
+
+    @include utils.media-ltlg() {
+      display: block;
+    }
+
+    svg {
+      width: utils.pxToRem(22px);
+      height: utils.pxToRem(22px);
+    }
+  }
+
+  &__nav {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: utils.pxToRem(14px);
+    padding: utils.pxToRem(4px) 0;
+    margin: 0 utils.pxToRem(-4px);
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  &__collapse {
+    display: flex;
+    gap: utils.pxToRem(12px);
+    align-items: center;
+    height: utils.pxToRem(42px);
+    padding: 0 utils.pxToRem(12px);
+    font: inherit;
+    font-size: utils.pxToRem(14px);
+    font-weight: 500;
+    color: var(--color-muted);
+    cursor: pointer;
+    background: none;
+    border: 0;
+    border-top: utils.pxToRem(1px) solid var(--color-border);
+    border-radius: 0;
+
+    @include utils.media-ltlg() {
+      display: none;
+    }
+
+    &:hover {
+      color: black;
+    }
+
+    svg {
+      width: utils.pxToRem(20px);
+      height: utils.pxToRem(20px);
+    }
+  }
+}
+
+.brand {
+  display: flex;
+  gap: utils.pxToRem(12px);
+  align-items: center;
+  color: black;
+  text-decoration: none;
+
+  &__mark {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: utils.pxToRem(40px);
+    height: utils.pxToRem(40px);
+    font-size: utils.pxToRem(20px);
+    font-weight: 900;
+    color: white;
+    background-color: black;
+    border-radius: utils.pxToRem(12px);
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    font-size: utils.pxToRem(17px);
+    font-weight: 900;
+    line-height: 1.1;
+    white-space: nowrap;
+
+    small {
+      font-size: utils.pxToRem(11px);
+      font-weight: 500;
+      color: var(--color-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.group {
+  &__title {
+    padding: 0 utils.pxToRem(12px);
+    margin-bottom: utils.pxToRem(6px);
+    font-size: utils.pxToRem(11px);
+    font-weight: 600;
+    color: #9a9aa2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: utils.pxToRem(1px);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+}
+
+.link {
+  position: relative;
+  display: flex;
+  gap: utils.pxToRem(12px);
+  align-items: center;
+  height: utils.pxToRem(40px);
+  padding: 0 utils.pxToRem(12px);
+  font-size: utils.pxToRem(14px);
+  font-weight: 500;
+  color: #4b4b52;
+  text-decoration: none;
+  border-radius: utils.pxToRem(12px);
+  transition:
+    background-color 0.15s,
+    color 0.15s;
 
   &:hover,
   &:focus-visible {
+    color: black;
+    background-color: #f2f2f4;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    width: utils.pxToRem(22px);
+    height: utils.pxToRem(22px);
+  }
+
+  &__label {
+    white-space: nowrap;
+  }
+
+  &_active,
+  &_active:hover,
+  &_active:focus-visible {
     color: white;
     background-color: black;
+  }
+}
+
+@include utils.media-gtmd() {
+  .shell_collapsed {
+    .sidebar__head,
+    .sidebar__collapse,
+    .link {
+      justify-content: center;
+    }
+
+    .sidebar__head {
+      padding: 0;
+    }
+
+    .brand__text,
+    .link__label,
+    .sidebar__collapseText {
+      display: none;
+    }
+
+    .group__title {
+      height: utils.pxToRem(1px);
+      padding: 0;
+      margin: utils.pxToRem(6px) utils.pxToRem(12px) utils.pxToRem(10px);
+      overflow: hidden;
+      font-size: 0;
+      background-color: var(--color-border);
+    }
+
+    .link {
+      padding: 0;
+    }
   }
 }

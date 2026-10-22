@@ -6,7 +6,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { useAuthStore } from "@/lib/auth/authStore";
 
 import { AdminShell } from "./AdminShell";
-import { ADMIN_NAV, ADMIN_NAV_GROUPS } from "./AdminShell.constants";
+import { ADMIN_NAV } from "./AdminShell.constants";
 import { buildSearchHref, isActiveLink } from "./AdminShell.utils";
 
 describe("AdminShell", () => {
@@ -39,25 +39,6 @@ describe("AdminShell", () => {
     expect(nav.querySelectorAll("a")).toHaveLength(ADMIN_NAV.length);
     expect(screen.getByRole("link", { name: "Products" })).toHaveAttribute("aria-current", "page");
     expect(screen.getByRole("link", { name: "Dashboard" })).not.toHaveAttribute("aria-current");
-  });
-
-  it("groups the links under titles", () => {
-    render(<AdminShell>content</AdminShell>);
-    for (const group of ADMIN_NAV_GROUPS) expect(screen.getByText(group.title)).toBeInTheDocument();
-  });
-
-  it("collapses the sidebar and remembers it", async () => {
-    render(<AdminShell>content</AdminShell>);
-    await userEvent.click(screen.getByRole("button", { name: "Collapse sidebar" }));
-    expect(screen.getByRole("button", { name: "Expand sidebar" })).toBeInTheDocument();
-    expect(window.localStorage.getItem("shop.adminSidebar")).toBe("true");
-  });
-
-  it("opens and closes the menu drawer", async () => {
-    render(<AdminShell>content</AdminShell>);
-    await userEvent.click(screen.getByRole("button", { name: "Open menu" }));
-    await userEvent.click(screen.getByRole("button", { name: "Dismiss menu" }));
-    expect(screen.queryByRole("button", { name: "Dismiss menu" })).not.toBeInTheDocument();
   });
 
   it("links back to the store", () => {

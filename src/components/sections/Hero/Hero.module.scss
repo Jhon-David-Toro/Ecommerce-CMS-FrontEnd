@@ -41,6 +41,7 @@
 
     &__image_mobile {
         display: none;
+        clip-path: inset(8% 2% 0 2%);
 
         @include utils.media-ltmd(){
             display: block;

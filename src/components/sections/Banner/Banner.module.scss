@@ -11,7 +11,10 @@
   background-color: black;
 
   @include utils.media-xs() {
-    height: max-content;
+    height: auto;
+    min-height: utils.pxToRem(38px);
+    padding: utils.pxToRem(8px) 0;
+    font-size: utils.pxToRem(12px);
   }
 
   &__paragraph {
@@ -19,6 +22,10 @@
     margin: 0;
     text-align: center;
     @include utils.container();
+
+    @include utils.media-xs() {
+      line-height: 1.4;
+    }
   }
 
   &__close {
@@ -56,6 +63,13 @@
   .signup {
     font-size: utils.pxToRem(16px);
     color: white;
+    white-space: nowrap;
     text-underline-offset: utils.pxToRem(5px);
+
+    @include utils.media-xs() {
+      font-size: inherit;
+      font-weight: 600;
+      text-underline-offset: utils.pxToRem(3px);
+    }
   }
 }

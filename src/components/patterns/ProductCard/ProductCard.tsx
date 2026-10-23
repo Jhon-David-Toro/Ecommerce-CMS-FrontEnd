@@ -30,7 +30,9 @@ export const ProductCard: FC<ProductCardProps> = ({ id, image, ...rest }) => {
     <article className={styles.product}>
       {!isLoaded && <Skeleton />}
       <Link href={getProductHref(id)} className={cx(styles.product__link, !isLoaded && styles.product__loading)}>
-        <Image src={image} alt={rest.name} {...PRODUCT_IMAGE_SIZE} className={styles.product__image} onLoad={onLoad} />
+        <div className={styles.product__media}>
+          <Image src={image} alt={rest.name} {...PRODUCT_IMAGE_SIZE} className={styles.product__image} onLoad={onLoad} />
+        </div>
         <ProductCardInfo {...rest} />
       </Link>
     </article>

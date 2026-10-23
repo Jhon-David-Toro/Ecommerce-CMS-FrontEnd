@@ -34,15 +34,25 @@
     }
   }
 
-  &__image {
-    object-fit: cover;
-    border-radius: utils.pxToRem(8px);
+  &__media {
+    position: relative;
+    width: utils.pxToRem(300px);
+    max-width: 100%;
+    aspect-ratio: 300 / 298;
+    overflow: hidden;
+    background-color: var(--color-product-surface, #f0eeed);
+    border-radius: utils.pxToRem(20px);
 
     @include utils.media-ltmd() {
       width: 100%;
-      height: auto;
-      aspect-ratio: 1 / 1;
     }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: multiply;
   }
 
   &__info {

@@ -3,96 +3,82 @@
 .pagination {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
-  gap: utils.pxToRem(16px);
-  margin-top: utils.pxToRem(32px);
+  gap: utils.pxToRem(12px);
+  width: 100%;
+  margin-top: utils.pxToRem(24px);
+
+  .navButton {
+    min-width: 0;
+    height: auto;
+    gap: utils.pxToRem(8px);
+    padding: utils.pxToRem(8px) utils.pxToRem(14px);
+    font-size: utils.pxToRem(14px);
+    font-weight: 500;
+    line-height: utils.pxToRem(20px);
+    color: #000;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: utils.pxToRem(8px);
+
+    svg {
+      width: utils.pxToRem(20px);
+      height: utils.pxToRem(20px);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+    }
+  }
 
   .pageNumbers {
     display: flex;
-    gap: utils.pxToRem(8px);
+    gap: utils.pxToRem(2px);
     padding: 0;
+    margin: 0;
     list-style: none;
 
     button {
       min-width: utils.pxToRem(40px);
       height: utils.pxToRem(40px);
       padding: 0 utils.pxToRem(8px);
-      border: none;
-      background: none;
+      font-size: utils.pxToRem(14px);
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.5);
       cursor: pointer;
-      max-width: max-content;
-      color: black;
-      font-size: utils.pxToRem(16px);
+      background: none;
+      border: none;
+      border-radius: utils.pxToRem(8px);
 
       &.active {
-        background: black;
-        color: #fff;
+        color: #000;
+        background: rgba(0, 0, 0, 0.06);
       }
 
       &:hover:not(.active) {
-        background: #f0f0f0;
+        background: rgba(0, 0, 0, 0.04);
       }
     }
 
-    span {
-      padding: utils.pxToRem(8px);
-      color: #666;
-    }
-  }
-
-  // Responsive para pantallas medianas (tablets)
-  @media (max-width: utils.pxToRem(768px)) {
-    gap: utils.pxToRem(12px);
-    margin-top: utils.pxToRem(24px);
-
-    .pageNumbers {
-      gap: utils.pxToRem(6px);
-
-      button {
-        min-width: utils.pxToRem(36px);
-        height: utils.pxToRem(36px);
-        padding: 0 utils.pxToRem(6px);
-        font-size: utils.pxToRem(14px);
-      }
-
-      span {
-        padding: utils.pxToRem(6px);
-      }
-    }
-
-    .navButton {
+    .ellipsis {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: utils.pxToRem(40px);
+      height: utils.pxToRem(40px);
       font-size: utils.pxToRem(14px);
-      padding: utils.pxToRem(6px) utils.pxToRem(10px);
+      color: rgba(0, 0, 0, 0.5);
     }
   }
 
-  // Responsive rules for small screens (phones)
-  @media (max-width: utils.pxToRem(480px)) {
-    gap: utils.pxToRem(8px);
-    margin-top: utils.pxToRem(16px);
-    flex-wrap: wrap; // Permite que los elementos se envuelvan si no caben
+  @media (max-width: utils.pxToRem(576px)) {
+    justify-content: center;
 
     .pageNumbers {
-      gap: utils.pxToRem(4px);
-
-      button {
-        min-width: utils.pxToRem(32px);
-        height: utils.pxToRem(32px);
-        padding: 0 utils.pxToRem(4px);
-        font-size: utils.pxToRem(12px);
-      }
-
-      // Optional: hides the ellipsis on phones
-      span.ellipsis {
-        display: none;
-      }
-    }
-
-    .navButton {
-      font-size: utils.pxToRem(12px);
-      padding: utils.pxToRem(4px) utils.pxToRem(8px);
-      min-width: utils.pxToRem(80px); // Asegura que los botones "Previous" y "Next" sean legibles
+      order: -1;
+      width: 100%;
+      justify-content: center;
     }
   }
 }

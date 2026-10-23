@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { useAuthStore } from "@/lib/auth/authStore";
 
-import { buildReviewQuery, createReview, deleteReview, listReviews, setReviewStatus } from "./reviews.remote";
+import { buildReviewQuery, createReview, deleteReview, listLatestReviews, listReviews, setReviewStatus } from "./reviews.remote";
 
 const answer = (status: number, body?: unknown) =>
   new Response(body === undefined ? null : JSON.stringify(body), { status, headers: { "Content-Type": "application/json" } });
@@ -51,5 +51,10 @@ describe("reviews against the API", () => {
     await deleteReview(9);
     expect(fetchMock.mock.calls[0]).toEqual(["/api/admin/reviews/9/status", expect.objectContaining({ method: "PATCH" })]);
     expect(fetchMock.mock.calls[1]).toEqual(["/api/admin/reviews/9", expect.objectContaining({ method: "DELETE" })]);
+  });
+
+  it("reads the newest approved reviews of the store from the public endpoint", async () => {
+    await listLatestReviews(6);
+    expect(fetchMock.mock.calls[0][0]).toBe("/api/public/reviews?limit=6");
   });
 });

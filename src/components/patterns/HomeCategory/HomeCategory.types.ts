@@ -8,3 +8,7 @@ export interface HomeCategoryItem {
 export interface HomeCategoryCardProps {
   category: HomeCategoryItem;
 }
+
+export interface HomeCategoryProps {
+  items: HomeCategoryItem[];
+}

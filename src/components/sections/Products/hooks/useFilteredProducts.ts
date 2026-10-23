@@ -17,11 +17,19 @@ import { filterProducts, scopeProducts } from "../Products.utils";
 export const useFilteredProducts = (scope: CatalogScope) => {
   const { category, priceRange, colors, sizes, dressStyles, sortBy } = useFilterStore();
   const { data, isLoading } = useQuery(listProducts, NO_OPTIONS);
-  const { query, view, brand } = scope;
+  const { query, view, brand, category: scopeCategory } = scope;
 
   const products = useMemo(
-    () => filterProducts(scopeProducts(data ?? [], { query, view, brand }), { category, priceRange, colors, sizes, dressStyles, sortBy }),
-    [data, query, view, brand, category, priceRange, colors, sizes, dressStyles, sortBy],
+    () =>
+      filterProducts(scopeProducts(data ?? [], { query, view, brand, category: scopeCategory }), {
+        category,
+        priceRange,
+        colors,
+        sizes,
+        dressStyles,
+        sortBy,
+      }),
+    [data, query, view, brand, scopeCategory, category, priceRange, colors, sizes, dressStyles, sortBy],
   );
 
   return { products, isLoading };

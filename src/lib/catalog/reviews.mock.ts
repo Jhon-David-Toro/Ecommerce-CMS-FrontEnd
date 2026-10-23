@@ -35,6 +35,18 @@ export const listReviews = async ({ productId, status }: ReviewListOptions = {})
   );
 
 /**
+ * Lists the newest approved reviews of the store, for the home page.
+ *
+ * @param limit Maximum number of reviews.
+ * @returns The reviews, newest first.
+ */
+export const listLatestReviews = async (limit: number) =>
+  (await reviewRepository.list())
+    .filter((review) => review.status === REVIEW_STATUSES.approved)
+    .sort((a, b) => b.id - a.id)
+    .slice(0, limit);
+
+/**
  * Stores a new review, which waits for moderation.
  *
  * @param input Review data.

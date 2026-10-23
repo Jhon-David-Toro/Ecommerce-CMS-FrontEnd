@@ -32,6 +32,14 @@ export const listReviews = async (options: ReviewListOptions = {}): Promise<Revi
 };
 
 /**
+ * Lists the newest approved reviews of the store, for the home page.
+ *
+ * @param limit Maximum number of reviews.
+ * @returns The reviews, newest first.
+ */
+export const listLatestReviews = (limit: number) => apiRequest<Review[]>(`/api/public/reviews?limit=${limit}`);
+
+/**
  * Sends a review, which waits for moderation. The author is the signed-in user.
  *
  * @param input Review data.

@@ -2,6 +2,9 @@
 
 .products {
     display: grid;
+    align-items: start;
+    min-height: 60vh;
+    padding-bottom: utils.pxToRem(40px);
     grid-template-areas:
         "filters products";
     gap: utils.pxToRem(8px);

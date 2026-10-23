@@ -17,6 +17,17 @@ describe("Footer", () => {
     FOOTER_COLUMNS.forEach(({ title }) => expect(screen.getByRole("heading", { name: title })).toBeInTheDocument());
   });
 
+  it("links every default column to a real page of the store", () => {
+    FOOTER_COLUMNS.flatMap(({ links }) => links).forEach(({ label, href }) => {
+      expect(href).not.toBe("/");
+      expect(screen.queryByRole("link", { name: label })).toBeNull();
+    });
+    render(<Footer />);
+    FOOTER_COLUMNS.flatMap(({ links }) => links).forEach(({ label, href }) => {
+      expect(screen.getAllByRole("link", { name: label })[0]).toHaveAttribute("href", href);
+    });
+  });
+
   it("links to every social network in a new tab", () => {
     render(<Footer />);
     SOCIAL_LINKS.forEach(({ label, href }) => {

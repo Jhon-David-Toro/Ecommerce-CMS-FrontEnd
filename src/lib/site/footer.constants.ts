@@ -2,39 +2,29 @@ import type { FooterColumn, FooterLink, PaymentMethod } from "./footer.types";
 
 export const FOOTER_COLUMNS: FooterColumn[] = [
   {
-    title: "COMPANY",
+    title: "SHOP",
     links: [
-      { label: "About", href: "/p/about" },
-      { label: "Features", href: "/" },
-      { label: "Works", href: "/" },
-      { label: "Career", href: "/" },
+      { label: "All Products", href: "/products" },
+      { label: "On Sale", href: "/products?view=sale" },
+      { label: "New Arrivals", href: "/products?view=new" },
+      { label: "Brands", href: "/brands" },
+    ],
+  },
+  {
+    title: "ACCOUNT",
+    links: [
+      { label: "My Account", href: "/account" },
+      { label: "Sign In", href: "/login" },
+      { label: "Create Account", href: "/register" },
+      { label: "Shopping Cart", href: "/cart" },
     ],
   },
   {
     title: "HELP",
     links: [
-      { label: "Customer Support", href: "/" },
-      { label: "Delivery Details", href: "/p/shipping-returns" },
-      { label: "Terms & Conditions", href: "/" },
-      { label: "Privacy Policy", href: "/" },
-    ],
-  },
-  {
-    title: "FAQ",
-    links: [
-      { label: "Account", href: "/" },
-      { label: "Manage Deliveries", href: "/" },
-      { label: "Orders", href: "/" },
-      { label: "Payments", href: "/" },
-    ],
-  },
-  {
-    title: "RESOURCES",
-    links: [
-      { label: "Free eBooks", href: "/" },
-      { label: "Development Tutorial", href: "/" },
-      { label: "How to - Blog", href: "/" },
-      { label: "YouTube Playlist", href: "/" },
+      { label: "Track Your Order", href: "/account" },
+      { label: "Search Products", href: "/search" },
+      { label: "Checkout", href: "/checkout" },
     ],
   },
 ];

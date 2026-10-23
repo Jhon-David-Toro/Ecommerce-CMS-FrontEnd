@@ -5,21 +5,24 @@ import { PriceFilter } from "@/components/patterns/PriceFilter";
 import { ResetFilterButton } from "@/components/patterns/ResetFilterButton";
 import { SizeFilter } from "@/components/patterns/SizeFilter";
 
+import type { FiltersProps } from "./Filters.types";
 import styles from "./Filters.module.scss";
 
 /**
- * Filters: all product filters followed by the reset button.
+ * Filters: the product filters built from what the catalog has, followed by the reset button.
  *
+ * @param props Component props.
+ * @param props.options Categories, price bounds, colors, sizes and dress styles to offer.
  * @returns The filter panel.
  */
-export const Filters = () => (
+export const Filters = ({ options }: FiltersProps) => (
   <section className={styles.filters}>
     <h2>Filters</h2>
-    <CategoryFilter />
-    <PriceFilter />
-    <ColorFilter />
-    <SizeFilter />
-    <DressStyleFilter />
+    <CategoryFilter options={options.categories} />
+    <PriceFilter bounds={options.priceBounds} />
+    <ColorFilter options={options.colors} />
+    <SizeFilter options={options.sizes} />
+    <DressStyleFilter options={options.dressStyles} />
     <ResetFilterButton />
   </section>
 );

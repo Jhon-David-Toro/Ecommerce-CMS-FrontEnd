@@ -35,6 +35,11 @@ describe("Reviews", () => {
     expect(screen.queryByRole("button", { name: "Load More Reviews" })).not.toBeInTheDocument();
   });
 
+  it("shows a message while there are no reviews", () => {
+    render(<Reviews review={[]} />);
+    expect(screen.getByText(/No reviews yet/)).toBeInTheDocument();
+  });
+
   it("sorts oldest first when Oldest is selected", async () => {
     render(<Reviews review={reviews} />);
     await userEvent.click(screen.getByRole("button", { name: "Latest" }));

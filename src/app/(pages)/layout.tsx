@@ -6,22 +6,24 @@ import { Banner } from "@/components/sections/Banner";
 import { Footer } from "@/components/sections/Footer";
 import { Navbar } from "@/components/sections/Navbar";
 
+import styles from "./layout.module.scss";
+
 /**
- * Page chrome: promotion banner, navigation, main content, footer and analytics.
+ * Page chrome: promotion banner, navigation, main content, footer and analytics, with the footer kept at the bottom of short pages.
  *
  * @param props Component props.
  * @param props.children Page content.
  * @returns The page body.
  */
 export const LayoutBody = ({ children }: { children: ReactNode }) => (
-  <>
+  <div className={styles.page}>
     <Banner />
     <Navbar />
-    <main>{children}</main>
+    <main className={styles.main}>{children}</main>
     <Footer />
     <SpeedInsights />
     <Analytics />
-  </>
+  </div>
 );
 
 /**

@@ -28,6 +28,22 @@ describe("FeaturedProducts", () => {
     expect(screen.queryByRole("button", { name: "View All" })).not.toBeInTheDocument();
   });
 
+  it("shows a message instead of an empty grid when there are no products", () => {
+    render(<FeaturedProducts category="Top Picks" products={[]} emptyMessage="Coming soon" />);
+    expect(screen.getByText("Coming soon")).toBeInTheDocument();
+  });
+
+  it("shows a spinner while the products load", () => {
+    render(<FeaturedProducts category="Top Picks" products={[]} isLoading emptyMessage="Coming soon" />);
+    expect(screen.getByRole("status")).toBeInTheDocument();
+    expect(screen.queryByText("Coming soon")).not.toBeInTheDocument();
+  });
+
+  it("hides the section when there are no products and no message", () => {
+    const { container } = render(<FeaturedProducts category="Top Picks" products={[]} />);
+    expect(container).toBeEmptyDOMElement();
+  });
+
   it("shows four products first and the rest after View All", async () => {
     render(<FeaturedProducts category="Top Picks" products={buildProducts(6)} />);
     expect(screen.queryByText("Product 5")).not.toBeInTheDocument();

@@ -18,7 +18,7 @@ import { usePagination } from "./usePagination";
 export const useProductsPage = () => {
   const { isFiltersOpen, setIsFiltersOpen } = useFilterStore();
   const scope = useCatalogScope();
-  const { products, isLoading } = useFilteredProducts(scope);
+  const { products, isLoading, filterOptions } = useFilteredProducts(scope);
   const { currentPage, totalPages, pageItems, setCurrentPage } = usePagination(products, PRODUCTS_PER_PAGE);
   const filtersRef = useRef<HTMLElement>(null);
   const pageRef = useRef<HTMLElement>(null);
@@ -42,6 +42,7 @@ export const useProductsPage = () => {
   return {
     title: getScopeTitle(scope),
     isLoading,
+    filterOptions,
     isFiltersOpen,
     openFilters,
     closeFilters,

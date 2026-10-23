@@ -12,16 +12,17 @@ import styles from "../Products.module.scss";
  *
  * @param props Component props.
  * @param props.isOpen Shows the panel on small screens.
+ * @param props.options Filter options built from the catalog.
  * @param props.onClose Called when the close button is pressed.
  * @param ref Ref to the panel, used to detect presses outside of it.
  * @returns The filter panel.
  */
-export const ProductsFilters = forwardRef<HTMLElement, ProductsFiltersProps>(({ isOpen, onClose }, ref) => (
+export const ProductsFilters = forwardRef<HTMLElement, ProductsFiltersProps>(({ isOpen, options, onClose }, ref) => (
   <section ref={ref} className={cx(styles.products__filters, { [styles.filtersOpen]: isOpen })}>
     <button type="button" className={styles.products__close} aria-label="Close filters" onClick={onClose}>
       <XMarkIcon />
     </button>
-    <Filters />
+    <Filters options={options} />
   </section>
 ));
 

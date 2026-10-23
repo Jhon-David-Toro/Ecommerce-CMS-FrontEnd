@@ -11,13 +11,17 @@ const NO_OPTIONS = {};
 /**
  * Loads the published products and picks the ones the home page highlights.
  *
- * @returns The newest and the best rated products.
+ * @returns The newest and the best rated products, and whether they are still loading.
  */
 export const useHomeProducts = () => {
-  const { data } = useQuery(listProducts, NO_OPTIONS);
+  const { data, isLoading } = useQuery(listProducts, NO_OPTIONS);
 
   return useMemo(
-    () => ({ newArrivals: getNewArrivals(data ?? [], HOME_PRODUCTS_LIMIT), topSelling: getTopSelling(data ?? [], HOME_PRODUCTS_LIMIT) }),
-    [data],
+    () => ({
+      newArrivals: getNewArrivals(data ?? [], HOME_PRODUCTS_LIMIT),
+      topSelling: getTopSelling(data ?? [], HOME_PRODUCTS_LIMIT),
+      isLoading,
+    }),
+    [data, isLoading],
   );
 };

@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 
 import { listProducts } from "@/lib/catalog/catalog.api";
+import { buildFilterOptions } from "@/lib/catalog/filters/filters.options";
 import { useFilterStore } from "@/lib/catalog/filters/filtersStore";
 import { useQuery } from "@/lib/shared/async/useQuery";
 
@@ -12,7 +13,7 @@ import { filterProducts, scopeProducts } from "../Products.utils";
  * Loads the published products, narrows them to the scope of the address and applies the filters and sort order.
  *
  * @param scope Search text, view and brand taken from the address.
- * @returns The products that match, in display order, and whether they are still loading.
+ * @returns The products that match, in display order, whether they are still loading, and the filter options the catalog offers.
  */
 export const useFilteredProducts = (scope: CatalogScope) => {
   const { category, priceRange, colors, sizes, dressStyles, sortBy } = useFilterStore();
@@ -24,5 +25,7 @@ export const useFilteredProducts = (scope: CatalogScope) => {
     [data, query, view, brand, category, priceRange, colors, sizes, dressStyles, sortBy],
   );
 
-  return { products, isLoading };
+  const filterOptions = useMemo(() => buildFilterOptions(data ?? []), [data]);
+
+  return { products, isLoading, filterOptions };
 };

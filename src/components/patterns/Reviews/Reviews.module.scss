@@ -61,6 +61,12 @@
     }
   }
   
+  &__empty {
+    padding: utils.pxToRem(32px) 0;
+    text-align: center;
+    color: var(--color-muted);
+  }
+
   &__list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

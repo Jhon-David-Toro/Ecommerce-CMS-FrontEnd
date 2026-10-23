@@ -17,3 +17,10 @@ export const VIEWS = { sale: "sale", newest: "new" } as const;
 export const NEW_ARRIVALS_LIMIT = 12;
 
 export const VIEW_TITLES: Record<string, string> = { [VIEWS.sale]: "On Sale", [VIEWS.newest]: "New Arrivals" };
+
+export const PRODUCTS_EMPTY = {
+  title: "No products found",
+  description: "Nothing matches what you are looking for. Try other filters or browse the whole catalog.",
+  actionLabel: "View all products",
+  actionHref: "/products",
+} as const;

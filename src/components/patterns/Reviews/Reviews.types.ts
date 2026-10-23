@@ -9,3 +9,7 @@ export interface ReviewsHeaderProps {
   sortOrder: string;
   onSortChange: (order: string) => void;
 }
+
+export interface ReviewsListProps {
+  reviews: Review[];
+}

@@ -7,11 +7,11 @@ import { listBrands } from "@/lib/taxonomy/taxonomy.api";
 
 import { BRANDS_TRAIL, NO_ARGS } from "./Brands.constants";
 import { getVisibleBrands } from "./Brands.utils";
-import { BrandsGrid } from "./parts/BrandsGrid";
+import { BrandsList } from "./parts/BrandsList";
 import styles from "./Brands.module.scss";
 
 /**
- * Brands: every visible brand of the store; each one opens the products of that brand.
+ * Brands: every visible brand of the store, each one opening its products, or a way to the whole catalog while there are none.
  *
  * @returns The brands page content.
  */
@@ -24,7 +24,7 @@ export const Brands = () => {
     <section className={styles.brands}>
       <Breadcrumb items={BRANDS_TRAIL} />
       <h1 className={styles.brands__title}>BRANDS</h1>
-      <BrandsGrid brands={getVisibleBrands(data)} />
+      <BrandsList brands={getVisibleBrands(data)} />
     </section>
   );
 };

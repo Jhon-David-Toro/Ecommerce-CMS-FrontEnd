@@ -1,21 +1,28 @@
 import { useMemo } from "react";
 
+import { listProducts } from "@/lib/catalog/catalog.api";
 import { useFilterStore } from "@/lib/catalog/filters/filtersStore";
-import type { Product } from "@/lib/catalog/product.types";
+import { useQuery } from "@/lib/shared/async/useQuery";
 
-import productsData from "../../../../../public/data/all-products.json";
-import { filterProducts } from "../Products.utils";
+import { NO_OPTIONS } from "../Products.constants";
+import type { CatalogScope } from "../Products.types";
+import { filterProducts, scopeProducts } from "../Products.utils";
 
 /**
- * Applies the filters and sort order of the filter store to the product catalog.
+ * Loads the published products, narrows them to the scope of the address and applies the filters and sort order.
  *
- * @returns The products that match, in display order.
+ * @param scope Search text, view and brand taken from the address.
+ * @returns The products that match, in display order, and whether they are still loading.
  */
-export const useFilteredProducts = (): Product[] => {
+export const useFilteredProducts = (scope: CatalogScope) => {
   const { category, priceRange, colors, sizes, dressStyles, sortBy } = useFilterStore();
+  const { data, isLoading } = useQuery(listProducts, NO_OPTIONS);
+  const { query, view, brand } = scope;
 
-  return useMemo(
-    () => filterProducts(productsData, { category, priceRange, colors, sizes, dressStyles, sortBy }),
-    [category, priceRange, colors, sizes, dressStyles, sortBy],
+  const products = useMemo(
+    () => filterProducts(scopeProducts(data ?? [], { query, view, brand }), { category, priceRange, colors, sizes, dressStyles, sortBy }),
+    [data, query, view, brand, category, priceRange, colors, sizes, dressStyles, sortBy],
   );
+
+  return { products, isLoading };
 };

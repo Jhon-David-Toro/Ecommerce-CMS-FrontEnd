@@ -17,7 +17,7 @@ export const INITIAL_FILTERS: FilterValues = {
   colors: [],
   sizes: [],
   dressStyles: [],
-  isFiltersOpen: true,
+  isFiltersOpen: false,
   sortBy: DEFAULT_SORT,
   selectedCategoryName: "",
 };

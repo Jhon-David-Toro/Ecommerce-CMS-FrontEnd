@@ -1,0 +1,18 @@
+@use "src/styles/utils" as utils;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: utils.pxToRem(20px);
+}
+
+.sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: utils.pxToRem(14px);
+
+  &__error {
+    font-size: utils.pxToRem(13px);
+    color: var(--color-danger);
+  }
+}

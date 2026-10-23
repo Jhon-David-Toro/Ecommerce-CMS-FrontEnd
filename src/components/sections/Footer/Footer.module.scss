@@ -24,10 +24,13 @@
     }
 
     @include utils.media-xs(){
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      justify-items: stretch;
+      gap: utils.pxToRem(28px) utils.pxToRem(16px);
+
+      > :first-child {
+        grid-column: 1 / -1;
+      }
     }
   }
 
@@ -43,6 +46,9 @@
     @include utils.media-ltlg(){
       min-width: 0;
       max-width: utils.pxToRem(200px);
+    }
+    @include utils.media-xs(){
+      max-width: none;
     }
   }
 

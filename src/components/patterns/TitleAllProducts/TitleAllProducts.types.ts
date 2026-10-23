@@ -4,4 +4,6 @@ export interface ShowingTextParams {
   totalProducts: number;
 }
 
-export type TitleAllProductsProps = ShowingTextParams;
+export interface TitleAllProductsProps extends ShowingTextParams {
+  heading?: string;
+}

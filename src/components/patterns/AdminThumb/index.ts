@@ -1,0 +1,1 @@
+export { AdminThumb } from "./AdminThumb";

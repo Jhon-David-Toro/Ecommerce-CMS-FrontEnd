@@ -1,0 +1,11 @@
+@use "src/styles/utils" as utils;
+
+.error {
+  font-size: utils.pxToRem(13px);
+  color: var(--color-danger);
+}
+
+.hint {
+  font-size: utils.pxToRem(13px);
+  color: var(--color-muted);
+}

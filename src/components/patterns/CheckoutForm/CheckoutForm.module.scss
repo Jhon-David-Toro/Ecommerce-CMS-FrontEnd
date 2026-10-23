@@ -1,0 +1,54 @@
+@use "src/styles/utils" as utils;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: utils.pxToRem(20px);
+
+  &__options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: utils.pxToRem(14px);
+
+    @include utils.media-xs() {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.option {
+  display: flex;
+  gap: utils.pxToRem(14px);
+  align-items: center;
+  padding: utils.pxToRem(18px);
+  cursor: pointer;
+  border: utils.pxToRem(1px) solid var(--color-border);
+  border-radius: utils.pxToRem(16px);
+
+  input {
+    width: utils.pxToRem(20px);
+    height: utils.pxToRem(20px);
+    accent-color: black;
+  }
+
+  &_selected {
+    background-color: #fafafa;
+    border: utils.pxToRem(2px) solid black;
+    padding: calc(utils.pxToRem(18px) - utils.pxToRem(1px));
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: utils.pxToRem(2px);
+  }
+
+  &__title {
+    font-weight: 600;
+  }
+
+  &__hint {
+    font-size: utils.pxToRem(13px);
+    color: var(--color-muted);
+  }
+}

@@ -1,17 +1,15 @@
-import type { Dispatch, SetStateAction } from "react";
-
-import type { ProductDetail } from "@/lib/catalog/productDetails.types";
+import type { Product } from "@/lib/catalog/product.types";
 
 export interface ProductInfoProps {
-  product: ProductDetail;
+  product: Product;
 }
 
 export interface ProductInfoSummaryProps {
-  product: ProductDetail;
+  product: Product;
 }
 
 export interface ProductInfoOptionsProps {
-  product: ProductDetail;
+  product: Product;
   selectedColor: string;
   onColorChange: (color: string) => void;
   selectedSize: string;
@@ -20,5 +18,14 @@ export interface ProductInfoOptionsProps {
 
 export interface ProductInfoPurchaseProps {
   quantity: number;
-  setQuantity: Dispatch<SetStateAction<number>>;
+  stock: number;
+  added: boolean;
+  onQuantityChange: (quantity: number) => void;
+  onAdd: () => void;
+}
+
+export interface PickedOptions {
+  color: string;
+  size: string;
+  quantity: number;
 }

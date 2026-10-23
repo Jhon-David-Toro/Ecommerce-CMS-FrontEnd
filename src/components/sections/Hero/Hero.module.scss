@@ -41,6 +41,7 @@
 
     &__image_mobile {
         display: none;
+        clip-path: inset(8% 2% 0 2%);
 
         @include utils.media-ltmd(){
             display: block;
@@ -62,7 +63,8 @@
 
         @include utils.media-ltmd(){
             align-items: center;
-            padding: utils.pxToRem(20px) 0;
+            padding-top: utils.pxToRem(20px);
+            padding-bottom: utils.pxToRem(20px);
         }
 
         &_title {

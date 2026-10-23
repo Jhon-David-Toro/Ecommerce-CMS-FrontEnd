@@ -2,9 +2,18 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 
-import mockProduct from "@/assets/mockProduct.json";
+import { buildProduct } from "@/test/factories";
 
 import { ProductInfo } from "./ProductInfo";
+
+const mockProduct = buildProduct({
+  name: "One Life Graphic T-Shirt",
+  colors: [
+    { name: "Olive", hex: "#6B7280" },
+    { name: "Navy", hex: "#1E3A8A" },
+  ],
+  sizes: ["Small", "Medium", "Large"],
+});
 
 describe("ProductInfo", () => {
   it("shows the name, the overview and the call to action", () => {

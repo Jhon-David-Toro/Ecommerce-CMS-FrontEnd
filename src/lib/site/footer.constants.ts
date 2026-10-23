@@ -4,7 +4,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
   {
     title: "COMPANY",
     links: [
-      { label: "About", href: "/" },
+      { label: "About", href: "/p/about" },
       { label: "Features", href: "/" },
       { label: "Works", href: "/" },
       { label: "Career", href: "/" },
@@ -14,7 +14,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     title: "HELP",
     links: [
       { label: "Customer Support", href: "/" },
-      { label: "Delivery Details", href: "/" },
+      { label: "Delivery Details", href: "/p/shipping-returns" },
       { label: "Terms & Conditions", href: "/" },
       { label: "Privacy Policy", href: "/" },
     ],

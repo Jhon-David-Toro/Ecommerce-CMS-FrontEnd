@@ -1,0 +1,16 @@
+@use "src/styles/utils" as utils;
+
+.thumb {
+  object-fit: cover;
+  background-color: var(--color-surface);
+  border-radius: utils.pxToRem(8px);
+}
+
+.remove {
+  padding: 0;
+  font: inherit;
+  color: var(--color-danger);
+  cursor: pointer;
+  background: none;
+  border: none;
+}

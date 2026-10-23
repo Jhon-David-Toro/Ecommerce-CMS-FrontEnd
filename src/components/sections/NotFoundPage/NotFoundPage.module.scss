@@ -1,0 +1,36 @@
+@use "src/styles/utils" as utils;
+
+.notFound {
+  display: flex;
+  flex-direction: column;
+  gap: utils.pxToRem(16px);
+  align-items: center;
+  padding: utils.pxToRem(80px) utils.pxToRem(16px) utils.pxToRem(120px);
+  text-align: center;
+
+  &__code {
+    font-size: clamp(utils.pxToRem(96px), 22vw, utils.pxToRem(220px));
+    font-weight: 900;
+    line-height: 1;
+    color: var(--color-surface);
+    -webkit-text-stroke: utils.pxToRem(2px) black;
+  }
+
+  &__title {
+    font-size: utils.pxToRem(36px);
+    font-weight: 900;
+  }
+
+  &__text {
+    max-width: utils.pxToRem(420px);
+    color: var(--color-muted);
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: utils.pxToRem(12px);
+    justify-content: center;
+    margin-top: utils.pxToRem(12px);
+  }
+}

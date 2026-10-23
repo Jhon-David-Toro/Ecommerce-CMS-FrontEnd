@@ -1,0 +1,20 @@
+@use "src/styles/utils" as utils;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: utils.pxToRem(16px);
+  max-width: utils.pxToRem(760px);
+  padding: utils.pxToRem(24px) utils.pxToRem(16px) utils.pxToRem(64px);
+  margin: 0 auto;
+
+  &__title {
+    font-size: utils.pxToRem(36px);
+    font-weight: 900;
+  }
+
+  &__text {
+    line-height: 1.7;
+    color: var(--color-muted);
+  }
+}

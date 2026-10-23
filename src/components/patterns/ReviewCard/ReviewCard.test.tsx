@@ -1,18 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
-import type { Review } from "@/lib/catalog/review.types";
+import { buildReview } from "@/test/factories";
 
 import { ReviewCard } from "./ReviewCard";
 
-const review: Review = {
-  id: "1",
-  author: "Jane Doe",
-  rating: 4,
-  text: "Very nice product!",
-  date: "2024-04-10",
-  verified: true,
-};
+const review = buildReview({ author: "Jane Doe", text: "Very nice product!", date: "2024-04-10T12:00:00.000Z" });
 
 const countIcons = (container: HTMLElement) => container.querySelectorAll("svg").length;
 
@@ -21,7 +14,7 @@ describe("ReviewCard", () => {
     render(<ReviewCard review={review} />);
     expect(screen.getByText("Jane Doe")).toBeInTheDocument();
     expect(screen.getByText('"Very nice product!"')).toBeInTheDocument();
-    expect(screen.getByText("Posted on 2024-04-10")).toBeInTheDocument();
+    expect(screen.getByText("Posted on April 10, 2024")).toBeInTheDocument();
   });
 
   it("adds a verified badge to the five stars", () => {

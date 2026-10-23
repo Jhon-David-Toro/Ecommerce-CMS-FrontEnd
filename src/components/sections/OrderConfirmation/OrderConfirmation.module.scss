@@ -1,0 +1,50 @@
+@use "src/styles/utils" as utils;
+
+.confirmation {
+  display: flex;
+  flex-direction: column;
+  gap: utils.pxToRem(24px);
+  align-items: center;
+  max-width: utils.pxToRem(1040px);
+  padding: utils.pxToRem(56px) utils.pxToRem(16px) utils.pxToRem(80px);
+  margin: 0 auto;
+  text-align: center;
+
+  &__check {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: utils.pxToRem(84px);
+    height: utils.pxToRem(84px);
+    color: white;
+    background-color: black;
+    border-radius: 50%;
+
+    svg {
+      width: utils.pxToRem(40px);
+      height: utils.pxToRem(40px);
+    }
+  }
+
+  &__title {
+    font-size: clamp(utils.pxToRem(28px), 5vw, utils.pxToRem(40px));
+    font-weight: 900;
+  }
+
+  &__text {
+    max-width: utils.pxToRem(520px);
+    color: var(--color-muted);
+  }
+
+  > article {
+    width: 100%;
+    text-align: left;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: utils.pxToRem(12px);
+    justify-content: center;
+  }
+}

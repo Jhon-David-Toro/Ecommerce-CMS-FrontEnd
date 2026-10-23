@@ -1,8 +1,10 @@
+import { getNewArrivals, searchProducts } from "@/lib/catalog/catalog.utils";
 import { DEFAULT_SORT } from "@/lib/catalog/filters/filters.constants";
 import type { FilterCreator, FilterCriteria } from "@/lib/catalog/filters/filters.types";
 import type { Product } from "@/lib/catalog/product.types";
 
-import { SORT_COMPARATORS } from "./Products.constants";
+import { NEW_ARRIVALS_LIMIT, SORT_COMPARATORS, VIEWS, VIEW_TITLES } from "./Products.constants";
+import type { CatalogScope } from "./Products.types";
 
 /**
  * Tells whether a value passes a multi-select filter: an empty selection lets everything through.
@@ -13,6 +15,16 @@ import { SORT_COMPARATORS } from "./Products.constants";
  */
 export const matchesSelection = (selected: string[], value?: string) =>
   selected.length === 0 || (value !== undefined && selected.includes(value));
+
+/**
+ * Tells whether any value of the product is selected: an empty selection lets everything through.
+ *
+ * @param selected Values the user picked.
+ * @param values Values of the product.
+ * @returns True when the product matches.
+ */
+export const matchesAny = (selected: string[], values: string[]) =>
+  selected.length === 0 || values.some((value) => selected.includes(value));
 
 export const filterCreators: Record<keyof Omit<FilterCriteria, "sortBy">, FilterCreator> = {
   category:
@@ -26,11 +38,14 @@ export const filterCreators: Record<keyof Omit<FilterCriteria, "sortBy">, Filter
   colors:
     ({ colors }) =>
     (product) =>
-      matchesSelection(colors, product.color),
+      matchesAny(
+        colors,
+        product.colors.map((color) => color.hex),
+      ),
   sizes:
     ({ sizes }) =>
     (product) =>
-      matchesSelection(sizes, product.size),
+      matchesAny(sizes, product.sizes),
   dressStyles:
     ({ dressStyles }) =>
     (product) =>
@@ -49,4 +64,29 @@ export const filterProducts = (products: Product[], criteria: FilterCriteria) =>
   const comparator = SORT_COMPARATORS[criteria.sortBy ?? DEFAULT_SORT] ?? SORT_COMPARATORS[DEFAULT_SORT];
 
   return products.filter((product) => filters.every((matches) => matches(product))).sort(comparator);
+};
+
+/**
+ * Narrows the catalog to what the address asks for: a search text, the sale, the new arrivals or one brand.
+ *
+ * @param products Published products.
+ * @param scope Search text, view and brand taken from the address.
+ * @returns The products inside the scope.
+ */
+export const scopeProducts = (products: Product[], scope: CatalogScope) => {
+  const searched = searchProducts(products, scope.query);
+  const inView = scope.view === VIEWS.newest ? getNewArrivals(searched, NEW_ARRIVALS_LIMIT) : searched;
+  const onSale = scope.view === VIEWS.sale ? inView.filter((product) => product.discountPrice !== null) : inView;
+  return scope.brand ? onSale.filter((product) => product.brand === scope.brand) : onSale;
+};
+
+/**
+ * Picks the title of the products page for a scope.
+ *
+ * @param scope Search text, view and brand taken from the address.
+ * @returns The title, or an empty string when the page shows the whole catalog.
+ */
+export const getScopeTitle = ({ query, view, brand }: CatalogScope) => {
+  if (query) return `Results for "${query}"`;
+  return brand || VIEW_TITLES[view] || "";
 };

@@ -15,6 +15,10 @@
         width: 100%;
         justify-content: space-between;
 
+        @include utils.media-ltmd() {
+            font-size: utils.pxToRem(28px);
+        }
+
         &_span {
             width: max-content;
             height: max-content;
@@ -22,10 +26,18 @@
             @include utils.media-ltlg() {
                 width: utils.pxToRem(400px);
             }
+
+            @include utils.media-ltmd() {
+                width: auto;
+            }
         }
         &_button {
             height: max-content;
             width: max-content;
+
+            @include utils.media-ltmd() {
+                display: none;
+            }
         }
     }
 
@@ -38,7 +50,24 @@
         width: 100%;
         @include utils.container();
 
+        @include utils.media-ltmd() {
+            padding-right: 0;
+            padding-left: 0;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
         &_track {
+            @include utils.media-ltmd() {
+                width: max-content;
+                transform: none;
+            }
+
             display: flex;
             width: 100%;
             gap: utils.pxToRem(16px);
@@ -60,6 +89,10 @@
 
         &_slide {
             list-style: none;
+
+            @include utils.media-ltmd() {
+                scroll-snap-align: start;
+            }
         }
     }
 }

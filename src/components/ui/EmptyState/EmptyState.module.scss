@@ -1,0 +1,19 @@
+@use "src/styles/utils" as utils;
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  gap: utils.pxToRem(12px);
+  align-items: center;
+  padding: utils.pxToRem(48px) utils.pxToRem(16px);
+  text-align: center;
+
+  &__title {
+    font-size: utils.pxToRem(22px);
+  }
+
+  &__text {
+    max-width: utils.pxToRem(420px);
+    color: var(--color-muted);
+  }
+}

@@ -27,13 +27,18 @@
       grid-template-columns: repeat(2, 1fr);
     }
     @include utils.media-xs() {
-      grid-template-columns: repeat(1, 1fr);
+      grid-template-columns: minmax(0, 1fr);
+      gap: utils.pxToRem(20px);
     }
   }
 
   &__title {
     font-size: utils.pxToRem(48px);
     margin: utils.pxToRem(50px) 0;
+
+    @include utils.media-xs() {
+      font-size: utils.pxToRem(32px);
+    }
   }
 
   &__hr{

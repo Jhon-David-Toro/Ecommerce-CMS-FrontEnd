@@ -1,0 +1,35 @@
+@use "src/styles/utils" as utils;
+
+.badge {
+  display: inline-block;
+  padding: utils.pxToRem(3px) utils.pxToRem(10px);
+  font-size: utils.pxToRem(12px);
+  font-weight: 600;
+  white-space: nowrap;
+  border-radius: 999px;
+}
+
+.neutral {
+  color: var(--color-muted);
+  background-color: var(--color-surface);
+}
+
+.success {
+  color: var(--color-success);
+  background-color: rgba(1, 171, 49, 0.12);
+}
+
+.warning {
+  color: var(--color-warning);
+  background-color: rgba(217, 130, 0, 0.14);
+}
+
+.danger {
+  color: var(--color-danger);
+  background-color: rgba(255, 51, 51, 0.12);
+}
+
+.info {
+  color: var(--color-info);
+  background-color: rgba(25, 118, 210, 0.12);
+}

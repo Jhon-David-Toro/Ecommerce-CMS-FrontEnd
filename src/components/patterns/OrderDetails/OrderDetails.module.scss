@@ -1,0 +1,92 @@
+@use "src/styles/utils" as utils;
+
+.order {
+  display: flex;
+  flex-direction: column;
+  gap: utils.pxToRem(20px);
+
+  &__header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: utils.pxToRem(12px);
+    align-items: center;
+  }
+
+  &__number {
+    font-size: utils.pxToRem(24px);
+  }
+
+  &__date {
+    width: 100%;
+    color: var(--color-muted);
+  }
+
+  &__layout {
+    display: grid;
+    grid-template-columns: 1fr utils.pxToRem(380px);
+    gap: utils.pxToRem(20px);
+    align-items: start;
+
+    @include utils.media-ltlg() {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    gap: utils.pxToRem(16px);
+  }
+
+  &__items {
+    padding: utils.pxToRem(8px) utils.pxToRem(20px);
+    list-style: none;
+    border: utils.pxToRem(1px) solid var(--color-border);
+    border-radius: var(--radius-card);
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: utils.pxToRem(64px) 1fr auto;
+    gap: utils.pxToRem(14px);
+    align-items: center;
+    padding: utils.pxToRem(12px) 0;
+    border-bottom: utils.pxToRem(1px) solid var(--color-border);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__image {
+    object-fit: cover;
+    background-color: var(--color-surface);
+    border-radius: utils.pxToRem(8px);
+  }
+
+  &__name {
+    font-weight: 700;
+  }
+
+  &__option {
+    font-size: utils.pxToRem(14px);
+    color: var(--color-muted);
+  }
+
+  &__price {
+    font-weight: 700;
+  }
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    gap: utils.pxToRem(4px);
+    padding: utils.pxToRem(16px) utils.pxToRem(20px);
+    border: utils.pxToRem(1px) solid var(--color-border);
+    border-radius: var(--radius-card);
+
+    h3 {
+      margin-bottom: utils.pxToRem(6px);
+    }
+  }
+}

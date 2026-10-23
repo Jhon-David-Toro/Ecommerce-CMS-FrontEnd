@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 
 import { Banner } from "./Banner";
@@ -11,9 +12,14 @@ describe(Banner.name, () => {
 
     const link = screen.getByRole("link", { name: /Sign Up Now/i });
     expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute("href", "/");
+    expect(link).toHaveAttribute("href", "/register");
 
-    const icon = screen.getByRole("img", { name: /close icon/i });
-    expect(icon).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Close banner" })).toBeInTheDocument();
+  });
+
+  it("hides itself when the shopper closes it", async () => {
+    render(<Banner />);
+    await userEvent.click(screen.getByRole("button", { name: "Close banner" }));
+    expect(screen.queryByText(/Sign up and get 20%/i)).not.toBeInTheDocument();
   });
 });

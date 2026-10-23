@@ -1,0 +1,293 @@
+@use "src/styles/utils" as utils;
+
+.shell {
+  display: grid;
+  grid-template-columns: utils.pxToRem(88px) minmax(0, 1fr);
+  min-height: 100vh;
+  background-color: #f6f6f8;
+
+  @include utils.media-ltlg() {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+  }
+
+  &__sidebar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: utils.pxToRem(24px);
+    align-items: center;
+    height: 100vh;
+    padding: utils.pxToRem(20px) 0;
+    background-color: white;
+    border-right: utils.pxToRem(1px) solid var(--color-border);
+
+    @include utils.media-ltlg() {
+      position: static;
+      flex-direction: row;
+      width: 100%;
+      height: auto;
+      justify-content: safe center;
+      padding: utils.pxToRem(8px) utils.pxToRem(16px);
+      overflow-x: auto;
+      scrollbar-width: none;
+      border-right: 0;
+      border-bottom: utils.pxToRem(1px) solid var(--color-border);
+    }
+  }
+
+  &__brand {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: utils.pxToRem(44px);
+    height: utils.pxToRem(44px);
+    font-size: utils.pxToRem(22px);
+    font-weight: 900;
+    color: white;
+    text-decoration: none;
+    background-color: black;
+    border-radius: utils.pxToRem(12px);
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    gap: utils.pxToRem(6px);
+    padding: 0;
+    list-style: none;
+
+    @include utils.media-ltlg() {
+      flex-direction: row;
+    }
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    width: utils.pxToRem(22px);
+    height: utils.pxToRem(22px);
+  }
+
+  &__link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: utils.pxToRem(48px);
+    height: utils.pxToRem(48px);
+    color: var(--color-muted);
+    text-decoration: none;
+    border-radius: utils.pxToRem(12px);
+
+    &:hover,
+    &:focus-visible {
+      color: black;
+      background-color: #f0f0f2;
+    }
+
+    &::after {
+      position: absolute;
+      left: calc(100% + #{utils.pxToRem(12px)});
+      z-index: 20;
+      padding: utils.pxToRem(6px) utils.pxToRem(10px);
+      font-size: utils.pxToRem(12px);
+      font-weight: 500;
+      color: white;
+      white-space: nowrap;
+      pointer-events: none;
+      content: attr(data-label);
+      background-color: black;
+      border-radius: utils.pxToRem(8px);
+      opacity: 0;
+      transition: opacity 0.15s;
+
+      @include utils.media-ltlg() {
+        display: none;
+      }
+    }
+
+    &:hover::after,
+    &:focus-visible::after {
+      opacity: 1;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  &__top {
+    display: flex;
+    flex-wrap: wrap;
+
+    @include utils.media-xs() {
+      flex-wrap: nowrap;
+    }
+    gap: utils.pxToRem(12px);
+    align-items: center;
+    justify-content: flex-end;
+    padding: utils.pxToRem(20px) utils.pxToRem(32px) 0;
+
+    @include utils.media-ltlg() {
+      padding: utils.pxToRem(12px) utils.pxToRem(16px) 0;
+    }
+  }
+
+  &__search {
+    position: relative;
+    flex: 1;
+    max-width: utils.pxToRem(420px);
+    margin-right: auto;
+
+    @include utils.media-ltlg() {
+      flex: 1 1 utils.pxToRem(200px);
+      min-width: 0;
+      max-width: none;
+      margin-right: 0;
+    }
+
+    input {
+      width: 100%;
+      padding: utils.pxToRem(10px) utils.pxToRem(16px) utils.pxToRem(10px) utils.pxToRem(44px);
+      font: inherit;
+      background-color: white;
+      border: utils.pxToRem(1px) solid var(--color-border);
+      border-radius: 999px;
+      outline: none;
+
+      &:focus-visible {
+        border-color: black;
+      }
+    }
+  }
+
+  &__searchIcon {
+    position: absolute;
+    top: 50%;
+    left: utils.pxToRem(16px);
+    width: utils.pxToRem(18px);
+    height: utils.pxToRem(18px);
+    color: var(--color-muted);
+    pointer-events: none;
+    transform: translateY(-50%);
+  }
+
+  &__store {
+    display: flex;
+    gap: utils.pxToRem(8px);
+    align-items: center;
+    padding: utils.pxToRem(10px) utils.pxToRem(18px);
+    font-weight: 500;
+    color: black;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: white;
+    border: utils.pxToRem(1px) solid var(--color-border);
+    border-radius: utils.pxToRem(999px);
+
+    svg {
+      width: utils.pxToRem(18px);
+      height: utils.pxToRem(18px);
+    }
+
+    &:hover {
+      border-color: black;
+    }
+  }
+
+  &__storeText {
+    @include utils.media-xs() {
+      display: none;
+    }
+  }
+
+  &__profile {
+    display: flex;
+    gap: utils.pxToRem(10px);
+    align-items: center;
+    color: black;
+    text-decoration: none;
+  }
+
+  &__avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: utils.pxToRem(36px);
+    height: utils.pxToRem(36px);
+    font-weight: 600;
+    color: white;
+    background-color: black;
+    border-radius: 50%;
+  }
+
+  &__user {
+    font-weight: 600;
+    white-space: nowrap;
+
+    @include utils.media-xs() {
+      display: none;
+    }
+  }
+
+  &__chevron {
+    @include utils.media-xs() {
+      display: none;
+    }
+
+    width: utils.pxToRem(16px);
+    height: utils.pxToRem(16px);
+  }
+
+  &__signout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: utils.pxToRem(40px);
+    height: utils.pxToRem(40px);
+    color: var(--color-muted);
+    cursor: pointer;
+    background: none;
+    border: 0;
+    border-radius: 50%;
+
+    svg {
+      width: utils.pxToRem(20px);
+      height: utils.pxToRem(20px);
+    }
+
+    &:hover {
+      color: black;
+      background-color: white;
+    }
+  }
+
+  &__main {
+    flex: 1;
+    width: 100%;
+    max-width: utils.pxToRem(1280px);
+    padding: utils.pxToRem(24px) utils.pxToRem(32px) utils.pxToRem(48px);
+    margin: 0 auto;
+
+    @include utils.media-ltlg() {
+      padding: utils.pxToRem(16px) utils.pxToRem(16px) utils.pxToRem(32px);
+    }
+  }
+}
+
+.active {
+  color: white;
+  background-color: black;
+
+  &:hover,
+  &:focus-visible {
+    color: white;
+    background-color: black;
+  }
+}

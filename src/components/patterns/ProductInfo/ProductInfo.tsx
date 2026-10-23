@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import type { FC } from "react";
 
 import type { ProductInfoProps } from "./ProductInfo.types";
+import { useProductOptions } from "./hooks/useProductOptions";
 import { ProductInfoOptions } from "./parts/ProductInfoOptions";
 import { ProductInfoPurchase } from "./parts/ProductInfoPurchase";
 import { ProductInfoSummary } from "./parts/ProductInfoSummary";
@@ -17,9 +17,7 @@ import styles from "./ProductInfo.module.scss";
  * @returns The product information.
  */
 export const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0].name);
-  const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
-  const [quantity, setQuantity] = useState(1);
+  const { selectedColor, selectedSize, quantity, added, add, setColor, setSize, setQuantity } = useProductOptions(product);
 
   return (
     <article className={styles.product}>
@@ -27,11 +25,11 @@ export const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
       <ProductInfoOptions
         product={product}
         selectedColor={selectedColor}
-        onColorChange={setSelectedColor}
+        onColorChange={setColor}
         selectedSize={selectedSize}
-        onSizeChange={setSelectedSize}
+        onSizeChange={setSize}
       />
-      <ProductInfoPurchase quantity={quantity} setQuantity={setQuantity} />
+      <ProductInfoPurchase quantity={quantity} stock={product.stock} added={added} onQuantityChange={setQuantity} onAdd={add} />
     </article>
   );
 };

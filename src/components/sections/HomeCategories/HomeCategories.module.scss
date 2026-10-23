@@ -15,7 +15,8 @@
         font-size: utils.pxToRem(48px);
         font-weight: bold;
         text-align: center;
-        padding: utils.pxToRem(50px) 0;
+        padding-top: utils.pxToRem(50px);
+        padding-bottom: utils.pxToRem(50px);
 
         @include utils.media-xs(){
             font-size: utils.pxToRem(38px);

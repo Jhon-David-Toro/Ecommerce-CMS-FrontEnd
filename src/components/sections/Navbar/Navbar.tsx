@@ -2,10 +2,9 @@
 
 import type { FC } from "react";
 
-import menuData from "@/assets/menu.json";
 import { Sidebar } from "@/components/sections/Sidebar";
+import { useSiteContent } from "@/lib/content/useSiteContent";
 import { useToggle } from "@/lib/shared/state/useToggle";
-import type { MenuData } from "@/lib/site/menu.types";
 
 import { NavbarActions } from "./parts/NavbarActions";
 import { NavbarBrand } from "./parts/NavbarBrand";
@@ -14,24 +13,24 @@ import { NavbarSearch } from "./parts/NavbarSearch";
 import styles from "./Navbar.module.scss";
 
 /**
- * Navbar: brand, main links, search box and account icons, with a sidebar menu on small screens.
+ * Navbar: brand, main links, search box and account and cart icons, with a sidebar menu on small screens.
  *
  * @returns The page header.
  */
 export const Navbar: FC = () => {
   const [isSidebarOpen, toggleSidebar] = useToggle();
-  const data: MenuData = menuData;
+  const { navbar, sidebar } = useSiteContent();
 
   return (
     <header className={styles.navbar}>
       <nav className={styles.navbar__container}>
         <ul className={styles.navbar__list}>
           <NavbarBrand onMenuClick={toggleSidebar} />
-          <NavbarLinks items={data.navbar} />
+          <NavbarLinks items={navbar} />
           <NavbarSearch />
           <NavbarActions />
         </ul>
-        <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} menu={data.sidebar} />
+        <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} menu={sidebar} />
       </nav>
     </header>
   );

@@ -1,0 +1,25 @@
+@use "src/styles/utils" as utils;
+
+.review {
+  display: flex;
+  flex-direction: column;
+  gap: utils.pxToRem(14px);
+  padding: utils.pxToRem(20px);
+  margin-top: utils.pxToRem(24px);
+  border: utils.pxToRem(1px) solid var(--color-border);
+  border-radius: var(--radius-card);
+
+  &__title {
+    font-size: utils.pxToRem(20px);
+  }
+
+  &__signin {
+    margin-top: utils.pxToRem(24px);
+    color: var(--color-muted);
+
+    a {
+      font-weight: 600;
+      color: var(--color-ink);
+    }
+  }
+}

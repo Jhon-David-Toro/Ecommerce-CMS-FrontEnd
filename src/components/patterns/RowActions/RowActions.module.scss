@@ -1,0 +1,42 @@
+@use "src/styles/utils" as utils;
+
+.actions {
+  display: flex;
+  gap: utils.pxToRem(6px);
+  justify-content: flex-end;
+
+  &__button,
+  &__danger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: utils.pxToRem(34px);
+    height: utils.pxToRem(34px);
+    padding: 0;
+    color: var(--color-ink);
+    cursor: pointer;
+    background: none;
+    border: utils.pxToRem(1px) solid var(--color-border);
+    border-radius: utils.pxToRem(8px);
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+
+    svg {
+      width: utils.pxToRem(18px);
+      height: utils.pxToRem(18px);
+    }
+
+    &:hover {
+      background-color: var(--color-surface);
+    }
+  }
+
+  &__danger {
+    color: var(--color-danger);
+
+    &:hover {
+      background-color: rgba(255, 51, 51, 0.1);
+    }
+  }
+}

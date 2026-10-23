@@ -12,3 +12,16 @@ html {
 body {
   background-color: rgb(255, 255, 255);
 }
+
+:root {
+  --color-ink: #000;
+  --color-muted: rgba(0, 0, 0, 0.6);
+  --color-border: rgba(0, 0, 0, 0.1);
+  --color-surface: #f0f0f0;
+  --color-danger: #ff3333;
+  --color-success: #01ab31;
+  --color-warning: #d98200;
+  --color-info: #1976d2;
+  --radius-field: 12px;
+  --radius-card: 20px;
+}

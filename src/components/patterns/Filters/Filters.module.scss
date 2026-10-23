@@ -11,6 +11,12 @@
     width: utils.pxToRem(290px);
   }
 
+  @include utils.media-ltlg() {
+    width: 100%;
+    border: 0;
+    padding: 0;
+  }
+
   h2 {
     font-size: utils.pxToRem(18px);
     font-weight: bold;

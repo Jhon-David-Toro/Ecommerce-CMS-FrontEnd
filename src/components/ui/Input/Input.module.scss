@@ -1,0 +1,91 @@
+@use "src/styles/utils" as utils;
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: utils.pxToRem(6px);
+
+  &__label {
+    font-size: utils.pxToRem(14px);
+    font-weight: 500;
+  }
+
+  &__control {
+    position: relative;
+  }
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    left: utils.pxToRem(16px);
+    width: utils.pxToRem(20px);
+    height: utils.pxToRem(20px);
+    color: #8a8a8a;
+    pointer-events: none;
+    transform: translateY(-50%);
+  }
+
+  &__toggle {
+    position: absolute;
+    top: 50%;
+    right: utils.pxToRem(14px);
+    display: flex;
+    padding: utils.pxToRem(4px);
+    color: #8a8a8a;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transform: translateY(-50%);
+
+    svg {
+      width: utils.pxToRem(20px);
+      height: utils.pxToRem(20px);
+    }
+  }
+
+  &__input {
+    width: 100%;
+    padding: utils.pxToRem(12px) utils.pxToRem(16px);
+    font: inherit;
+    background-color: var(--color-surface);
+    border: utils.pxToRem(1px) solid transparent;
+    border-radius: var(--radius-field);
+    outline: none;
+    transition: border-color 0.2s;
+
+    &::placeholder {
+      color: #8a8a8a;
+    }
+
+    &:focus {
+      border-color: var(--color-ink);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  &__error {
+    font-size: utils.pxToRem(13px);
+    color: var(--color-danger);
+  }
+
+  &__hint {
+    font-size: utils.pxToRem(13px);
+    color: var(--color-muted);
+  }
+}
+
+.withIcon {
+  padding-left: utils.pxToRem(48px);
+}
+
+.withToggle {
+  padding-right: utils.pxToRem(48px);
+}
+
+.invalid {
+  border-color: var(--color-danger);
+}

@@ -1,0 +1,7 @@
+@use "src/styles/utils" as utils;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: utils.pxToRem(20px);
+}

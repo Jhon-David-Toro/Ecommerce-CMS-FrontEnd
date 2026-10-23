@@ -1,6 +1,6 @@
-import type { Product } from "@/lib/catalog/product.types";
+import type { ProductSummary } from "@/lib/catalog/product.types";
 
 export interface FeaturedProductsProps {
-  products: Product[];
+  products: ProductSummary[];
   category: string;
 }

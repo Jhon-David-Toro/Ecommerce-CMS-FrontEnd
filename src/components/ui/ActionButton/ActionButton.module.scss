@@ -1,0 +1,52 @@
+@use "src/styles/utils" as utils;
+
+.action {
+  display: inline-flex;
+  gap: utils.pxToRem(6px);
+  align-items: center;
+  justify-content: center;
+  padding: utils.pxToRem(7px) utils.pxToRem(14px);
+  font: inherit;
+  font-size: utils.pxToRem(13px);
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  background-color: white;
+  border: utils.pxToRem(1px) solid var(--color-border);
+  border-radius: 999px;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+
+  &__icon {
+    width: utils.pxToRem(16px);
+    height: utils.pxToRem(16px);
+  }
+
+  &_neutral:hover {
+    color: white;
+    background-color: black;
+    border-color: black;
+  }
+
+  &_success {
+    color: #01ab31;
+    border-color: #01ab31;
+
+    &:hover {
+      color: white;
+      background-color: #01ab31;
+    }
+  }
+
+  &_danger {
+    color: var(--color-danger);
+    border-color: var(--color-danger);
+
+    &:hover {
+      color: white;
+      background-color: var(--color-danger);
+    }
+  }
+}

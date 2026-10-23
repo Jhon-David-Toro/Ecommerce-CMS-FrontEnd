@@ -1,0 +1,73 @@
+@use "src/styles/utils" as utils;
+
+.orders {
+  display: flex;
+  flex-direction: column;
+  gap: utils.pxToRem(16px);
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: utils.pxToRem(14px);
+  padding: utils.pxToRem(24px);
+  border: utils.pxToRem(1px) solid var(--color-border);
+  border-radius: utils.pxToRem(20px);
+
+  &__head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: utils.pxToRem(14px);
+    align-items: center;
+  }
+
+  &__title {
+    font-size: utils.pxToRem(20px);
+    font-weight: 700;
+  }
+
+  &__total {
+    margin-left: auto;
+    font-size: utils.pxToRem(22px);
+    font-weight: 700;
+  }
+
+  &__meta {
+    font-size: utils.pxToRem(14px);
+    color: var(--color-muted);
+  }
+
+  &__body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: utils.pxToRem(16px);
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__thumbs {
+    display: flex;
+    gap: utils.pxToRem(10px);
+    padding: 0;
+    list-style: none;
+  }
+
+  &__thumb {
+    object-fit: cover;
+    background-color: var(--color-surface);
+    border-radius: utils.pxToRem(12px);
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: utils.pxToRem(10px);
+  }
+
+  &__danger {
+    color: var(--color-danger);
+    border-color: var(--color-danger);
+  }
+}

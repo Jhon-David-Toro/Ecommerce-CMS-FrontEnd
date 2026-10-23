@@ -1,4 +1,4 @@
-import { useAuthStore } from "@/lib/auth/authStore";
+import { isAdminSession } from "@/lib/auth/auth.session";
 import type { Repository } from "@/lib/mock/repository.types";
 import { UNSUPPORTED_MESSAGE } from "@/lib/shared/http/api.constants";
 import { apiRequest } from "@/lib/shared/http/apiClient";
@@ -9,13 +9,6 @@ import { fromAdminProduct, fromAdminSummary, toProductRequest } from "./catalog.
 import { ADMIN_PAGE_SIZE, API_PATHS, STATUS_ACTIONS } from "./catalog.remote.constants";
 import type { ApiPage, ApiProduct, ApiProductSummary, TaxonomyIds } from "./catalog.remote.types";
 import type { Product, ProductInput, ProductListOptions, ProductStatus } from "./product.types";
-
-/**
- * Tells whether the signed-in user is an administrator.
- *
- * @returns True for administrators.
- */
-export const isAdminSession = () => useAuthStore.getState().user?.role === "admin";
 
 /**
  * Finds the id of a category or brand by its name, ignoring case.

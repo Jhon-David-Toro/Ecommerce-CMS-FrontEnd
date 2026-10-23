@@ -73,9 +73,9 @@ By default the data lives in the browser (`localStorage`). To use the Spring Boo
 NEXT_PUBLIC_API_URL=http://localhost:8080
 ```
 
-and restart `pnpm dev`. Today **authentication, users (list and block), categories/brands and products** talk to the API (JWT in `localStorage`, sent as `Authorization: Bearer`); orders, reviews, settings and site content still use the browser data until their endpoints exist.
+and restart `pnpm dev`. Every module talks to the API: **authentication, users, categories and brands, products, orders, reviews, settings and promo codes, site content and pages** (JWT in `localStorage`, sent as `Authorization: Bearer`). Each `*.api.ts` file picks the REST implementation (`*.remote.ts`) or the browser one (`*.mock.ts`).
 
-Products: the store reads `/api/public/catalog` and the admin uses `/api/admin/products`. The mappers in `src/lib/catalog/catalog.mappers.ts` translate between the form and the API: the form's single stock is shared between one variant per color and size, a product without colors or sizes gets a hidden placeholder one, and the category and brand are matched by name. Stock and rating changes caused by orders and reviews are not sent to the API yet. The switch lives in `src/lib/auth/auth.api.ts`, `src/lib/taxonomy/taxonomy.api.ts` and `src/lib/catalog/catalog.api.ts`; the HTTP client is in `src/lib/shared/http`.
+Products: the store reads `/api/public/catalog` and the admin uses `/api/admin/products`. The mappers in `src/lib/catalog/catalog.mappers.ts` translate between the form and the API: the form's single stock is shared between one variant per color and size, a product without colors or sizes gets a hidden placeholder one, and the category and brand are matched by name. Orders are priced by the server (the front only sends lines, address, payment method and promo code), which also takes the stock and keeps the rating of each product in line with its approved reviews. Shoppers see the approved reviews of a product, administrators every review; a shopper can cancel their own order, administrators move it along the flow. The switch lives in `src/lib/auth/auth.api.ts`, `src/lib/taxonomy/taxonomy.api.ts` and `src/lib/catalog/catalog.api.ts`; the HTTP client is in `src/lib/shared/http`.
 
 ## Scripts
 

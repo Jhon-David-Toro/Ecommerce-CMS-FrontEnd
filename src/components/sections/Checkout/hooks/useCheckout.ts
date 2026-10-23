@@ -30,7 +30,10 @@ export const useCheckout = () => {
     setIsSubmitting(true);
     setError("");
     try {
-      const order = await createOrder(buildOrderInput({ values, items: cart.items, totals: cart.totals, userId: user?.id ?? null }));
+      const order = await createOrder(
+        buildOrderInput({ values, items: cart.items, totals: cart.totals, userId: user?.id ?? null }),
+        cart.promoCode,
+      );
       cart.clear();
       router.push(`/checkout/success/${order.id}`);
     } catch {

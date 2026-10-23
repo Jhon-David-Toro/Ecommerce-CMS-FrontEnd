@@ -65,6 +65,16 @@ Every screen talks to a function in a `*.api.ts` file (`catalog.api.ts`, `orders
 `createRepository` from `src/lib/mock`. When the backend is ready, only those files change: the repositories become HTTP
 calls and the screens keep working. Ids are numbers so they match the `Long` ids of the backend.
 
+## Using the REST API
+
+By default the data lives in the browser (`localStorage`). To use the Spring Boot API instead, create `.env.local` with:
+
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:8080
+```
+
+and restart `pnpm dev`. Today **authentication, users (list and block) and categories/brands** talk to the API (JWT in `localStorage`, sent as `Authorization: Bearer`); products, orders, reviews, settings and site content still use the browser data until their endpoints exist. The switch lives in `src/lib/auth/auth.api.ts` and `src/lib/taxonomy/taxonomy.api.ts`; the HTTP client is in `src/lib/shared/http`.
+
 ## Scripts
 
 | Script | What it does |

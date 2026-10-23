@@ -48,3 +48,8 @@ export interface PasswordInput {
   current: string;
   next: string;
 }
+
+export interface AuthResponse {
+  token: string;
+  user: PublicUser;
+}

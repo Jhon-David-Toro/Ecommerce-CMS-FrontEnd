@@ -1,15 +1,17 @@
 import { CheckboxFilter } from "@/components/patterns/CheckboxFilter";
 import { useFilterStore } from "@/lib/catalog/filters/filtersStore";
 
-import { CATEGORIES } from "./CategoryFilter.constants";
+import type { CategoryFilterProps } from "./CategoryFilter.types";
 
 /**
- * CategoryFilter: product category checkboxes connected to the filter store.
+ * CategoryFilter: checkboxes for the categories the catalog has, connected to the filter store; hidden without categories.
  *
+ * @param props Component props.
+ * @param props.options Categories to offer.
  * @returns The category filter.
  */
-export const CategoryFilter = () => {
+export const CategoryFilter = ({ options }: CategoryFilterProps) => {
   const { category, setCategory } = useFilterStore();
 
-  return <CheckboxFilter title="Categories" options={CATEGORIES} selected={category} onChange={setCategory} />;
+  return options.length ? <CheckboxFilter title="Categories" options={options} selected={category} onChange={setCategory} /> : null;
 };

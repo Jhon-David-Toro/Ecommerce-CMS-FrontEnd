@@ -1,16 +1,22 @@
 @use 'src/styles/utils' as utils;
 
-.sizeButton {
-    background-color: #f0f0f0;
-    border: none;
-    border-radius: utils.pxToRem(20px);
-    padding: utils.pxToRem(5px) utils.pxToRem(10px);
-    margin: utils.pxToRem(5px);
-    font-size: utils.pxToRem(14px);
-    cursor: pointer;
-  
-    &.selected {
-      background-color: #000;
-      color: #fff;
-    }
+.sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: utils.pxToRem(10px);
+}
+
+.sizes .sizeButton {
+  margin: 0;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: utils.pxToRem(20px);
+  padding: utils.pxToRem(5px) utils.pxToRem(14px);
+  font-size: utils.pxToRem(14px);
+  cursor: pointer;
+
+  &.selected {
+    background-color: #000;
+    color: #fff;
   }
+}

@@ -44,10 +44,10 @@
         &::-webkit-slider-runnable-track {
           background: linear-gradient(
             to right,
-            transparent calc((var(--min-value) / 250) * 100%),
-            #000 calc((var(--min-value) / 250) * 100%),
-            #000 calc((var(--max-value) / 250) * 100%),
-            transparent calc((var(--max-value) / 250) * 100%)
+            transparent calc(((var(--min-value) - var(--limit-min)) / (var(--limit-max) - var(--limit-min))) * 100%),
+            #000 calc(((var(--min-value) - var(--limit-min)) / (var(--limit-max) - var(--limit-min))) * 100%),
+            #000 calc(((var(--max-value) - var(--limit-min)) / (var(--limit-max) - var(--limit-min))) * 100%),
+            transparent calc(((var(--max-value) - var(--limit-min)) / (var(--limit-max) - var(--limit-min))) * 100%)
           );
         }
       }

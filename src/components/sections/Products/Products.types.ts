@@ -1,3 +1,4 @@
+import type { FilterOptions } from "@/lib/catalog/filters/filters.types";
 import type { Product } from "@/lib/catalog/product.types";
 
 export interface ProductsGridProps {
@@ -7,6 +8,7 @@ export interface ProductsGridProps {
 
 export interface ProductsFiltersProps {
   isOpen: boolean;
+  options: FilterOptions;
   onClose: () => void;
 }
 
@@ -18,4 +20,11 @@ export interface CatalogScope {
   query: string;
   view: string;
   brand: string;
+}
+
+export interface ProductsPaginationProps {
+  total: number;
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
 }

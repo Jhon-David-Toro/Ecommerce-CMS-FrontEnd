@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { movePriceBound } from "./PriceFilter.utils";
+import { getPriceGap, movePriceBound } from "./PriceFilter.utils";
 
 describe("movePriceBound", () => {
   it("moves the minimum while keeping the gap", () => {
@@ -18,5 +18,18 @@ describe("movePriceBound", () => {
 
   it("rejects a maximum that gets too close to the minimum", () => {
     expect(movePriceBound([50, 200], "max", 55)).toBeNull();
+  });
+});
+
+describe("getPriceGap", () => {
+  it("keeps the usual gap on a wide range and shrinks it on a narrow one", () => {
+    expect(getPriceGap([0, 250])).toBe(10);
+    expect(getPriceGap([20, 30])).toBe(2);
+    expect(getPriceGap([20, 22])).toBe(1);
+  });
+
+  it("lets the ends get closer on a narrow range", () => {
+    expect(movePriceBound([20, 30], "min", 28, 2)).toEqual([28, 30]);
+    expect(movePriceBound([20, 30], "min", 29, 2)).toBeNull();
   });
 });

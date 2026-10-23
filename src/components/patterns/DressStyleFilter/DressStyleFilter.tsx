@@ -1,15 +1,17 @@
 import { CheckboxFilter } from "@/components/patterns/CheckboxFilter";
 import { useFilterStore } from "@/lib/catalog/filters/filtersStore";
 
-import { DRESS_STYLES } from "./DressStyleFilter.constants";
+import type { DressStyleFilterProps } from "./DressStyleFilter.types";
 
 /**
- * DressStyleFilter: dress style checkboxes connected to the filter store.
+ * DressStyleFilter: checkboxes for the dress styles the catalog has, connected to the filter store; hidden without styles.
  *
+ * @param props Component props.
+ * @param props.options Dress styles to offer.
  * @returns The dress style filter.
  */
-export const DressStyleFilter = () => {
+export const DressStyleFilter = ({ options }: DressStyleFilterProps) => {
   const { dressStyles, setDressStyles } = useFilterStore();
 
-  return <CheckboxFilter title="Dress Style" options={DRESS_STYLES} selected={dressStyles} onChange={setDressStyles} />;
+  return options.length ? <CheckboxFilter title="Dress Style" options={options} selected={dressStyles} onChange={setDressStyles} /> : null;
 };

@@ -4,7 +4,7 @@ export type PriceRange = [number, number];
 
 export interface FilterCriteria {
   category: string[];
-  priceRange: PriceRange;
+  priceRange: PriceRange | null;
   colors: string[];
   sizes: string[];
   dressStyles: string[];
@@ -13,7 +13,7 @@ export interface FilterCriteria {
 
 export interface FilterValues {
   category: string[];
-  priceRange: PriceRange;
+  priceRange: PriceRange | null;
   colors: string[];
   sizes: string[];
   dressStyles: string[];
@@ -31,6 +31,19 @@ export interface FilterActions {
   setIsFiltersOpen: (isOpen: boolean) => void;
   setSortBy: (sortBy: string) => void;
   resetFilters: () => void;
+}
+
+export interface ColorOption {
+  hex: string;
+  name: string;
+}
+
+export interface FilterOptions {
+  categories: string[];
+  priceBounds: PriceRange | null;
+  colors: ColorOption[];
+  sizes: string[];
+  dressStyles: string[];
 }
 
 export type FilterState = FilterValues & FilterActions;

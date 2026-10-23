@@ -1,5 +1,3 @@
-export const PRICE_LIMITS = { min: 0, max: 250 } as const;
-
 export const MIN_PRICE_GAP = 10;
 
 export const PRICE_BOUND = { min: "min", max: "max" } as const;

@@ -1,35 +1,32 @@
 import { FilterSection } from "@/components/patterns/FilterSection";
 import { useFilterStore } from "@/lib/catalog/filters/filtersStore";
-import { cx } from "@/lib/shared/classnames/cx";
 import { toggleItem } from "@/lib/shared/collections/collections";
-import { KEYS } from "@/lib/shared/dom/keys.constants";
 
-import { FILTER_COLORS } from "./ColorFilter.constants";
+import type { ColorFilterProps } from "./ColorFilter.types";
+import { ColorSwatch } from "./parts/ColorSwatch";
 import styles from "./ColorFilter.module.scss";
 
 /**
- * ColorFilter: color swatches connected to the filter store.
+ * ColorFilter: swatches for the colors the catalog has, connected to the filter store; hidden without colors.
  *
+ * @param props Component props.
+ * @param props.options Colors to offer.
  * @returns The color filter.
  */
-export const ColorFilter = () => {
+export const ColorFilter = ({ options }: ColorFilterProps) => {
   const { colors, setColors } = useFilterStore();
+
+  if (!options.length) return null;
 
   return (
     <FilterSection title="Colors">
       <section className={styles.color}>
-        {FILTER_COLORS.map((color) => (
-          <article
-            key={color}
-            className={cx(styles.color__circle, { [styles.selected]: colors.includes(color) })}
-            style={{ backgroundColor: color }}
-            data-color={color}
-            onClick={() => setColors(toggleItem(colors, color))}
-            role="button"
-            aria-label={color}
-            aria-pressed={colors.includes(color)}
-            tabIndex={0}
-            onKeyDown={(event) => event.key === KEYS.enter && setColors(toggleItem(colors, color))}
+        {options.map((color) => (
+          <ColorSwatch
+            key={color.hex}
+            color={color}
+            isSelected={colors.includes(color.hex)}
+            onToggle={() => setColors(toggleItem(colors, color.hex))}
           />
         ))}
       </section>

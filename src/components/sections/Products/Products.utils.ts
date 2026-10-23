@@ -34,7 +34,7 @@ export const filterCreators: Record<keyof Omit<FilterCriteria, "sortBy">, Filter
   priceRange:
     ({ priceRange }) =>
     (product) =>
-      product.price >= priceRange[0] && product.price <= priceRange[1],
+      !priceRange || (product.price >= priceRange[0] && product.price <= priceRange[1]),
   colors:
     ({ colors }) =>
     (product) =>

@@ -1,14 +1,13 @@
 "use client";
 
-import { Pagination } from "@/components/patterns/Pagination";
 import { TitleAllProducts } from "@/components/patterns/TitleAllProducts";
-import { Divider } from "@/components/ui/Divider";
 
 import { PRODUCTS_PER_PAGE } from "./Products.constants";
 import { useProductsPage } from "./hooks/useProductsPage";
 import { FiltersToggle } from "./parts/FiltersToggle";
 import { ProductsFilters } from "./parts/ProductsFilters";
 import { ProductsGrid } from "./parts/ProductsGrid";
+import { ProductsPagination } from "./parts/ProductsPagination";
 import styles from "./Products.module.scss";
 
 /**
@@ -20,6 +19,7 @@ export const Products = () => {
   const {
     title,
     isLoading,
+    filterOptions,
     isFiltersOpen,
     openFilters,
     closeFilters,
@@ -34,13 +34,12 @@ export const Products = () => {
 
   return (
     <main className={styles.products} ref={pageRef}>
-      <ProductsFilters ref={filtersRef} isOpen={isFiltersOpen} onClose={closeFilters} />
+      <ProductsFilters ref={filtersRef} isOpen={isFiltersOpen} options={filterOptions} onClose={closeFilters} />
       <section className={styles.products__cards}>
         <FiltersToggle onOpen={openFilters} />
         <TitleAllProducts heading={title} currentPage={currentPage} productsPerPage={PRODUCTS_PER_PAGE} totalProducts={total} />
         <ProductsGrid products={pageItems} isLoading={isLoading} />
-        <Divider />
-        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={changePage} />
+        <ProductsPagination total={total} currentPage={currentPage} totalPages={totalPages} onPageChange={changePage} />
       </section>
     </main>
   );

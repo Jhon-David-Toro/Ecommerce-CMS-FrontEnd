@@ -67,17 +67,18 @@ export const filterProducts = (products: Product[], criteria: FilterCriteria) =>
 };
 
 /**
- * Narrows the catalog to what the address asks for: a search text, the sale, the new arrivals or one brand.
+ * Narrows the catalog to what the address asks for: a search text, the sale, the new arrivals, one brand or one category.
  *
  * @param products Published products.
- * @param scope Search text, view and brand taken from the address.
+ * @param scope Search text, view, brand and category taken from the address.
  * @returns The products inside the scope.
  */
 export const scopeProducts = (products: Product[], scope: CatalogScope) => {
   const searched = searchProducts(products, scope.query);
   const inView = scope.view === VIEWS.newest ? getNewArrivals(searched, NEW_ARRIVALS_LIMIT) : searched;
   const onSale = scope.view === VIEWS.sale ? inView.filter((product) => product.discountPrice !== null) : inView;
-  return scope.brand ? onSale.filter((product) => product.brand === scope.brand) : onSale;
+  const ofBrand = scope.brand ? onSale.filter((product) => product.brand === scope.brand) : onSale;
+  return scope.category ? ofBrand.filter((product) => product.category === scope.category) : ofBrand;
 };
 
 /**
@@ -86,7 +87,7 @@ export const scopeProducts = (products: Product[], scope: CatalogScope) => {
  * @param scope Search text, view and brand taken from the address.
  * @returns The title, or an empty string when the page shows the whole catalog.
  */
-export const getScopeTitle = ({ query, view, brand }: CatalogScope) => {
+export const getScopeTitle = ({ query, view, brand, category }: CatalogScope) => {
   if (query) return `Results for "${query}"`;
-  return brand || VIEW_TITLES[view] || "";
+  return brand || category || VIEW_TITLES[view] || "";
 };

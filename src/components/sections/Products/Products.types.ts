@@ -18,4 +18,5 @@ export interface CatalogScope {
   query: string;
   view: string;
   brand: string;
+  category: string;
 }

@@ -1,8 +1,4 @@
-export interface CustomerReview {
-  name: string;
-  rating: number;
-  text: string;
-}
+import type { Review } from "@/lib/catalog/review.types";
 
 export interface UseSliderParams {
   total: number;
@@ -16,5 +12,6 @@ export interface HappyCustomersHeaderProps {
 }
 
 export interface HappyCustomersTrackProps {
+  reviews: Review[];
   offsetPercent: number;
 }

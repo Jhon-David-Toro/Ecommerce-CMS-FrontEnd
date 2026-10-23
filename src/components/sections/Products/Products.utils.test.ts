@@ -4,7 +4,7 @@ import type { FilterCriteria } from "@/lib/catalog/filters/filters.types";
 import type { Product } from "@/lib/catalog/product.types";
 import { buildProduct } from "@/test/factories";
 
-import { filterProducts, matchesAny, matchesSelection } from "./Products.utils";
+import { filterProducts, getScopeTitle, matchesAny, matchesSelection, scopeProducts } from "./Products.utils";
 
 const criteria: FilterCriteria = { category: [], priceRange: [0, 250], colors: [], sizes: [], dressStyles: [] };
 
@@ -66,5 +66,19 @@ describe("filterProducts", () => {
 
   it("falls back to popularity for an unknown sort", () => {
     expect(names(filterProducts(products, { ...criteria, sortBy: "Unknown" }))[0]).toBe("Pricey");
+  });
+});
+
+describe("scopeProducts", () => {
+  const scope = { query: "", view: "", brand: "", category: "" };
+
+  it("keeps the whole catalog without a scope", () => {
+    expect(scopeProducts(products, scope)).toHaveLength(3);
+  });
+
+  it("narrows the catalog to one category and names the page after it", () => {
+    const jeans = { ...scope, category: "Jeans" };
+    expect(names(scopeProducts(products, jeans))).toEqual(["Cheap", "Middle"]);
+    expect(getScopeTitle(jeans)).toBe("Jeans");
   });
 });
